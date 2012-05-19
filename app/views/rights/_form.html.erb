@@ -1,0 +1,16 @@
+
+<!--[form:rights]-->
+<p><%= Right.human_attribute_name("name") %><br/>
+<%= text_field 'right', 'name'  %></p>
+
+<p><%= Right.human_attribute_name("controller") %><br/>
+<%= text_field 'right', 'controller'  %></p>
+
+<p><%= Right.human_attribute_name("action") %><br/>
+<%= text_field 'right', 'action'  %></p>
+
+<p><%= Right.human_attribute_name("description") %><br/>
+<%= text_field 'right', 'description'  %></p>
+<!--[eoform:rights]-->
+<%= submit_tag "Сохранить" %> или <%= link_to 'Вернуться', rights_path %>
+

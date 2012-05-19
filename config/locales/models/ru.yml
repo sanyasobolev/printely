@@ -1,0 +1,73 @@
+ru:
+  activerecord:
+    models:
+      article: "Статья"
+      asset: "Приложенный файл"
+      category: "Категория"
+      offer: "Предложение"
+      page: "Страница"
+      right: "Право"
+      role: "Роль"
+      section: "Раздел"
+      user: "Пользователь"
+      letter: "Обратная связь"
+    attributes:
+      article:
+        title: "Название"
+        synopsis: "Краткий обзор"
+        body: "Текст статьи"
+        published: "Опубликована"
+        published_at: "Дата публикации"
+        category_id: "Категория"
+        user_id: "Автор"
+        created_at: "Дата создания"
+      category:
+        name: "Название"
+        created_at: "Дата создания"
+      offer:
+        title: "Название"
+        body: "Текст предложения"
+        address: "Адрес объекта"
+        price: "Цена"
+        phone: "Телефон агента"
+        agent: "ФИО агента"
+        published: "Опубликовано"
+        published_at: "Дата публикации"
+        user_id: "Автор"
+        created_at: "Дата создания"
+      page:
+        title: "Заголовок страницы"
+        permalink: "Название в URL"
+        body: "Текст страницы"
+        published: "Опубликована"
+        published_at: "Дата публикации"
+        user_id: "Автор"
+        created_at: "Дата создания"
+        section_id: "Раздел"
+      right:
+        name: "Название"
+        controller: "Контроллер"
+        action: "Действие"
+        description: "Описание"
+      role:
+        name: "Название"
+      section:
+        title: "Название"
+        order: "Порядковый номер (слева направо)"
+      user:
+        first_name: "Имя"
+        second_name: "Фамилия"
+        email: "Email"
+        remember_token: "Запомнить"
+        created_at: "Дата регистрации"
+        role_id: "Роль"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        current_password: "Текущий пароль"
+        new_password: "Новый пароль"
+      letter:
+        name: "ФИО"
+        contact: "Контактные данные (email/телефон)"
+        question: "Текст письма"
+        created_at: "Дата создания"
+

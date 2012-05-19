@@ -1,0 +1,383 @@
+body {
+    margin:0;
+    padding:0;
+    background-color: white;
+    font-size: 80%;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+#main_container {
+    position: relative;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
+#header {
+    height: 100px;
+    width: 100%;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-bottom-style: solid;
+        border-top-style: solid;
+        border-right-width: 1px;
+        border-left-width: 1px;
+        border-bottom-width: 1px;
+        border-top-width: 1px;
+}
+
+#logo_container {
+    height: 50%;
+    width: 100%;
+    text-align: center;
+}
+
+#auth_panel {
+    height: 25px;
+    position: absolute;
+    left: 1000px;
+    top: 0px;
+}
+
+#top_nav {
+    height: 50%;
+    width: 100%;
+    text-align: center;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-bottom-style: solid;
+        border-top-style: solid;
+        border-right-width: 1px;
+        border-left-width: 1px;
+        border-bottom-width: 1px;
+        border-top-width: 1px;
+}
+
+#sidebar {
+    width: 150px;
+    min-height: 600px;
+    padding: 25px;
+    float: left;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-bottom-style: solid;
+        border-top-style: solid;
+        border-right-width: 1px;
+        border-left-width: 1px;
+        border-bottom-width: 1px;
+        border-top-width: 1px;
+}
+
+#content {
+    margin-left: 200px;
+    min-height: 600px;
+    padding: 25px;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-bottom-style: solid;
+        border-top-style: solid;
+        border-right-width: 1px;
+        border-left-width: 1px;
+        border-bottom-width: 1px;
+        border-top-width: 1px;
+}
+
+#bot_nav {
+    width: 95%;
+    height: 50px;
+    background-color: white;
+    
+    margin-left: auto;
+    margin-right: auto;
+
+    border-top-style: solid;
+    border-top-color: gray;
+    border-top-width: 2px;
+}
+
+/*общие*/
+h1 {
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+   }
+
+h2 {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
+p {
+    font-size: 1em;
+    line-height: 130%;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.grey {
+    color: #999999;
+}
+
+.center {
+    text-align: center;
+}
+
+.fl_clear {
+    clear: both
+}
+
+.multi_form {
+    width: 50%;
+    height: 300px;
+    float: left;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+/*списки*/
+ul.square {
+    list-style-type: square;
+    float: left;
+}
+
+/*ссылки --------------------------------------------------------------------------*/
+a:link {text-decoration: none; color: #0066ff}
+a:visited {text-decoration: none; color: #0066ff}
+a:hover {text-decoration: underline;}
+
+a.section:link {text-decoration: none; color: black}
+a.section:visited {text-decoration: none; color: black}
+a.section:hover {text-decoration: none; color: #0066ff}
+
+a.box:link, a.box:visited {
+    display:block;
+    font-weight:bold;
+    color:#0066ff;
+    background-color:#ffffff;
+    width:100%;
+    text-align:left;
+    padding:5px;
+    text-decoration:none;
+}
+
+a.box:hover,a.box:active{
+    background-color:#cccccc;
+}
+
+a.for_admin:link,a.for_admin:visited {
+    display:block;
+    color:#000000;
+    font-weight: bold;
+    text-align: right;
+    background-color:white;
+    width:120px;
+    padding: 4px;
+    text-decoration:none;
+    float: left;
+}
+
+a.for_admin:hover,a.for_admin:active{
+    background-color:#c2c1c1;
+}
+
+/*стиль для таблиц и меню у администратора*/
+.admin {
+    width: 100%;
+}
+
+.admin th, .admin td {
+    font-size: 1em;
+    border: 1px solid #a1d8ff;
+    padding: 3px 7px 2px 7px;
+}
+
+.admin th {
+    font-size: 1.1em;
+    background-color: #a1d8ff;
+    text-align: center
+}
+
+#admin_menu {
+    position: fixed;
+    top: 20%;
+    right: 0px;
+    background-color: #ffffff;
+    width: 128px;
+    border: 1px solid #a1d8ff;
+}
+
+/*обработка ошибок и сообщений-------------------------------------------------
+/*общее сообщение*/
+#notice {
+  border: 2px solid red;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #ffffff;
+    border-right-color: #00ff00;
+    border-left-color: #00ff00;
+    border-bottom-color: #00ff00;
+    border-top-color: #00ff00;
+}
+
+/*сообщение об ошибке*/
+#error {
+    font-style: normal;
+    font-weight: bold;
+    font-variant: inherit;
+    color: #000000;
+    border-right-width: 3px;
+    border-left-width: 3px;
+    border-bottom-width: 3px;
+    border-top-width: 3px;
+    background-color: #ff0000;
+}
+
+/*сообщение о неправильно выбранном порядковом номере раздела*/
+#number_busy {
+    font-style: italic;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+/*обработка ошибок модели и выделение поля при введении неверных данных-------*/
+.fieldWithErrors {
+    margin: 2px;
+    padding: 2px;
+    background-color: red;
+    display: inline-table;
+}
+
+#errorExplanation {
+
+    background-color: #e7e9ff;
+
+    border-right-style: solid;
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-right-color: #0000ff;
+    border-left-color: #0000ff;
+    border-bottom-color: #0000ff;
+    border-top-color: #0000ff;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+
+#errorExplanation h3 {
+
+}
+
+#errorExplanation p {
+
+}
+
+#errorExplanation ul li {
+
+}
+
+/*стиль пагинации страниц-----------------------------------------------*/
+.pagination {
+    padding: 3px;
+    margin: 3px;
+}
+
+.pagination a {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #aaaadd;
+    text-decoration: none;
+    color: #E87830;
+}
+
+.pagination a:hover, .pagination a:active {
+    border: 1px solid #000099;
+    color: #000;
+}
+
+.pagination span.current {
+    padding: 2px 5px 2px 5px;
+    margin: 2px; 
+    border: 1px solid #E87830;
+    font-weight: bold;
+    background-color: #E87830;
+    color: #FFF;
+}
+
+.pagination span.disabled {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #eee;
+    color: #ddd;
+}
+
+/*оформление статей-----------------------------------------------*/
+.article {
+    position: relative;
+    padding: 10px;
+/*    border:  5px solid gray;*/
+    margin: 0px;
+}
+
+.category {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.property_article {
+    font-style: italic;
+}
+
+/*оформление предложений-------------------------------------*/
+.offer {
+    position: relative;
+    padding: 10px;
+    margin: 0px;
+}
+
+#assets {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #E5EECC;
+    border: 1px solid #C3C3C3;
+}
+
+/*фотогалерея-------------------------------------*/
+.thumb {
+    margin: 5px;
+    height: auto;
+    width: auto;
+    float: left;
+    text-align: center;
+}
+
+.thumb img {
+/*    display: inline;*/
+    margin: 3px;
+    border: 1px solid #E5EECC;
+}
+
+.thumb a:hover img {border: 1px solid #0000ff;}
+
+.delete_thumb {
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 3px;
+    text-align: center;
+}
+

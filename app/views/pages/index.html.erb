@@ -1,0 +1,9 @@
+<%= render :partial => 'pages_for_side' %>
+
+<!-- смотрим, есть ли страницы в разделе и отображаем первую из них. если нет, то выводим мессадж!-->
+<% if @page_default != nil %>
+    <h1><%= @page_default.title %></h1>
+    <p><%= @page_default.body %></p>
+<% else %>
+    <p>В этом разделе пока нет страниц.</p>
+<% end %>

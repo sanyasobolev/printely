@@ -1,0 +1,12 @@
+<tr>
+  <%# unless role.name == 'Administrator' || role.id == 2 %>
+    <%#= link_to '(X)', role_path(role), :confirm => 'Вы действительно хотите удалить роль?', :method => :delete %>
+  <%# end %>
+
+  <td><%=h (role.name) %></td>
+  <td>
+  <% unless role.name == 'Administrator' %>
+    <%= link_to 'Редактировать', edit_role_path(role) %>
+  <% end %>
+  </td>
+</tr>

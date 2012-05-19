@@ -1,0 +1,7 @@
+<p>
+  <%= User.human_attribute_name("role_id") %><br/>
+  <%= form.collection_select(:role_id,
+                      Role.find(:all),
+                      :id,
+                      :name) %>
+</p>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title><%= @title %></title>
+  <%= stylesheet_link_tag    "style", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= yield :head %>
+</head>
+<body>
+
+  <body>
+    <div id="main_container" >
+
+      <div id="header" >
+        <div id="logo_container">
+          <%= link_to "Место логотипа", root_path %>
+        </div>
+
+        <div id="auth_panel">
+          <% if logged_in? -%>
+            <%= render :partial => 'sessions/current' %>
+          <% else -%>
+            <%= link_to_unless_current '>>', :login %>
+          <% end -%>
+        </div>
+
+        <div id="top_nav">
+          <%#= render :partial => 'share/header_menu' %>
+        </div>
+      </div>
+
+      <div id="sidebar">
+        <%#= render :partial => 'share/side_menu' %>
+      </div>
+
+      <div id="content">
+
+        <% if flash[:notice] -%>
+          <div id="notice" ><%= flash[:notice] %></div>
+        <% end -%>
+
+        <% if flash[:error] -%>
+          <div id="error" ><%= flash[:error] %></div>
+        <%  end -%>
+
+        <%= yield %>
+      </div>
+
+      <div id="bot_nav">
+        <%#= render :partial => 'share/bottom_menu' %>
+      </div>
+
+      <% if logged_in? && current_user.has_role?('Administrator') %>
+        <%= render :partial => 'share/admin_menu' %>
+      <% end %>
+
+    </div>
+  </body>
+
+</body>
+</html>

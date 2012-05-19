@@ -1,0 +1,33 @@
+<h2>Собственные страницы в системе</h2>
+  <h3>Стартовая страница</h3>
+    <table class ="admin">
+    <tr>
+      <th><%= Page.human_attribute_name("title") %></th>
+      <th><%= Page.human_attribute_name("permalink") %></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td><%= @main_page.title %></td>
+      <td><%= link_to @main_page.permalink, page_path(@main_page)%></td>
+      <td><%= link_to 'Редактировать', edit_page_path(@main_page) %></td>
+    </tr>
+    </table>
+
+  <h3>Страницы, созданные пользователями</h3>
+    <table class ="admin">
+      <tr>
+        <th></th>
+        <th><%= Page.human_attribute_name("title") %></th>
+        <th><%= Page.human_attribute_name("permalink") %></th>
+        <th><%= Page.human_attribute_name("created_at") %></th>
+        <th><%= Page.human_attribute_name("published") %></th>
+        <th><%= Page.human_attribute_name("section_id") %></th>
+        <th></th>
+      </tr>
+
+      <%= render :partial => 'page', :collection => @pages %>
+
+    </table>
+  <p><%= link_to 'Создать страницу', new_page_path, :class => 'box' %></p>
+
+  <%= paginate_links @pages %>

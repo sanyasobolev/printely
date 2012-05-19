@@ -1,0 +1,13 @@
+<h2>Пользователи</h2>
+<table class ="admin">
+<tr>
+  <th></th>
+  <th><%= User.human_attribute_name("first_name") %><br/></th>
+  <th><%= User.human_attribute_name("second_name") %><br/></th>
+  <th><%= User.human_attribute_name("email") %><br/></th>
+  <th><%= User.human_attribute_name("created_at") %><br/></th>
+  <th><%= User.human_attribute_name("role_id") %><br/></th>
+  <th></th>
+</tr>
+<%= render :partial => 'user', :collection => @users  %>
+</table>

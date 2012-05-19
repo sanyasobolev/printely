@@ -1,0 +1,20 @@
+    <p>
+      <%= User.human_attribute_name("first_name") %><br/>
+      <%= form.text_field :first_name,
+                          :size => User::FIRST_AND_SECOND_NAME_SIZE,
+                          :maxlength => User::FIRST_AND_SECOND_NAME_MAX_LENGTH %>
+    </p>
+
+    <p>
+      <%= User.human_attribute_name("second_name") %><br/>
+      <%= form.text_field :second_name,
+                          :size => User::FIRST_AND_SECOND_NAME_SIZE,
+                          :maxlength => User::FIRST_AND_SECOND_NAME_MAX_LENGTH %>
+    </p>
+
+    <p>
+      <%= User.human_attribute_name("email") %><br/>
+      <%= form.text_field :email,
+                        :size => User::EMAIL_SIZE,
+                        :maxlength => User::EMAIL_MAX_LENGTH %>
+    </p>
