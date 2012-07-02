@@ -2,18 +2,19 @@
 <%= error_messages_for :user %>
 
 <div class="multi_form">
-  <% form_for :user, :url => user_path(@user), :html => {:method => :put} do |f| %>
+  <%= form_for :user, :url => user_path(@user), :html => {:method => :put} do |f| %>
 
-    <%= hidden_field_tag "attribute", "email", :id => nil%>
+    <%= hidden_field_tag "attribute", "email", :id => nil %>
     <%= render :partial => 'profile', :locals => {:form => f} %>
-    <%= render :partial => @edit_role, :locals => {:form => f} %>
-
+    <%  if @user != current_user %>
+      <%= render :partial => 'edit_role', :locals => {:form => f} %>
+    <%  end %>
   <%= submit_tag 'Изменить данные' %>
   <% end %>
 </div>
 
 <div class="multi_form">
-  <% form_for :user, :url => user_path(@user), :html => {:method => :put} do |f| %>
+  <%= form_for :user, :url => user_path(@user), :html => {:method => :put} do |f| %>
 
       <%= hidden_field_tag "attribute", "password", :id => nil %>
       <%= render :partial => 'update_password', :locals => {:form => f} %>

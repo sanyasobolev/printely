@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         self.current_user = @user
-        format.html { redirect_to home_path, :notice => 'Вы успешно зарегистрированы!' }
+        format.html { redirect_to root, :notice => 'Вы успешно зарегистрированы!' }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
@@ -46,9 +46,6 @@ class UsersController < ApplicationController
     if !your_profile?(@user)
       flash[:notice] = 'Вы не можете редактировать чужой профиль!'
       redirect_to :controller => :sessions, :action => :new
-    end
-    if @user != current_user
-      @edit_role = 'edit_role'
     end
   end
 

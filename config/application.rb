@@ -17,7 +17,7 @@ module Spsite
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/libs)
-     config.autoload_paths << "#{Rails.root}/lib"
+     config.autoload_paths << "#{Rails.root}/lib" # загрузка модуля авторизации
 
 
     # Only load the plugins named here, in the order given (default is alphabetical).
@@ -33,6 +33,7 @@ module Spsite
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
      config.i18n.default_locale = :ru
 
 
