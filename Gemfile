@@ -5,6 +5,8 @@ gem 'mysql2'
 gem "russian"
 gem "rdoc"
 gem "dynamic_form" #отображение ошибок
+gem 'will_paginate', '~> 3.0' #пагинация страниц
+gem "ckeditor", "3.7.1" #WYSIWYG редактор
 
 # Gems used only for assets and not required
 # in production environments by default.

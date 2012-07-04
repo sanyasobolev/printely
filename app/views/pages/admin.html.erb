@@ -30,4 +30,4 @@
     </table>
   <p><%= link_to 'Создать страницу', new_page_path, :class => 'box' %></p>
 
-  <%= paginate_links @pages %>
+  <%= will_paginate @pages %>

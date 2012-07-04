@@ -42,7 +42,7 @@ module AuthenticatedSystem
                    right.action == action_name && right.controller == controller_name} #self.class.controller_path
             return true
           else
-            flash[:notice] = "У Вас нет прав!"
+            flash[:notice] = "У Вас нет прав выполнить это действие. Обратитесь к администратору."
             request.env["HTTP_REFERER"] ? (redirect_to :back) : (redirect_to home_path)
             return false
           end
