@@ -54,6 +54,9 @@ ru:
       section:
         title: "Название"
         order: "Порядковый номер (слева направо)"
+        controller: "Контроллер"
+        action: "Действие"
+        published: "Опубликован"
       user:
         first_name: "Имя"
         second_name: "Фамилия"

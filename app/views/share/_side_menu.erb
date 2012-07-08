@@ -1,0 +1,10 @@
+<% if controller_name == 'articles' || controller_name == 'categories' %>
+  <% categories = Category.find(:all) %>
+  <% categories.each do |category| %>
+      <%= link_to category.name, category_articles_path(category), :class => 'box' %>
+  <% end %>
+<% end %>
+
+<%=  yield :sidebar %>
+
+

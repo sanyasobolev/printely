@@ -1,0 +1,14 @@
+<h2>
+<% sections = Section.all %>
+<% Section::SECTION_ORDER.each do |section_order| %>
+  <% sections.each do |section| %>
+    <% if section.order == section_order %>
+      <% if section.controller == 'no' %>
+        <%= link_to_unless_current section.title, section_pages_path(section), :class => 'section' %>
+      <% else %>
+        <%= link_to_unless_current section.title, {:controller => section.controller, :action => section.action} , {:class => 'section'} %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+</h2>

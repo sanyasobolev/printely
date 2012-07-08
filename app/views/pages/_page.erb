@@ -1,8 +1,8 @@
 <tr>
-  <td><%= link_to 'Х', page_url(page), :method => :delete, :confirm => 'Действительно удалить страницу?' %> </td>
+  <td><%= link_to 'Х', page_path(page), :method => :delete, :confirm => 'Действительно удалить страницу?' %> </td>
   <td><%= page.title %> </td>
   <td><%= link_to page.permalink, page_path(page)%></td>
-  <td><%= format_date(page.created_at) %> </td>
+  <td><%= Russian::strftime(page.created_at, "%d %B %Y") %> </td>
   <% if page.published == true %>
       <td>Да</td>
       <% else %>

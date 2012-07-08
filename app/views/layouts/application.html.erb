@@ -6,6 +6,7 @@
   <%= stylesheet_link_tag    "style", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "ckeditor/init" %>
+  <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
 </head>
@@ -28,12 +29,12 @@
         </div>
 
         <div id="top_nav">
-          <%#= render :partial => 'share/header_menu' %>
+          <%= render :partial => 'share/header_menu' %>
         </div>
       </div>
 
       <div id="sidebar">
-        <%#= render :partial => 'share/side_menu' %>
+        <%= render :partial => 'share/side_menu' %>
       </div>
 
       <div id="content">

@@ -1,9 +1,12 @@
 # encoding: utf-8
 class Page < ActiveRecord::Base
 
+  before_create :create_permalink
+
   cattr_reader :per_page
   @@per_page = 10
 
+  belongs_to :section
   belongs_to :user
   before_save :update_published_at
 
@@ -36,7 +39,7 @@ class Page < ActiveRecord::Base
   }
 
 #транслитерация названия страницы в ссылку
-  def before_create
+  def create_permalink
     @attributes['permalink'] = title.parameterize
   end
 
