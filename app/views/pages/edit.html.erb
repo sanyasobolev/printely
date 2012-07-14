@@ -7,7 +7,7 @@
   
   <% if !@main_page %>
     <p><%= Page.human_attribute_name("section_id") %><br />
-      <%= f.collection_select :section_id, section_for_page, :id, :title %>
+      <%= f.collection_select :section_id, section_for_page, :id, :title, :prompt => 'Нет' %>
     </p>
 
     <p><%= Page.human_attribute_name("published") %>

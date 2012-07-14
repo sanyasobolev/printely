@@ -3,7 +3,7 @@ class Section < ActiveRecord::Base
 
   has_many :pages, :dependent => :destroy
 
-  SECTION_ORDER = [1,2,3,4,5,6,7,8,9,10]
+  SECTION_ORDER = [1,2,3,4,5,6]
 
   #максмимальные и минимальные значения для полей
   TITLE_MAX_LENGTH = 10

@@ -25,7 +25,6 @@ class Page < ActiveRecord::Base
   #проверка полей
   validates :title,
             :body,
-            :section_id,
             :presence => true
 
   validates :title, :length => {

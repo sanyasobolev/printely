@@ -4,7 +4,11 @@
       <%= link_to 'Х', section_path(section), :method => :delete, :confirm => 'Все страницы этого раздела также удалятся! Действительно хотите удалить раздел?' %>
     <% end %>
   </td>
-  <td><%= section.title %></td>
+  <% if section.controller == 'no' %>
+    <td><%= link_to section.title, section_pages_path(section) %></td>
+    <% else %>
+    <td><%= link_to section.title, {:controller => section.controller, :action => section.action} %></td>
+  <% end %>
   <td><%= section.order %></td>
   <td><%= section.controller %></td>
   <td><%= section.action %></td>

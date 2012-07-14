@@ -9,7 +9,8 @@ def index #отображение списка страниц в sidebar
                                   :order => 'published_at',
                                   :include => :user,
                                   :conditions => "section_id=#{params[:section_id].to_i} AND published=true" )
-    @page_default = Page.find( :first, :conditions => "section_id=#{params[:section_id].to_i} AND published=true")
+   # @page_default = Page.find( :first, :conditions => "section_id=#{params[:section_id].to_i} AND published=true")
+   @page_default = @pages_of_section.first
   end
   respond_to do |wants| #web-сервис
     wants.html

@@ -2,7 +2,7 @@
 <% sections = Section.all %>
 <% Section::SECTION_ORDER.each do |section_order| %>
   <% sections.each do |section| %>
-    <% if section.order == section_order %>
+    <% if section.order == section_order && section.published == true %>
       <% if section.controller == 'no' %>
         <%= link_to_unless_current section.title, section_pages_path(section), :class => 'section' %>
       <% else %>
