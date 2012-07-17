@@ -2,7 +2,8 @@
 class User < ActiveRecord::Base
 
   require 'digest/sha1'
-
+  
+  has_many :articles
   belongs_to :role
   has_many :pages
 

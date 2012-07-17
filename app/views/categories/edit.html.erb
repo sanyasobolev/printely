@@ -1,0 +1,6 @@
+<%= error_messages_for :category %>
+<h2>Редактирование категории</h2>
+  <%= form_for :category, :url => category_path(@category), :html => {:method => :put} do |f| -%>
+    <%= render :partial => 'form', :locals => {:f => f} %>
+    <%= submit_tag 'Сохранить' %> или <%= link_to 'Вернуться', admin_categories_path %>
+  <% end %>

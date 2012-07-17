@@ -1,0 +1,7 @@
+<h2><%= @article.title %></h2>
+    <%= raw(@article.body) %><br />
+    <div class="property_article">
+      <%= Article.human_attribute_name("published_at") %>: <%= Russian::strftime(@article.published_at, "%d %B %Y") %> <br />
+      <%= Article.human_attribute_name("user_id") %>: <%= "#{@article.user.first_name} #{@article.user.second_name}"%>
+    </div>
+<p><%= link_to 'Назад', :back %></p>

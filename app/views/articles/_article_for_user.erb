@@ -1,0 +1,9 @@
+<div class="article">
+  <h2><%= link_to article_for_user.title, article_path(article_for_user) %></h2>
+      <%= raw(article_for_user.synopsis) %><br />
+      <% if article_for_user.category %>
+        <div class="category">
+           Категория: <%= link_to article_for_user.category.name, category_articles_path(article_for_user.category) %>
+        </div>
+      <% end %>
+</div>

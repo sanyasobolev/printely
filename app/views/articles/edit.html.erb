@@ -1,0 +1,8 @@
+<%= error_messages_for :article %>
+<h2>Редактирование статьи</h2>
+  <%= form_for :article, :url => article_path(@article), :html => { :method => :put } do |f| -%>
+
+  <%= render :partial => 'form', :locals => {:f => f} %>
+
+  <%= submit_tag 'Сохранить' %> или <%= link_to 'Вернуться', admin_articles_path %>
+  <% end -%>

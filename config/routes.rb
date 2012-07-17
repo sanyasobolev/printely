@@ -21,6 +21,15 @@ Spsite::Application.routes.draw do
     get 'admin', :on => :collection
   end
 
+  resources :articles do
+    get 'admin', :on => :collection
+  end
+
+  resources :categories do
+    resources :articles
+    get 'admin', :on => :collection
+  end
+
   mount Ckeditor::Engine => "/ckeditor"
 
 

@@ -1,0 +1,5 @@
+<tr>
+  <td><%= link_to 'Х', category_path(category_for_admin), :method => :delete, :confirm => 'Все статьи этой категории также удалятся! Действительно хотите удалить категорию?' %></td>
+  <td><%= link_to category_for_admin.name, category_articles_path(:category_id => category_for_admin) %></td>
+  <td><%= link_to 'Редактировать', edit_category_path(category_for_admin) %></td>
+</tr>

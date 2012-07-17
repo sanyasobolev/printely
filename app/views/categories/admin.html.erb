@@ -1,0 +1,12 @@
+<h2>Редактирование категорий</h2>
+  <p><%= link_to 'Создать категорию', new_category_path, :class => 'box' %></p>
+  <table class ="admin">
+    <tr>
+      <th></th>
+      <th><%= Category.human_attribute_name("name") %></th>
+      <th></th>
+    </tr>
+
+    <%= render :partial => 'category_for_admin', :collection => @categories %>
+
+  </table>
