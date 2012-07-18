@@ -1,5 +1,7 @@
 Spsite::Application.routes.draw do
   
+  mount Ckeditor::Engine => '/ckeditor'
+
   root :to => 'pages#show', :id => 'welcome'
 
   resources :users
@@ -30,9 +32,10 @@ Spsite::Application.routes.draw do
     get 'admin', :on => :collection
   end
 
-  mount Ckeditor::Engine => "/ckeditor"
-
-
+  Ckeditor::Engine.routes.draw do
+    resources :pictures, :only => [:index, :create, :destroy]
+    resources :attachment_files, :only => [:index, :create, :destroy]
+  end
   
 
 

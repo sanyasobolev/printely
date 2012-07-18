@@ -9,7 +9,7 @@ before_save :update_published_at
 
 #максмимальные и минимальные значения для полей
 TITLE_MAX_LENGTH = 255
-SYNOPSIS_MAX_length = 1000
+SYNOPSIS_MAX_LENGTH = 1000
 BODY_MAX_LENGTH = 20000
 
 #размер боксов полей в формах
@@ -31,7 +31,7 @@ BODY_COLS_SIZE = 60
       :maximum => TITLE_MAX_LENGTH
     }
     validates :synopsis, :length => {
-      :maximum => SYNOPSIS_MAX_length
+      :maximum => SYNOPSIS_MAX_LENGTH
     }
     validates :body, :length => {
       :maximum => BODY_MAX_LENGTH
