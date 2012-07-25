@@ -10,10 +10,21 @@
     <span id="number_busy"></span>
   </p>
 
+  <p>
+    <%= Section.human_attribute_name("controller")  %>
+    <%= f.text_field :controller %>
+  </p>
+
+  <p>
+    <%= Section.human_attribute_name("action")  %>
+    <%= f.text_field :action %>
+  </p>
+
+
   <p><%= Section.human_attribute_name("published") %>
     <%= f.check_box :published %>
   </p>
- 
+
 <%
   #"ajax-наблюдатель" за состоянием поля "section_order"
   #если выбранный порядковый номер занят, то пишет уведомление пользователю 

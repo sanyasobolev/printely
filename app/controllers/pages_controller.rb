@@ -11,6 +11,7 @@ def index #отображение списка страниц в sidebar
                                   :conditions => "section_id=#{params[:section_id].to_i} AND published=true" )
    # @page_default = Page.find( :first, :conditions => "section_id=#{params[:section_id].to_i} AND published=true")
    @page_default = @pages_of_section.first
+   @count_of_pages = @pages_of_section.count
   end
   respond_to do |wants| #web-сервис
     wants.html

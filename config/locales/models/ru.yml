@@ -57,6 +57,8 @@ ru:
         controller: "Контроллер"
         action: "Действие"
         published: "Опубликован"
+        controller: "Контроллер"
+        action: "Действие"
       user:
         first_name: "Имя"
         second_name: "Фамилия"

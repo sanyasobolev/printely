@@ -151,9 +151,19 @@ a:link {text-decoration: none; color: #0066ff}
 a:visited {text-decoration: none; color: #0066ff}
 a:hover {text-decoration: underline;}
 
-a.section:link {text-decoration: none; color: black}
+a.section:link {
+    display:block;
+    font-weight:bold;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    text-align: center;
+    position: relative;
+    width:15%;
+}
+
 a.section:visited {text-decoration: none; color: black}
-a.section:hover {text-decoration: none; color: #0066ff}
+a.section:hover {text-decoration: none; color: white}
 
 a.box:link, a.box:visited {
     display:block;
