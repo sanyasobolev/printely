@@ -5,95 +5,124 @@ body {
     font-size: 80%;
     font-family: Verdana,Arial,Helvetica,sans-serif;
 }
+/*панели---------------------------------------------------------------------*/
+#header {
+    height: 60px;
+    width: 100%;
+    background-color: #262626;
+}
 
-#main_container {
-    position: relative;
-    background-color: white;
+#slide_panel {
+    height: 300px;
+    width: 100%;
+    background-color: #378cff;
+}
+
+#content_panel {
     margin-left: auto;
     margin-right: auto;
-    width: 1000px;
+    width: 900px;
 }
 
-#header {
-    height: 100px;
+#first_bottom_panel {
+    height: 45px;
     width: 100%;
-        border-right-style: solid;
-        border-left-style: solid;
-        border-bottom-style: solid;
-        border-top-style: solid;
-        border-right-width: 1px;
-        border-left-width: 1px;
-        border-bottom-width: 1px;
-        border-top-width: 1px;
+    background-color: #f2f2f2;
 }
 
-#logo_container {
-    height: 50%;
+#second_bottom_panel {
+    height: 28px;
     width: 100%;
-    text-align: center;
+    background-color: #3f3f3f;
 }
-
-#auth_panel {
-    height: 25px;
-    position: absolute;
-    left: 1000px;
-    top: 0px;
-}
-
+/*-----------------------------------------------------------------------------------------*/
+/*контейнеры верхней панели---------------------------------------------------------------------*/
 #top_nav {
-    height: 50%;
-    width: 100%;
-    text-align: center;
-        border-right-style: solid;
-        border-left-style: solid;
-        border-bottom-style: solid;
-        border-top-style: solid;
-        border-right-width: 1px;
-        border-left-width: 1px;
-        border-bottom-width: 1px;
-        border-top-width: 1px;
+    position: relative;
+    height:100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
 }
+#logo_container {
+    padding-top: 20px;
+    width: 150px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+#user_options {
+    height: 25px;
+    width: 100px;
+    float:right;
+    margin-left: 20px;
+}
+
+a.box_user_opt:link, a.box_user_opt:visited {
+    display:block;
+    color:white;
+    background-color:#378cff;
+    max-width: 50px;
+    text-align:center;
+    text-decoration:none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+a.box_user_opt:hover, a.box_user_opt:active {
+    background-color: #3b6fb5;
+}
+
+.section_nav {
+    display:block;
+    text-align: center;
+    float:right;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    font-size: 1.2em;
+    color: #378cff;
+    margin-top: 20px;
+}
+
+a.section:link, a.section:visited {
+    color: white;
+    text-align:center;
+    text-decoration:none;
+    padding: 0px;
+    font-size: inherit;
+}
+
+a.section:hover {
+    color: #378cff;
+    text-align:center;
+    text-decoration:none;
+    padding: 0px;
+}
+/*-----------------------------------------------------------------------------------------*/
+
+/*контенеры центральной панели-----------------------------------------------------------------------------*/
 
 #sidebar {
     width: 150px;
-    min-height: 600px;
+    min-height: 400px;
     padding: 25px;
     float: left;
-        border-right-style: solid;
-        border-left-style: solid;
-        border-bottom-style: solid;
-        border-top-style: solid;
-        border-right-width: 1px;
-        border-left-width: 1px;
-        border-bottom-width: 1px;
-        border-top-width: 1px;
 }
 
 #content {
     margin-left: 200px;
-    min-height: 600px;
+    min-height: 400px;
     padding: 25px;
-        border-right-style: solid;
-        border-left-style: solid;
-        border-bottom-style: solid;
-        border-top-style: solid;
-        border-right-width: 1px;
-        border-left-width: 1px;
-        border-bottom-width: 1px;
-        border-top-width: 1px;
 }
 
+/*контейнеры нижних панелей-----------------------------------------------------------------------------------------*/
 #bot_nav {
-    width: 95%;
-    height: 50px;
-    background-color: white;
-    
-    margin-left: auto;
-    margin-right: auto;
 
-    border-top-style: solid;
-    border-top-color: gray;
-    border-top-width: 2px;
+
 }
 
 /*общие*/
@@ -126,6 +155,10 @@ p {
     text-align: center;
 }
 
+.float_right {
+    float: right
+}
+
 .fl_clear {
     clear: both
 }
@@ -151,19 +184,7 @@ a:link {text-decoration: none; color: #0066ff}
 a:visited {text-decoration: none; color: #0066ff}
 a:hover {text-decoration: underline;}
 
-a.section:link {
-    display:block;
-    font-weight:bold;
-    text-decoration: none;
-    color: white;
-    background-color: black;
-    text-align: center;
-    position: relative;
-    width:15%;
-}
-
-a.section:visited {text-decoration: none; color: black}
-a.section:hover {text-decoration: none; color: white}
+a.logo {text-decoration: none; color: white}
 
 a.box:link, a.box:visited {
     display:block;

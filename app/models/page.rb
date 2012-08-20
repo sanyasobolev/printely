@@ -2,13 +2,14 @@
 class Page < ActiveRecord::Base
 
   before_create :create_permalink
+  before_save :update_published_at
 
   cattr_reader :per_page
   @@per_page = 10
 
   belongs_to :section
   belongs_to :user
-  before_save :update_published_at
+
 
   #длины полей
   TITLE_MIN_LENGTH = 3
@@ -27,6 +28,10 @@ class Page < ActiveRecord::Base
             :body,
             :presence => true
 
+  validates :title,
+            :permalink,
+            :uniqueness => true
+
   validates :title, :length => {
     :within => TITLE_RANGE,
     :message => "Слишком длинное название"
@@ -43,7 +48,7 @@ class Page < ActiveRecord::Base
   end
 
   def to_param
-    "#{permalink}"
+    permalink
   end
 
   def update_published_at

@@ -1,33 +1,17 @@
 <!-- если страниц в разделе больше одной, то отображаем панел навигации !-->
 <% if @count_of_pages > 1 %>
-  <%= render :partial => 'pages_for_side' %>
+  <%= render :partial => 'pages_for_sidebar' %>
 <% end %>
-
 
 <!-- если страница в разделе одна, то убираем панель навигации !-->
 <% if @count_of_pages == 1 %>
-  <% content_for :stylesheets do %>
-    #sidebar {display: none}
-    #content {
-      margin-left: 0px;
-      min-height: 600px;
-      padding: 25px;
-          border-right-style: solid;
-          border-left-style: solid;
-          border-bottom-style: solid;
-          border-top-style: solid;
-          border-right-width: 1px;
-          border-left-width: 1px;
-          border-bottom-width: 1px;
-          border-top-width: 1px;
-  }
-  <% end %>
+  <%= render :partial => 'remove_sidebar' %>
 <% end %>
 
-<!-- смотрим, есть ли страницы в разделе и отображаем первую из них. если нет, то выводим мессадж!-->
+<!-- если страниц нет, тоже убираем панель навигации и выводим месадж -->
 <% if @count_of_pages < 1 %>
+    <%= render :partial => 'remove_sidebar' %>
     <p>В этом разделе пока нет страниц.</p>
-  <% else %>
-    <h1><%= @page_default.title %></h1>
-    <p><%= raw(@page_default.body) %></p>
+<% else %>
+    <%= render :partial => 'show_page', :locals => {:page => @page_default} %>
 <% end %>

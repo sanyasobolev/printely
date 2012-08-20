@@ -9,9 +9,8 @@ def index #отображение списка страниц в sidebar
                                   :order => 'published_at',
                                   :include => :user,
                                   :conditions => "section_id=#{params[:section_id].to_i} AND published=true" )
-   # @page_default = Page.find( :first, :conditions => "section_id=#{params[:section_id].to_i} AND published=true")
-   @page_default = @pages_of_section.first
-   @count_of_pages = @pages_of_section.count
+    @count_of_pages = @pages_of_section.count
+    @page_default = @pages_of_section.first
   end
   respond_to do |wants| #web-сервис
     wants.html
@@ -19,21 +18,33 @@ def index #отображение списка страниц в sidebar
   end
 end
 
-  def show #отображение выбранной страницы из sidebar
-    if params[:id]
+  def welcome
+    if params[:id] == 'welcome'
       @page = Page.find_by_permalink(params[:id])
       @title = @page.title
-      if @section = Section.find_by_id(@page.section_id) #проверка на случай, если пришла главная страница
+    end
+    respond_to do |format|
+        format.html
+        format.xml { render :xml => @page.to_xml }
+    end
+  end
+
+  def show #отображение выбранной страницы из sidebar или страницы без раздела
+    if params[:id]
+      @page = Page.find_by_permalink(params[:id])
+      if @section = Section.find_by_id(@page.section_id)
          @pages_of_section = Page.find(:all,
                                        :order => 'published_at',
                                        :include => :user,
                                        :conditions => "section_id=#{@section.id.to_i} AND published=true" )
-      @title = "#{@section.title} - #{@page.title}"
+        @title = "#{@section.title} - #{@page.title}"
+      else
+        @title = "#{@page.title}"
       end
-      respond_to do |format|
-        format.html
-        format.xml { render :xml => @page.to_xml }
-      end
+    end
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @page.to_xml }
     end
   end
 

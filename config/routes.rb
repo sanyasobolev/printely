@@ -2,7 +2,7 @@ Spsite::Application.routes.draw do
   
   mount Ckeditor::Engine => '/ckeditor'
 
-  root :to => 'pages#show', :id => 'welcome'
+  root :to => 'pages#welcome', :id => 'welcome' #отправляет на действие welcome контроллера pages, с Id=welcome
 
   resources :users
   resources :rights
@@ -31,6 +31,12 @@ Spsite::Application.routes.draw do
     resources :articles
     get 'admin', :on => :collection
   end
+
+  resources :letters do
+    get 'admin', :on => :collection
+    get 'sent', :on => :collection
+  end
+
 
   Ckeditor::Engine.routes.draw do
     resources :pictures, :only => [:index, :create, :destroy]

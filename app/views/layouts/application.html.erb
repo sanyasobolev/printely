@@ -13,34 +13,32 @@
   <%= yield :head %>
 </head>
 <body>
-
-  <body>
-    <div id="main_container" >
-
-      <div id="header" >
-        <div id="logo_container">
-          <%= link_to "Место логотипа", root_path %>
-        </div>
-
-        <div id="auth_panel">
+  <div id="header" >
+    <div id="top_nav">
+        <div id="user_options">
           <% if logged_in? -%>
             <%= render :partial => 'sessions/current' %>
           <% else -%>
-            <%= link_to_unless_current '>>', :login %>
+            <%= link_to 'Log In', :login, :class => 'box_user_opt' %>
           <% end -%>
         </div>
-
-        <div id="top_nav">
-          <%= render :partial => 'share/header_menu' %>
+        <%= render :partial => 'share/header_menu' %>
+        <div id="logo_container">
+          <%= link_to 'Logo', :root, :class => 'logo' %>
         </div>
-      </div>
+    </div>
+  </div>
 
+  <div id="slide_panel">
+
+  </div>
+
+  <div id="content_panel">
       <div id="sidebar">
         <%= render :partial => 'share/side_menu' %>
       </div>
 
       <div id="content">
-
         <% if flash[:notice] -%>
           <div id="notice" ><%= flash[:notice] %></div>
         <% end -%>
@@ -50,19 +48,25 @@
         <%  end -%>
 
         <%= yield %>
-        
       </div>
+  </div>
 
-      <div id="bot_nav">
-        <%#= render :partial => 'share/bottom_menu' %>
-      </div> 
+  <div id="first_bottom_panel">
 
-      <% if logged_in? && current_user.has_role?('Administrator') %>
-        <%= render :partial => 'share/admin_menu' %>
-      <% end %>
+  </div>
 
+  <div id="second_bottom_panel">
+    <div id="bot_nav">
+      <%= render :partial => 'share/bottom_menu' %>
     </div>
+  </div>
+
+
+
+  <% if logged_in? && current_user.has_role?('Administrator') %>
+    <%= render :partial => 'share/admin_menu' %>
+  <% end %>
+
   </body>
 
-</body>
 </html>
