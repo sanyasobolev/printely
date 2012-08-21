@@ -72,7 +72,9 @@ ru:
         new_password: "Новый пароль"
       letter:
         name: "ФИО"
-        contact: "Контактные данные (email/телефон)"
+        company: "Компания"
+        phone: "Телефон"
+        email: "Email"
         question: "Текст письма"
         created_at: "Дата создания"
 

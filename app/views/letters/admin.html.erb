@@ -1,0 +1,14 @@
+<h2>Обратная связь от клиентов</h2>
+<table class ="admin">
+  <tr>
+    <th></th>
+    <th><%= Letter.human_attribute_name("name") %></th>
+    <th><%= Letter.human_attribute_name("company") %></th>
+    <th><%= Letter.human_attribute_name("created_at") %></th>
+    <th></th>
+  </tr>
+
+    <%= render :partial => 'letter_for_admin', :collection => @letters %>
+
+</table>
+  <%= will_paginate @letters %>
