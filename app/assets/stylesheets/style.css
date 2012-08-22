@@ -413,3 +413,58 @@ a.for_admin:hover,a.for_admin:active{
     text-align: center;
 }
 
+
+/*оформление форм ввода данных-------------------------------------*/
+.form_shape {
+    padding: 10px;
+}
+
+.form_align {
+    margin-top: 20px;
+}
+
+.form_align label {
+    float: left;
+    text-align: right;
+    width: 20%;
+    margin-right: 20px;
+    margin-top: 9px;
+}
+
+.form_align input {
+    border: 1px solid #D6D3D1;
+    height: 30px;
+    width: 450px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    font-size: 1.3em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_align textarea {
+    border: 1px solid #D6D3D1;
+    padding: 7px;
+    resize: none;
+    font-size: 1.3em;
+    width: 450px;
+    height: 200px;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+/*------------------------------------------------------------------*/
+/*кнопка------------------------------------------------------------*/
+.button {
+    position: relative;
+    right: -475px;
+    background-color: #1BA1E2;
+    border: 0 none;
+    color: white;
+    cursor: pointer;
+    padding: 7px 25px;
+    margin: 10px;
+/*    float: right;*/
+}
+
+
+/*------------------------------------------------------------------*/

@@ -1,36 +1,37 @@
 <%= error_messages_for :letter %>
 <h2>Обратная связь</h2>
-<%= form_for :letter, :url => letters_path, :html => { :method => :post } do |f| -%>
+<div class="form_shape">
+  <%= form_for :letter, :url => letters_path, :html => { :method => :post } do |f| -%>
 
-  <p><%= Letter.human_attribute_name("name") %><br />
-  <%= f.text_field :name,
-                   :size => Letter::NAME_SIZE,
-                   :maxlength =>Letter::NAME_MAX_LENGTH %>
-  </p>
+    <div class="form_align">
+      <%= f.label(:name) %>
+      <%= f.text_field :name,
+                       :maxlength =>Letter::NAME_MAX_LENGTH %>
+    </div>
 
-  <p><%= Letter.human_attribute_name("company") %><br />
-  <%= f.text_field :company,
-                   :size => Letter::COMPANY_SIZE,
-                   :maxlength =>Letter::COMPANY_MAX_LENGTH %>
-  </p>
+    <div class="form_align">
+        <%= f.label(:company) %>
+        <%= f.text_field :company,
+                         :maxlength =>Letter::COMPANY_MAX_LENGTH %>
+    </div>
 
-  <p><%= Letter.human_attribute_name("phone") %><br />
-  <%= f.text_field :phone,
-                   :size => Letter::PHONE_SIZE,
-                   :maxlength =>Letter::PHONE_MAX_LENGTH %>
-  </p>
+    <div class="form_align">
+        <%= f.label(:phone) %>
+        <%= f.text_field :phone,
+                         :maxlength =>Letter::PHONE_MAX_LENGTH %>
+    </div>
 
-<p><%= Letter.human_attribute_name("email") %><br />
-  <%= f.text_field :email,
-                   :size => Letter::EMAIL_SIZE,
-                   :maxlength =>Letter::EMAIL_MAX_LENGTH %>
-  </p>
+    <div class="form_align">
+      <%= f.label(:email) %>
+      <%= f.text_field :email,
+                       :maxlength =>Letter::EMAIL_MAX_LENGTH %>
+    </div>
 
-  <p><%= Letter.human_attribute_name("question") %><br />
-  <%= f.text_area :question,
-                  :rows => Letter::QUESTION_ROWS_SIZE,
-                  :cols => Letter::QUESTION_COLS_SIZE %>
-  </p>
+    <div class="form_align">
+      <%= f.label(:question) %>
+      <%= f.text_area :question %>
+    </div>
 
-  <%= submit_tag 'Отправить' %>
-<% end -%>
+    <%= submit_tag 'Отправить', :class => "button" %>
+  <% end -%>
+</div>

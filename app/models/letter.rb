@@ -17,14 +17,6 @@ class Letter < ActiveRecord::Base
   EMAIL_MAX_LENGTH = 255
   EMAIL_RANGE = EMAIL_MIN_LENGTH..EMAIL_MAX_LENGTH
 
-  #размер боксов полей в форме
-  NAME_SIZE = 60
-  COMPANY_SIZE = 60
-  PHONE_SIZE = 60
-  EMAIL_SIZE = 60
-  QUESTION_COLS_SIZE = 45
-  QUESTION_ROWS_SIZE = 20
-
   #проверка полей
   validates :name,
             :phone,
