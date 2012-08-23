@@ -110,12 +110,10 @@ a.section:hover {
 #sidebar {
     width: 150px;
     min-height: 400px;
-    padding: 25px;
     float: left;
 }
 
 #content {
-    margin-left: 200px;
     min-height: 400px;
     padding: 25px;
 }

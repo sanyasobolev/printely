@@ -1,6 +1,8 @@
 <% if @pages_of_section != nil %>
-  <%= render :partial => 'pages_for_sidebar' %>
+  <%= render :partial => 'add_sidebar' %>
+<% else %>
+  <%= render :partial => 'show_page', :locals => {:page => @page} %>
 <% end %>
 
-<%= render :partial => 'show_page', :locals => {:page => @page} %>
+
 

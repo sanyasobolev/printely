@@ -34,21 +34,17 @@
   </div>
 
   <div id="content_panel">
-      <div id="sidebar">
-        <%= render :partial => 'share/side_menu' %>
-      </div>
+    <% if flash[:notice] -%>
+      <div id="notice" ><%= flash[:notice] %></div>
+    <% end -%>
 
-      <div id="content">
-        <% if flash[:notice] -%>
-          <div id="notice" ><%= flash[:notice] %></div>
-        <% end -%>
+    <% if flash[:error] -%>
+      <div id="error" ><%= flash[:error] %></div>
+    <%  end -%>
 
-        <% if flash[:error] -%>
-          <div id="error" ><%= flash[:error] %></div>
-        <%  end -%>
-
-        <%= yield %>
-      </div>
+    <div id="content">
+      <%= content_for?(:content) ? yield(:content) : yield %>
+    </div>
   </div>
 
   <div id="first_bottom_panel">

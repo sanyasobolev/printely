@@ -10,7 +10,7 @@ def index #отображение списка страниц в sidebar
                                   :include => :user,
                                   :conditions => "section_id=#{params[:section_id].to_i} AND published=true" )
     @count_of_pages = @pages_of_section.count
-    @page_default = @pages_of_section.first
+    @page = @pages_of_section.first
   end
   respond_to do |wants| #web-сервис
     wants.html
