@@ -23,6 +23,9 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 900px;
+    min-height: 400px;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 #first_bottom_panel {
@@ -48,7 +51,7 @@ body {
 #logo_container {
     padding-top: 20px;
     width: 150px;
-    text-align: center;
+    text-align: left;
     font-weight: bold;
     font-size: 1.5em;
 }
@@ -108,12 +111,15 @@ a.section:hover {
 /*контенеры центральной панели-----------------------------------------------------------------------------*/
 
 #sidebar {
+    padding-top: 25px;
+    padding-bottom: 25px;
     width: 150px;
     min-height: 400px;
     float: left;
 }
 
 #content {
+    margin-left: 150px;
     min-height: 400px;
     padding: 25px;
 }

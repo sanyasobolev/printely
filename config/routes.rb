@@ -16,6 +16,7 @@ Spsite::Application.routes.draw do
 
   resources :pages do
     get 'admin', :on => :collection
+    get 'no_page', :on => :collection
   end
 
   resources :sections do

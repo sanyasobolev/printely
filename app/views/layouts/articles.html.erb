@@ -1,0 +1,19 @@
+<% content_for :stylesheets do %> 
+  #content_panel {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    }
+  #sidebar
+  #content
+<% end %>
+
+<% content_for :content_panel do %>
+  <div id="sidebar">
+    <%= render :partial => 'categories' %>
+  </div>
+  <div id="content">
+    <%= yield %>
+  </div>
+<% end %>
+
+<%= render :template => 'layouts/application' %>

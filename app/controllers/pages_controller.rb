@@ -1,22 +1,28 @@
 class PagesController < ApplicationController
+
   skip_before_filter :login_required, :authorized?,
                      :only => [:show, :index]
 
-def index #отображение списка страниц в sidebar
-  if params[:section_id]
-    @title =  Section.find_by_id(params[:section_id]).title
-    @pages_of_section = Page.find(:all,
-                                  :order => 'published_at',
-                                  :include => :user,
-                                  :conditions => "section_id=#{params[:section_id].to_i} AND published=true" )
-    @count_of_pages = @pages_of_section.count
-    @page = @pages_of_section.first
+  def index #отображение списка страниц в sidebar
+    if params[:section_id]
+      @title =  Section.find_by_id(params[:section_id]).title
+      @pages_of_section = Page.find(:all,
+                                    :order => 'published_at',
+                                    :include => :user,
+                                    :conditions => "section_id=#{params[:section_id].to_i} AND published=true" )
+      @count_of_pages = @pages_of_section.count
+      @page = @pages_of_section.first
+    end
+
+    if @count_of_pages > 1
+      render :action => 'index', :layout => 'side_pages'
+    elsif @count_of_pages < 1
+      redirect_to no_page_pages_path
+    end
   end
-  respond_to do |wants| #web-сервис
-    wants.html
-    wants.xml { render :xml => @pages_of_section.to_xml }
+
+  def no_page
   end
-end
 
   def welcome
     if params[:id] == 'welcome'
@@ -38,13 +44,14 @@ end
                                        :include => :user,
                                        :conditions => "section_id=#{@section.id.to_i} AND published=true" )
         @title = "#{@section.title} - #{@page.title}"
+        @count_of_pages = @pages_of_section.count
       else
         @title = "#{@page.title}"
+        @count_of_pages = 0
       end
     end
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @page.to_xml }
+    if @count_of_pages > 1
+      render :action => 'show', :layout => 'side_pages'
     end
   end
 

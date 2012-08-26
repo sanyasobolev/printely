@@ -24,7 +24,7 @@
         </div>
         <%= render :partial => 'share/header_menu' %>
         <div id="logo_container">
-          <%= link_to 'Logo', :root, :class => 'logo' %>
+          <%= link_to 'Logotype', :root, :class => 'logo' %>
         </div>
     </div>
   </div>
@@ -33,7 +33,7 @@
 
   </div>
 
-  <div id="content_panel">
+
     <% if flash[:notice] -%>
       <div id="notice" ><%= flash[:notice] %></div>
     <% end -%>
@@ -42,9 +42,10 @@
       <div id="error" ><%= flash[:error] %></div>
     <%  end -%>
 
-    <div id="content">
-      <%= content_for?(:content) ? yield(:content) : yield %>
-    </div>
+  <div id="content_panel">
+
+      <%= content_for?(:content_panel) ? yield(:content_panel) : yield %>
+
   </div>
 
   <div id="first_bottom_panel">
