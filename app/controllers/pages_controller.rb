@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   skip_before_filter :login_required, :authorized?,
-                     :only => [:show, :index]
+                     :only => [:show, :index, :no_page, :welcome]
 
   def index #отображение списка страниц в sidebar
     if params[:section_id]

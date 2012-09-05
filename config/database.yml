@@ -5,7 +5,7 @@
 #   gem 'sqlite3'
 development:
   adapter: mysql2
-  host: localhost
+  host: 127.0.0.1
   encoding: utf8
   database: spsite_development
   username: root
@@ -16,12 +16,15 @@ development:
 
 
 production:
-  adapter: mysql
+  adapter: mysql2
   host: localhost
   encoding: utf8
-  database: dance_development
+  database: spsite_development
   username: root
   password: zpdm6q
+  pool: 5
+  reconnect: false
+  port: 3306
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

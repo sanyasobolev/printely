@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  layout "articles", :only => [:index, :show]
+  layout 'articles', :only => [:index, :show]
   layout "application", :only => [:admin, :new, :edit]
   skip_before_filter :login_required, :authorized?,
                      :only => [:index, :show]

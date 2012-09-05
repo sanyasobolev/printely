@@ -1,2 +1,8 @@
-&copy; Logo. Все права защищены
-<p class="float_right"> <%= link_to 'Обратная связь', new_letter_path %> | <%= link_to 'Карта сайта', :root %> </p>
+<div id="all_rights">
+  &copy; Logo. Все права защищены
+</div>
+<div id="bot_section_nav">
+  <%= link_to 'Обратная связь', new_letter_path, :class => 'bot_section' %>
+  |
+  <%= link_to 'Карта сайта', :root, :class => 'bot_section' %>
+</div>
