@@ -13,6 +13,10 @@ body {
     background-color: #262626;
 }
 
+#flash_panel {
+    
+}
+
 #slide_panel {
     height: 300px;
     width: 100%;
@@ -281,7 +285,10 @@ a.for_admin:hover,a.for_admin:active{
     border: 1px solid #a1d8ff;
 }
 
-/*обработка ошибок и сообщений-------------------------------------------------
+/*обработка ошибок и сообщений-------------------------------------------------*/
+
+
+
 /*общее сообщение*/
 #notice {
   border: 2px solid red;
@@ -505,7 +512,11 @@ a.for_admin:hover,a.for_admin:active{
     color: white;
     cursor: pointer;
     padding: 7px 25px;
-    margin: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 0px;
+
 }
 
 
