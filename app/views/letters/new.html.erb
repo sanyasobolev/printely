@@ -7,7 +7,8 @@
     <div class="form_align">
       <%= f.label(:name) %>
       <%= f.text_field :name,
-                       :maxlength =>Letter::NAME_MAX_LENGTH %>
+                       :maxlength =>Letter::NAME_MAX_LENGTH,
+                       :class => 'req_input' %>
     </div>
 
     <div class="form_align">
@@ -19,22 +20,25 @@
     <div class="form_align">
         <%= f.label(:phone) %>
         <%= f.text_field :phone,
-                         :maxlength =>Letter::PHONE_MAX_LENGTH %>
+                         :maxlength =>Letter::PHONE_MAX_LENGTH,
+                         :class => 'req_input' %>
     </div>
 
     <div class="form_align">
       <%= f.label(:email) %>
       <%= f.text_field :email,
-                       :maxlength =>Letter::EMAIL_MAX_LENGTH %>
+                       :maxlength =>Letter::EMAIL_MAX_LENGTH,
+                       :class => 'req_input' %>
     </div>
 
     <div class="form_align">
       <%= f.label(:question) %>
-      <%= f.text_area :question %>
+      <%= f.text_area :question,
+                      :class => 'req_textarea' %>
     </div>
 
   <div class="submit_area">
-    <%= submit_tag 'Отправить', :class=>'submit' %>
+    <%= submit_tag 'Отправить', :class => 'submit' %>
   </div>
   
 

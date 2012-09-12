@@ -12,4 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require_tree 
+//
+// обработчик slide-панели
+
+$(function() {
+    $("#slide_panel").carouFredSel();
+});

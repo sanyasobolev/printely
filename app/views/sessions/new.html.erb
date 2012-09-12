@@ -1,23 +1,30 @@
   <h1>Вход в систему</h1>
-    <%= form_for :user, :url => :login do |form| %>
-      <p>
-      <%= User.human_attribute_name("email") %><br />
-      <%= form.text_field :email,
-                          :size => User::EMAIL_SIZE,
-                          :maxlength => User::EMAIL_MAX_LENGTH %>
-      </p>
-      <p>
-      <%= User.human_attribute_name("password") %> <br />
-      <%= form.password_field :password,
-                              :size => User::PASSWORD_SIZE,
-                              :maxlength => User::PASSWORD_MAX_LENGTH %>
-      </p>
-      <%= submit_tag "Войти" %> или <%= link_to "На главную", root_path %>
-    <% end %>
-  <p>
-    Не зарегистрированы? <%= link_to "Регистрация", new_user_path %>
-  </p>
+  <div class="form_shape">
+      <%= form_for :user, :url => :login do |form| %>
+        <div class="form_align">
+            <%= form.label :email %>
+            <%= form.text_field :email,
+                                :size => User::EMAIL_SIZE,
+                                :maxlength => User::EMAIL_MAX_LENGTH %>
+        </div>
 
+        <div class="form_align">
+        <%= form.label :password %>
+        <%= form.password_field :password,
+                                :size => User::PASSWORD_SIZE,
+                                :maxlength => User::PASSWORD_MAX_LENGTH %>
+        </div>
+
+        <div class="submit_area">
+          <%= submit_tag "Войти", :class => 'submit' %>
+        </div>
+
+      <% end %>
+  </div>
+    <p>
+      Не зарегистрированы? <%= link_to "Регистрация", new_user_path %>
+    </p>
+    
   <!--
   <td>
     <p><label for="remember_me">Remember me:</label>

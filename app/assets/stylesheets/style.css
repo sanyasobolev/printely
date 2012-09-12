@@ -332,23 +332,18 @@ a.for_admin:hover,a.for_admin:active{
 
 /*общее сообщение*/
 #notice {
-  padding: 1em;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  background-color: #F7941D;
+    padding: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    background-color: #F7941D;
 }
 
 /*сообщение об ошибке*/
 #error {
-    font-style: normal;
-    font-weight: bold;
-    font-variant: inherit;
-    color: #000000;
-    border-right-width: 3px;
-    border-left-width: 3px;
-    border-bottom-width: 3px;
-    border-top-width: 3px;
-    background-color: #ff0000;
+    padding: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    background-color: red;
 }
 
 /*сообщение о неправильно выбранном порядковом номере раздела*/
@@ -360,35 +355,17 @@ a.for_admin:hover,a.for_admin:active{
 
 /*обработка ошибок модели и выделение поля при введении неверных данных-------*/
 .fieldWithErrors {
-    margin: 2px;
-    padding: 2px;
+    padding: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
     background-color: red;
-    display: inline-table;
 }
 
 #errorExplanation {
-
-    background-color: #e7e9ff;
-
-    border-right-style: solid;
-    border-left-style: solid;
-    border-bottom-style: solid;
-    border-top-style: solid;
-    border-right-color: #0000ff;
-    border-left-color: #0000ff;
-    border-bottom-color: #0000ff;
-    border-top-color: #0000ff;
-    border-right-width: 1px;
-    border-left-width: 1px;
-    border-bottom-width: 1px;
-    border-top-width: 1px;
-
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-bottom: 0px;
-    padding-top: 0px;
-    margin-bottom: 20px;
-    margin-top: 0px;
+    padding: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    background-color: red;
 }
 
 #errorExplanation h3 {
@@ -525,8 +502,33 @@ a.for_admin:hover,a.for_admin:active{
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
+.form_align .req_input {
+    border-bottom: 1px solid #D6D3D1;
+    border-left: 1px solid red;
+    border-top: 1px solid #D6D3D1;
+    border-right: 1px solid #D6D3D1;
+    height: 30px;
+    width: 450px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    font-size: 1.3em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
 .form_align textarea {
     border: 1px solid #D6D3D1;
+    padding: 7px;
+    resize: none;
+    font-size: 1.3em;
+    width: 450px;
+    height: 200px;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_align .req_textarea {
+    border: 1px solid #D6D3D1;
+    border-left-color: red;
     padding: 7px;
     resize: none;
     font-size: 1.3em;
