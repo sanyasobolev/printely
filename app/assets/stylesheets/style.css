@@ -123,17 +123,18 @@ a.top_section:hover {
 	text-align: center;
 }
 .slide_pagination a {
-	background: blue;
+	background: #cccccc;
 	width: 15px;
 	height: 15px;
 	margin: 0 5px 0 0;
 	display: inline-block;
 }
-slide_pagination a.selected {
+
+.slide_pagination a.selected {
 	background:#1BA1E2;
 	cursor: default;
 }
-slide_pagination a span {
+.slide_pagination a span {
 	display: none;
 }
 .clearfix {
