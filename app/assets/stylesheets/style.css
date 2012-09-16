@@ -22,7 +22,6 @@ body {
 #slide_panel {
     height: 300px;
     width: 100%;
-    background-color: #378cff;
 }
 
 #content_panel {
@@ -113,6 +112,34 @@ a.top_section:hover {
     padding: 0px;
 }
 /*-----------------------------------------------------------------------------------------*/
+/*контенеры slide - панели-----------------------------------------------------------------------------*/
+
+.slide_panel img {
+	display: block;
+	float: left;
+}
+
+.slide_pagination {
+	text-align: center;
+}
+.slide_pagination a {
+	background: blue;
+	width: 15px;
+	height: 15px;
+	margin: 0 5px 0 0;
+	display: inline-block;
+}
+slide_pagination a.selected {
+	background:#1BA1E2;
+	cursor: default;
+}
+slide_pagination a span {
+	display: none;
+}
+.clearfix {
+	float: none;
+	clear: both;
+}
 
 /*контенеры центральной панели-----------------------------------------------------------------------------*/
 

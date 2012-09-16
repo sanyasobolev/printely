@@ -17,5 +17,16 @@
 // обработчик slide-панели
 
 $(function() {
-    $("#slide_panel").carouFredSel();
+    $("#slide_image").carouFredSel({
+        circular: true,
+	infinite: false,
+        width: "100%",
+        height: "300px",
+        align: "center",
+        cookie: true,
+	auto : {
+            pauseDuration: 15000
+        },
+	pagination: "#slide_img_pag"
+    });
 });
