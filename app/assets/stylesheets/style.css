@@ -113,6 +113,33 @@ a.top_section:hover {
 }
 /*-----------------------------------------------------------------------------------------*/
 /*контенеры slide - панели-----------------------------------------------------------------------------*/
+#slide_background {
+    position: relative;
+    top: -300px;
+    z-index: -1;
+}
+
+#slide_background .red {
+    display: block;
+    float: left;
+    width: 100%;
+    height: 300px;
+    background-color: #ffff33;
+}
+#slide_background .white {
+        display: block;
+    float: left;
+    width: 100%;
+    height: 300px;
+    background-color: #00ffff;
+}
+#slide_background .black {
+        display: block;
+    float: left;
+    width: 100%;
+    height: 300px;
+    background-color: #ff00ff;
+}
 
 .slide_panel img {
 	display: block;

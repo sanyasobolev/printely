@@ -19,7 +19,7 @@
 $(function() {
     $("#slide_image").carouFredSel({
         circular: true,
-	infinite: false,
+	infinite: true,
         width: "100%",
         height: "300px",
         align: "center",
@@ -27,6 +27,25 @@ $(function() {
 	auto : {
             pauseDuration: 15000
         },
-	pagination: "#slide_img_pag"
+	pagination: "#slide_img_pag",
+        synchronise : ["#slide_background", false, true ]
+    });
+});
+
+$(function() {
+    $("#slide_background").carouFredSel({
+//        circular: true,
+//	infinite: false,
+//          width: "100%",
+//          height: "300px",
+//        cookie: true,
+	auto : {
+            pauseDuration: 15000
+        },
+        scroll: {
+            fx			: "crossfade",
+            easing		: "swing",
+            duration	: 500
+	}
     });
 });
