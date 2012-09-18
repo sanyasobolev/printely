@@ -20,6 +20,7 @@ body {
 }
 
 #slide_panel {
+    position: relative;
     height: 300px;
     width: 100%;
 }
@@ -112,61 +113,71 @@ a.top_section:hover {
     padding: 0px;
 }
 /*-----------------------------------------------------------------------------------------*/
-/*контенеры slide - панели-----------------------------------------------------------------------------*/
+/*контейнеры slide - панели-----------------------------------------------------------------------------*/
+
+.slide_image {
+    position: absolute;
+    height: 300px;
+    width: 100%;
+}
+
+.slide_image img {
+    display: block;
+    float: left;
+}
+
 #slide_background {
-    position: relative;
-    top: -300px;
-    z-index: -1;
+    position: absolute;
+    height: 300px;
+    width: 100%;
+    top: 0px;
+    z-index:-1;
 }
 
 #slide_background .red {
     display: block;
     float: left;
     width: 100%;
-    height: 300px;
+    height: 100%;
     background-color: #ffff33;
 }
 #slide_background .white {
-        display: block;
+    display: block;
     float: left;
     width: 100%;
-    height: 300px;
+    height: 100%;
     background-color: #00ffff;
 }
 #slide_background .black {
-        display: block;
+    display: block;
     float: left;
     width: 100%;
-    height: 300px;
+    height: 100%;
     background-color: #ff00ff;
 }
 
-.slide_panel img {
-	display: block;
-	float: left;
-}
-
 .slide_pagination {
-	text-align: center;
+    margin-top: 10px;
+    text-align: center;
 }
 .slide_pagination a {
-	background: #cccccc;
-	width: 15px;
-	height: 15px;
-	margin: 0 5px 0 0;
-	display: inline-block;
+    background: #cccccc;
+    width: 15px;
+    height: 15px;
+    margin: 0 5px 0 0;
+    display: inline-block;
 }
 
 .slide_pagination a.selected {
-	background:#1BA1E2;
-	cursor: default;
+    background:#1BA1E2;
+    cursor: default;
 }
 .slide_pagination a span {
-	display: none;
+    display: none;
 }
 .clearfix {
-	float: none;
-	clear: both;
+    float: none;
+    clear: both;
 }
 
 /*контенеры центральной панели-----------------------------------------------------------------------------*/

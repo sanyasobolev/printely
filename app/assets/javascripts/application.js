@@ -18,10 +18,7 @@
 
 $(function() {
     $("#slide_image").carouFredSel({
-        circular: true,
-	infinite: true,
         width: "100%",
-        height: "300px",
         align: "center",
         cookie: true,
 	auto : {
@@ -34,11 +31,7 @@ $(function() {
 
 $(function() {
     $("#slide_background").carouFredSel({
-//        circular: true,
-//	infinite: false,
-//          width: "100%",
-//          height: "300px",
-//        cookie: true,
+        cookie: true,
 	auto : {
             pauseDuration: 15000
         },
