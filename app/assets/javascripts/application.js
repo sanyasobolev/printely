@@ -16,21 +16,38 @@
 //
 // обработчик slide-панели
 
-$(function() {
-    $("#slide_image").carouFredSel({
-        width: "100%",
-        align: "center",
-        cookie: true,
-	auto : {
-            pauseDuration: 15000
-        },
-	pagination: "#slide_img_pag",
-        synchronise : ["#slide_background", false, true ]
-    });
-});
+//$(function() {
+//    $("#slide_image").carouFredSel({
+//        width: "100%",
+//        align: "center",
+//        cookie: true,
+//	auto : {
+//            pauseDuration: 15000
+//        },
+//	pagination: "#slide_img_pag",
+//        synchronise : ["#slide_background", false, true ]
+//    });
+//});
+//
+//$(function() {
+//    $("#slide_background").carouFredSel({
+//        cookie: true,
+//	auto : {
+//            pauseDuration: 15000
+//        },
+//        scroll: {
+//            fx			: "crossfade",
+//            easing		: "swing",
+//            duration	: 500
+//	}
+//    });
+//});
 
+//тестирование
 $(function() {
     $("#slide_background").carouFredSel({
+        width: "100%",
+        align: "center",
         cookie: true,
 	auto : {
             pauseDuration: 15000
@@ -39,6 +56,11 @@ $(function() {
             fx			: "crossfade",
             easing		: "swing",
             duration	: 500
-	}
+	},
+	pagination: "#slide_img_pag"
     });
 });
+
+
+
+
