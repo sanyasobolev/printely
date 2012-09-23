@@ -16,38 +16,29 @@
 //
 // обработчик slide-панели
 
-//$(function() {
-//    $("#slide_image").carouFredSel({
-//        width: "100%",
-//        align: "center",
-//        cookie: true,
-//	auto : {
-//            pauseDuration: 15000
-//        },
-//	pagination: "#slide_img_pag",
-//        synchronise : ["#slide_background", false, true ]
-//    });
-//});
-//
-//$(function() {
-//    $("#slide_background").carouFredSel({
-//        cookie: true,
-//	auto : {
-//            pauseDuration: 15000
-//        },
-//        scroll: {
-//            fx			: "crossfade",
-//            easing		: "swing",
-//            duration	: 500
-//	}
-//    });
-//});
+$(function() {
+    $("#slide_image").carouFredSel({
+        width: "100%",
+        align: "center",
+        cookie: true,
+	auto : {
+            pauseDuration: 15000
+        },
+        items: {
+            visible: 1
+        },
+	pagination: "#slide_img_pag",
+        synchronise : ["#slide_background", false, false]
+    });
+});
+
 
 //тестирование
 $(function() {
     $("#slide_background").carouFredSel({
-        width: "100%",
-        align: "center",
+        responsive: true,
+        width: "1850px",
+        height: "300px",
         cookie: true,
 	auto : {
             pauseDuration: 15000
@@ -56,8 +47,7 @@ $(function() {
             fx			: "crossfade",
             easing		: "swing",
             duration	: 500
-	},
-	pagination: "#slide_img_pag"
+	}
     });
 });
 
