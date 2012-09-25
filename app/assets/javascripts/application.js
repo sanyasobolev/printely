@@ -27,18 +27,14 @@ $(function() {
         items: {
             visible: 1
         },
-	pagination: "#slide_img_pag",
-        synchronise : ["#slide_background", false, false]
+	synchronise : ["#slide_background", false, false],
+        pagination: "#slide_img_pag"
     });
 });
 
-
-//тестирование
 $(function() {
     $("#slide_background").carouFredSel({
-        responsive: true,
-        width: "1850px",
-        height: "300px",
+        width: "100%",
         cookie: true,
 	auto : {
             pauseDuration: 15000
