@@ -115,15 +115,33 @@ a.top_section:hover {
 /*-----------------------------------------------------------------------------------------*/
 /*контейнеры slide - панели-----------------------------------------------------------------------------*/
 
-.slide_image {
+#slide_image {
     position: absolute;
     height: 300px;
     width: 100%;
 }
+#slide_image .slide_img_1 {
+    background-color: red
+}
 
-.slide_image img {
+#slide_image .slide_img_2 {
+    background-color: yellow
+}
+
+#slide_image .slide_img_3 {
+    background-color: green
+}
+
+#slide_image div {
+    width: 1900px;
     display: block;
     float: left;
+}
+
+#slide_image div img {
+    width: 900px;
+    height: 300px;
+    margin-left:500px;
 }
 
 #slide_background {
@@ -134,15 +152,16 @@ a.top_section:hover {
     z-index:-1;
 }
 
-.slide_background img {
+/*#slide_background img {
     display: block;
     float: left;
-}
+}*/
 
 .slide_pagination {
     margin-top: 10px;
     text-align: center;
 }
+
 .slide_pagination a {
     background: #cccccc;
     width: 15px;

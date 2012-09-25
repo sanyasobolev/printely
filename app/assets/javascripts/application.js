@@ -27,25 +27,25 @@ $(function() {
         items: {
             visible: 1
         },
-	synchronise : ["#slide_background", false, false],
         pagination: "#slide_img_pag"
     });
 });
 
-$(function() {
-    $("#slide_background").carouFredSel({
-        width: "100%",
-        cookie: true,
-	auto : {
-            pauseDuration: 15000
-        },
-        scroll: {
-            fx			: "crossfade",
-            easing		: "swing",
-            duration	: 500
-	}
-    });
-});
+//$(function() {
+//    $("#slide_background").carouFredSel({
+//        width: "100%",
+//        height: "300px",
+//        cookie: true,
+//	auto : {
+//            pauseDuration: 15000
+//        },
+//        scroll: {
+//            fx			: "crossfade",
+//            easing		: "swing",
+//            duration	: 500
+//	}
+//    });
+//});
 
 
 
