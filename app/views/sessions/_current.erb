@@ -1,12 +1,10 @@
 <table>
 <tr>
   <td>
-    <%= link_to "#{current_user.first_name} #{current_user.second_name}", edit_user_path(current_user) %>
+    <%= link_to image_tag("icons/edit.png", :border => 0), edit_user_path(current_user) %>
   </td>
-</tr>
-<tr>
   <td>
-    <%= link_to "Выйти", :logout %>
+    <%= link_to image_tag("icons/logout.png", :border => 0), :logout %>
   </td>
 </tr>
 </table>

@@ -2,9 +2,9 @@ body {
     margin:0;
     padding:0;
     background-color: white;
-    font-size: 80%;
-    font-family: Verdana,Arial,Helvetica,sans-serif;
-/*    font-family: "Segoe UI",helvetica,arial,sans-serif;*/
+    font-size: 100%;
+/*    font-family: Verdana,Arial,Helvetica,sans-serif;*/
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 /*панели---------------------------------------------------------------------*/
 #header {
@@ -24,6 +24,7 @@ body {
     background-color: #9DCCDE;
     height: 300px;
     width: 100%;
+    margin-bottom: 25px;
 }
 
 #content_panel {
@@ -56,7 +57,7 @@ body {
     width: 900px;
 }
 #logo_container {
-    padding-top: 20px;
+    padding-top: 10px;
     width: 150px;
     text-align: left;
     font-weight: bold;
@@ -77,8 +78,9 @@ a.box_user_opt:link, a.box_user_opt:visited {
     max-width: 50px;
     text-align:center;
     text-decoration:none;
-    padding-top: 5px;
     padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 
 }
 
@@ -96,7 +98,7 @@ a.box_user_opt:hover, a.box_user_opt:active {
         padding-right: 10px;
     font-size: 1.2em;
     color: #378cff;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 a.top_section:link, a.top_section:visited {
@@ -172,8 +174,8 @@ a.top_section:hover {
 /*контенеры центральной панели-----------------------------------------------------------------------------*/
 
 #sidebar {
-    padding-top: 25px;
-    padding-bottom: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 150px;
     min-height: 400px;
     float: left;
@@ -182,17 +184,16 @@ a.top_section:hover {
 #content {
     margin-left: 150px;
     min-height: 400px;
-    padding: 25px;
+    padding: 20px;
 }
 
 /*контейнеры нижних панелей-----------------------------------------------------------------------------------------*/
 #bot_nav {
-/*    position: relative;*/
     height:100%;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 6px;
     width: 900px;
+    padding-top: 3px;
 }
 
 #all_rights {
