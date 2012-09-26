@@ -21,6 +21,7 @@ body {
 
 #slide_panel {
     position: relative;
+    background-color: #9DCCDE;
     height: 300px;
     width: 100%;
 }
@@ -116,45 +117,31 @@ a.top_section:hover {
 /*контейнеры slide - панели-----------------------------------------------------------------------------*/
 
 #slide_image {
-    position: absolute;
     height: 300px;
     width: 100%;
 }
-#slide_image .slide_img_1 {
-    background-color: red
-}
 
-#slide_image .slide_img_2 {
-    background-color: yellow
-}
-
-#slide_image .slide_img_3 {
-    background-color: green
-}
-
-#slide_image div {
-    width: 1900px;
-    display: block;
-    float: left;
-}
-
-#slide_image div img {
+#slide_image > div {
     width: 900px;
     height: 300px;
-    margin-left:500px;
-}
-
-#slide_background {
-    position: absolute;
-    height: 300px;
-    width: 100%;
-    top: 0px;
-    z-index:-1;
-}
-
-/*#slide_background img {
-    display: block;
     float: left;
+    overflow: hidden;
+}
+
+#slide_image img {
+    display: block;
+    margin: 0 25px 0 0;
+    float: left;
+}
+
+/*#slide_image #slide_1 img {
+    background-color: red;
+}
+#slide_image #slide_2 img {
+    background-color: blueviolet;
+}
+#slide_image #slide_3 img {
+    background-color: yellow;
 }*/
 
 .slide_pagination {
