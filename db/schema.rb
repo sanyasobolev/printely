@@ -11,18 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120820120222) do
+ActiveRecord::Schema.define(:version => 20120927112442) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
     t.text     "synopsis"
     t.text     "body"
-    t.boolean  "published",    :default => false
+    t.boolean  "published",                 :default => false
     t.datetime "published_at"
-    t.integer  "category_id",  :default => 1
+    t.integer  "category_id",               :default => 1
     t.integer  "user_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.string   "header_image_file_name"
+    t.string   "header_image_content_type"
+    t.integer  "header_image_file_size"
+    t.datetime "header_image_updated_at"
   end
 
   create_table "categories", :force => true do |t|

@@ -1,7 +1,12 @@
 class Article < ActiveRecord::Base
 
-  cattr_reader :per_page
-  @@per_page = 3
+#paperclipe
+has_attached_file :header_image, 
+                  :path => ":rails_root/app/assets/images/articles/:id_:basename.:extension"
+
+#pagination on page
+cattr_reader :per_page
+@@per_page = 3
 
 belongs_to :user
 belongs_to :category
@@ -36,6 +41,12 @@ BODY_COLS_SIZE = 60
     validates :body, :length => {
       :maximum => BODY_MAX_LENGTH
     }
+
+  #проверка приложенного файла
+  validates_attachment :header_image,
+                       :presence => true,
+                       :content_type => { :content_type => /image/ },
+                       :size => { :in => 0..1.megabytes }
 
   def update_published_at
     self.published_at = Time.now if published == true

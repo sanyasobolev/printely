@@ -1,7 +1,7 @@
-<p>
-  <%= User.human_attribute_name("role_id") %><br/>
+<div class="form_align">
+  <%= form.label :role_id %>
   <%= form.collection_select(:role_id,
                       Role.find(:all),
                       :id,
                       :name) %>
-</p>
+</div>
