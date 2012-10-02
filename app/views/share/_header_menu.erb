@@ -5,11 +5,11 @@
           <% if section.order == section_order && section.published == true %>
             <% if section.controller == 'no' %>
               <div class="top_section_nav">
-                <%= link_to_unless_current section.title, section_pages_path(section), :class => 'top_section' %>
+                <%= link_to section.title, section_pages_path(section), :class => 'top_section' %>
               </div>
             <% else %>
               <div class="top_section_nav">
-                <%= link_to_unless_current section.title, {:controller => section.controller, :action => section.action} , {:class => 'top_section'} %>
+                <%= link_to section.title, {:controller => section.controller, :action => section.action} , {:class => 'top_section'} %>
               </div>
             <% end %>
           <% end %>

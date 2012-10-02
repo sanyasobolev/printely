@@ -1,7 +1,8 @@
 class Article < ActiveRecord::Base
 
 #paperclipe
-has_attached_file :header_image, 
+has_attached_file :header_image,
+                  :url => "/assets/articles/:id_:basename.:extension",
                   :path => ":rails_root/app/assets/images/articles/:id_:basename.:extension"
 
 #pagination on page
@@ -25,22 +26,22 @@ BODY_ROWS_SIZE = 20
 BODY_COLS_SIZE = 60
 
 # поля должны быть не пустыми
-    validates :title,
-              :synopsis,
-              :body,
-              :category_id,
-              :presence => true
+  validates :title,
+            :synopsis,
+            :body,
+            :category_id,
+            :presence => true
 
 #проверка длины строк
-    validates :title, :length => {
-      :maximum => TITLE_MAX_LENGTH
-    }
-    validates :synopsis, :length => {
-      :maximum => SYNOPSIS_MAX_LENGTH
-    }
-    validates :body, :length => {
-      :maximum => BODY_MAX_LENGTH
-    }
+  validates :title, :length => {
+    :maximum => TITLE_MAX_LENGTH
+  }
+  validates :synopsis, :length => {
+    :maximum => SYNOPSIS_MAX_LENGTH
+  }
+  validates :body, :length => {
+    :maximum => BODY_MAX_LENGTH
+  }
 
   #проверка приложенного файла
   validates_attachment :header_image,

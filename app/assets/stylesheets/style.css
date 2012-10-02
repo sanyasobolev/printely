@@ -472,9 +472,23 @@ a.for_admin:hover,a.for_admin:active{
 /*оформление статей-----------------------------------------------*/
 .article {
     position: relative;
-    padding: 10px;
-/*    border:  5px solid gray;*/
-    margin: 0px;
+    margin: 10px
+}
+
+.article_title {
+    position: absolute;
+    z-index: +1;
+    top: 0px;
+    left: 150px;
+    font-size: 1.5em;
+}
+
+.article_synopsis {
+    position: absolute;
+    z-index: +1;
+    top: 50px;
+    left: 150px;
+
 }
 
 .category {
