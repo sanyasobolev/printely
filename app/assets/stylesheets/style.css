@@ -230,12 +230,14 @@ h1 {
     font-size: 2em;
     margin-top: 0;
     margin-bottom: 0.5em;
-   }
+    font-weight: normal;
+}
 
 h2 {
     font-size: 1.5em;
     margin-top: 0;
     margin-bottom: 0.5em;
+    font-weight: normal;
 }
 
 p {
@@ -472,24 +474,31 @@ a.for_admin:hover,a.for_admin:active{
 /*оформление статей-----------------------------------------------*/
 .article {
     position: relative;
-    margin: 10px
+    margin: 10px;
+    background-color: orange;
 }
 
 .article_title {
     position: absolute;
-    z-index: +1;
     top: 0px;
-    left: 150px;
+    left: 120px;
     font-size: 1.5em;
+    width: 500px;
 }
 
 .article_synopsis {
     position: absolute;
-    z-index: +1;
     top: 50px;
-    left: 150px;
-
+    left: 120px;
+    width: 500px;
 }
+
+.article_goto {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
 
 .category {
     position: absolute;
