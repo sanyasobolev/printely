@@ -1,5 +1,7 @@
 <div class="article">
-  <%= link_to image_tag(article_for_user.header_image.url), article_path(article_for_user) %>
+  <div class="article_img">
+    <%= link_to image_tag(article_for_user.header_image.url, :border => "0"), article_path(article_for_user) %>
+  </div>
   <div class="article_title">
     <%= raw(article_for_user.title) %>
   </div>
@@ -7,6 +9,6 @@
     <%= raw(article_for_user.synopsis) %>
   </div>
   <div class="article_goto">
-    <%= link_to image_tag("icons/goto_link.png"), article_path(article_for_user) %>
+    <%= link_to image_tag("icons/goto_link.png", :border => "0"), article_path(article_for_user) %>
   </div>
 </div>

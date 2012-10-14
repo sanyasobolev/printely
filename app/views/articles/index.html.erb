@@ -3,7 +3,8 @@
 <% end %>
   <h1>
     <% if @category -%>
-      <span class="grey">Статьи</span><%="/#{@category.name}"%>
+      <span class="grey">
+        <%=link_to "Статьи", articles_path, :class=> "article_nav" %></span><%="/#{@category.name}"%>
     <% else %>
       Статьи
     <% end -%>

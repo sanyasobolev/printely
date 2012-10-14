@@ -303,3 +303,7 @@ ru:
       words_connector: ", "
       two_words_connector: " и "
       last_word_connector: " и "
+
+  will_paginate:
+    next_label: "вперед"
+    previous_label: "назад"

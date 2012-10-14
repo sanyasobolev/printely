@@ -136,16 +136,6 @@ a.top_section:hover {
     float: left;
 }
 
-/*#slide_image #slide_1 img {
-    background-color: red;
-}
-#slide_image #slide_2 img {
-    background-color: blueviolet;
-}
-#slide_image #slide_3 img {
-    background-color: yellow;
-}*/
-
 .slide_pagination {
     margin-top: 10px;
     text-align: center;
@@ -182,6 +172,7 @@ a.top_section:hover {
 }
 
 #content {
+    position: relative;
     margin-left: 150px;
     min-height: 400px;
     padding: 20px;
@@ -249,10 +240,6 @@ p {
     font-weight: bold;
 }
 
-.grey {
-    color: #999999;
-}
-
 .center {
     text-align: center;
 }
@@ -288,6 +275,8 @@ a:hover {text-decoration: underline;}
 
 a.logo {text-decoration: none; color: white}
 
+a.article_nav {text-decoration: none; color: #999999}
+
 a.button_style:link, a.button_style:visited {
     display:block;
     font-weight:bold;
@@ -310,17 +299,17 @@ a.button_style:hover {
 
 a.box:link, a.box:visited {
     display:block;
-    font-weight:bold;
-    color:#0066ff;
-    background-color:#ffffff;
+    background-color: #F4F4F4;
     width:100%;
     text-align:left;
     padding:5px;
     text-decoration:none;
+    margin-bottom: 10px;
+    color: black;
 }
 
 a.box:hover,a.box:active{
-    background-color:#cccccc;
+    background-color:#EEEEEE;
 }
 
 a.for_admin:link,a.for_admin:visited {
@@ -445,9 +434,9 @@ a.for_admin:hover,a.for_admin:active{
 .pagination a {
     padding: 2px 5px 2px 5px;
     margin: 2px;
-    border: 1px solid #aaaadd;
     text-decoration: none;
-    color: #E87830;
+    color: black;
+    background: #cccccc;
 }
 
 .pagination a:hover, .pagination a:active {
@@ -467,7 +456,6 @@ a.for_admin:hover,a.for_admin:active{
 .pagination span.disabled {
     padding: 2px 5px 2px 5px;
     margin: 2px;
-    border: 1px solid #eee;
     color: #ddd;
 }
 
@@ -476,10 +464,11 @@ a.for_admin:hover,a.for_admin:active{
     position: relative;
     margin: 10px;
     background-color: orange;
+    height: 150px;
 }
 
 .article_title {
-    position: absolute;
+    position: relative;
     top: 0px;
     left: 120px;
     font-size: 1.5em;
@@ -487,8 +476,7 @@ a.for_admin:hover,a.for_admin:active{
 }
 
 .article_synopsis {
-    position: absolute;
-    top: 50px;
+    position: relative;
     left: 120px;
     width: 500px;
 }
@@ -499,6 +487,10 @@ a.for_admin:hover,a.for_admin:active{
     bottom: 0px;
 }
 
+.article_img {
+    position: absolute;
+}
+
 
 .category {
     position: absolute;
@@ -507,7 +499,19 @@ a.for_admin:hover,a.for_admin:active{
 }
 
 .property_article {
-    font-style: italic;
+    position: relative;
+    width: 200px;
+    height: 50px;
+    float: right;
+}
+
+.property_article img {
+    position: absolute;
+}
+
+.property_article p {
+    position: absolute;
+    left: 60px;
 }
 
 /*оформление предложений-------------------------------------*/
