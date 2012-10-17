@@ -164,7 +164,7 @@ a.top_section:hover {
 /*контенеры центральной панели-----------------------------------------------------------------------------*/
 
 #sidebar {
-    margin-top: 20px;
+    margin-top: 79px;
     margin-bottom: 20px;
     width: 150px;
     min-height: 400px;
@@ -427,37 +427,48 @@ a.for_admin:hover,a.for_admin:active{
 
 /*стиль пагинации страниц-----------------------------------------------*/
 .pagination {
-    padding: 3px;
-    margin: 3px;
+    padding: 3px 0px 3px 0px;
+    margin: 30px 10px 10px 10px;
 }
 
 .pagination a {
     padding: 2px 5px 2px 5px;
-    margin: 2px;
+    margin: 2px 2px 2px 0px;
     text-decoration: none;
     color: black;
     background: #cccccc;
+   
 }
 
 .pagination a:hover, .pagination a:active {
-    border: 1px solid #000099;
     color: #000;
 }
 
-.pagination span.current {
+.pagination .current {
     padding: 2px 5px 2px 5px;
-    margin: 2px; 
-    border: 1px solid #E87830;
-    font-weight: bold;
-    background-color: #E87830;
+    margin: 2px 2px 2px 0px;
+/*    border: 1px solid #E87830;*/
+/*    font-weight: bold;*/
+    background-color: #1BA1E2;
     color: #FFF;
+    font-style: normal;
 }
 
 .pagination span.disabled {
     padding: 2px 5px 2px 5px;
     margin: 2px;
     color: #ddd;
+    display: none;
 }
+
+.pagination .previous_page {
+    display: none;
+}
+
+.pagination .next_page {
+    display: none;
+}
+
 
 /*оформление статей-----------------------------------------------*/
 .article {
