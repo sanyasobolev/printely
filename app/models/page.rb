@@ -2,6 +2,7 @@
 class Page < ActiveRecord::Base
 
   before_create :create_permalink
+  before_save :update_permalink
   before_save :update_published_at
 
   cattr_reader :per_page
@@ -9,7 +10,6 @@ class Page < ActiveRecord::Base
 
   belongs_to :section
   belongs_to :user
-
 
   #длины полей
   TITLE_MIN_LENGTH = 3
@@ -45,6 +45,10 @@ class Page < ActiveRecord::Base
 #транслитерация названия страницы в ссылку
   def create_permalink
     @attributes['permalink'] = title.parameterize
+  end
+
+  def update_permalink
+    self.permalink = title.parameterize
   end
 
   def to_param

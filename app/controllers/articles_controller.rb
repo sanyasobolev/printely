@@ -12,7 +12,8 @@ class ArticlesController < ApplicationController
                              :order => 'published_at DESC',
                              :include => :user, #оптимизация - запрос выполняется один раз, данные извлекаются из двух таблиц
                              :conditions => "category_id=#{params[:category_id].to_i} AND published=true" #соответствие условиям
-      else
+#      @category_for_route = @category.name
+    else
          @articles = Article.paginate :page => params[:page],
                              :order => 'published_at DESC',
                              :include => :user,
@@ -27,7 +28,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find_by_id_and_published(params[:id], true)
+    @article = Article.find_by_permalink_and_published(params[:id], true)
     @title = @article.title
     respond_to do |wants|
       wants.html
@@ -56,12 +57,12 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+    @article = Article.find_by_permalink(params[:id])
     @title = "Редактирование статьи - #{@article.title}"
   end
 
   def update
-    @article = Article.find(params[:id])
+    @article = Article.find_by_permalink(params[:id])
     respond_to do |wants|
       if @article.update_attributes(params[:article])
         flash[:notice] = 'Статья обновлена'
@@ -75,7 +76,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
+    @article = Article.find_by_permalink(params[:id])
     @article.destroy
     respond_to do |wants|
       flash[:notice] = 'Статья удалена'

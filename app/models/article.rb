@@ -11,7 +11,10 @@ cattr_reader :per_page
 
 belongs_to :user
 belongs_to :category
+
 before_save :update_published_at
+before_create :create_permalink
+before_save :update_permalink
 
 #максмимальные и минимальные значения для полей
 TITLE_MAX_LENGTH = 255
@@ -31,6 +34,11 @@ BODY_COLS_SIZE = 60
             :body,
             :category_id,
             :presence => true
+
+ # поля должны быть уникальны
+  validates :title,
+            :permalink,
+            :uniqueness => true
 
 #проверка длины строк
   validates :title, :length => {
@@ -53,5 +61,17 @@ BODY_COLS_SIZE = 60
     self.published_at = Time.now if published == true
   end
 
+  #транслитерация названия статьи в ссылку
+  def create_permalink
+    @attributes['permalink'] = title.parameterize
+  end
+
+  def update_permalink
+    self.permalink = title.parameterize
+  end
+
+  def to_param
+    permalink
+  end
 
 end

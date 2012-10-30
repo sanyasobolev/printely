@@ -1,1 +1,3 @@
-<%= link_to page_of_section.title, page_path(page_of_section), :class => 'box' %>
+<div class="container_for_link_box">
+  <%= link_to_unless_current page_of_section.title, page_path(page_of_section), :class => 'box' %>
+</div>

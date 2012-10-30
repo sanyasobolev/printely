@@ -28,12 +28,12 @@ body {
 }
 
 #content_panel {
+    margin-top: 35px;
+    margin-bottom: 35px;
     margin-left: auto;
     margin-right: auto;
     width: 900px;
     min-height: 400px;
-    padding-top: 25px;
-    padding-bottom: 25px;
 }
 
 #first_bottom_panel {
@@ -167,7 +167,7 @@ a.top_section:hover {
     margin-top: 79px;
     margin-bottom: 20px;
     width: 150px;
-    min-height: 400px;
+    min-height: 300px;
     float: left;
 }
 
@@ -299,17 +299,17 @@ a.button_style:hover {
 
 a.box:link, a.box:visited {
     display:block;
-    background-color: #F4F4F4;
+    background-color: #cccccc;
     width:100%;
-    text-align:left;
-    padding:5px;
+    text-align:center;
     text-decoration:none;
-    margin-bottom: 10px;
     color: black;
+    min-height: 50px;
+    line-height: 50px;
 }
 
 a.box:hover,a.box:active{
-    background-color:#EEEEEE;
+    background:#1BA1E2;
 }
 
 a.for_admin:link,a.for_admin:visited {
@@ -327,6 +327,21 @@ a.for_admin:link,a.for_admin:visited {
 a.for_admin:hover,a.for_admin:active{
     background-color:#c2c1c1;
 }
+
+
+.link_container {
+     width: 300px; /* Ширина слоя */
+     height: 200px; /* Высота слоя */
+     background: #fc0; /* Цвет фона */
+}
+.link_container a {
+     display: block; /* Ссылка как блочный элемент */
+     text-align: center; /* Выравнивание по центру */
+     height: 100%; /* Высота на весь слой */
+     color: #666; /* Цвет ссылки */
+}
+
+
 
 .submit_area {
     height: 50px;
@@ -381,7 +396,6 @@ a.for_admin:hover,a.for_admin:active{
 #notice {
     padding: 1em;
     margin-top: 2em;
-    margin-bottom: 2em;
     background-color: #F7941D;
 }
 
@@ -523,6 +537,17 @@ a.for_admin:hover,a.for_admin:active{
 .property_article p {
     position: absolute;
     left: 60px;
+}
+
+.container_for_link_box {
+    display:block;
+    background-color: #1BA1E2;
+    width:100%;
+    text-align:center;
+    margin-bottom: 10px;
+    color: black;
+    min-height: 50px;
+    line-height: 50px;
 }
 
 /*оформление предложений-------------------------------------*/
