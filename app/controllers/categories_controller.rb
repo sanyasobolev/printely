@@ -20,12 +20,12 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
+    @category = Category.find_by_permalink(params[:id])
     @title = "Редактирование категории - #{@category.name}"
   end
 
   def update
-    @category = Category.find(params[:id])
+    @category = Category.find_by_permalink(params[:id])
     respond_to do |wants|
     if @category.update_attributes(params[:category])
         flash[:notice] = 'Категория обновлена'
@@ -39,7 +39,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:id])
+    @category = Category.find_by_permalink(params[:id])
     @category.destroy
     respond_to do |wants|
       wants.html { redirect_to admin_categories_path }

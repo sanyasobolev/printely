@@ -5,7 +5,7 @@ class CreateCategories < ActiveRecord::Migration
       t.column :name, :string
       t.timestamps
     end
-    default_category = Category.create(:name => "Категория №1")
+    default_category = Category.create(:name => "Тестовая категория")
     change_column :articles, :category_id, :integer, :default => default_category
   end
 

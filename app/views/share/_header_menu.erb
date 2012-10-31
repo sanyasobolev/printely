@@ -9,7 +9,7 @@
               </div>
             <% else %>
               <div class="top_section_nav">
-                <%= link_to section.title, {:controller => section.controller, :action => section.action} , {:class => 'top_section'} %>
+                <%= link_to section.title, {:controller => section.controller, :action => section.action, :category_id => nil} , {:class => 'top_section'} %>
               </div>
             <% end %>
           <% end %>

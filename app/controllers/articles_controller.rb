@@ -7,12 +7,11 @@ class ArticlesController < ApplicationController
   def index
     @title = 'Статьи'
     if params[:category_id]
-      @category = Category.find_by_id(params[:category_id])
+      @category = Category.find_by_permalink(params[:category_id])
       @articles = Article.paginate :page => params[:page],
                              :order => 'published_at DESC',
                              :include => :user, #оптимизация - запрос выполняется один раз, данные извлекаются из двух таблиц
-                             :conditions => "category_id=#{params[:category_id].to_i} AND published=true" #соответствие условиям
-#      @category_for_route = @category.name
+                             :conditions => "category_id=#{@category.id.to_i} AND published=true" #соответствие условиям
     else
          @articles = Article.paginate :page => params[:page],
                              :order => 'published_at DESC',

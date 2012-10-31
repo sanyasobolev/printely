@@ -4,10 +4,6 @@ Spsite::Application.routes.draw do
 
   root :to => 'pages#welcome', :id => 'welcome' #отправляет на действие welcome контроллера pages, с Id=welcome
 
-  #маршрутизация для статей и категорий
-#  match 'articles/*category_name' => 'articles#index'
-#  match 'articles/*category_name/:id' => 'articles#show'
-
   resources :users
   resources :rights
   resources :roles
