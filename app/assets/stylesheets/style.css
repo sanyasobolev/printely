@@ -286,6 +286,7 @@ a.button_style:link, a.button_style:visited {
     border: 0 none;
     color: white;
     max-width: 90px;
+    height: 30px;
     padding: 10px 25px;
     margin-bottom: 10px;
     margin-left: 0px;
@@ -298,6 +299,7 @@ a.button_style:hover {
 }
 
 a.box:link, a.box:visited {
+    position: relative;
     display:block;
     background-color: #cccccc;
     width:100%;
@@ -305,11 +307,21 @@ a.box:link, a.box:visited {
     text-decoration:none;
     color: black;
     min-height: 50px;
-    line-height: 50px;
 }
 
 a.box:hover,a.box:active{
     background:#1BA1E2;
+}
+
+.container_for_link_box {
+    position: relative;
+    display:block;
+    background-color: #1BA1E2;
+    width:100%;
+    text-align:center;
+    margin-bottom: 10px;
+    color: black;
+    min-height: 50px;
 }
 
 a.for_admin:link,a.for_admin:visited {
@@ -328,22 +340,57 @@ a.for_admin:hover,a.for_admin:active{
     background-color:#c2c1c1;
 }
 
-
+/*сложные ссылки для стартовой страницы---------------------------------------------------*/
 .link_container {
-     width: 300px; /* Ширина слоя */
-     height: 200px; /* Высота слоя */
-     background: #fc0; /* Цвет фона */
+     width: 420px; /* Ширина слоя */
+     height: 230px; /* Высота слоя */
+     background: #517B93; /* Цвет фона */
 }
 .link_container a {
      display: block; /* Ссылка как блочный элемент */
      text-align: center; /* Выравнивание по центру */
      height: 100%; /* Высота на весь слой */
-     color: #666; /* Цвет ссылки */
+     color: white; /* Цвет ссылки */
+     text-decoration: none;
 }
 
+/*сложные ссылки для услуг и подуслуг---------------------------------------------------*/
+.link_container_for_service {
+    position: relative;
+    float: left;
+    width: 420px;
+    height: 230px;
+    margin-right: 30px;
+    cursor: pointer;
+    background-color: #517B93;
+    }
 
+.link_container_for_service:hover {
+    background: orange;
+}
 
+.link_container_for_service img {
+    margin: 20px 20px 30px 20px;
+    float: left;
+    }
+
+.link_container_for_service .service_synopsis {
+    float: left;
+    margin-left: 20px;
+    color: white;
+    }
+
+.link_container_for_service .service_title {
+    margin-top: 30px;
+    height: 100px;
+    float: left;
+    color: white;
+    font-size: 2em;
+    }
+
+/*стили кнопки подтверждения-------------------------*/
 .submit_area {
+    margin-top: 20px;
     height: 50px;
 }
 
@@ -526,8 +573,10 @@ a.for_admin:hover,a.for_admin:active{
 .property_article {
     position: relative;
     width: 200px;
-    height: 50px;
-    float: right;
+    height: 60px;
+    left: 700px;
+    top: 70px;
+/*    float: right;*/
 }
 
 .property_article img {
@@ -539,16 +588,7 @@ a.for_admin:hover,a.for_admin:active{
     left: 60px;
 }
 
-.container_for_link_box {
-    display:block;
-    background-color: #1BA1E2;
-    width:100%;
-    text-align:center;
-    margin-bottom: 10px;
-    color: black;
-    min-height: 50px;
-    line-height: 50px;
-}
+
 
 /*оформление предложений-------------------------------------*/
 .offer {

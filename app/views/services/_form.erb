@@ -1,0 +1,21 @@
+<div class="form_align">
+  <%= f.label(:title) %>
+  <%= f.text_field :title,
+                   :size => Service::TITLE_SIZE,
+                   :maxlength => Service::TITLE_MAX_LENGTH,
+                   :class => 'req_input'%>
+</div>
+
+<div class="form_align">
+  <%= f.label(:synopsis) %>
+  <%= f.text_area :synopsis,
+                   :rows => Service::SYNOPSIS_ROWS_SIZE,
+                   :cols => Service::SYNOPSIS_COLS_SIZE,
+                   :class => 'req_textarea'%>
+</div>
+
+<div class="form_align">
+  <%= f.label :service_header_icon %>
+  <%= f.file_field :service_header_icon,
+                   :class => 'req_input'%>
+</div>

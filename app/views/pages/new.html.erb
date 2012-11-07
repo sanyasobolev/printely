@@ -2,15 +2,9 @@
 <h2>Создание новой страницы</h2>
 <%= form_for :page, :url => pages_path, :html => { :method => :post } do |f| -%>
 
-  <%= render :partial => 'form', :locals => {:f => f} %>
+  <%= render :partial => 'form_for_all_pages', :locals => {:f => f} %>
 
-  <p><%= Page.human_attribute_name("section_id") %><br />
-  <%= f.collection_select :section_id, section_for_page, :id, :title, :prompt => 'Нет' %>
-  </p>
-
-  <p><%= Page.human_attribute_name("published") %>
-  <%= f.check_box :published %>
-  </p>
+  <%= render :partial => 'form_for_user_pages', :locals => {:f => f} %>
 
   <%= submit_tag 'Сохранить' %> или <%= link_to 'Вернуться', admin_pages_path %>
 <% end -%>

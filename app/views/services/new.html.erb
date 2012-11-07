@@ -1,0 +1,12 @@
+<%= error_messages_for :service %>
+<h2>Создание услуги</h2>
+<div class="form_shape">
+  <%= form_for :service, :url => services_path, :html => { :method => :post } do |f| -%>
+
+    <%= render :partial => 'form', :locals => {:f => f} %>
+
+    <div class="submit_area">
+      <%= submit_tag 'Сохранить', :class => 'submit' %>
+    </div>
+  <% end -%>
+</div>

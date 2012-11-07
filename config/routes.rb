@@ -33,6 +33,15 @@ Spsite::Application.routes.draw do
     get 'admin', :on => :collection
   end
 
+  resources :subservices do
+    get 'admin', :on => :collection
+  end
+
+  resources :services do
+    resources :subservices
+    get 'admin', :on => :collection
+  end
+
   resources :letters do
     get 'admin', :on => :collection
     get 'sent', :on => :collection

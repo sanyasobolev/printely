@@ -3,16 +3,10 @@
 <h2>Редактирование страницы</h2>
 <%= form_for :page, :url => page_path(@page), :html => { :method => :put } do |f| -%>
 
-  <%= render :partial => 'form', :locals => {:f => f} %>
+  <%= render :partial => 'form_for_all_pages', :locals => {:f => f} %>
   
   <% if !@main_page %>
-    <p><%= Page.human_attribute_name("section_id") %><br />
-      <%= f.collection_select :section_id, section_for_page, :id, :title, :prompt => 'Нет' %>
-    </p>
-
-    <p><%= Page.human_attribute_name("published") %>
-      <%= f.check_box :published %>
-    </p>
+    <%= render :partial => 'form_for_user_pages', :locals => {:f => f} %>
   <% end %>
   
   <%= submit_tag 'Сохранить' %> или <%= link_to 'Вернуться', admin_pages_path %>

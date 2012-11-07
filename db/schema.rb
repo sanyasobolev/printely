@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121030061407) do
+ActiveRecord::Schema.define(:version => 20121106091150) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -67,12 +67,14 @@ ActiveRecord::Schema.define(:version => 20121030061407) do
     t.string   "title"
     t.string   "permalink"
     t.text     "body"
-    t.boolean  "published",    :default => false
+    t.boolean  "published",     :default => false
     t.datetime "published_at"
     t.integer  "user_id"
     t.integer  "section_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "service_id"
+    t.integer  "subservice_id"
   end
 
   create_table "rights", :force => true do |t|
@@ -101,6 +103,18 @@ ActiveRecord::Schema.define(:version => 20121030061407) do
     t.boolean  "published",  :default => false
   end
 
+  create_table "services", :force => true do |t|
+    t.string   "title"
+    t.string   "synopsis"
+    t.string   "permalink"
+    t.string   "service_header_icon_file_name"
+    t.string   "service_header_icon_content_type"
+    t.integer  "service_header_icon_file_size"
+    t.datetime "service_header_icon_updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -110,6 +124,19 @@ ActiveRecord::Schema.define(:version => 20121030061407) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "subservices", :force => true do |t|
+    t.string   "title"
+    t.string   "synopsis"
+    t.integer  "service_id"
+    t.string   "permalink"
+    t.string   "subservice_header_icon_file_name"
+    t.string   "subservice_header_icon_content_type"
+    t.integer  "subservice_header_icon_file_size"
+    t.datetime "subservice_header_icon_updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "hashed_password"

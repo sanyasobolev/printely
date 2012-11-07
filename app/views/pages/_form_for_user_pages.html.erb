@@ -1,0 +1,15 @@
+  <p><%= Page.human_attribute_name("section_id") %><br />
+  <%= f.collection_select :section_id, section_for_page, :id, :title, :prompt => 'Нет' %>
+  </p>
+
+  <p><%= Page.human_attribute_name("service_id") %><br />
+  <%= f.collection_select :service_id, Service.all, :id, :title, :prompt => 'Нет' %>
+  </p>
+
+  <p><%= Page.human_attribute_name("subservice_id") %><br />
+  <%= f.collection_select :subservice_id, Subservice.all, :id, :title, :prompt => 'Нет' %>
+  </p>
+
+  <p><%= Page.human_attribute_name("published") %>
+  <%= f.check_box :published %>
+  </p>

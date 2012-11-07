@@ -11,6 +11,8 @@ ru:
       section: "Раздел"
       user: "Пользователь"
       letter: "Обратная связь"
+      service: "Услуга"
+      subservice: "Услуга"
     attributes:
       article:
         title: "Название"
@@ -45,6 +47,8 @@ ru:
         user_id: "Автор"
         created_at: "Дата создания"
         section_id: "Раздел"
+        service_id: "Услуга"
+        subservice_id: "Подуслуга"
       right:
         name: "Название"
         controller: "Контроллер"
@@ -78,4 +82,8 @@ ru:
         email: "Email"
         question: "Текст письма"
         created_at: "Дата создания"
-
+      service:
+        title: "Название"
+        synopsis: "Краткий обзор"
+        service_header_icon: "Иконка"
+        permalink: "Название в URL"

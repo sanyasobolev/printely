@@ -1,0 +1,13 @@
+<h2>Редактирование услуг</h2>
+  <p><%= link_to 'Создать услугу', new_service_path, :class => 'box' %></p>
+<table class ="admin">
+  <tr>
+    <th></th>
+    <th><%= Service.human_attribute_name("title") %></th>
+    <th><%= Service.human_attribute_name("synopsis") %></th>
+    <th><%= Service.human_attribute_name("permalink") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'service_for_admin', :collection => @services %>
+</table>

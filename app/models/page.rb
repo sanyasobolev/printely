@@ -10,6 +10,8 @@ class Page < ActiveRecord::Base
 
   belongs_to :section
   belongs_to :user
+  belongs_to :service
+  belongs_to :subservice
 
   #длины полей
   TITLE_MIN_LENGTH = 3

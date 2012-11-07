@@ -16,5 +16,17 @@
     <td>Нет</td>
   <% end %>
 
+  <% if page.service_id %>
+    <td><%= page.service.title %></td>
+    <% else %>
+    <td>Нет</td>
+  <% end %>
+
+  <% if page.subservice_id %>
+    <td><%= page.subservice.title %></td>
+    <% else %>
+    <td>Нет</td>
+  <% end %>
+
   <td><%= link_to 'Редактировать', edit_page_path(page) %></td>
 </tr>
