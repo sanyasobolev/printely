@@ -3,12 +3,9 @@ class ServicesController < ApplicationController
                      :only => [:index]
   
   def index
+    @title = "Услуги"
     @services = Service.all
     @page_about_services = Page.find_by_permalink('services')
-  end
-
-  def show
-
   end
 
   def new

@@ -87,3 +87,9 @@ ru:
         synopsis: "Краткий обзор"
         service_header_icon: "Иконка"
         permalink: "Название в URL"
+      subservice:
+        title: "Название"
+        synopsis: "Краткий обзор"
+        subservice_header_icon: "Иконка"
+        permalink: "Название в URL"
+        service_id: "Услуга"

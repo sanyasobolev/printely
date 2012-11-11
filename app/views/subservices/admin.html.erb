@@ -1,0 +1,14 @@
+<h2>Редактирование подуслуг</h2>
+  <p><%= link_to 'Создать подуслугу', new_subservice_path, :class => 'box' %></p>
+<table class ="admin">
+  <tr>
+    <th></th>
+    <th><%= Subservice.human_attribute_name("title") %></th>
+    <th><%= Subservice.human_attribute_name("synopsis") %></th>
+    <th><%= Subservice.human_attribute_name("permalink") %></th>
+    <th><%= Subservice.human_attribute_name("service_id") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'subservice_for_admin', :collection => @subservices %>
+</table>

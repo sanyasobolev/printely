@@ -1,8 +1,11 @@
-<%#= render :partial => 'pages/show_page', :locals => {:page => @page_about_service} %>
+<% if @page_about_service != nil %>
+  <%= render :partial => 'pages/show_page', :locals => {:page => @page_about_service} %>
+<% else %>
+  <p>Описание услуги отсутствует</p>
+<% end %>
 
-<%#= render :partial => 'subservice_for_user', :collection => @subservices %>
+<%= render :partial => 'subservice_for_user', :collection => @subservices, :locals => { :service_id => @service.permalink} %>
 
-<%#*<div class="clearfix">%>
+<div class="clearfix">
 
-<%#*</div>%>
-test
+</div>

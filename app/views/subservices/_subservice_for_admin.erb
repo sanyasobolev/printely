@@ -1,0 +1,8 @@
+<tr>
+  <td><%= link_to 'Х', subservice_path(subservice_for_admin), :method => :delete, :confirm => 'Действительно хотите удалить подуслугу?' %></td>
+  <td><%= subservice_for_admin.title %></td>
+  <td><%= subservice_for_admin.synopsis %></td>
+  <td><%= subservice_for_admin.permalink %></td>
+  <td><%= subservice_for_admin.service.title %></td>
+  <td><%= link_to 'Редактировать', edit_subservice_path(subservice_for_admin) %></td>
+</tr>

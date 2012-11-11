@@ -27,6 +27,12 @@ body {
     margin-bottom: 35px;
 }
 
+#boardlinks {
+    height: 45px;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
 #content_panel {
     margin-top: 35px;
     margin-bottom: 35px;
@@ -644,7 +650,7 @@ a.for_admin:hover,a.for_admin:active{
     float: left;
     display: block;
     text-align: right;
-    width: 214px;
+    width: 212px;
     margin-right: 20px;
     margin-top: 9px;
 }
@@ -660,13 +666,10 @@ a.for_admin:hover,a.for_admin:active{
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
-.form_align .req_input {
-    border-bottom: 1px solid #D6D3D1;
-    border-left: 1px solid red;
-    border-top: 1px solid #D6D3D1;
-    border-right: 1px solid #D6D3D1;
-    height: 30px;
-    width: 450px;
+.form_align select {
+    border: 1px solid #D6D3D1;
+    height: 35px;
+    width: 465px;
     padding-left: 7px;
     padding-right: 7px;
     padding-bottom: 4px;
@@ -681,6 +684,20 @@ a.for_admin:hover,a.for_admin:active{
     font-size: 1.3em;
     width: 450px;
     height: 200px;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_align .req_input {
+    border-bottom: 1px solid #D6D3D1;
+    border-left: 1px solid red;
+    border-top: 1px solid #D6D3D1;
+    border-right: 1px solid #D6D3D1;
+    height: 30px;
+    width: 450px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    font-size: 1.3em;
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
