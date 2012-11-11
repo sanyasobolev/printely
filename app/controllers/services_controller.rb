@@ -7,6 +7,10 @@ class ServicesController < ApplicationController
     @page_about_services = Page.find_by_permalink('services')
   end
 
+  def show
+
+  end
+
   def new
     @title = 'Создание новой услуги'
     @service = Service.new

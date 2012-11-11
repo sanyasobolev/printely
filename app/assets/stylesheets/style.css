@@ -361,6 +361,7 @@ a.for_admin:hover,a.for_admin:active{
     width: 420px;
     height: 230px;
     margin-right: 30px;
+    margin-bottom: 30px;
     cursor: pointer;
     background-color: #517B93;
     }
