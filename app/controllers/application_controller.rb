@@ -9,4 +9,5 @@ class ApplicationController < ActionController::Base
   before_filter :login_required
   before_filter :authorized?
 
+
 end

@@ -31,22 +31,8 @@
     </div>
   </div>
 
-  <div id="slide_panel">
-
-    <div id="slide_image">
-      <div id="slide_1">
-        <%= image_tag("1.png")%>
-      </div>
-      <div id="slide_2">
-        <%= image_tag("2.png")%>
-      </div>
-      <div id="slide_3">
-        <%= image_tag("3.png")%>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-    <div id="slide_img_pag" class="slide_pagination" ></div>
-
+  <div id="middle_panel">
+    <%= content_for?(:middle_panel) ? yield(:middle_panel) : (render :partial => 'share/slide_panel') %>
   </div>
 
   <div id="flash_panel">
@@ -60,9 +46,7 @@
   </div>
 
   <div id="content_panel">
-
-      <%= content_for?(:content_panel) ? yield(:content_panel) : yield %>
-
+    <%= content_for?(:content_panel) ? yield(:content_panel) : yield %>
   </div>
 
   <div id="first_bottom_panel">

@@ -1,4 +1,6 @@
 class SubservicesController < ApplicationController
+  layout 'subservices', :only => [:index, :show]
+  layout 'wo_boardlinks', :only => [:admin, :new, :edit]
   skip_before_filter :login_required, :authorized?,
                            :only => [:index, :show]
 

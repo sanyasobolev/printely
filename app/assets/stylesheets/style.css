@@ -13,6 +13,10 @@ body {
     background-color: #262626;
 }
 
+#middle_panel  {
+    width: 100%
+}
+
 #flash_panel {
     margin-left: auto;
     margin-right: auto;
@@ -28,7 +32,9 @@ body {
 }
 
 #boardlinks {
-    height: 45px;
+    border-bottom: solid 1px #CCCCCC;
+    border-top: solid 1px #CCCCCC;
+    height: 33px;
     width: 100%;
     background-color: #f2f2f2;
 }
@@ -394,6 +400,37 @@ a.for_admin:hover,a.for_admin:active{
     color: white;
     font-size: 2em;
     }
+/*ссылки и текст панели ссылок-------------------------*/
+#boardlinks_nav {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 33px;
+    line-height: 33px;
+}
+.boardseparator {
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.boardlink {
+    float: left;
+}
+
+.boardlink a:link, a:visited {
+    color: black;
+    text-decoration:none;
+}
+
+.boardlink a:hover {
+    color: #F7941D;
+    text-decoration:none;
+}
+
+.boardtext {
+    float: left;
+}
 
 /*стили кнопки подтверждения-------------------------*/
 .submit_area {

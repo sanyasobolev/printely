@@ -5,11 +5,12 @@ class PagesController < ApplicationController
 
   def index #отображение списка страниц в sidebar
     if params[:section_id]
-      @title =  Section.find_by_id(params[:section_id]).title
+      @current_section = Section.find_by_permalink(params[:section_id])
+      @title =  @current_section.title
       @pages_of_section = Page.find(:all,
                                     :order => 'published_at',
                                     :include => :user,
-                                    :conditions => "section_id=#{params[:section_id].to_i} AND published=true" )
+                                    :conditions => "section_id=#{@current_section.id.to_i} AND published=true" )
       @count_of_pages = @pages_of_section.count
       @page = @pages_of_section.first
     end

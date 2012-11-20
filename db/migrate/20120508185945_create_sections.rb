@@ -8,22 +8,6 @@ class CreateSections < ActiveRecord::Migration
       t.column :action, :string, :default => 'no'
       t.timestamps
     end
-
-    Section.create(
-      :id => '1',
-      :title => 'Статьи',
-      :order => '1',
-      :controller => 'articles',
-      :action => 'index'
-    )
-
-    Section.create(
-      :id => '2',
-      :title => 'Предложения',
-      :order => '2',
-      :controller => 'offers',
-      :action => 'index'
-    )
   end
 
   def self.down

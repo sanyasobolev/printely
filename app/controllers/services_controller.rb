@@ -1,11 +1,13 @@
 class ServicesController < ApplicationController
+  layout 'services', :only => [:index]
+  layout 'wo_boardlinks', :only => [:admin, :new, :edit]
   skip_before_filter :login_required, :authorized?,
                      :only => [:index]
   
   def index
     @title = "Услуги"
     @services = Service.all
-    @page_about_services = Page.find_by_permalink('services')
+    @page_about_services = Page.find_by_id('2')
   end
 
   def new

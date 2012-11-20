@@ -16,7 +16,6 @@ class SectionsController < ApplicationController
         wants.html { render :action => "new" }
         wants.xml {render :xml => @section.errors}
       end
-
     end
   end
 

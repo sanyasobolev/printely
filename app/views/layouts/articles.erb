@@ -1,0 +1,24 @@
+<% content_for :stylesheets do %> 
+  #sidebar
+  #content
+  #boardlinks
+<% end %>
+
+<% content_for :middle_panel do %>
+  <div id="boardlinks">
+    <div id="boardlinks_nav">
+      <%= boardlinks %>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :content_panel do %>
+  <div id="sidebar">
+    <%= render :partial => 'categories' %>
+  </div>
+  <div id="content">
+    <%= yield %>
+  </div>
+<% end %>
+
+<%= render :template => 'layouts/application' %>
