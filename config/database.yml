@@ -17,14 +17,12 @@ development:
 
 production:
   adapter: mysql2
-  host: localhost
+  host: mysql2.locum.ru
   encoding: utf8
-  database: spsite_development
-  username: root
+  database: pmsystem_spsit20
+  username: pmsystem_spsit20
   password: zpdm6q
-  pool: 5
-  reconnect: false
-  port: 3306
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
