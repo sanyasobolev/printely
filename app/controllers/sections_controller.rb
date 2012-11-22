@@ -20,12 +20,12 @@ class SectionsController < ApplicationController
   end
 
   def edit
-    @section = Section.find(params[:id])
+    @section = Section.find_by_permalink(params[:id])
     @title = "Редактирование раздела - #{@section.title}"
   end
 
   def update
-    @section = Section.find(params[:id])
+    @section = Section.find_by_permalink(params[:id])
     respond_to do |wants|
       if @section.update_attributes(params[:section])
         wants.html { redirect_to admin_sections_path }
@@ -38,7 +38,7 @@ class SectionsController < ApplicationController
   end
 
   def destroy
-    @section = Section.find(params[:id])
+    @section = Section.find_by_permalink(params[:id])
     @section.destroy
     flash[:notice] = "Раздел удален!"
     respond_to do |wants|

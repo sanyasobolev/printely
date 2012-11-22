@@ -418,12 +418,12 @@ a.for_admin:hover,a.for_admin:active{
     float: left;
 }
 
-.boardlink a:link, a:visited {
+a.boardlink:link, a.boardlink:visited {
     color: black;
     text-decoration:none;
 }
 
-.boardlink a:hover {
+a.boardlink:hover, a.boardlink:active {
     color: #F7941D;
     text-decoration:none;
 }
