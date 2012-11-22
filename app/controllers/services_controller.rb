@@ -7,7 +7,7 @@ class ServicesController < ApplicationController
   def index
     @title = "Услуги"
     @services = Service.all
-    @page_about_services = Page.find_by_id('2')
+    @page_about_services = Page.find_by_id('2', :conditions => "published=true")
   end
 
   def new

@@ -14,6 +14,7 @@ class CreateServices < ActiveRecord::Migration
     :title => 'services',
     :permalink => 'services',
     :body => 'Эта страница с описанием всех услуг',
-    :user_id => '1')
+    :user_id => '1',
+    :published => true)
   end
 end
