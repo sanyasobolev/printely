@@ -1,3 +1,4 @@
+# encoding: utf-8
 module ApplicationHelper
   def boardlinks
     @first = "<div class=\"boardlink\"> #{link_to "Главная", :root, :class => 'boardlink'}</div>"
