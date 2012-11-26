@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SubservicesController < ApplicationController
   layout 'subservices', :only => [:index, :show]
   layout 'wo_boardlinks', :only => [:admin, :new, :edit]

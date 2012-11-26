@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ServicesController < ApplicationController
   layout 'services', :only => [:index]
   layout 'wo_boardlinks', :only => [:admin, :new, :edit]

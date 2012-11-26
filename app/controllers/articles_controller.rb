@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ArticlesController < ApplicationController
   layout 'articles', :only => [:index]
   layout 'wo_categories', :only => [:show]

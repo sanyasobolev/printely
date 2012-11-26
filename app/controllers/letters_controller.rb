@@ -1,3 +1,4 @@
+# encoding: utf-8
 class LettersController < ApplicationController
  skip_before_filter :login_required, :authorized?,
                     :only => [:sent, :new, :create]
