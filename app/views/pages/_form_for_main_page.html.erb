@@ -1,9 +1,3 @@
-  <p><%= Page.human_attribute_name("title") %><br />
-  <%= f.text_field :title,
-                   :size => Page::TITLE_SIZE,
-                   :maxlength =>Page::TITLE_MAX_LENGTH%>
-  </p>
-
   <p><%= Page.human_attribute_name("body") %><br />
   <%= f.cktext_area :body,
                   :rows => Page::BODY_ROWS_SIZE,

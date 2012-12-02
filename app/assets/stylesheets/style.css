@@ -69,10 +69,9 @@ body {
     width: 900px;
 }
 #logo_container {
-    padding-top: 10px;
+    padding-top: 5px;
     width: 150px;
     text-align: left;
-    font-weight: bold;
     font-size: 1.5em;
 }
 
@@ -400,6 +399,69 @@ a.for_admin:hover,a.for_admin:active{
     color: white;
     font-size: 2em;
     }
+
+/*сложные ссылки c боковой линией---------------------------------------------------*/
+.link_container_for_sidelinelink {
+    position: relative;
+    float: left;
+    width: 210px;
+    height: 210px;
+    margin-right: 43px;
+    margin-left: 43px;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    border: 1px solid #d6d6d6;
+    }
+
+.link_container_for_sidelinelink:hover {
+    background-color: #e8e8e8;
+}
+
+.link_container_for_sidelinelink .sideline_red {
+    float: left;
+    width: 5px;
+    height: 100%;
+    background-color: red;
+    margin-right: 20px;
+}
+
+.link_container_for_sidelinelink .sideline_blue {
+    float: left;
+    width: 5px;
+    height: 100%;
+    background-color: #0000ff;
+    margin-right: 20px;
+}
+
+.link_container_for_sidelinelink .sideline_green {
+    float: left;
+    width: 5px;
+    height: 100%;
+    background-color: lime;
+    margin-right: 20px;
+}
+
+.link_container_for_sidelinelink .sideline_cyan {
+    float: left;
+    width: 5px;
+    height: 100%;
+    background-color: cyan;
+    margin-right: 20px;
+}
+
+
+.link_container_for_sidelinelink .sidelinelink_synopsis {
+    float: left;
+    }
+
+.link_container_for_sidelinelink .sidelinelink_title {
+    margin-top: 15px;
+    width: 80%;
+    float: left;
+    font-size: 1.5em;
+    }
+
+
 /*ссылки и текст панели ссылок-------------------------*/
 #boardlinks_nav {
     width: 900px;

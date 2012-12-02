@@ -2,12 +2,10 @@
 <%= error_messages_for :page %>
 <h2>Редактирование страницы</h2>
 <%= form_for :page, :url => page_path(@page), :html => { :method => :put } do |f| -%>
-
-  <%= render :partial => 'form_for_all_pages', :locals => {:f => f} %>
-  
-  <% if !@main_page %>
+  <% if @main_page %>
+     <%= render :partial => 'form_for_main_page', :locals => {:f => f} %>
+  <% else %>
     <%= render :partial => 'form_for_user_pages', :locals => {:f => f} %>
   <% end %>
-  
   <%= submit_tag 'Сохранить' %> или <%= link_to 'Вернуться', admin_pages_path %>
 <% end -%>

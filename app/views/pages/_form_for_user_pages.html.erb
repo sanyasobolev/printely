@@ -1,3 +1,17 @@
+  <p><%= Page.human_attribute_name("title") %><br />
+  <%= f.text_field :title,
+                   :size => Page::TITLE_SIZE,
+                   :maxlength =>Page::TITLE_MAX_LENGTH%>
+  </p>
+
+  <p><%= Page.human_attribute_name("body") %><br />
+  <%= f.cktext_area :body,
+                  :rows => Page::BODY_ROWS_SIZE,
+                  :cols => Page::BODY_COLS_SIZE,
+                  :height => '400px',
+                  :language => 'ru'%>
+  </p>
+
   <p><%= Page.human_attribute_name("section_id") %><br />
   <%= f.collection_select :section_id, section_for_page, :id, :title, :prompt => 'Нет' %>
   </p>
