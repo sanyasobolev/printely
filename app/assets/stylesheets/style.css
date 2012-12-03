@@ -89,9 +89,6 @@ a.box_user_opt:link, a.box_user_opt:visited {
     max-width: 50px;
     text-align:center;
     text-decoration:none;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
 
 }
 
@@ -109,7 +106,7 @@ a.box_user_opt:hover, a.box_user_opt:active {
         padding-right: 10px;
     font-size: 1.2em;
     color: #378cff;
-    margin-top: 10px;
+    margin-top: 18px;
 }
 
 a.top_section:link, a.top_section:visited {

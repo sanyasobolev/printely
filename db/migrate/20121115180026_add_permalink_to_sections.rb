@@ -9,7 +9,8 @@ class AddPermalinkToSections < ActiveRecord::Migration
       :order => '1',
       :controller => 'articles',
       :action => 'index',
-      :permalink => 'statyi'
+      :permalink => 'statyi',
+      :published => true
     )
 
     Section.create(
@@ -18,7 +19,8 @@ class AddPermalinkToSections < ActiveRecord::Migration
       :order => '2',
       :controller => 'services',
       :action => 'index',
-      :permalink => 'uslugi'
+      :permalink => 'uslugi',
+      :published => true
     )
   end
 end

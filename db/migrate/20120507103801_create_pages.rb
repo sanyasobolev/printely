@@ -15,7 +15,7 @@ class CreatePages < ActiveRecord::Migration
         :id => '1',
         :title => 'welcome',
         :permalink => 'welcome',
-        :body => 'Добро пожаловать!',
+        :body => 'Добро пожаловать',
         :user_id => '1',
         :section_id => '0')
   end
