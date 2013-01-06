@@ -2,6 +2,7 @@
 class LettersController < ApplicationController
  skip_before_filter :login_required, :authorized?,
                     :only => [:sent, :new, :create]
+ layout 'letters'
 
  def sent
     @title = 'Спасибо!'
@@ -16,7 +17,7 @@ class LettersController < ApplicationController
     @letter = Letter.new(params[:letter])
     respond_to do |wants|
       if @letter.save
-        flash[:notice] = 'Спасибо! Ваше сообщение сохранено и направлено в администрацию компании.'
+        flash[:notice] = 'Спасибо! Мы свяжемся с Вами в ближайшее время.'
         wants.html { redirect_to sent_letters_path }
         wants.xml { render :xml => @letter.to_xml }
       else

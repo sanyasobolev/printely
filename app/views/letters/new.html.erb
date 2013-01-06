@@ -1,5 +1,4 @@
 <%= error_messages_for :letter %>
-<h2>Обратная связь</h2>
 <p> Если у Вас возникли какие-либо вопросы, пожалуйста, напишите нам письмо, заполнив форму ниже. </p>
 <div class="form_shape">
   <%= form_for :letter, :url => letters_path, :html => { :method => :post } do |f| -%>

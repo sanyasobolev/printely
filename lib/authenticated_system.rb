@@ -44,7 +44,7 @@ module AuthenticatedSystem
             return true
           else
             flash[:notice] = "У Вас нет прав выполнить это действие. Обратитесь к администратору."
-            request.env["HTTP_REFERER"] ? (redirect_to :back) : (redirect_to home_path)
+            request.env["HTTP_REFERER"] ? (redirect_to :back) : (redirect_to :root)
             return false
           end
         end

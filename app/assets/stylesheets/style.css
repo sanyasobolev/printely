@@ -76,7 +76,7 @@ body {
 }
 
 #user_options {
-    height: 25px;
+    height: 28px;
     width: 100px;
     float:right;
     margin-left: 20px;
@@ -86,10 +86,9 @@ a.box_user_opt:link, a.box_user_opt:visited {
     display:block;
     color:white;
     background-color:#378cff;
-    max-width: 50px;
     text-align:center;
     text-decoration:none;
-
+    max-width: 56px;
 }
 
 a.box_user_opt:hover, a.box_user_opt:active {
@@ -169,6 +168,39 @@ a.top_section:hover {
     clear: both;
 }
 
+.image_title_letters {
+    height: 200px;
+    width: 100%;
+    background: #378cff;
+}
+
+.image_title_sitemap {
+    height: 200px;
+    width: 100%;
+    background-color: #006699;
+}
+
+.image_title_login {
+    height: 200px;
+    width: 100%;
+    background-color: #009999;
+}
+
+.image_title_signin {
+    height: 200px;
+    width: 100%;
+    background-color: #009999;
+}
+
+.image_title_text {
+    color: white;
+    position: relative;
+    right: -300px;
+    top: -185px;
+    width: 400px;
+    font-size: 3em;
+}
+
 /*контенеры центральной панели-----------------------------------------------------------------------------*/
 
 #sidebar {
@@ -244,6 +276,10 @@ p {
     line-height: 130%;
 }
 
+.big_text {
+    font-size: 3em;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -270,6 +306,12 @@ table {
     border-collapse: collapse;
 }
 
+.center_container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+}
+
 /*списки*/
 ul.square {
     list-style-type: square;
@@ -293,9 +335,9 @@ a.button_style:link, a.button_style:visited {
     background-color: #1BA1E2;
     border: 0 none;
     color: white;
-    max-width: 90px;
-    height: 30px;
-    padding: 10px 25px;
+    max-width: 100px;
+    height: 28px;
+    padding: 12px 10px 10px 10px;
     margin-bottom: 10px;
     margin-left: 0px;
     margin-top: 10px;
@@ -395,6 +437,7 @@ a.for_admin:hover,a.for_admin:active{
     float: left;
     color: white;
     font-size: 2em;
+    width: 300px;
     }
 
 /*сложные ссылки c боковой линией---------------------------------------------------*/
@@ -551,6 +594,7 @@ a.boardlink:hover, a.boardlink:active {
 
 /*сообщение об ошибке*/
 #error {
+    margin-top: 2em;
     padding: 20px;
     background-color: red;
 }
@@ -691,7 +735,50 @@ a.boardlink:hover, a.boardlink:active {
     left: 60px;
 }
 
+/*карта сайта-------------------------------------*/
+.left_site_map {
+    float: left;
+    width: 450px;
+}
 
+.right_site_map {
+    float: left;
+    width: 450px;
+}
+
+a.site_map_link:link, a.site_map_link:visited {
+    text-decoration:none;
+    color: black;
+}
+
+a.site_map_link:hover {
+    cursor: pointer;
+    color: #F7941D
+}
+
+.zero_level {
+    font-size: 2em;
+    margin-top: 30px;
+}
+
+.zero_level a {
+    position: relative;
+    top: -5px;
+}
+
+.first_level {
+    font-size: 1.5em;
+    position: relative;
+    right: -70px;
+}
+
+.second_level {
+    font-size: 1em;
+    position: relative;
+    right: -100px;
+}
+
+/*------------------------------------------------*/
 
 /*оформление предложений-------------------------------------*/
 .offer {

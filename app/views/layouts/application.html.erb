@@ -21,7 +21,7 @@
           <% if logged_in? -%>
             <%= render :partial => 'sessions/current' %>
           <% else -%>
-            <%= link_to 'Log In', :login, :class => 'box_user_opt' %>
+            <%= link_to image_tag("icons/Login.png"), :login, :class => 'box_user_opt' %>
           <% end -%>
         </div>
         <%= render :partial => 'share/header_menu' %>
@@ -32,7 +32,7 @@
   </div>
 
   <div id="middle_panel">
-    <%= content_for?(:middle_panel) ? yield(:middle_panel) : (render :partial => 'share/slide_panel') %>
+    <%= content_for?(:middle_panel) ? yield(:middle_panel) : '' %>
   </div>
 
   <div id="flash_panel">

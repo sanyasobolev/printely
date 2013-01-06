@@ -1,0 +1,14 @@
+<% content_for :stylesheets do %>
+  #boardlinks
+<% end %>
+
+<% content_for :middle_panel do %>
+  <div id="boardlinks">
+    <div id="boardlinks_nav">
+      <%= boardlinks %>
+    </div>
+  </div>
+  <%= render :partial => 'share/image_title_sitemap' %>
+<% end %>
+
+<%= render :template => 'layouts/application' %>

@@ -1,13 +1,13 @@
 # encoding: utf-8
 class PagesController < ApplicationController
-
+  layout 'welcome', :only => [:welcome]
   skip_before_filter :login_required, :authorized?,
                      :only => [:show, :index, :no_page, :welcome]
 
   def index #отображение списка страниц в sidebar
     if params[:section_id]
       @current_section = Section.find_by_permalink(params[:section_id])
-      @title =  @current_section.title
+      @title =  current_section_title
       @pages_of_section = Page.find(:all,
                                     :order => 'published_at',
                                     :include => :user,
@@ -40,12 +40,12 @@ class PagesController < ApplicationController
   def show #отображение выбранной страницы из sidebar или страницы без раздела
     if params[:id]
       @page = Page.find_by_permalink(params[:id])
-      if @section = Section.find_by_id(@page.section_id)
+      if @current_section = Section.find_by_id(@page.section_id)
          @pages_of_section = Page.find(:all,
                                        :order => 'published_at',
                                        :include => :user,
-                                       :conditions => "section_id=#{@section.id.to_i} AND published=true" )
-        @title = "#{@section.title} - #{@page.title}"
+                                       :conditions => "section_id=#{@current_section.id.to_i} AND published=true" )
+        @title = "#{@current_section.title} - #{@page.title}"
         @count_of_pages = @pages_of_section.count
       else
         @title = "#{@page.title}"

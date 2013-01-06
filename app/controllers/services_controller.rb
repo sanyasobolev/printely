@@ -6,7 +6,7 @@ class ServicesController < ApplicationController
                      :only => [:index]
   
   def index
-    @title = "Услуги"
+    @title = current_section_title
     @services = Service.all
     @page_about_services = Page.find_by_id('2', :conditions => "published=true")
   end
@@ -59,7 +59,7 @@ class ServicesController < ApplicationController
   end
 
   def admin
-    @title = 'Администрирование - Услуги'
+    @title = "Администрирование - #{current_section_title}"
     @services = Service.all
     respond_to do |wants|
       wants.html

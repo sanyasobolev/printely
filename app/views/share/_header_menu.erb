@@ -1,19 +1,19 @@
  
-    <% sections = Section.all %>
-    <% Section::SECTION_ORDER.each do |section_order| %>
-        <% sections.each do |section| %>
-          <% if section.order == section_order && section.published == true %>
-            <% if section.controller == 'no' %>
-              <div class="top_section_nav">
-                <%= link_to section.title, section_pages_path(section), :class => 'top_section' %>
-              </div>
-            <% else %>
-              <div class="top_section_nav">
-                <%= link_to section.title, {:controller => section.controller, :action => section.action, :category_id => nil} , {:class => 'top_section'} %>
-              </div>
-            <% end %>
+  <% sections = Section.all %>
+  <% Section::SECTION_ORDER.each do |section_order| %>
+      <% sections.each do |section| %>
+        <% if section.order == section_order && section.published == true %>
+          <% if section.controller == 'no' %>
+            <div class="top_section_nav">
+              <%= link_to section.title, section_pages_path(section), :class => 'top_section' %>
+            </div>
+          <% else %>
+            <div class="top_section_nav">
+              <%= link_to section.title, {:controller => section.controller, :action => section.action, :category_id => nil}, {:class => 'top_section'} %>
+            </div>
           <% end %>
         <% end %>
-    <% end %>
+      <% end %>
+  <% end %>
 
 

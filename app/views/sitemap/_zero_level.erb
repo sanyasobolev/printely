@@ -1,0 +1,27 @@
+<div class="zero_level">
+  <%= image_tag ("icons/section_sitemap.png") %>
+  <% if zero_level.controller == 'no' %>
+    <%= link_to zero_level.title, section_pages_path(zero_level), :class => "site_map_link" %>
+  <% else %>
+    <%= link_to zero_level.title, {:controller => zero_level.controller, :action => zero_level.action, :category_id => nil} , {:class => "site_map_link"} %>
+  <% end %>
+</div>
+
+<% if zero_level.controller == 'services' %>
+  <% services = Service.find(:all,
+                             :order => 'title') %>
+  <%= render :partial => 'service', :collection => services %>
+<% end %>
+  
+<% if zero_level.controller == 'articles' %>
+  <%  categories = Category.find(:all,
+                                 :order => 'name') %>
+  <%= render :partial => 'category', :collection => categories %>
+<% end %>
+
+<% if zero_level.controller == 'no'  %>
+  <% pages = Page.find(:all,
+             :order => 'published_at',
+             :conditions => "published=true AND section_id=#{zero_level.id.to_i}") %>
+  <%= render :partial => 'page', :collection => pages %>
+<% end %>

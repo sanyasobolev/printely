@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
                      :only => [:index, :show]
 
   def index
-    @title = 'Статьи'
+    @title = current_section_title
     if params[:category_id]
       @category = Category.find_by_permalink(params[:category_id])
       @articles = Article.paginate :page => params[:page],
@@ -86,7 +86,7 @@ class ArticlesController < ApplicationController
   end
 
   def admin
-    @title = 'Администрирование - Статьи'
+    @title = "Администрирование - #{current_section_title}"
     @articles = Article.paginate :page => params[:page],
                                  :order => 'published_at DESC',
                                  :include => :user,
