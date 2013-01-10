@@ -348,30 +348,40 @@ a.button_style:hover {
     cursor: pointer;
 }
 
-a.box:link, a.box:visited {
-    position: relative;
-    display:block;
-    background-color: #cccccc;
-    width:100%;
+.container_for_link_box {
+    display:table;
+    background-color: #1BA1E2;
+    width:150px;
+    text-align:center;
+    margin-bottom: 10px;
+    color: black;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.link_box {
+    display:table-cell;
+    width:150px;
     text-align:center;
     text-decoration:none;
     color: black;
-    min-height: 50px;
+    height: 50px;
+    vertical-align: middle; 
+}
+
+a.box:link, a.box:visited {
+    display: table-cell;
+    background-color: #cccccc;
+    text-align:center;
+    text-decoration:none;
+    color: black;
+    height: 50px;
+    width:150px;
+    vertical-align: inherit;
 }
 
 a.box:hover,a.box:active{
     background:#1BA1E2;
-}
-
-.container_for_link_box {
-    position: relative;
-    display:block;
-    background-color: #1BA1E2;
-    width:100%;
-    text-align:center;
-    margin-bottom: 10px;
-    color: black;
-    min-height: 50px;
 }
 
 a.for_admin:link,a.for_admin:visited {
