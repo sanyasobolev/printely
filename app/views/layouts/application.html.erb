@@ -21,12 +21,12 @@
           <% if logged_in? -%>
             <%= render :partial => 'sessions/current' %>
           <% else -%>
-            <%= link_to image_tag("icons/Login.png"), :login, :class => 'box_user_opt' %>
+            <%= link_to image_tag("icons/Login.png", :border => '0'), :login, :class => 'box_user_opt' %>
           <% end -%>
         </div>
         <%= render :partial => 'share/header_menu' %>
         <div id="logo_container">
-          <%= link_to image_tag("logo_sbold.png"), :root, :class => 'logo' %>
+          <%= link_to image_tag("logo_sbold.png", :border => '0'), :root, :class => 'logo' %>
         </div>
     </div>
   </div>
