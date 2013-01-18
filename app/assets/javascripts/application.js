@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require ckeditor/ckeditor
+//= require ckeditor/init
 //= require_tree
+//= require_self
+//
 //
 // обработчик slide-панели
 
