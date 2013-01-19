@@ -16,7 +16,6 @@
 //= require_tree
 //= require_self
 //
-//
 // обработчик slide-панели
 
 //$(function() {
