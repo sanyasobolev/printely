@@ -617,10 +617,6 @@ a.boardlink:hover, a.boardlink:active {
 }
 
 /*стиль для таблиц в оформлении заказа*/
-.upload_documents {
-    width: 900px;
-}
-
 .select_print_format {
     width: 140px;
     height: 150px;
