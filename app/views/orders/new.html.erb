@@ -1,0 +1,39 @@
+<h2 class="orange">Загрузите Ваши файлы</h2>
+<div class="form_shape">
+  <%= form_for @order, :url => orders_path, :html => { :multipart => true } do |f| -%>
+  <table class="upload_documents">
+    <%= f.fields_for :documents do |document|%>
+      <tr>
+        <td>
+            <%= document.file_field :docfile %>
+        </td>
+        <td>
+          <table class="select_print_format">
+            <%  Document::PRINT_FORMAT.each do |print_format| %>
+              <tr>
+                <td class="right"><%= document.label(print_format) %></td>
+                <td><%= document.radio_button(:print_format, print_format, :class => "radio") %></td>
+              </tr>
+            <%  end %>
+          </table>
+        </td>
+        <td>
+          <%= document.text_area :user_comment,
+                                 :rows => Document::USER_COMMENT_ROWS_SIZE,
+                                 :cols => Document::USER_COMMENT_COLS_SIZE %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+    <%#*<p>%>
+      <%#*<!-- ссылка, генерирующая еще одно поле ввода !-->%>
+      <%#= link_to "Добавить файл...", new_order_path(:add_document => true), remote: true %>
+    <%#*</p>%>
+
+    <div class="submit_area">
+      <%= submit_tag 'Сохранить', :class => 'submit'  %>
+    </div>
+  <% end -%>
+</div>
+
+<%= render :partial => 'pages/show_page', :locals => {:page => @page_about_download} %>

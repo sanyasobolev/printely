@@ -7,10 +7,11 @@ class UsersController < ApplicationController
 
   def index
     @title = 'Администрирование - Пользователи системы'
-    @users = User.all
+    @users = params[:role] ? User.where(:role_id => Role.where(:name => params[:role])) : User.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @users }
+      format.js
     end
   end
 

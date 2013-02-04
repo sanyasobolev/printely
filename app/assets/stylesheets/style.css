@@ -271,6 +271,16 @@ h2 {
     font-weight: normal;
 }
 
+.orange {
+    padding: 10px;
+    background-color: orange;
+}
+
+h2 span {
+    text-decoration: none;
+    font-size: 1em;
+}
+
 p {
     font-size: 1em;
     line-height: 130%;
@@ -414,8 +424,8 @@ a.for_admin:hover,a.for_admin:active{
      text-decoration: none;
 }
 
-/*сложные ссылки для услуг и подуслуг---------------------------------------------------*/
-.link_container_for_service {
+/*сложные ссылки---------------------------------------------------*/
+.link_container_for_flash_link {
     position: relative;
     float: left;
     width: 420px;
@@ -426,22 +436,22 @@ a.for_admin:hover,a.for_admin:active{
     background-color: #517B93;
     }
 
-.link_container_for_service:hover {
+.link_container_for_flash_link:hover {
     background: orange;
 }
 
-.link_container_for_service img {
+.link_container_for_flash_link img {
     margin: 20px 20px 30px 20px;
     float: left;
     }
 
-.link_container_for_service .service_synopsis {
+.link_container_for_flash_link .flash_link_synopsis {
     float: left;
     margin-left: 20px;
     color: white;
     }
 
-.link_container_for_service .service_title {
+.link_container_for_flash_link .flash_link_title {
     margin-top: 30px;
     height: 100px;
     float: left;
@@ -590,6 +600,36 @@ a.boardlink:hover, a.boardlink:active {
     width: 128px;
     border: 1px solid #a1d8ff;
 }
+
+/*стиль для таблиц для пользователя*/
+.user {
+    width: 100%;
+}
+
+.user th, .user td {
+    font-size: 1em;
+    padding: 3px 7px 2px 7px;
+    text-align: center
+}
+
+.user th {
+    background-color: #e4eefa;
+}
+
+/*стиль для таблиц в оформлении заказа*/
+.upload_documents {
+    width: 900px;
+}
+
+.select_print_format {
+    width: 140px;
+    height: 150px;
+}
+
+.select_print_format .right {
+    text-align: right;
+}
+
 
 /*обработка ошибок и сообщений-------------------------------------------------*/
 

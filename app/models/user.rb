@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :articles
   belongs_to :role
   has_many :pages
+  has_many :orders
 
   #константы---------------------------------------------------------------------------------
   #максмимальные и минимальные значения для полей

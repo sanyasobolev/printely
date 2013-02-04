@@ -1,0 +1,9 @@
+<h2>Мои заказы</h2>
+<table class ="user">
+<tr>
+  <th>Номер заказа<br/></th>
+  <th>Создан<br/></th>
+  <th></th>
+</tr>
+  <%= render :partial => 'order', :collection => @orders  %>
+</table>

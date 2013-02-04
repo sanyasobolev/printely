@@ -34,5 +34,11 @@ Spsite::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-  Paperclip.options[:command_path] = "/usr/local/bin/"
+
+  #paperclip options
+  Paperclip.options[:command_path] = 'C:\Program Files (x86)\ImageMagick-6.8.2-Q16'
+  Paperclip.options[:swallow_stderr] = false
+  Paperclip.interpolates :order_number do |attachment, style|
+    attachment.instance.order.id
+  end
 end

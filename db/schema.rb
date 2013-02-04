@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115180026) do
+ActiveRecord::Schema.define(:version => 20130122202039) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(:version => 20121115180026) do
     t.integer  "header_image_file_size"
     t.datetime "header_image_updated_at"
     t.string   "permalink"
+  end
+
+  create_table "assets", :force => true do |t|
+    t.integer  "order_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size"
+    t.datetime "asset_updated_at"
   end
 
   create_table "categories", :force => true do |t|
@@ -53,12 +63,30 @@ ActiveRecord::Schema.define(:version => 20121115180026) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
+  create_table "documents", :force => true do |t|
+    t.integer  "order_id"
+    t.string   "print_format"
+    t.text     "user_comment"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "docfile_file_name"
+    t.string   "docfile_content_type"
+    t.integer  "docfile_file_size"
+    t.datetime "docfile_updated_at"
+  end
+
   create_table "letters", :force => true do |t|
     t.string   "name"
     t.string   "company"
     t.string   "phone"
     t.string   "email"
     t.string   "question"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "orders", :force => true do |t|
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

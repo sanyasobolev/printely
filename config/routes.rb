@@ -9,6 +9,12 @@ Spsite::Application.routes.draw do
   resources :rights
   resources :roles
 
+  resources :orders do
+    resources :documents
+    get 'my', :on => :collection
+    get 'admin', :on => :collection
+  end
+
   controller :sessions do
     get 'login' => :new
     post 'login' => :create

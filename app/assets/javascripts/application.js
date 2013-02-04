@@ -9,32 +9,13 @@
 //
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
-//
+
 //= require jquery
 //= require jquery_ujs
 //= require ckeditor/init
 //= require_tree
-//
-// обработчик slide-панели
 
-//$(function() {
-//    $("#slide_image").carouFredSel({
-//        width: "100%",
-//        align: "center",
-//        cookie: true,
-//	auto : {
-//            pauseDuration: 15000
-//        },
-//        items: {
-//            visible: 1
-//        },
-//        pagination : {
-//            container	: "#slide_img_pag",
-//            easing: "swing",
-//            duration	: 800
-//	}
-//    });
-//});
+// обработчик slide-панели
 
 $(function() {
 	$(window).bind('resize.x', function() {
@@ -53,22 +34,13 @@ $(function() {
 	}).trigger('resize.x');
 });
 
-//$(function() {
-//    $("#slide_background").carouFredSel({
-//        width: "100%",
-//        height: "300px",
-//        cookie: true,
-//	auto : {
-//            pauseDuration: 15000
-//        },
-//        scroll: {
-//            fx			: "crossfade",
-//            easing		: "swing",
-//            duration	: 500
-//	}
-//    });
-//});
 
-
-
+//инициализатор загрузчика SWF
+//var swfu;
+//window.onload = function () {
+//    swfu = new SWFUpload({
+//        upload_url : "/public/swfupload",
+//        flash_url : "/lib/swfupload.swf",
+//        file_size_limit : "20 MB"
+//    }); };
 

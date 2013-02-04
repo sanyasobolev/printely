@@ -1,4 +1,12 @@
-<h2>Пользователи</h2>
+<h2>
+  Пользователи,
+    <span>
+      <%= link_to "все",
+          users_path(:role => 'Administrator'),
+          :remote => true,
+          :id => 'toggle' %>
+    </span>
+</h2>
 <table class ="admin">
 <tr>
   <th></th>

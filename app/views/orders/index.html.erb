@@ -1,0 +1,28 @@
+<h2 class="orange">Здравствуйте, <%= current_user.first_name %> <%= current_user.second_name %>!</h2>
+<p>Вы находитесь в личном кабинете. Здесь Вы можете создавать новые заказы на печать и просматривать информацию о ранее созданных заказах. </p>
+
+<% @str_1 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new';\">" %>
+<% @str_2 = "</div>" %>
+
+<%= @str_1.html_safe %>
+  <%= image_tag("orders/document_add.png", :border => '0') %>
+  <div class="flash_link_title">
+    Новый заказ
+  </div>
+  <div class="flash_link_synopsis">
+    Распечатайте Ваши фотографии или документы
+  </div>
+<%= @str_2.html_safe %>
+
+<% @str_1 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/my';\">" %>
+<% @str_2 = "</div>" %>
+
+<%= @str_1.html_safe %>
+  <%= image_tag("orders/my_orders.png", :border => '0') %>
+  <div class="flash_link_title">
+    Мои заказы
+  </div>
+  <div class="flash_link_synopsis">
+    Посмотрите текущий статус Ваших заказов
+  </div>
+<%= @str_2.html_safe %>

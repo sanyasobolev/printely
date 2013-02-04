@@ -1,0 +1,27 @@
+<div class="newPaperclipFiles">
+
+        <%= fields_for :documents do |document| %>
+
+           <% if document.object.new_record? %>
+                 <%= document.file_field :document %>
+           <% end %>
+
+       <% end %>
+
+</div>
+
+<div class="existingPaperclipFiles">
+
+     <% fields_for :documents do |document| %>
+
+          <% unless document.object.new_record? %>
+
+                <div class="thumbnail">
+                        <%= image_tag(document.object.document.url) %>
+                        <%= document.check_box :_delete %>
+                </div>
+
+          <% end %>
+
+     <% end %>
+</div>
