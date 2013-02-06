@@ -2,7 +2,7 @@ class Document < ActiveRecord::Base
 
   belongs_to :order
 
-  attr_accessible :docfile
+  attr_accessible :docfile, :print_format, :user_comment, :paper_type
   has_attached_file :docfile,
                     :styles => {
                       :thumb => "100x100>"
@@ -15,10 +15,11 @@ class Document < ActiveRecord::Base
                                     :content_type => ['image/jpeg', 'image/png', 'application/pdf', 'application/msword']
 
   #варианты форматов печати
-  PRINT_FORMAT = ['Фото-10х15 или Документы-А4', 'Фото-А4']
-
+  PRINT_FORMAT = ['10х15', 'А4']
+  PAPER_TYPE = ['Глянцевая', 'Матовая']
+  
   #размер боксов полей в формах
-  USER_COMMENT_ROWS_SIZE = 4
+  USER_COMMENT_ROWS_SIZE = 2
   USER_COMMENT_COLS_SIZE = 40
 
    #методы удаления файлов-------------------------------------------------

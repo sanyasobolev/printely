@@ -14,12 +14,10 @@ class OrdersController < ApplicationController
   end
 
   def new
-    if params[:add_document]
-    else
       @order = Order.new
       5.times{@order.documents.build}
       @page_about_download = Page.find_by_id('3', :conditions => "published=true")
-    end
+      flash[:page_about_download] = @page_about_download
     respond_to do |format|
       format.html
       format.js
@@ -28,6 +26,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(params[:order]) #создаем экземпляр с атрибутами из хэша
+    @page_about_download = flash[:page_about_download]
     current_user.orders << @order
     respond_to do |wants|
       if @order.save #если создано предложение

@@ -1,32 +1,31 @@
+<h2 class="orange">Какие файлы загружать?</h2>
+  <%= render :partial => 'pages/show_page', :locals => {:page => @page_about_download} %>
 <h2 class="orange">Загрузите Ваши файлы</h2>
   <%= form_for @order, :url => orders_path, :html => { :multipart => true } do |f| -%>
   <table class="user">
     <tr>
       <th>Файлы</th>
       <th>Формат печати</th>
+      <th>Тип бумаги</th>
       <th>Комментарии</th>
     </tr>
     <%= f.fields_for :documents do |document|%>
-      <tr>
-        <td>
-            <%= document.file_field :docfile %>
-        </td>
-        <td>
-          <table class="select_print_format">
-            <%  Document::PRINT_FORMAT.each do |print_format| %>
-              <tr>
-                <td class="right"><%= document.label(print_format) %></td>
-                <td><%= document.radio_button(:print_format, print_format, :class => "radio") %></td>
-              </tr>
-            <%  end %>
-          </table>
-        </td>
-        <td>
-          <%= document.text_area :user_comment,
-                                 :rows => Document::USER_COMMENT_ROWS_SIZE,
-                                 :cols => Document::USER_COMMENT_COLS_SIZE %>
-        </td>
-      </tr>
+    <tr class="<%= cycle('line_white','line_grey')%>">
+      <td>
+          <%= document.file_field :docfile %>
+      </td>
+      <td>
+        <%= document.select(:print_format, Document::PRINT_FORMAT) %>
+      </td>
+      <td>
+        <%= document.select(:paper_type, Document::PAPER_TYPE) %>
+      </td>
+      <td>
+        <%= document.text_area :user_comment,
+                               :rows => Document::USER_COMMENT_ROWS_SIZE,
+                               :cols => Document::USER_COMMENT_COLS_SIZE %>
+      </td>
+    </tr>
     <% end %>
   </table>
     <%#*<p>%>
@@ -35,9 +34,8 @@
     <%#*</p>%>
 
     <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit'  %>
+      <%= submit_tag 'Далее', :class => 'submit'  %>
     </div>
   <% end -%>
 
 
-<%= render :partial => 'pages/show_page', :locals => {:page => @page_about_download} %>

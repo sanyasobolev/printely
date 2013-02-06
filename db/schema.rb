@@ -30,16 +30,6 @@ ActiveRecord::Schema.define(:version => 20130122202039) do
     t.string   "permalink"
   end
 
-  create_table "assets", :force => true do |t|
-    t.integer  "order_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.string   "asset_file_name"
-    t.string   "asset_content_type"
-    t.integer  "asset_file_size"
-    t.datetime "asset_updated_at"
-  end
-
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.string   "permalink"
@@ -67,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130122202039) do
     t.integer  "order_id"
     t.string   "print_format"
     t.text     "user_comment"
+    t.string   "paper_type"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.string   "docfile_file_name"
