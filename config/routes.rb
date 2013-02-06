@@ -4,15 +4,20 @@ Spsite::Application.routes.draw do
 
   root :to => 'pages#welcome', :id => 'welcome' #отправляет на действие welcome контроллера pages, с Id=welcome
   match "sitemap" => "sitemap#index"
-
+  
   resources :users
   resources :rights
   resources :roles
 
+  match "myoffice" => "orders#index", :as => :myoffice
+  
   resources :orders do
     resources :documents
     get 'my', :on => :collection
     get 'admin', :on => :collection
+    get 'upload_files', :on => :collection
+    get 'delivery', :on => :collection
+    get 'no_order', :on => :collection
   end
 
   controller :sessions do

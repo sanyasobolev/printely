@@ -4,7 +4,11 @@ class Order < ActiveRecord::Base
   has_many :documents, :dependent => :destroy
   accepts_nested_attributes_for :documents, :allow_destroy => true
 
-#  after_update :save_documents
+  DELIVERY_STREET = ['Тарасково', 'КЭЧ', 'Фабричная']
+
+  #размер боксов полей в формах
+  DELIVERY_COMMENT_ROWS_SIZE = 2
+  DELIVERY_COMMENT_COLS_SIZE = 40
 
   #проверка ассоциированных объектов------------------------------------------
     validates_associated :documents

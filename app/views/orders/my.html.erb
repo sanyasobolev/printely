@@ -1,4 +1,4 @@
-<h2>Мои заказы</h2>
+<h2 class="blue">Мои заказы</h2>
 <table class ="user">
 <tr>
   <th>Номер заказа<br/></th>
@@ -6,4 +6,11 @@
   <th></th>
 </tr>
   <%= render :partial => 'order', :collection => @orders  %>
+</table>
+<table>
+  <tr>
+    <td>
+      <%= link_to 'Вернуться в личный кабинет', myoffice_path, :class =>"button_style_long" %>
+    </td>
+  </tr>
 </table>

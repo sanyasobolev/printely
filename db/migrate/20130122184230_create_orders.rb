@@ -3,6 +3,10 @@ class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
       t.column :user_id, :integer
+      t.column :delivery_street, :string
+      t.column :delivery_address, :string
+      t.column :delivery_comment, :text
+      t.column :status, :string
       t.timestamps
     end
 
