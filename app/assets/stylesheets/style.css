@@ -659,7 +659,8 @@ a.boardlink:hover, a.boardlink:active {
 #notice {
     padding: 1em;
     margin-top: 2em;
-    background-color: #F7941D;
+    background-color: #7eb200;
+    font-weight: bold;
 }
 
 /*сообщение об ошибке*/
