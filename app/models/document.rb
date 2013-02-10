@@ -11,8 +11,7 @@ class Document < ActiveRecord::Base
                     :path => ":rails_root/public/order_documents/:order_number/:style/:id.:extension"
 
   validates_attachment_size :docfile, :less_than => 5.megabytes
-  validates_attachment_content_type :docfile,
-                                    :content_type => ['image/jpeg', 'image/png', 'application/pdf', 'application/msword']
+  validates_attachment_content_type :docfile, :content_type => ['image/jpg', 'image/jpeg', 'image/png', 'application/zip']
 
   #варианты форматов печати
   PRINT_FORMAT = ['10х15', 'А4']

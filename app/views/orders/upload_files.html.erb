@@ -1,5 +1,5 @@
 <h2 class="orange">Какие файлы можно загружать?</h2>
-  <%= render :partial => 'pages/show_page', :locals => {:page => @page_about_download} %>
+  <%= render :partial => 'pages/show_page', :locals => {:page => page_about_download} %>
 <h2 class="orange">Загрузите Ваши файлы</h2>
   <%= form_for @order, :url => orders_path, :html => { :multipart => true } do |f| -%>
   <table class="user">
