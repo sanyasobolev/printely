@@ -1,13 +1,14 @@
+<%= error_messages_for :order %>
 <h2 class="orange">Какие файлы можно загружать?</h2>
   <%= render :partial => 'pages/show_page', :locals => {:page => page_about_download} %>
 <h2 class="orange">Загрузите Ваши файлы</h2>
   <%= form_for @order, :url => orders_path, :html => { :multipart => true } do |f| -%>
   <table class="user">
     <tr>
-      <th>Файлы</th>
-      <th>Формат печати</th>
-      <th>Тип бумаги</th>
-      <th>Комментарии</th>
+      <th><%= Document.human_attribute_name(:docfile) %></th>
+      <th><%= Document.human_attribute_name(:print_format) %></th>
+      <th><%= Document.human_attribute_name(:paper_type) %></th>
+      <th><%= Document.human_attribute_name(:user_comment) %></th>
     </tr>
     <%= f.fields_for :documents do |document|%>
         <tr class="<%= cycle('line_grey','line_white')%>">
@@ -32,9 +33,32 @@
       <%#*<!-- ссылка, генерирующая еще одно поле ввода !-->%>
       <%#= link_to "Добавить файл...", new_order_path(:add_document => true), remote: true %>
     <%#*</p>%>
+<br />
+<h2 class="orange">Введите адрес доставки вашего заказа</h2>
+  <table class="user">
+    <tr>
+      <th><%=  f.label(:delivery_street) %></th>
+      <th><%=  f.label(:delivery_address) %></th>
+      <th><%=  f.label(:delivery_comment) %></th>
+    </tr>
+    <tr>
+      <td>
+        <%= f.select(:delivery_street, Order::DELIVERY_STREET) %>
+      </td>
+      <td>
+        <%= f.text_field :delivery_address %>
+      </td>
+      <td>
+        <%= f.text_area :delivery_comment,
+                        :rows => Order::DELIVERY_COMMENT_ROWS_SIZE,
+                        :cols => Order::DELIVERY_COMMENT_COLS_SIZE %>
+      </td>
+    </tr>
+
+  </table>
 
     <div class="submit_area">
-      <%= submit_tag 'Далее', :class => 'submit'  %>
+      <%= submit_tag 'Сохранить заказ', :class => 'submit'  %>
     </div>
   <% end -%>
 

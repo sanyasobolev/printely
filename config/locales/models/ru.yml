@@ -13,6 +13,8 @@ ru:
       letter: "Обратная связь"
       service: "Услуга"
       subservice: "Услуга"
+      order: "Заказ"
+      document: "Документ"
     attributes:
       article:
         title: "Название"
@@ -93,3 +95,16 @@ ru:
         subservice_header_icon: "Иконка"
         permalink: "Название в URL"
         service_id: "Услуга"
+      order:
+        user_id: "Автор"
+        delivery_street: "Улица, поселок"
+        delivery_address: "Дом, квартира"
+        delivery_comment: "Комментарии к времени доставки"
+        status: "Статус"
+        created_at: "Дата создания"
+      document:
+        order_id: "Номер заказа"
+        print_format: "Формат печати"
+        user_comment: "Комментарии"
+        paper_type: "Тип бумаги"
+        docfile: "Файл"

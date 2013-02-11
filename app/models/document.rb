@@ -10,8 +10,9 @@ class Document < ActiveRecord::Base
                     :url => "/order_documents/:order_number/:style/:id.:extension",
                     :path => ":rails_root/public/order_documents/:order_number/:style/:id.:extension"
 
-  validates_attachment_size :docfile, :less_than => 5.megabytes
-  validates_attachment_content_type :docfile, :content_type => ['image/jpg', 'image/jpeg', 'image/png', 'application/zip']
+  validates_attachment_size :docfile, :less_than => 100.megabytes
+  validates_attachment_content_type :docfile,
+                                    :content_type => ['image/jpg', 'image/jpeg', 'image/png', 'application/zip', 'application/x-zip']
 
   #варианты форматов печати
   PRINT_FORMAT = ['10х15', 'А4']
@@ -21,13 +22,8 @@ class Document < ActiveRecord::Base
   USER_COMMENT_ROWS_SIZE = 2
   USER_COMMENT_COLS_SIZE = 40
 
-   #методы удаления файлов-------------------------------------------------
-  def docfile_delete
-    @docfile_delete ||= "0"
-  end
-
-  def docfile_delete=(value)
-    @docfile_delete = value
+  def image?
+    upload_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|png|x-png)$}
   end
 
 end
