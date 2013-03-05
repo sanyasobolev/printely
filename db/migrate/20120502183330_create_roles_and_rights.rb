@@ -31,9 +31,21 @@ class CreateRolesAndRights < ActiveRecord::Migration
                              :first_name => 'Admin',
                              :second_name => 'of system',
                              :email => 'admin@info.net',
+                             :phone => '1234567890',
                              :password => '123456',
                              :password_confirmation => '123456',
                              :role_id => admin_role.id)
+
+    user_role = Role.find_by_name('User')
+
+    test_user = User.create(:id => '2',
+                             :first_name => 'test',
+                             :second_name => 'test',
+                             :email => 'test@info.net',
+                             :phone => '0987654321',
+                             :password => '123456',
+                             :password_confirmation => '123456',
+                             :role_id => user_role.id)
 
     #установка дефолтной роли для пользователей
     default_role = Role.find_by_name('User')

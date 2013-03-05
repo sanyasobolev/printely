@@ -20,6 +20,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-fileupload-rails'
+gem 'twitter-bootstrap-rails'
 
 #group :production do
 #  gem 'jquery-rails'

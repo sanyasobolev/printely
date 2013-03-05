@@ -38,7 +38,14 @@ Spsite::Application.configure do
   #paperclip options
   Paperclip.options[:command_path] = 'C:\Program Files (x86)\ImageMagick-6.8.2-Q16'
   Paperclip.options[:swallow_stderr] = false
+
+  Paperclip.interpolates :order_created do |attachment, style|
+    attachment.instance.order.created_at.to_formatted_s(:day_month_year)
+  end
   Paperclip.interpolates :order_number do |attachment, style|
     attachment.instance.order.id
+  end
+  Paperclip.interpolates :name_docfile do |attachment, style|
+    @str = "#{attachment.instance.id}_#{attachment.instance.print_format.parameterize}_#{attachment.instance.paper_type.parameterize}_#{attachment.instance.quantity}_#{attachment.instance.margins.parameterize}_#{attachment.instance.user_comment.parameterize}"
   end
 end

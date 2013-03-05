@@ -6,7 +6,9 @@ class CreateOrders < ActiveRecord::Migration
       t.column :delivery_street, :string
       t.column :delivery_address, :string
       t.column :delivery_comment, :text
-      t.column :status, :string
+      t.column :status, :string, :default => Order::STATUS[0]
+      t.column :cost, :float
+      t.column :manager_comment, :text
       t.timestamps
     end
 

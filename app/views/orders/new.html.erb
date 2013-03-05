@@ -2,64 +2,50 @@
 <h2 class="orange">Какие файлы можно загружать?</h2>
   <%= render :partial => 'pages/show_page', :locals => {:page => page_about_download} %>
 <h2 class="orange">Загрузите Ваши файлы</h2>
-  <%= form_for @order, :url => orders_path, :html => { :multipart => true } do |f| -%>
-  <table class="user">
-    <tr>
-      <th><%= Document.human_attribute_name(:docfile) %></th>
-      <th><%= Document.human_attribute_name(:print_format) %></th>
-      <th><%= Document.human_attribute_name(:paper_type) %></th>
-      <th><%= Document.human_attribute_name(:user_comment) %></th>
-    </tr>
-    <%= f.fields_for :documents do |document|%>
-        <tr class="<%= cycle('line_grey','line_white')%>">
-          <td>
-              <%= document.file_field :docfile %>
-          </td>
-          <td>
-            <%= document.select(:print_format, Document::PRINT_FORMAT) %>
-          </td>
-          <td>
-            <%= document.select(:paper_type, Document::PAPER_TYPE) %>
-          </td>
-          <td>
-            <%= document.text_area :user_comment,
-                                   :rows => Document::USER_COMMENT_ROWS_SIZE,
-                                   :cols => Document::USER_COMMENT_COLS_SIZE %>
-          </td>
-        </tr>
-    <% end %>
-  </table>
-    <%#*<p>%>
-      <%#*<!-- ссылка, генерирующая еще одно поле ввода !-->%>
-      <%#= link_to "Добавить файл...", new_order_path(:add_document => true), remote: true %>
-    <%#*</p>%>
-<br />
+  <%= form_for @order, :url => orders_path, :html => { :multipart => true } do |order| -%>
+    <%= render 'header_table_with_documents' %>
+  <div id="container_for_upload">
+    <%= create_form_for_upload %>
+  </div>
+    <p>
+      <!-- ссылка, генерирующая еще одно поле ввода !-->
+       <%= link_to image_tag("icons/Add.png", :border => '0'), new_order_path, remote: true, :class =>"link_for_upload_file", :id => "link_for_upload_file" %>
+       <%= link_to image_tag("icons/remove.png", :border => '0'), remove_orders_path, remote: true, :class =>"link_for_upload_file", :id => "link_for_upload_file" %>
+    <div class="clearfix"></div>
+    </p>
 <h2 class="orange">Введите адрес доставки вашего заказа</h2>
-  <table class="user">
+  <table class="user_delivery">
     <tr>
-      <th><%=  f.label(:delivery_street) %></th>
-      <th><%=  f.label(:delivery_address) %></th>
-      <th><%=  f.label(:delivery_comment) %></th>
+      <th><%=  order.label(:delivery_street) %></th>
+      <th><%=  order.label(:delivery_address) %></th>
+      <th><%=  order.label(:delivery_comment) %></th>
     </tr>
     <tr>
       <td>
-        <%= f.select(:delivery_street, Order::DELIVERY_STREET) %>
+        <div class="form_align_order_delivery_street">
+          <%= order.select :delivery_street,
+                            Order::DELIVERY_STREET %>
+        </div>
       </td>
       <td>
-        <%= f.text_field :delivery_address %>
+        <div class="form_align_order_delivery_address">
+          <%= order.text_field :delivery_address %>
+        </div>
       </td>
       <td>
-        <%= f.text_area :delivery_comment,
-                        :rows => Order::DELIVERY_COMMENT_ROWS_SIZE,
-                        :cols => Order::DELIVERY_COMMENT_COLS_SIZE %>
-      </td>
+        <div class="form_align_order_delivery_comment">
+          <%= order.text_area :delivery_comment,
+                          :rows => Order::DELIVERY_COMMENT_ROWS_SIZE,
+                          :cols => Order::DELIVERY_COMMENT_COLS_SIZE %>
+        </div>
+        </td>
     </tr>
 
   </table>
-
     <div class="submit_area">
-      <%= submit_tag 'Сохранить заказ', :class => 'submit'  %>
-    </div>
+     <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
+     <%= link_to 'Отмена', myoffice_path, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
+      </div>
   <% end -%>
 
 

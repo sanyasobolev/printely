@@ -8,14 +8,14 @@ class SessionsController < ApplicationController
     @title = 'Вход в систему'
   end
 
-  def create #вход в систему
+  def create # вход в систему
   	self.current_user = User.authenticate(params[:user][:email], params[:user][:password])
     if logged_in?
       if params[:remember_me] == "1" #если юзер поставил галочку "запомнить меня"
         current_user.remember_me unless current_user.remember_token?
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      redirect_to root_path
+      redirect_to myoffice_path
     else
       flash[:error] = "Вы ввели неверный логин или пароль!"
       redirect_to :action => :new

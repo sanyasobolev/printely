@@ -1,0 +1,12 @@
+<tr>
+  <td><%=h (order_for_admin.id) %></td>
+  <td><%= order_for_admin.user.first_name %> <%= order_for_admin.user.second_name %> <br /> <%= order_for_admin.user.email %> <br /> <%= order_for_admin.user.phone %> </td>
+  <td><%=h (Russian::strftime(order_for_admin.created_at, "%R, %d %B %Y года")) %></td>
+  <td><%=h (order_for_admin.delivery_street) %></td>
+  <td><%=h (order_for_admin.delivery_address) %></td>
+  <td><%=h (order_for_admin.delivery_comment) %></td>
+  <td><%=h (order_for_admin.status) %></td>
+  <td><%=h (number_to_currency(order_for_admin.cost, :unit => "коп.", :separator => " руб. ")) %></td>
+  <td><%= link_to image_tag("icons/details_view_order.png", :border => "0"), order_path(order_for_admin) %></td>
+  <td><%= link_to image_tag("icons/edit_order.png", :border => "0"), edit_order_path(order_for_admin), :alt => 'редактировать' %></td>
+</tr>

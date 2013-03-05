@@ -12,6 +12,7 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require jquery.fileupload
 //= require ckeditor/init
 //= require_tree
 
@@ -34,13 +35,17 @@ $(function() {
 	}).trigger('resize.x');
 });
 
+//$(document).ready(function() {
+//  $('a#add-another').click(function() {
+//    $('table#document-list tr:last').clone().find('input').val('')
+//    .end().appendTo('#-list');
+//  });
 
-//инициализатор загрузчика SWF
-//var swfu;
-//window.onload = function () {
-//    swfu = new SWFUpload({
-//        upload_url : "/public/swfupload",
-//        flash_url : "/lib/swfupload.swf",
-//        file_size_limit : "20 MB"
-//    }); };
+//  $('.delete-invite').live('click', function() {
+//    if ($('#invite-list li').length > 1)
+//  $(this).parent().remove();
+//    else
+//  alert('You need at least one invite.')
+//  });
+//});
 

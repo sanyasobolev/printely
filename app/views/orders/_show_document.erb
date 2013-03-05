@@ -1,0 +1,20 @@
+<div class="line_for_upload">
+    <div class="upload">
+      <%= link_to image_tag(show_document.docfile.url(:thumb), :border => '0'), show_document.docfile.url(:original) %>
+    </div>
+    <div class="print_format">
+      <p><%= show_document.print_format %></p>
+    </div>
+    <div class="paper_type">
+      <p><%= show_document.paper_type %></p>
+    </div>
+    <div class="quantity">
+      <p><%= show_document.quantity %></p>
+    </div>
+    <div class="margins">
+      <p><%= show_document.margins %></p>
+    </div>
+    <div class="user_comment">
+      <p><%= show_document.user_comment %></p>
+    </div>
+ </div>

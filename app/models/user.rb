@@ -20,12 +20,15 @@ class User < ActiveRecord::Base
 
   EMAIL_MAX_LENGTH = 50
 
+  PHONE_MAX_LENGTH = 11
+
   #константа для разрешения ввода русских симоволов в поля формы
   RUSSIAN_ABC = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЫЭЮЯабвгдеёжзийклмнопрстуфхцчшщьъыэюя'
 
   #размер боксов полей в форме регистрации
   FIRST_AND_SECOND_NAME_SIZE = 30
   EMAIL_SIZE = 30
+  PHONE_SIZE = 30
   PASSWORD_SIZE = 30
 
 # проверка имени и фамилии--------------------------------------------------------------------
@@ -53,6 +56,18 @@ class User < ActiveRecord::Base
       :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
       :message => "Не заполнен или неправильный формат email"
     }
+
+    #проверка телефона
+    validates :phone, :presence => true
+    validates :phone, :uniqueness => {
+      :message => 'Такой телефон уже зарегистрирован'
+    }
+
+    validates :phone, :length => {
+      :maximum => PHONE_MAX_LENGTH,
+      :message => "Номер мобильного телефона слишком длинный"
+    }
+
 
   # проверка password и password_confirmation------------------------------------------------------
     validates :password,

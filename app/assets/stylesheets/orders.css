@@ -1,0 +1,346 @@
+/* 
+    Document   : orders
+    Created on : 01.03.2013, 15:47:46
+    Author     : v-alsobo
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/*стиль для таблиц для заказов*/
+.user_order {
+    width: 100%;
+}
+
+.user_order tr td {
+    padding: 5px;
+    vertical-align: middle;
+    text-align: center
+}
+
+.user_order tr:hover{
+    background-color: #e8e8e8;
+}
+
+.user_order th {
+    background-color: #e4eefa;
+}
+
+.user_delivery {
+    width: 100%;
+}
+
+.user_delivery tr td {
+    padding: 5px;
+    vertical-align: middle;
+    text-align: center
+}
+
+.user_delivery th {
+    background-color: #e4eefa;
+}
+/*форма ввода информации о доставке*/
+.form_align_order_delivery_street select {
+    border: 1px solid #D6D3D1;
+    height: 30px;
+    width: 250px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    font-size: 1em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_align_order_delivery_address input {
+    border: 1px solid #D6D3D1;
+    height: 25px;
+    width: 200px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    font-size: 1em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_align_order_delivery_comment textarea{
+    border: 1px solid #D6D3D1;
+    height: 50px;
+    width: 270px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    font-size: 1em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+
+/*ссылки для загрузки файлов--------------------------------------------------------*/
+a.link_for_upload_file:link, a.link_for_upload_file:visited {
+    float: left;
+    width: 50%;
+    display: block;
+    height: 40px;
+    text-align: center;
+    padding-top: 5px;
+    background-color: #CCCCCC
+}
+
+a.link_for_upload_file:hover, a.link_for_upload_file:active {
+    background-color: #1BA1E2
+}
+
+/*форма для загружки файлов------------------------------------------------------------*/
+
+#container_for_upload {
+    width: 100%;
+}
+
+.line_for_upload {
+    width: 100%;
+    height: 100px;
+}
+
+.header_container {
+    background-color: #E4EEFA;
+    width: 100%;
+    height: 25px;
+}
+
+.upload_header {
+    width: 250px;
+    float: left;
+    font-weight: bold;
+    text-align: center;
+    height: inherit;
+}
+
+.upload {
+    width: 250px;
+    float: left;
+}
+
+.upload input {
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
+
+.upload img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.print_format_header {
+    width: 150px;
+    float: left;
+    font-weight: bold;
+    text-align: center;
+    height: inherit;
+}
+
+.print_format {
+    width: 150px;
+    float: left;
+}
+
+.print_format select {
+    width: 80px;
+    margin-left: 35px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
+
+.print_format p {
+    text-align: center;
+}
+
+.paper_type_header {
+    width: 100px;
+    float: left;
+    font-weight: bold;
+    text-align: center;
+    height: inherit;
+}
+
+.paper_type {
+    width: 100px;
+    float: left;
+}
+
+.paper_type select {
+    width: 100px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
+
+.paper_type p {
+    text-align: center;
+}
+
+.quantity_header {
+    width: 100px;
+    float: left;
+    font-weight: bold;
+    text-align: center;
+    height: inherit;
+}
+
+.quantity {
+    width: 100px;
+    float: left;
+}
+
+.quantity input {
+    width: 50px;
+    margin-bottom: 30px;
+    margin-left: 25px;
+    margin-top: 40px;
+}
+
+.quantity p {
+    text-align: center;
+}
+
+.margins_header {
+    width: 100px;
+    float: left;
+    font-weight: bold;
+    text-align: center;
+    height: inherit;
+}
+
+.margins {
+    width: 100px;
+    float: left;
+}
+
+.margins select {
+    width: 100px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
+
+.margins p {
+    text-align: center;
+}
+
+.user_comment_header {
+    width: 200px;
+    float: left;
+    font-weight: bold;
+    text-align: center;
+    height: inherit;
+}
+
+.user_comment {
+    width: 200px;
+    float: left;
+}
+
+.user_comment textarea {
+    width: 180px;
+    height: 80px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.user_comment p {
+    text-align: center;
+}
+
+
+/*------------------------------*/
+/*цветовые блоки с параметрами заказа------------------------------*/
+
+.container_for_label_created_at_order{
+    position: relative;
+    width: 166px;
+    height: 70px;
+    display: block;
+    text-align: center;
+    float: right;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.container_for_label_created_at_order label{
+    position: absolute;
+    display: none;
+    top: -25px;
+    right: 30px;
+    color: grey;
+}
+
+.container_for_created_at_order{
+    width: 150px;
+    height: 50px;
+    display: block;
+    background-color: #8A2BE2;
+    color: white;
+    padding: 8px;
+}
+
+.container_for_label_status_order{
+    position: relative;
+    width: 166px;
+    height: 70px;
+    display: block;
+    text-align: center;
+    float: right;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.container_for_label_status_order label{
+    position: absolute;
+    display: none;
+    top: -25px;
+    right: 63px;
+    color: grey;
+}
+
+.container_for_status_order{
+    width: 150px;
+    height: 50px;
+    display: block;
+    background-color: #008B00;
+    color: white;
+    padding: 8px;
+}
+
+
+
+.container_for_label_cost_order{
+    position: relative;
+    width: 166px;
+    height: 70px;
+    display: block;
+    text-align: center;
+    float: right;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.container_for_label_cost_order label{
+    position: absolute;
+    display: none;
+    top: -25px;
+    right: 43px;
+    color: grey;
+}
+.container_for_cost_order{
+    width: 150px;
+    height: 50px;
+    display: block;
+    background-color: #8B1A1A;
+    color: white;
+    padding: 8px;
+}
+

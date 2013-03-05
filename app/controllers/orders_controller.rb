@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  skip_before_filter :authorized?,
+                     :only => [:index, :my, :new, :create, :remove, :show]
 
   def index
 
@@ -6,24 +8,28 @@ class OrdersController < ApplicationController
 
   def my
     @title = 'Мои заказы'
-  	@orders = Order.where(:user_id => current_user.id)
+    @orders = Order.where(:user_id => current_user.id)
     respond_to do |format|
       format.html # index.html.erb
-      format.xml { render :xml => @users }
+      format.xml { render :xml => @orders }
+    end
+  end
+
+  def new_uploader
+    @order = Order.new
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render json: @order }
     end
   end
 
   def new
-      @order = Order.new
-      5.times{@order.documents.build}
+    @order = Order.new
     respond_to do |format|
       format.html
       format.js
     end
-  end
-
-  def no_order
-
   end
 
   def create
@@ -43,6 +49,51 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    @title = "Редактирование заказа №#{@order.id}"
+  end
 
+  def update
+    @order = Order.find(params[:id])
+    respond_to do |wants|
+      if @order.update_attributes(params[:order])
+        flash[:notice] = 'Заказ обновлен'
+        wants.html { redirect_to admin_orders_path }
+        wants.xml { render :xml => @order.to_xml }
+      else
+        wants.html { render :action => "edit" }
+        wants.xml {render :xml => @order.errors}
+      end
+    end
+  end
+
+
+
+
+  def remove
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def show
+    @order = Order.find_by_id(params[:id])
+    @title = "Заказ № #{@order.id}"
+    respond_to do |wants|
+      wants.html
+      wants.xml { render :xml => @order.to_xml }
+    end
+  end
+
+  def admin
+    @title = "Управление заказами"
+    @orders = Order.paginate :page => params[:page],
+                             :order => 'created_at DESC',
+                             :include => :user,
+                             :per_page => '50'
+
+    respond_to do |wants|
+      wants.html
+      wants.xml { render :xml => @services.to_xml }
+    end
   end
 end

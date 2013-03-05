@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
     	t.column :first_name, :string
     	t.column :second_name, :string
     	t.column :email, :string
+      t.column :phone, :string
     	t.column :remember_token_expires_at, :datetime
       t.column :remember_token, :string
       t.column :created_at, :datetime #автоматическая простановка даты создания

@@ -1,0 +1,59 @@
+<%= javascript_include_tag "show_order" %>
+<h2><%= @title %></h2>
+<div class="container_for_label_cost_order">
+  <%= label(:order, :cost) %>
+    <div class="container_for_cost_order">
+      <%=h (number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ")) %>
+    </div>
+</div>
+<div class="container_for_label_status_order">
+    <%= label(:order, :status) %>
+  <div class="container_for_status_order">
+    <%=h @order.status %>
+  </div>
+</div>
+<div class="container_for_label_created_at_order">
+  <%= label(:order, :created_at) %>
+    <div class="container_for_created_at_order">
+      <%= Russian::strftime(@order.created_at, "%R, %d %B %Y года") %>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<h2 class="orange"> Файлы </h2>
+<table class="user_order">
+  <%= render :partial=>'header_table_with_documents' %>
+  <%= render :partial=>'show_document', :collection => @order.documents %>
+</table>
+
+<h2 class="orange"> Доставка </h2>
+ <table class="user_delivery">
+    <%= render :partial => 'header_table_with_delivery' %>
+    <tr>
+      <td>
+        <%= @order.delivery_street %>
+      </td>
+      <td>
+        <%= @order.delivery_address %>
+      </td>
+      <td>
+        <%= @order.delivery_comment %>
+      </td>
+    </tr>
+  </table>
+<br />
+<table>
+  <tr>
+    <% if current_user.has_role?('Administrator') %>
+      <td>
+        <%= link_to 'К списку заказов', admin_orders_path, :class => "button_style_long" %>
+      </td>
+    <% else %>
+      <td>
+        <%= link_to 'К моим заказам', my_orders_path, :class => "button_style_long" %>
+      </td>
+    <% end %>
+  </tr>
+</table>
+
+

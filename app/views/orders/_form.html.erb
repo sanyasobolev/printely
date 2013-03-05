@@ -1,27 +1,12 @@
-<div class="newPaperclipFiles">
-
-        <%= fields_for :documents do |document| %>
-
-           <% if document.object.new_record? %>
-                 <%= document.file_field :document %>
-           <% end %>
-
-       <% end %>
-
+<div class="form_align">
+  <%= f.label(:status) %>
+  <%= f.select(:status, Order::STATUS) %>
 </div>
-
-<div class="existingPaperclipFiles">
-
-     <% fields_for :documents do |document| %>
-
-          <% unless document.object.new_record? %>
-
-                <div class="thumbnail">
-                        <%= image_tag(document.object.document.url) %>
-                        <%= document.check_box :_delete %>
-                </div>
-
-          <% end %>
-
-     <% end %>
+<div class="form_align">
+  <%= f.label(:cost) %>
+  <%= f.text_field(:cost) %>
+</div>
+<div class="form_align">
+  <%= f.label(:manager_comment) %>
+  <%= f.text_area(:manager_comment) %>
 </div>

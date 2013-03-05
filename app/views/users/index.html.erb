@@ -10,11 +10,12 @@
 <table class ="admin">
 <tr>
   <th></th>
-  <th> Имя <br/></th>
-  <th>Фамилия<br/></th>
-  <th>Email<br/></th>
-  <th>Создан<br/></th>
-  <th>Роль<br/></th>
+  <th><%= User.human_attribute_name(:first_name) %></th>
+  <th><%= User.human_attribute_name(:second_name) %></th>
+  <th><%= User.human_attribute_name(:email) %></th>
+  <th><%= User.human_attribute_name(:phone) %></th>
+  <th><%= User.human_attribute_name(:created_at) %></th>
+  <th><%= User.human_attribute_name(:role_id) %></th>
   <th></th>
 </tr>
 <%= render :partial => 'user', :collection => @users  %>

@@ -1,0 +1,22 @@
+<%= fields_for "order[documents_attributes][]", document do |i| %>
+ <div class="line_for_upload">
+    <div class="upload">
+      <%= i.file_field :docfile %>
+    </div>
+    <div class="print_format">
+      <%= i.select(:print_format, Document::PRINT_FORMAT) %>
+    </div>
+    <div class="paper_type">
+      <%= i.select(:paper_type, Document::PAPER_TYPE) %>
+    </div>
+    <div class="quantity">
+      <%= i.text_field(:quantity, :value => '1') %>
+    </div>
+    <div class="margins">
+      <%= i.select(:margins, Document::MARGINS) %>
+    </div>
+    <div class="user_comment">
+      <%= i.text_area :user_comment %>
+    </div>
+ </div>
+<% end %>

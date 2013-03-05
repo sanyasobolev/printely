@@ -30,16 +30,6 @@ ActiveRecord::Schema.define(:version => 20130122202039) do
     t.string   "permalink"
   end
 
-  create_table "assets", :force => true do |t|
-    t.integer  "order_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.string   "asset_file_name"
-    t.string   "asset_content_type"
-    t.integer  "asset_file_size"
-    t.datetime "asset_updated_at"
-  end
-
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.string   "permalink"
@@ -68,6 +58,8 @@ ActiveRecord::Schema.define(:version => 20130122202039) do
     t.string   "print_format"
     t.text     "user_comment"
     t.string   "paper_type"
+    t.integer  "quantity"
+    t.string   "margins"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.string   "docfile_file_name"
@@ -91,9 +83,11 @@ ActiveRecord::Schema.define(:version => 20130122202039) do
     t.string   "delivery_street"
     t.string   "delivery_address"
     t.text     "delivery_comment"
-    t.string   "status"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.string   "status",           :default => "Определяется стоимость"
+    t.float    "cost"
+    t.text     "manager_comment"
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
   end
 
   create_table "pages", :force => true do |t|
@@ -178,6 +172,7 @@ ActiveRecord::Schema.define(:version => 20130122202039) do
     t.string   "first_name"
     t.string   "second_name"
     t.string   "email"
+    t.string   "phone"
     t.datetime "remember_token_expires_at"
     t.string   "remember_token"
     t.datetime "created_at"

@@ -1,6 +1,14 @@
-<% form_for :order, :url => order_path(@order), :html => {:method => :put} do %>
-  <%= render :partial => 'form' %>
-<% end %>
+<%= error_messages_for :order %>
+<div class="form_shape">
+  <%= form_for :order, :url => order_path(@order), :html => {:method => :put} do |f| %>
 
+    <%= render :partial => 'form', :locals => {:f => f} %>
+  
+    <div class="submit_area">
+      <%= submit_tag 'Сохранить', :class => 'submit' %>
+      <%= link_to 'Отмена', admin_orders_path, :class =>"button_style" %>
+    </div>
+<% end %>
+</div>
 
 

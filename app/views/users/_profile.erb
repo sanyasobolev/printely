@@ -21,3 +21,11 @@
                         :maxlength => User::EMAIL_MAX_LENGTH,
                         :class => 'req_input' %>
     </div>
+
+    <div class="form_align">
+      <%= form.label :phone %>
+      <%= form.text_field :phone,
+                        :size => User::PHONE_SIZE,
+                        :maxlength => User::PHONE_MAX_LENGTH,
+                        :class => 'req_input' %>
+    </div>

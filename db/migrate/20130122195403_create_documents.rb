@@ -5,6 +5,8 @@ class CreateDocuments < ActiveRecord::Migration
       t.string :print_format
       t.text :user_comment, :limit => 1000
       t.string :paper_type
+      t.integer :quantity
+      t.string :margins
       t.timestamps
     end
   end
