@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Section < ActiveRecord::Base
 
+  attr_accessible :id, :title, :order, :controller, :action, :permalink, :published
+
   before_create :create_permalink
   before_save :update_permalink
 

@@ -10,6 +10,8 @@ Spsite::Application.routes.draw do
   resources :rights
   resources :roles
 
+  resources :documents
+
   resources :orders do
     resources :documents
      get 'my', :on => :collection

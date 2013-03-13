@@ -20,12 +20,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'jquery-fileupload-rails'
-
-#gem "therubyracer"
-gem "less-rails"
-gem 'twitter-bootstrap-rails'
-
+gem "therubyracer"
 
 #group :production do
 #  gem 'jquery-rails'

@@ -1,5 +1,7 @@
 class Category < ActiveRecord::Base
 
+  attr_accessible :name
+
   has_many :articles, :dependent => :destroy
 
   before_create :create_permalink

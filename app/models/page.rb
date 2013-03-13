@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Page < ActiveRecord::Base
 
+  attr_accessible :id, :title, :permalink, :body, :user_id, :section_id, :published
+
   before_create :create_permalink
   before_save :update_permalink
   before_save :update_published_at

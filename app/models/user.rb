@@ -1,6 +1,8 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
 
+  attr_accessible :id, :first_name, :second_name, :email, :phone, :password, :password_confirmation, :role_id
+
   require 'digest/sha1'
   
   has_many :articles

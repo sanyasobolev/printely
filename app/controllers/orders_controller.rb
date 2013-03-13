@@ -1,3 +1,4 @@
+# encoding: utf-8
 class OrdersController < ApplicationController
   skip_before_filter :authorized?,
                      :only => [:index, :my, :new, :create, :remove, :show]
@@ -17,10 +18,10 @@ class OrdersController < ApplicationController
 
   def new_uploader
     @order = Order.new
+    @document = @order.documents.build
     respond_to do |format|
       format.html
-      format.js
-      format.json { render json: @order }
+      format.json { render json: @document }
     end
   end
 
