@@ -18,10 +18,10 @@ class OrdersController < ApplicationController
 
   def new_uploader
     @order = Order.new
-    @document = @order.documents.build
+#    @document = @order.documents.build
     respond_to do |format|
       format.html
-      format.json { render json: @document }
+      format.json{ render json @document }
     end
   end
 
