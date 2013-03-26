@@ -94,6 +94,10 @@ a.link_for_upload_file:hover, a.link_for_upload_file:active {
 }
 
 /*форма для загружки файлов------------------------------------------------------------*/
+.docfile {
+    margin: 10px;
+}
+
 
 #container_for_upload {
     width: 100%;
@@ -344,3 +348,13 @@ a.link_for_upload_file:hover, a.link_for_upload_file:active {
     padding: 8px;
 }
 
+/*html 5-----------------------------------------------*/
+#fileList ul {
+  list-style-type: none;
+}
+
+#fileList ul div.progress {
+    width: 0px;
+    height: 20px;
+    background-color: green;
+}

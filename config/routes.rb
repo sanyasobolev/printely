@@ -12,6 +12,7 @@ Spsite::Application.routes.draw do
 
   resources :documents
 
+  match'/create_order', :to => 'orders#create'
   resources :orders do
     resources :documents
      get 'my', :on => :collection

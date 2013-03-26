@@ -1,6 +1,7 @@
 # encoding: utf-8
 class Order < ActiveRecord::Base
 
+  attr_accessible :delivery_street, :delivery_address, :delivery_comment, :documents_attributes
   #pagination on page
   cattr_reader :per_page
 
@@ -18,8 +19,8 @@ class Order < ActiveRecord::Base
   #статусы
   STATUS = ['Определяется стоимость', 'На обработке', 'Печатается', 'Едет к Вам', 'Выполнен', 'Отклонен' ]
 
-    validate do |order|
-      order.errors.add(:delivery_address, "Поле \"#{Order.human_attribute_name(:delivery_address)}\" не должно быть пустым" ) if order.delivery_address.blank?
-    end
+#    validate do |order|
+#      order.errors.add(:delivery_address, "Поле \"#{Order.human_attribute_name(:delivery_address)}\" не должно быть пустым" ) if order.delivery_address.blank?
+#    end
 
 end
