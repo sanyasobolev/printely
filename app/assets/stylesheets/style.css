@@ -163,10 +163,6 @@ a.top_section:hover {
 .slide_pagination a span {
     display: none;
 }
-.clearfix {
-    float: none;
-    clear: both;
-}
 
 .image_title_letters {
     height: 200px;
@@ -319,7 +315,8 @@ p {
 }
 
 .fl_clear {
-    clear: both
+    float: none;
+    clear: both;
 }
 
 .multi_form {

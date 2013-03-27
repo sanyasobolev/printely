@@ -40,6 +40,7 @@ $(document).ready(function(){
           list.appendChild(li);
 
           //добавляем картинку
+          var upload = $('<div/>').addClass('upload').appendTo(li);
           var img = document.createElement("img");
           img.src = window.URL.createObjectURL(file);//создаем ссылку на img
           img.width = 100;
@@ -48,24 +49,18 @@ $(document).ready(function(){
           img.onLoad = function(e) {
             window.URL.revokeObjectURL(this.src);
           }
-          li.appendChild(img);
+          upload.append(img)
 
-          //добавляем доп к каждому файлу
-          var title = $('<div/>').text(file.name+' ').appendTo(li); //имя файла
+          //select tag print_format
+            var print_format = $('<div/>').addClass('print_format').appendTo(li);
+            var sel = $('<select>').appendTo(print_format);
+            for (var k in gon.print_format_array) {
+                 sel.append($("<option>").attr('value', k).text(gon.print_format_array[k]));
+            };
 
-          //select tag
-            var arr = [
-              {val : 1, text: 'One'},
-              {val : 2, text: 'Two'},
-              {val : 3, text: 'Three'}
-            ];
+          //select tag paper type
 
-            var sel = $('<select>').appendTo(li);
-            $(arr).each(function() {
-             sel.append($("<option>").attr('value',this.val).text(this.text));
-            });
-
-          //обновление информации о загруженных файлах
+          //обновление информации о загруженных файлах-------------------------------------------------------------------
           imgSize += file.size;
           imgCount++;
           updateInfo();

@@ -21,6 +21,8 @@ class OrdersController < ApplicationController
 
   def new_uploader
     @order = Order.new
+    @print_format_array = Document::PRINT_FORMAT
+    gon.print_format_array = @print_format_array
 #    @document = @order.documents.build
     respond_to do |format|
       format.html

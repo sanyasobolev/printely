@@ -351,6 +351,8 @@ a.link_for_upload_file:hover, a.link_for_upload_file:active {
 /*html 5-----------------------------------------------*/
 #fileList ul {
   list-style-type: none;
+  height: 100px;
+  padding-left: 0px;
 }
 
 #fileList ul div.progress {
