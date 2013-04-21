@@ -10,6 +10,7 @@ Spsite::Application.routes.draw do
   resources :rights
   resources :roles
 
+  match'/create_document', :to => 'documents#create'
   resources :documents
 
   match'/create_order', :to => 'orders#create'

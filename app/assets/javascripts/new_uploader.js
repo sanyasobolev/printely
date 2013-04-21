@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     window.URL = window.URL || window.webkitURL;
 
@@ -27,8 +28,6 @@ $(document).ready(function(){
       if (!files.length) { //если файлов нет
         fileList.innerHTML = "<p>No files selected!</p>";
       } else {
-        var list = document.createElement("ul"); //создаем список
-
         for (var i = 0; i < files.length; i++) {
           var file = files[i];
           var imageType = /image.*/;
@@ -37,7 +36,7 @@ $(document).ready(function(){
           }
           //--------------------------------------
           var li = document.createElement("li");//создаем элемент списка
-          list.appendChild(li);
+          fileList.appendChild(li);
 
           //добавляем картинку
           var upload = $('<div/>').addClass('upload').appendTo(li);
@@ -46,6 +45,8 @@ $(document).ready(function(){
           img.width = 100;
           img.classList.add("docfile");
           img.file = file;
+          img.id = 'order_documents_attributes__docfile'
+          img.name = 'order[documents_attributes][][docfile]'
           img.onLoad = function(e) {
             window.URL.revokeObjectURL(this.src);
           }
@@ -53,26 +54,46 @@ $(document).ready(function(){
 
           //select tag print_format
             var print_format = $('<div/>').addClass('print_format').appendTo(li);
-            var sel = $('<select>').appendTo(print_format);
-            for (var k in gon.print_format_array) {
-                 sel.append($("<option>").attr('value', k).text(gon.print_format_array[k]));
+            var sel_pf = $('<select>').attr('name','order[documents_attributes][][print_format]').attr('id','order_documents_attributes__print_format').appendTo(print_format);
+            for (var print_format_i in gon.print_format_array) {
+                 sel_pf.append($("<option>").attr('value', print_format_i).text(gon.print_format_array[print_format_i]));
             };
 
           //select tag paper type
+            var paper_type = $('<div/>').addClass('paper_type').appendTo(li);
+            var sel_pt = $('<select>').attr('name', 'order[documents_attributes][][paper_type]').attr('id','order_documents_attributes__paper_type').appendTo(paper_type);
+            for (var paper_type_i in gon.paper_type_array) {
+                 sel_pt.append($("<option>").attr('value', paper_type_i).text(gon.paper_type_array[paper_type_i]));
+            };
+
+            //select tag margins
+            var margins = $('<div/>').addClass('margins').appendTo(li);
+            var sel_m = $('<select>').attr('name','order[documents_attributes][][margins]').attr('id','order_documents_attributes__margins').appendTo(margins);
+            for (var margins_i in gon.margins_array) {
+                 sel_m.append($("<option>").attr('value', margins_i).text(gon.margins_array[margins_i]));
+            };
+
+            //input type text quantity
+            var quantity = $('<div/>').addClass('quantity').appendTo(li);
+            $('<input>').attr('name','order[documents_attributes][][quantity]').attr('type','text').attr('value','1').attr('id','order_documents_attributes__quantity').appendTo(quantity);
+
+            //input type textarea user_comment
+            var user_comment = $('<div/>').addClass('user_comment').appendTo(li);
+            $('<textarea/>').attr('name','order[documents_attributes][][user_comment]').attr('rows','20').attr('cols','40').attr('id','order_documents_attributes__user_comment').appendTo(user_comment);
+
 
           //обновление информации о загруженных файлах-------------------------------------------------------------------
           imgSize += file.size;
           imgCount++;
           updateInfo();
         }
-        fileList.appendChild(list);
       }
 
     })
 
 
     $("#upload-all").click(function () {
-      var imgs = document.querySelectorAll(".docfile");
+      var imgs = $(".docfile");
       for (var i = 0; i < imgs.length; i++) {
         new FileUpload(imgs[i], imgs[i].file);
       }
@@ -98,7 +119,7 @@ $(document).ready(function(){
       // File uploaded
       xhr.addEventListener("load", transferComplete, false);
       function transferComplete(evt) {
-        $('<p>Uploaded!</p>').insertAfter(progressBar);
+        $('<p>Файл загружен</p>').insertAfter(progressBar);
       }
 
       xhr.open("POST", "/create_order");//readyState property set to 1

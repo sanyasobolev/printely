@@ -123,7 +123,7 @@ a.link_for_upload_file:hover, a.link_for_upload_file:active {
 }
 
 .upload {
-    width: 250px;
+    width: 200px;
     float: left;
 }
 
@@ -349,14 +349,26 @@ a.link_for_upload_file:hover, a.link_for_upload_file:active {
 }
 
 /*html 5-----------------------------------------------*/
-#fileList ul {
-  list-style-type: none;
-  height: 100px;
-  padding-left: 0px;
+#fileList {
+    list-style-type: none;
+    padding-left: 0px;
 }
 
-#fileList ul div.progress {
-    width: 0px;
-    height: 20px;
-    background-color: green;
+#fileList li {
+    height: 120px;
 }
+
+#fileList li .upload .progress {
+    width: 0px;
+    height: 5px;
+    background-color: green;
+    margin-left: 50px;
+}
+
+#fileList .upload p {
+    margin: 0px;
+    margin-left: 50px;
+    font-size: 0.8em;
+}
+
+

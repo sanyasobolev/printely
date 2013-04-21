@@ -4,9 +4,10 @@ class Document < ActiveRecord::Base
 
   attr_accessible :docfile, :print_format, :user_comment, :paper_type, :quantity, :margins
   has_attached_file :docfile,
-                    :styles => {
-                      :thumb => "100x100>"
-                    },
+#    раскомментировать при работающем imageMagick
+#                    :styles => {
+#                      :thumb => "100x100>"
+#                    },
                     :url => "/order_documents/:order_created/:order_number/:style/:name_docfile.:extension",
                     :path => ":rails_root/public/order_documents/:order_created/:order_number/:style/:name_docfile.:extension"
 
