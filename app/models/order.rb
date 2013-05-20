@@ -2,13 +2,13 @@
 class Order < ActiveRecord::Base
 
   attr_accessible :delivery_street, :delivery_address, :delivery_comment, :documents_attributes
+  
   #pagination on page
   cattr_reader :per_page
 
   belongs_to :user
   has_many :documents, :dependent => :destroy
   accepts_nested_attributes_for :documents, :allow_destroy => true
-
   #варианты доставки
   DELIVERY_STREET = ['КЭЧ', 'Тарасково', 'Фабричная']
 

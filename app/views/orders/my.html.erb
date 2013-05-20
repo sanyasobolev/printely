@@ -1,3 +1,10 @@
+<table>
+  <tr>
+    <td>
+      <%= link_to 'В личный кабинет', myoffice_path, :class =>"button_style_long" %>
+    </td>
+  </tr>
+</table>
 <h2 class="orange">Мои заказы</h2>
 <% if @orders.count > 0 %>
   <table class ="user_order">
@@ -14,11 +21,14 @@
 <% else %>
   <%= render 'no_orders' %>
 <% end %>
+
+<%= will_paginate @orders %>
+
 <br />
 <table>
   <tr>
     <td>
-      <%= link_to 'Вернуться в личный кабинет', myoffice_path, :class =>"button_style_long" %>
+      <%= link_to 'В личный кабинет', myoffice_path, :class =>"button_style_long" %>
     </td>
   </tr>
 </table>

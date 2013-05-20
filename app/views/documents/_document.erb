@@ -1,22 +1,25 @@
-<%= fields_for "order[documents_attributes][]", document do |i| %>
- <div class="line_for_upload">
-    <div class="upload">
-      <%= i.file_field :docfile %>
-    </div>
-    <div class="print_format">
+<tr class="document" id="document_<%= document.id %>">
+  <%= fields_for "order[documents_attributes][]", document do |i| %>
+    <td class="upload">
+      <div id="container_for_link_delete_docfile">
+        <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :id => 'link_delete_docfile' %>
+        <%= image_tag document.docfile.thumb.url %>
+      </div>
+    </td>
+    <td class="print_format">
       <%= i.select(:print_format, Document::PRINT_FORMAT) %>
-    </div>
-    <div class="paper_type">
+    </td>
+    <td class="paper_type">
       <%= i.select(:paper_type, Document::PAPER_TYPE) %>
-    </div>
-    <div class="quantity">
+    </td>
+    <td class="quantity">
       <%= i.text_field(:quantity, :value => '1') %>
-    </div>
-    <div class="margins">
+    </td>
+    <td class="margins">
       <%= i.select(:margins, Document::MARGINS) %>
-    </div>
-    <div class="user_comment">
+    </td>
+    <td class="user_comment">
       <%= i.text_area :user_comment %>
-    </div>
- </div>
-<% end %>
+    </td>
+  <% end %>
+</tr>

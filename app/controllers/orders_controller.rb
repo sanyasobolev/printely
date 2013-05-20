@@ -1,10 +1,10 @@
 # encoding: utf-8
 class OrdersController < ApplicationController
   skip_before_filter :authorized?,
-                     :only => [:index, :my, :new, :create, :remove, :show]
+                     :only => [:index, :my, :new, :show, :edit, :update, :destroy]
 
   skip_before_filter :verify_authenticity_token,
-                     :only => [:create]
+                     :only => [:create, :update]
 
   def index
 
@@ -12,39 +12,23 @@ class OrdersController < ApplicationController
 
   def my
     @title = 'Мои заказы'
-    @orders = Order.where(:user_id => current_user.id)
+    @orders = Order.paginate :page => params[:page],
+                             :order => 'created_at DESC',
+                             :include => :user,
+                             :per_page => '10',
+                             :conditions => "user_id=#{current_user.id}"
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @orders }
     end
   end
 
-  def new_uploader
-    @order = Order.new
-    gon.print_format_array = Document::PRINT_FORMAT
-    gon.paper_type_array = Document::PAPER_TYPE
-    gon.margins_array = Document::MARGINS
-    respond_to do |format|
-      format.html
-      format.json{ render json @document }
-    end
-  end
-
-  def new
-    @order = Order.new
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
-  def create
-    @order = Order.new(params[:order])
+  def new #create empty order and redirect to edit it
+   @order = Order.new
     current_user.orders << @order
     respond_to do |wants|
         if @order.save
-          flash[:notice] = 'Заказ создан успешно.'
-          wants.html {redirect_to my_orders_path}
+          wants.html {redirect_to edit_order_path(@order)}
           wants.xml { render :xml => @order.to_xml }
         else
           wants.html { render :action => "new" }
@@ -55,29 +39,23 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
-    @title = "Редактирование заказа №#{@order.id}"
+    @title = "Создание заказа №#{@order.id}"
   end
 
   def update
     @order = Order.find(params[:id])
+    @order.documents.each do |document|
+      document.update_attributes(params[:order][:documents_attributes][document.id.to_s])
+    end
     respond_to do |wants|
-      if @order.update_attributes(params[:order])
-        flash[:notice] = 'Заказ обновлен'
-        wants.html { redirect_to admin_orders_path }
+      if @order.update_attribute('delivery_street', params[:order][:delivery_street]) && @order.update_attribute('delivery_address', params[:order][:delivery_address]) && @order.update_attribute('delivery_comment', params[:order][:delivery_comment])
+        flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
+        wants.html { redirect_to my_orders_path }
         wants.xml { render :xml => @order.to_xml }
       else
         wants.html { render :action => "edit" }
         wants.xml {render :xml => @order.errors}
       end
-    end
-  end
-
-
-
-
-  def remove
-    respond_to do |format|
-      format.js
     end
   end
 
@@ -87,6 +65,15 @@ class OrdersController < ApplicationController
     respond_to do |wants|
       wants.html
       wants.xml { render :xml => @order.to_xml }
+    end
+  end
+
+  def destroy
+    @order = Order.find_by_id(params[:id])
+    @order.destroy
+    respond_to do |wants|
+      wants.html { redirect_to myoffice_path }
+      wants.xml { render :nothing => true }
     end
   end
 

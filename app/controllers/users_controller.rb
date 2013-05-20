@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         self.current_user = @user
-        format.html { redirect_to :root, :notice => 'Вы успешно зарегистрированы!' }
+        format.html { redirect_to :myoffice, :notice => 'Вы успешно зарегистрированы!' }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }

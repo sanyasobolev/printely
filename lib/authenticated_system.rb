@@ -100,6 +100,11 @@ module AuthenticatedSystem
      current_user.has_role?("Administrator") || user == current_user
     end
 
+  #для проверки, что пользователь осуществляет доступ к своему заказу
+    def your_order?(order)
+     current_user.has_role?("Administrator") || user == current_user
+    end
+
     # Store the URI of the current request in the session.
     #
     # We can return to this location by calling #redirect_back_or_default.

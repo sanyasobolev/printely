@@ -55,17 +55,14 @@ ActiveRecord::Schema.define(:version => 20130122202039) do
 
   create_table "documents", :force => true do |t|
     t.integer  "order_id"
+    t.string   "docfile"
     t.string   "print_format"
     t.text     "user_comment"
     t.string   "paper_type"
     t.integer  "quantity"
     t.string   "margins"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-    t.string   "docfile_file_name"
-    t.string   "docfile_content_type"
-    t.integer  "docfile_file_size"
-    t.datetime "docfile_updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "letters", :force => true do |t|

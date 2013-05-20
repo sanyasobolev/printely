@@ -11,40 +11,25 @@
 // GO AFTER THE REQUIRES BELOW.
 
 //= require jquery
-//= require jquery_ujs
-//= require ckeditor/init
 //= require_tree
+
 
 // обработчик slide-панели
 
 $(function() {
-	$(window).bind('resize.x', function() {
-		$('#slide_image').carouFredSel({
-			circular: true,
-			items: 1,
-			width: $(window).width(),
-                        cookie: true,
-                        auto : {
-                            pauseDuration: 15000
-                        },
-			pagination: {
-				container: '#slide_img_pag'
-			}
-		});
-	}).trigger('resize.x');
+ 	$(window).bind('resize.x', function() {
+                    $('#slide_image').carouFredSel({
+                            circular: true,
+                            items: 1,
+                            width: $(window).width(),
+                            cookie: true,
+                            auto : {
+                                pauseDuration: 15000
+                            },
+                            pagination: {
+                                    container: '#slide_img_pag'
+                            }
+                    });
+            }).trigger('resize.x');
 });
-
-//$(document).ready(function() {
-//  $('a#add-another').click(function() {
-//    $('table#document-list tr:last').clone().find('input').val('')
-//    .end().appendTo('#-list');
-//  });
-
-//  $('.delete-invite').live('click', function() {
-//    if ($('#invite-list li').length > 1)
-//  $(this).parent().remove();
-//    else
-//  alert('You need at least one invite.')
-//  });
-//});
 

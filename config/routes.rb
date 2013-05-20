@@ -10,16 +10,12 @@ Spsite::Application.routes.draw do
   resources :rights
   resources :roles
 
-  match'/create_document', :to => 'documents#create'
   resources :documents
 
-  match'/create_order', :to => 'orders#create'
   resources :orders do
     resources :documents
      get 'my', :on => :collection
      get 'admin', :on => :collection
-     get 'remove', :on => :collection
-     get 'new_uploader', :on => :collection
   end
 
   controller :sessions do

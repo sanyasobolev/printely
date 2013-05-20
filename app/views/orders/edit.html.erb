@@ -1,14 +1,94 @@
-<%= error_messages_for :order %>
-<div class="form_shape">
-  <%= form_for :order, :url => order_path(@order), :html => {:method => :put} do |f| %>
+<h2 class="orange">Какие файлы можно загружать?</h2>
+  <%= render :partial => 'pages/show_page', :locals => {:page => page_about_download} %>
+<h2 class="orange">Загрузите Ваши файлы</h2>
 
-    <%= render :partial => 'form', :locals => {:f => f} %>
-  
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-      <%= link_to 'Отмена', admin_orders_path, :class =>"button_style" %>
-    </div>
+<% key = Rails.application.config.session_options[:key] %>
+
+<%= content_for :scripts do %>
+  <script type="text/javascript">
+    var upload_params = {
+      '<%= key %>' : '<%= cookies[key] %>',
+      '<%= request_forgery_protection_token %>' : '<%= form_authenticity_token %>',
+      '_http_accept': 'application/javascript'
+    };
+
+    var url = $('input#document_docfile').attr('rel');
+
+    $('input#document_docfile').uploadify({
+      uploader : '/assets/uploadify/uploadify.swf',
+      buttonImg : '/assets/uploadify/upload_button.png',
+      script : url,
+      fileDataName : 'document[docfile]',
+      fileExt : '*.png;*.jpg;',
+      cancelImg : '/assets/uploadify/cancel.png',
+      multi : true,
+      scriptData : upload_params,
+      auto : true,
+      onComplete : function(e, id, obj, response, data) {
+        $('#fileList').append(response);
+        },
+      onAllComplete : function(){
+        var status = $("#fileList_header").attr("style")
+        if (status == 'display: none;') {
+          $("#fileList_header").fadeIn("slow");
+        }
+      }
+    });
+  </script>
 <% end %>
-</div>
 
+<%#*кнопка выбора файлов%>
+<% unless @order.new_record? %>
+  <%= fields_for Document.new do |f| %>
+    <%= f.file_field :docfile, :rel => order_documents_path(@order) %>
+  <% end %>
+<% end %>
 
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put } do |order| -%>
+
+  <%#*перечень всех файлов с параметрами печати%>
+  <table id="fileList">
+    <tr id="fileList_header"
+      <% if @order.documents.count > 0 %>
+        >
+      <% else %>
+        style="display: none;">
+      <% end %>
+    <%= render :partial=>'header_table_with_documents' %>
+    </tr>
+    <%= render :partial => 'documents/document', :collection => @order.documents %>
+  </table>
+
+  <h2 class="orange">Укажите адрес и способ доставки</h2>
+    <table class="user_delivery">
+      <tr>
+        <th><%=  order.label(:delivery_street) %></th>
+        <th><%=  order.label(:delivery_address) %></th>
+        <th><%=  order.label(:delivery_comment) %></th>
+      </tr>
+      <tr>
+        <td>
+          <div class="form_align_order_delivery_street">
+            <%= order.select :delivery_street,
+                              Order::DELIVERY_STREET %>
+          </div>
+        </td>
+        <td>
+          <div class="form_align_order_delivery_address">
+            <%= order.text_field :delivery_address %>
+          </div>
+        </td>
+        <td>
+          <div class="form_align_order_delivery_comment">
+            <%= order.text_area :delivery_comment,
+                            :rows => Order::DELIVERY_COMMENT_ROWS_SIZE,
+                            :cols => Order::DELIVERY_COMMENT_COLS_SIZE %>
+          </div>
+          </td>
+      </tr>
+    </table>
+  <div class="submit_area">
+   <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
+   <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
+  </div>
+<% end -%>
