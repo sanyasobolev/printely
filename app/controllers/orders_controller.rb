@@ -6,6 +6,9 @@ class OrdersController < ApplicationController
   skip_before_filter :verify_authenticity_token,
                      :only => [:create, :update]
 
+  #Сообщения
+  NOT_YOUR_ORDER = 'Заказ принадлежит не Вам. Нет доступа.'
+
   def index
 
   end
@@ -39,7 +42,12 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
-    @title = "Создание заказа №#{@order.id}"
+    if your_order?(@order)
+      @title = "Создание заказа №#{@order.id}"
+    else
+      flash[:error] = NOT_YOUR_ORDER
+      redirect_to my_orders_path
+    end
   end
 
   def update
@@ -61,19 +69,29 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by_id(params[:id])
-    @title = "Заказ № #{@order.id}"
-    respond_to do |wants|
-      wants.html
-      wants.xml { render :xml => @order.to_xml }
+    if your_order?(@order)
+      @title = "Заказ № #{@order.id}"
+      respond_to do |wants|
+        wants.html
+        wants.xml { render :xml => @order.to_xml }
+      end
+    else
+      flash[:error] = NOT_YOUR_ORDER
+      redirect_to my_orders_path
     end
   end
 
   def destroy
     @order = Order.find_by_id(params[:id])
-    @order.destroy
-    respond_to do |wants|
-      wants.html { redirect_to myoffice_path }
-      wants.xml { render :nothing => true }
+    if your_order?(@order)
+      @order.destroy
+      respond_to do |wants|
+        wants.html { redirect_to myoffice_path }
+        wants.xml { render :nothing => true }
+      end
+    else
+      flash[:error] = NOT_YOUR_ORDER
+      redirect_to my_orders_path
     end
   end
 

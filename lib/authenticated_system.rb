@@ -68,7 +68,7 @@ module AuthenticatedSystem
     #
     def login_required
       unless logged_in?
-        flash[:notice] = "Вы должны пройти аутентификацию!"
+        flash[:notice] = "Вы должны войти в систему!"
         store_location
         redirect_to :controller => :sessions, :action => :new
         return false
@@ -102,7 +102,7 @@ module AuthenticatedSystem
 
   #для проверки, что пользователь осуществляет доступ к своему заказу
     def your_order?(order)
-     current_user.has_role?("Administrator") || user == current_user
+      current_user.has_role?("Administrator") || current_user == order.user
     end
 
     # Store the URI of the current request in the session.
