@@ -19,7 +19,9 @@
       buttonImg : '/assets/uploadify/upload_button.png',
       script : url,
       fileDataName : 'document[docfile]',
-      fileExt : '*.png;*.jpg;',
+      fileDesc : 'Images (.png, .jpg, .jpeg)',
+      fileExt : '*.png;*.jpg;*.jpeg;*.JPG',
+      sizeLimit : 10240000, //10MB
       cancelImg : '/assets/uploadify/cancel.png',
       multi : true,
       scriptData : upload_params,
@@ -59,7 +61,7 @@
     <%= render :partial => 'documents/document', :collection => @order.documents %>
   </table>
 
-  <h2 class="orange">Укажите адрес и способ доставки</h2>
+  <h2 class="orange">Укажите адрес и время доставки</h2>
     <table class="user_delivery">
       <tr>
         <th><%=  order.label(:delivery_street) %></th>

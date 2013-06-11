@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
 
   #статусы
   #to_remove - заказ должен бть удален немедленно
-  STATUS = ['Определяется стоимость', 'На обработке', 'Печатается', 'Едет к Вам', 'Выполнен', 'Отклонен', 'to_remove']
+  STATUS = ['draft','Определяется стоимость', 'На обработке', 'Печатается', 'Едет к Вам', 'Выполнен', 'Отклонен']
 
 #    validate do |order|
 #      order.errors.add(:delivery_address, "Поле \"#{Order.human_attribute_name(:delivery_address)}\" не должно быть пустым" ) if order.delivery_address.blank?

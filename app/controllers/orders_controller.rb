@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
                      :only => [:index, :my, :new, :show, :edit, :update, :destroy]
 
   skip_before_filter :verify_authenticity_token,
-                     :only => [:create, :update]
+                     :only => [:new, :edit, :update, :show]
 
   before_filter :your_order?,
                 :only => [:edit, :show, :destroy]
@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
 
   def my
     @title = 'Мои заказы'
+    @draft_orders = Order.destroy_all(:status => Order::STATUS[0])
     @orders = Order.paginate :page => params[:page],
                              :order => 'created_at DESC',
                              :include => :user,
@@ -27,10 +28,10 @@ class OrdersController < ApplicationController
   end
 
   def new #create empty order and redirect to edit it
-   @order = Order.new
+    @order = Order.new(:status => Order::STATUS[0])
     current_user.orders << @order
     respond_to do |wants|
-        if @order.save
+        if @order.save(:validate => false)
           wants.html {redirect_to edit_order_path(@order)}
           wants.xml { render :xml => @order.to_xml }
         else
@@ -41,7 +42,6 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    gon.order_id = @order.id
     if current_user.has_role?('Administrator')
       @title = "Обновление заказа №#{@order.id}"
       render 'adminedit'
@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    if current_user.has_role?('Administrator')
+    if current_user.has_role?('Administrator') # если администратор или менеджер
       respond_to do |wants|
         if @order.update_attributes(params[:order])
           flash[:notice] = 'Заказ обновлен.'
@@ -64,22 +64,22 @@ class OrdersController < ApplicationController
           wants.xml {render :xml => @order.errors}
         end
       end
-    else
-      @order.documents.each do |document|
-        document.update_attributes(params[:order][:documents_attributes][document.id.to_s])
-      end
-      respond_to do |wants|
-        if @order.update_attribute('delivery_street', params[:order][:delivery_street]) && @order.update_attribute('delivery_address', params[:order][:delivery_address]) && @order.update_attribute('delivery_comment', params[:order][:delivery_comment])
+    else #если обычный пользователь
+      if (@order.documents.length == 0 || params[:order][:delivery_street] == "" || params[:order][:delivery_address] == "")
+        flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл и заполнить информацию о доставке.'
+        render :action => "edit"
+      else
+        @order.documents.each do |document|
+          document.update_attributes(params[:order][:documents_attributes][document.id.to_s])
+        end
+        if @order.update_attribute('delivery_street', params[:order][:delivery_street]) && @order.update_attribute('delivery_address', params[:order][:delivery_address]) && @order.update_attribute('delivery_comment', params[:order][:delivery_comment]) && @order.update_attribute('status', Order::STATUS[1])
           flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
-          wants.html { redirect_to my_orders_path }
-          wants.xml { render :xml => @order.to_xml }
-        else
-          wants.html { render :action => "edit" }
-          wants.xml {render :xml => @order.errors}
+          redirect_to my_orders_path
         end
       end
-     end
     end
+  end
+
 
 
   def show
@@ -94,7 +94,6 @@ class OrdersController < ApplicationController
     @order.destroy
     respond_to do |wants|
       wants.html { redirect_to myoffice_path }
-      wants.js  
     end
   end
 
