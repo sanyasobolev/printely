@@ -44,7 +44,7 @@
   <% end %>
 <% end %>
 
-<%= form_for @order, :url => order_path(@order), :html => { :method => :put } do |order| -%>
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => "form_edit_order"} do |order| -%>
 
   <%#*перечень всех файлов с параметрами печати%>
   <table id="fileList">

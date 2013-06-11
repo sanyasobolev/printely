@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Order < ActiveRecord::Base
 
-  attr_accessible :delivery_street, :delivery_address, :delivery_comment, :documents_attributes
+  attr_accessible :delivery_street, :delivery_address, :delivery_comment, :documents_attributes, :status, :cost, :manager_comment
   
   #pagination on page
   cattr_reader :per_page
@@ -17,7 +17,8 @@ class Order < ActiveRecord::Base
   DELIVERY_COMMENT_COLS_SIZE = 40
 
   #статусы
-  STATUS = ['Определяется стоимость', 'На обработке', 'Печатается', 'Едет к Вам', 'Выполнен', 'Отклонен' ]
+  #to_remove - заказ должен бть удален немедленно
+  STATUS = ['Определяется стоимость', 'На обработке', 'Печатается', 'Едет к Вам', 'Выполнен', 'Отклонен', 'to_remove']
 
 #    validate do |order|
 #      order.errors.add(:delivery_address, "Поле \"#{Order.human_attribute_name(:delivery_address)}\" не должно быть пустым" ) if order.delivery_address.blank?

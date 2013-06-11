@@ -101,8 +101,14 @@ module AuthenticatedSystem
     end
 
   #для проверки, что пользователь осуществляет доступ к своему заказу
-    def your_order?(order)
-      current_user.has_role?("Administrator") || current_user == order.user
+    def your_order?
+      @order = Order.find_by_id(params[:id])
+      if current_user.has_role?("Administrator") || current_user == @order.user
+        return true
+      else
+        flash[:error] = 'Заказ принадлежит не Вам. Нет доступа.'
+        redirect_to my_orders_path
+      end
     end
 
     # Store the URI of the current request in the session.

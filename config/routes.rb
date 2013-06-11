@@ -17,6 +17,7 @@ Spsite::Application.routes.draw do
      get 'my', :on => :collection
      get 'admin', :on => :collection
   end
+  match 'delete_order' => 'orders#destroy'
 
   controller :sessions do
     get 'login' => :new
