@@ -91,6 +91,9 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    @order.documents.each do |document|
+      document.remove_docfile!
+    end
     @order.destroy
     respond_to do |wants|
       wants.html { redirect_to myoffice_path }
