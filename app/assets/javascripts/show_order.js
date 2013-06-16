@@ -20,7 +20,4 @@ $(document).ready(function(){
       $(".container_for_label_created_at_order label").fadeOut();
   });
 
-
-
-
 });

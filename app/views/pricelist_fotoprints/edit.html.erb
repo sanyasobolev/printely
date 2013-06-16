@@ -1,0 +1,12 @@
+<%= error_messages_for :pricelist_fotoprint %>
+<h2>Редактирование записи</h2>
+<div class="form_shape">
+  <%= form_for :line, :url => pricelist_fotoprint_path(@line), :html => { :method => :put } do |f| -%>
+
+    <%= render :partial => 'form', :locals => {:f => f} %>
+
+    <div class="submit_area">
+      <%= submit_tag 'Сохранить', :class => 'submit' %>
+    </div>
+  <% end -%>
+</div>

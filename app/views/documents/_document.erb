@@ -1,8 +1,8 @@
 <tr class="document" id="document_<%= document.id %>">
   <%= fields_for "order[documents_attributes][]", document do |i| %>
     <td class="upload">
-      <div id="container_for_link_delete_docfile">
-        <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :id => 'link_delete_docfile' %>
+      <div class="container_for_link_delete_docfile">
+        <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :class => 'link_delete_docfile' %>
         <%= image_tag document.docfile.thumb.url %>
       </div>
     </td>
@@ -20,6 +20,9 @@
     </td>
     <td class="user_comment">
       <%= i.text_area :user_comment %>
+    </td>
+    <td class="document_price">
+      <%= h (number_to_currency(document.price, :unit => "коп.", :separator => " руб. ")) %>
     </td>
   <% end %>
 </tr>

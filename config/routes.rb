@@ -1,5 +1,5 @@
 Spsite::Application.routes.draw do
-  
+
   mount Ckeditor::Engine => '/ckeditor'
 
   root :to => 'pages#welcome', :id => 'welcome' #отправляет на действие welcome контроллера pages, с Id=welcome
@@ -27,6 +27,10 @@ Spsite::Application.routes.draw do
   resources :pages do
     get 'admin', :on => :collection
     get 'no_page', :on => :collection
+  end
+
+  resources :pricelist_fotoprints do
+    get 'admin', :on => :collection
   end
 
   resources :sections do
@@ -59,6 +63,18 @@ Spsite::Application.routes.draw do
 
 
   Ckeditor::Engine.routes.draw do
+  get "pricelist_fotoprint/admin"
+
+  get "pricelist_fotoprint/edit"
+
+  get "pricelist_fotoprint/update"
+
+  get "pricelist_fotoprint/new"
+
+  get "pricelist_fotoprint/create"
+
+  get "pricelist_fotoprint/destroy"
+
     resources :pictures, :only => [:index, :create, :destroy]
     resources :attachment_files, :only => [:index, :create, :destroy]
   end

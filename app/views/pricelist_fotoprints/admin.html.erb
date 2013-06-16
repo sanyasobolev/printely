@@ -1,0 +1,13 @@
+<h2>Редактирование прайс-листа</h2>
+  <p><%= link_to 'Создать запись', new_pricelist_fotoprint_path, :class => 'box' %></p>
+<table class ="admin">
+  <tr>
+    <th></th>
+    <th><%= PricelistFotoprint.human_attribute_name("print_format") %></th>
+    <th><%= PricelistFotoprint.human_attribute_name("paper_type") %></th>
+    <th><%= PricelistFotoprint.human_attribute_name("price") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'line_for_admin', :collection => @lines %>
+</table>

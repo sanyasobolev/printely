@@ -90,18 +90,18 @@
     background-color: #e8e8e8;
 }
 
-#fileList td.upload, td.print_format, td.paper_type, td.quantity, td.margins, td.user_comment {
+#fileList td.upload, td.print_format, td.paper_type, td.quantity, td.margins, td.user_comment, td.document_price {
     width: 150px;
 }
 
-#fileList td.upload #container_for_link_delete_docfile {
+#fileList td.upload .container_for_link_delete_docfile {
     position: relative
 }
 
-#fileList td.upload #link_delete_docfile {
+#fileList td.upload .link_delete_docfile {
     position: absolute;
     top: -10px;
-    right: 12px;
+    right: 2px;
 }
 
 #fileList td.upload img {

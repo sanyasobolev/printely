@@ -1,0 +1,17 @@
+<div class="form_align">
+  <%= f.label(:print_format) %>
+  <%= f.select "print_format", Document::PRINT_FORMAT, { :prompt => true } %>
+
+</div>
+
+<div class="form_align">
+  <%= f.label(:paper_type) %>
+  <%= f.select "paper_type", Document::PAPER_TYPE, { :prompt => true }  %>
+
+</div>
+
+<div class="form_align">
+  <%= f.label :price %>
+  <%= f.text_field :price,
+                   :class => 'req_input'%>
+</div>

@@ -1,0 +1,2 @@
+module PricelistFotoprintsHelper
+end
