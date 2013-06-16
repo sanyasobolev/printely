@@ -13,7 +13,7 @@
       <%= i.select(:paper_type, Document::PAPER_TYPE) %>
     </td>
     <td class="quantity">
-      <%= i.text_field(:quantity, :value => '1') %>
+      <%= i.text_field (:quantity)%>
     </td>
     <td class="margins">
       <%= i.select(:margins, Document::MARGINS) %>
@@ -23,6 +23,7 @@
     </td>
     <td class="document_price">
       <%= h (number_to_currency(document.price, :unit => "коп.", :separator => " руб. ")) %>
+      <%#= link_to 'upd', document_path(document, :params), :method => :put, :remote => true %>
     </td>
   <% end %>
 </tr>

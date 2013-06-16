@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
           wants.html { redirect_to admin_orders_path }
           wants.xml { render :xml => @order.to_xml }
         else
-          wants.html { render :action => "adminupdate" }
+          wants.html { render :action => "adminedit" }
           wants.xml {render :xml => @order.errors}
         end
       end

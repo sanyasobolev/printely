@@ -34,10 +34,11 @@
         if (status == 'display: none;') {
           $("#fileList_header").fadeIn("slow");
         }
+        $("select[name*='print_format']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
+          var new_price =
 
 
-
-
+        });
       }
     });
   </script>
@@ -49,6 +50,12 @@
     <%= f.file_field :docfile, :rel => order_documents_path(@order) %>
   <% end %>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+  })
+</script>
 
 <%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => "form_edit_order"} do |order| -%>
 
