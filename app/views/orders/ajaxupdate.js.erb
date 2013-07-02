@@ -1,0 +1,2 @@
+$("table.order_delivery tr td.delivery_price").html("<%= j number_to_currency(@order.delivery_price, :unit => "коп.", :separator => " руб. ") %>");
+$("div.total_cost_order").html("<%= j number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ") %>");

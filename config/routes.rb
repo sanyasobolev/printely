@@ -11,12 +11,14 @@ Spsite::Application.routes.draw do
   resources :roles
 
   resources :documents
+  match 'document/ajaxupdate' => 'documents#ajaxupdate'
 
   resources :orders do
     resources :documents
      get 'my', :on => :collection
      get 'admin', :on => :collection
   end
+  match 'order/ajaxupdate' => 'orders#ajaxupdate'
 
   controller :sessions do
     get 'login' => :new
@@ -30,6 +32,10 @@ Spsite::Application.routes.draw do
   end
 
   resources :pricelist_fotoprints do
+    get 'admin', :on => :collection
+  end
+
+  resources :pricelist_deliveries do
     get 'admin', :on => :collection
   end
 
@@ -63,17 +69,6 @@ Spsite::Application.routes.draw do
 
 
   Ckeditor::Engine.routes.draw do
-  get "pricelist_fotoprint/admin"
-
-  get "pricelist_fotoprint/edit"
-
-  get "pricelist_fotoprint/update"
-
-  get "pricelist_fotoprint/new"
-
-  get "pricelist_fotoprint/create"
-
-  get "pricelist_fotoprint/destroy"
 
     resources :pictures, :only => [:index, :create, :destroy]
     resources :attachment_files, :only => [:index, :create, :destroy]

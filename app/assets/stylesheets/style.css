@@ -76,19 +76,28 @@ body {
 }
 
 #user_options {
-    height: 28px;
-    width: 100px;
+    height: 60px;
+    max-width: 200px;
     float:right;
     margin-left: 20px;
 }
 
+#current_user {
+    margin-top: 5px;
+    float: right;
+    height: 25px;
+    color: white
+}
+
 a.box_user_opt:link, a.box_user_opt:visited {
+    float: right;
     display:block;
     color:white;
     background-color:#378cff;
     text-align:center;
     text-decoration:none;
-    max-width: 56px;
+    max-width: 100px;
+    margin-left: 3px;
 }
 
 a.box_user_opt:hover, a.box_user_opt:active {

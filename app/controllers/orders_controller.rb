@@ -1,13 +1,14 @@
 # encoding: utf-8
 class OrdersController < ApplicationController
+  layout 'orders_boardlinks', :only => [:index, :my, :show]
   skip_before_filter :authorized?,
-                     :only => [:index, :my, :new, :show, :edit, :update, :destroy]
+                     :only => [:index, :my, :new, :show, :edit, :update, :destroy, :ajaxupdate]
 
   skip_before_filter :verify_authenticity_token,
                      :only => [:new, :edit, :update, :show]
 
   before_filter :your_order?,
-                :only => [:edit, :show, :destroy]
+                :only => [:edit, :show, :destroy, :ajaxupdate]
 
   def index
 
@@ -29,14 +30,12 @@ class OrdersController < ApplicationController
 
   def new #create empty order and redirect to edit it
     @order = Order.new(:status => Order::STATUS[0])
+    order_set_price
     current_user.orders << @order
     respond_to do |wants|
         if @order.save(:validate => false)
           wants.html {redirect_to edit_order_path(@order)}
           wants.xml { render :xml => @order.to_xml }
-        else
-          wants.html { render :action => "new" }
-          wants.xml {render :xml => @order.errors}
         end
       end
   end
@@ -46,8 +45,13 @@ class OrdersController < ApplicationController
       @title = "Обновление заказа №#{@order.id}"
       render 'adminedit'
     else
-      @title = "Создание заказа №#{@order.id}"
-      render 'edit'
+      if @order.status == Order::STATUS[0]
+        @title = "Заказ №#{@order.id}"
+        render 'edit'
+      else
+        flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
+        redirect_to my_orders_path
+      end
     end
   end
 
@@ -72,7 +76,7 @@ class OrdersController < ApplicationController
         @order.documents.each do |document|
           document.update_attributes(params[:order][:documents_attributes][document.id.to_s])
         end
-        if @order.update_attribute('delivery_street', params[:order][:delivery_street]) && @order.update_attribute('delivery_address', params[:order][:delivery_address]) && @order.update_attribute('delivery_comment', params[:order][:delivery_comment]) && @order.update_attribute('status', Order::STATUS[1])
+        if @order.update_attribute('delivery_street', params[:order][:delivery_street]) && @order.update_attribute('delivery_address', params[:order][:delivery_address]) && @order.update_attribute('delivery_comment', params[:order][:delivery_comment]) && @order.update_attribute('status', Order::STATUS[1]) && @order.update_attribute('created_at', Time.now)
           flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
           redirect_to my_orders_path
         end
@@ -110,6 +114,37 @@ class OrdersController < ApplicationController
       wants.html
       wants.xml { render :xml => @services.to_xml }
     end
+  end
+
+  def ajaxupdate
+    if params[:delivery_type]
+      @order.update_attribute(:delivery_type, params[:delivery_type])
+    end
+    order_set_price
+    respond_to do |format|
+        format.js
+      end
+  end
+
+  private
+  def order_set_price
+    if @order.delivery_type
+      #ищем цену доставки в прайсе
+      delivery_price = PricelistDelivery.where(:delivery_type => @order.delivery_type).first.price
+    else
+      delivery_price = 0
+    end
+    @order.update_attribute(:delivery_price, delivery_price)
+
+    #считаем стоимость всех документов
+    documents_cost = 0
+    if @order.documents.length > 0
+      @order.documents.each do |document|
+        documents_cost = documents_cost + document.price
+      end
+    end
+    order_cost = @order.delivery_price + documents_cost
+    @order.update_attribute(:cost, order_cost)
   end
 end
 

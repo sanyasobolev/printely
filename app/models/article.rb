@@ -1,5 +1,7 @@
 class Article < ActiveRecord::Base
 
+attr_accessible :title, :synopsis, :body, :category_id, :published, :header_image
+
 #paperclipe
 has_attached_file :header_image,
                   :url => "/assets/articles/:id_:basename.:extension",

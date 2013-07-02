@@ -25,4 +25,7 @@
     <td class="user_comment">
       <%= show_document.user_comment %>
     </td>
+    <td class="document_price ">
+      <%= h (number_to_currency(show_document.price, :unit => "коп.", :separator => " руб. ")) %>
+    </td>
 </tr>

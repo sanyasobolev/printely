@@ -11,13 +11,5 @@ class CreateOrders < ActiveRecord::Migration
       t.column :manager_comment, :text
       t.timestamps
     end
-
-  Page.create(
-    :id => '3',
-    :title => 'About download',
-    :permalink => 'About download',
-    :body => 'Эта страница с описанием форматов файлов, которые можно загружать',
-    :user_id => '1',
-    :published => true)
   end
 end

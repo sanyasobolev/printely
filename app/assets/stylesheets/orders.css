@@ -12,7 +12,7 @@
 */
 /*стиль конпки*/
 
-#document_docfileUploader {
+#document_docfileUplquoader {
     cursor: pointer;
     width: 200px;
     height: 50px;
@@ -33,21 +33,21 @@
     background-color: #e8e8e8;
 }
 
-.user_delivery {
+.order_delivery {
     width: 100%;
 }
 
-.user_delivery tr td {
+.order_delivery tr td {
     padding: 5px;
     vertical-align: middle;
     text-align: center
 }
 
 /*форма ввода информации о доставке*/
-.form_align_order_delivery_street select {
+.order_delivery tr td.delivery_street select {
     border: 1px solid #D6D3D1;
     height: 30px;
-    width: 250px;
+    width: 200px;
     padding-left: 7px;
     padding-right: 7px;
     padding-bottom: 4px;
@@ -55,7 +55,7 @@
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
-.form_align_order_delivery_address input {
+.order_delivery tr td.delivery_address input {
     border: 1px solid #D6D3D1;
     height: 25px;
     width: 200px;
@@ -66,10 +66,10 @@
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
-.form_align_order_delivery_comment textarea{
+.order_delivery tr td.delivery_comment textarea{
     border: 1px solid #D6D3D1;
     height: 50px;
-    width: 270px;
+    width: 250px;
     padding-left: 7px;
     padding-right: 7px;
     padding-bottom: 4px;
@@ -77,6 +77,9 @@
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
+.order_delivery tr td.delivery_price {
+    width: 120px
+}
 
 /*форма для загружки файлов------------------------------------------------------------*/
 
@@ -91,7 +94,7 @@
 }
 
 #fileList td.upload, td.print_format, td.paper_type, td.quantity, td.margins, td.user_comment, td.document_price {
-    width: 150px;
+    width: 128px;
 }
 
 #fileList td.upload .container_for_link_delete_docfile {
@@ -116,6 +119,8 @@
     width: 70px;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid #D6D3D1;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
 #fileList td.paper_type select {
@@ -123,13 +128,28 @@
     width: 120px;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid #D6D3D1;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
 #fileList td.quantity input {
     display: block;
-    width: 50px;
+    float: left;
+    width: 25px;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid #D6D3D1;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+    text-align: center;
+}
+
+button.decrease {
+    float: left;
+    margin-left: 22px;
+}
+
+button.increase {
+    float: left;
 }
 
 #fileList td.margins select {
@@ -137,6 +157,8 @@
     width: 120px;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid #D6D3D1;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
 #fileList td.user_comment textarea {
@@ -145,6 +167,8 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid #D6D3D1;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
 /*------------------------------*/
@@ -163,7 +187,6 @@
 
 .container_for_label_created_at_order label{
     position: absolute;
-    display: none;
     top: -25px;
     right: 30px;
     color: grey;
@@ -191,7 +214,6 @@
 
 .container_for_label_status_order label{
     position: absolute;
-    display: none;
     top: -25px;
     right: 63px;
     color: grey;
@@ -221,7 +243,6 @@
 
 .container_for_label_cost_order label{
     position: absolute;
-    display: none;
     top: -25px;
     right: 43px;
     color: grey;
@@ -235,6 +256,30 @@
     padding: 8px;
 }
 
+.total_cost_order_label{
+    width: 50px;
+    height: 30px;
+    display: block;
+    background-color: #8B1A1A;
+    color: white;
+    margin-top: 20px;
+    padding: 8px;
+    font-size: 1.5em;
+    text-align: right;
+    float: right
+}
 
+.total_cost_order{
+    width: 210px;
+    height: 30px;
+    display: block;
+    background-color: #8B1A1A;
+    color: white;
+    margin-top: 20px;
+    padding: 8px;
+    font-size: 1.5em;
+    text-align: right;
+    float: right
+}
 
 

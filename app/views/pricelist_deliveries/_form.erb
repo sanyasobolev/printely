@@ -1,0 +1,11 @@
+<div class="form_align">
+  <%= f.label(:delivery_type) %>
+  <%= f.select "delivery_type", Order::DELIVERY_TYPE, { :prompt => true } %>
+
+</div>
+
+<div class="form_align">
+  <%= f.label :price %>
+  <%= f.text_field :price,
+                   :class => 'req_input'%>
+</div>

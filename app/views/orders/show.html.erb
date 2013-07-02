@@ -28,17 +28,20 @@
 </table>
 
 <h2 class="orange"> Доставка </h2>
- <table class="user_delivery">
+ <table class="order_delivery">
     <%= render :partial => 'header_table_with_delivery' %>
     <tr>
-      <td>
+      <td class="delivery_street">
         <%= @order.delivery_street %>
       </td>
-      <td>
+      <td class="delivery_address">
         <%= @order.delivery_address %>
       </td>
-      <td>
+      <td class="delivery_comment">
         <%= @order.delivery_comment %>
+      </td>
+      <td class="delivery_price">
+        <%= h (number_to_currency(@order.delivery_price, :unit => "коп.", :separator => " руб. ")) %>
       </td>
     </tr>
   </table>

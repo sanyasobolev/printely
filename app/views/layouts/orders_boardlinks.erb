@@ -1,0 +1,14 @@
+<%#*layout названо нестандартно, т.к. action "edit" не отрабатывает.%>
+<% content_for :stylesheets do %>
+  #boardlinks
+<% end %>
+
+<% content_for :middle_panel do %>
+  <div id="boardlinks">
+    <div id="boardlinks_nav">
+      <%= boardlinks %>
+    </div>
+  </div>
+<% end %>
+
+<%= render :template => 'layouts/application' %>

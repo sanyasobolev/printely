@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122195403) do
+ActiveRecord::Schema.define(:version => 20130619143126) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20130122195403) do
     t.string   "margins"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.float    "price"
   end
 
   create_table "letters", :force => true do |t|
@@ -80,11 +81,13 @@ ActiveRecord::Schema.define(:version => 20130122195403) do
     t.string   "delivery_street"
     t.string   "delivery_address"
     t.text     "delivery_comment"
-    t.string   "status",           :default => "Определяется стоимость"
+    t.string   "status"
     t.float    "cost"
     t.text     "manager_comment"
-    t.datetime "created_at",                                             :null => false
-    t.datetime "updated_at",                                             :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.float    "delivery_price"
+    t.string   "delivery_type"
   end
 
   create_table "pages", :force => true do |t|
@@ -99,6 +102,21 @@ ActiveRecord::Schema.define(:version => 20130122195403) do
     t.datetime "updated_at",                       :null => false
     t.integer  "service_id"
     t.integer  "subservice_id"
+  end
+
+  create_table "pricelist_deliveries", :force => true do |t|
+    t.string   "delivery_type"
+    t.float    "price"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "pricelist_fotoprints", :force => true do |t|
+    t.string   "print_format"
+    t.string   "paper_type"
+    t.float    "price"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "rights", :force => true do |t|

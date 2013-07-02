@@ -42,6 +42,10 @@ module ApplicationHelper
         @second = "<div class='boardtext'> Карта сайта </div>"
         @str = @first + @separator + @second
         return @str.html_safe
+      when 'orders'
+        @second = "<div class='boardtext'> #{link_to image_tag("icons/my_office_black.png", :border => 0), myoffice_path} </div>"
+        @str = @first + @separator + @second
+        return @str.html_safe
       else
       return
       end
@@ -72,6 +76,12 @@ module ApplicationHelper
       @third = "<div class='boardtext'> #{article_title} </div>"
       @str = @first + @separator + @second + @separator + @third
       return @str.html_safe
+    when 'orders'
+      @second = "<div class='boardlink'> #{link_to image_tag("icons/my_office_black.png", :border => 0), myoffice_path}</div>"
+      @third = "<div class='boardlink'> #{link_to "мои заказы", my_orders_path, :class => 'boardlink' } </div>"
+      @fourth = "<div class='boardtext'> заказ №#{Order.find_by_id(params[:id]).id} </div>"
+      @str = @first + @separator + @second + @separator + @third + @separator + @fourth
+      return @str.html_safe
     else
     return
     end
@@ -93,5 +103,14 @@ module ApplicationHelper
       return @str.html_safe
     end
   end
+   if @current_action == 'my'
+    case @current_controller
+    when 'orders'
+        @second = "<div class='boardlink'> #{link_to image_tag("icons/my_office_black.png", :border => 0), myoffice_path}</div>"
+        @third = "<div class='boardlink'> мои заказы </div>"
+        @str = @first + @separator + @second + @separator + @third
+        return @str.html_safe
+    end
+   end
   end
 end

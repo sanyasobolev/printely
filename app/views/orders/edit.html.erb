@@ -1,5 +1,4 @@
-<h2 class="orange">Какие файлы можно загружать?</h2>
-  <%= render :partial => 'pages/show_page', :locals => {:page => page_about_download} %>
+<h2><%= @title %></h2>
 <h2 class="orange">Загрузите Ваши файлы</h2>
 
 <% key = Rails.application.config.session_options[:key] %>
@@ -28,17 +27,74 @@
       auto : true,
       onComplete : function(e, id, obj, response, data) {
         $('#fileList').append(response);
-        },
+       },
       onAllComplete : function(){
-        var status = $("#fileList_header").attr("style")
+        var status = $("#fileList_header").attr("style"),
+            order_id = $("form.edit_order").attr("id"),
+            url_for_update_order = "/order/ajaxupdate";
+
         if (status == 'display: none;') {
           $("#fileList_header").fadeIn("slow");
         }
+
+        //подключение хендлеров по управлению ценой
         $("select[name*='print_format']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
-          var new_price =
-
-
+          var selected_print_format = $(this).val(),
+              document_id = this.parentNode.parentNode.id;
+              url = "/document/ajaxupdate";
+          $.post( url, {id: document_id, print_format: selected_print_format} );
+          $.post( url_for_update_order, {id: order_id} );
         });
+
+        $("select[name*='paper_type']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
+          var selected_paper_type = $(this).val(),
+              document_id = this.parentNode.parentNode.id;
+              url = "/document/ajaxupdate";
+          $.post( url, {id: document_id, paper_type: selected_paper_type} );
+          $.post( url_for_update_order, {id: order_id} );
+        });
+
+        $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
+          var selected_quantity = $(this).val(),
+              document_id = this.parentNode.parentNode.id;
+              url = "/document/ajaxupdate";
+          selected_quantity = validate(parseInt(selected_quantity));
+          $(this).val(selected_quantity);
+          $.post( url, {id: document_id, quantity: selected_quantity} );
+          $.post( url_for_update_order, {id: order_id} );
+        });
+
+        //обновление цены после удаления одного документа
+        $("a.link_delete_docfile:not([title='with_priceEventHandler'])").attr('title', 'with_priceEventHandler').bind('click', function(event){
+          setTimeout(function(){$.post( url_for_update_order, {id: order_id} )}, 1000);
+        });
+
+        //работа переключателя
+        $("button.increase:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+          var selected_input_quantity = $(this).siblings("input[id*='quantity']");
+          new_value = parseInt(selected_input_quantity.val()) + 1 ;
+          new_value = validate(new_value);
+          selected_input_quantity.val(new_value);
+          selected_input_quantity.change();
+        });
+        $("button.decrease:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+          var selected_input_quantity = $(this).siblings("input[id*='quantity']");
+          new_value = parseInt(selected_input_quantity.val()) - 1 ;
+          new_value = validate(new_value);
+          selected_input_quantity.val(new_value);
+          selected_input_quantity.change();
+        });
+
+        //обновление всех цен при загрузке новых доков
+        $.post( url_for_update_order, {id: order_id} );
+
+        function validate(value){
+          if (value < 1) {
+            value = 1;
+          }
+          return value
+        };
+
       }
     });
   </script>
@@ -53,11 +109,19 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    
+    $("select#order_delivery_street").change(function(event){ //clear value 'выберите' in select
+        $('[value=""]',event.target).remove();
+    });
+    $("table.order_delivery").change(function(event){ //при любом изменении в таблице, устанавливаем тип доставки "курьер"
+        var url = '/order/ajaxupdate',
+            selected_delivery = 'Курьер',
+            order_id = this.id;
+        $.post( url, {id: order_id, delivery_type: selected_delivery} )
+    });
   })
 </script>
 
-<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => "form_edit_order"} do |order| -%>
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id} do |order| -%>
 
   <%#*перечень всех файлов с параметрами печати%>
   <table id="fileList">
@@ -73,35 +137,43 @@
   </table>
 
   <h2 class="orange">Укажите адрес и время доставки</h2>
-    <table class="user_delivery">
+  <table class="order_delivery" id="<%= @order.id %>">
       <tr>
         <th><%=  order.label(:delivery_street) %></th>
         <th><%=  order.label(:delivery_address) %></th>
         <th><%=  order.label(:delivery_comment) %></th>
+        <th><%=  order.label(:delivery_price) %></th>
       </tr>
       <tr>
-        <td>
-          <div class="form_align_order_delivery_street">
+        <td class="delivery_street">
             <%= order.select :delivery_street,
-                              Order::DELIVERY_STREET %>
-          </div>
+                              Order::DELIVERY_STREET,
+                              { :prompt => true } %>
         </td>
-        <td>
-          <div class="form_align_order_delivery_address">
+        <td class="delivery_address">
             <%= order.text_field :delivery_address %>
-          </div>
         </td>
-        <td>
-          <div class="form_align_order_delivery_comment">
+        <td class="delivery_comment">
             <%= order.text_area :delivery_comment,
                             :rows => Order::DELIVERY_COMMENT_ROWS_SIZE,
                             :cols => Order::DELIVERY_COMMENT_COLS_SIZE %>
-          </div>
-          </td>
+        </td>
+        <td class="delivery_price">
+          <%= h (number_to_currency(@order.delivery_price, :unit => "коп.", :separator => " руб. ")) %>
+        </td>
       </tr>
     </table>
+  <div class="total_cost_order">
+    <%= h (number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ")) %>
+  </div>
+  <div class="total_cost_order_label">
+    Итого:
+  </div>
+  <div class="fl_clear"></div>
+
   <div class="submit_area">
    <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
    <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
   </div>
 <% end -%>
+ 

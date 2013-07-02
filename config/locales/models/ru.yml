@@ -103,6 +103,7 @@ ru:
         delivery_street: "Улица, поселок"
         delivery_address: "Дом, квартира"
         delivery_comment: "Комментарии к времени доставки"
+        delivery_price: "Цена"
         status: "Статус"
         created_at: "Дата создания"
         details: "Детали"
@@ -122,4 +123,7 @@ ru:
         print_format: "Формат"
         paper_type: "Тип бумаги"
         price: "Цена"
+      pricelist_delivery:
+        delivery_type: "Тип доставки"
+        price: "Цена доставки"
 

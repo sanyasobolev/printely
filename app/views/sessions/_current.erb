@@ -1,11 +1,5 @@
-<table>
-<tr>
-  <td>
-    <%= link_to image_tag("icons/edit.png", :border => 0), edit_user_path(current_user), :class => 'box_user_opt' %>
-  </td>
-  <td>
-    <%= link_to image_tag("icons/logout.png", :border => 0), :logout, :class => 'box_user_opt' %>
-  </td>
-</tr>
-</table>
-  	
+<%= link_to image_tag("icons/logout.png", :border => 0), :logout, :class => 'box_user_opt' %>
+<%= link_to image_tag("icons/my_office.png", :border => 0), myoffice_path, :class => 'box_user_opt' %>
+
+<div class="fl_clear"></div>
+<div id="current_user"><%= link_to "#{current_user.first_name} #{current_user.second_name}", edit_user_path(current_user), :class => 'top_section' %></div>
