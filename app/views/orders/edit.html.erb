@@ -87,7 +87,8 @@
 
         //обновление всех цен при загрузке новых доков
         $.post( url_for_update_order, {id: order_id} );
-
+        
+        //проверка значения количества файлов для печати
         function validate(value){
           if (value < 1 || isNaN(value) == true) {
             value = 1;
@@ -108,20 +109,6 @@
     <%= f.file_field :docfile, :rel => order_documents_path(@order) %>
   <% end %>
 <% end %>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $("select#order_delivery_street").change(function(event){ //clear value 'выберите' in select
-        $('[value=""]',event.target).remove();
-    });
-    $("table.order_delivery").change(function(event){ //при любом изменении в таблице, устанавливаем тип доставки "курьер"
-        var url = '/order/ajaxupdate',
-            selected_delivery = 'Курьер',
-            order_id = this.id;
-        $.post( url, {id: order_id, delivery_type: selected_delivery} )
-    });
-  })
-</script>
 
 <%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id} do |order| -%>
 
