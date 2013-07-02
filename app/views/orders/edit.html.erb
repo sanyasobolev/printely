@@ -65,11 +65,11 @@
         });
 
         //обновление цены после удаления одного документа
-        $("a.link_delete_docfile:not([title='with_priceEventHandler'])").attr('title', 'with_priceEventHandler').bind('click', function(event){
+        $("a.link_delete_docfile:not([handler-status='with_priceEventHandler'])").attr('handler-status', 'with_priceEventHandler').bind('click', function(event){
           setTimeout(function(){$.post( url_for_update_order, {id: order_id} )}, 1000);
         });
 
-        //работа переключателя
+        //работа переключателя количества файлов
         $("button.increase:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
           var selected_input_quantity = $(this).siblings("input[id*='quantity']");
           new_value = parseInt(selected_input_quantity.val()) + 1 ;
@@ -89,8 +89,10 @@
         $.post( url_for_update_order, {id: order_id} );
 
         function validate(value){
-          if (value < 1) {
+          if (value < 1 || isNaN(value) == true) {
             value = 1;
+          } else if (value > 100) {
+            value = 100;
           }
           return value
         };

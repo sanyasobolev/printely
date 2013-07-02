@@ -4,6 +4,7 @@ $(document).ready(function(){
           message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
           aOutConfirm: "a.button_style"
         });
+        
     }
   });
 

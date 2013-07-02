@@ -12,7 +12,7 @@
 */
 /*стиль конпки*/
 
-#document_docfileUplquoader {
+#document_docfileUploader {
     cursor: pointer;
     width: 200px;
     height: 50px;
@@ -144,12 +144,22 @@
 }
 
 button.decrease {
+    cursor: pointer;
     float: left;
     margin-left: 22px;
+    width: 21px;
+    height: 23px;
+    border: 0px;
+    background-image: url(/assets/icons/minus.png);
 }
 
 button.increase {
+    cursor: pointer;
     float: left;
+    width: 21px;
+    height: 23px;
+    border: 0px;
+    background-image: url(/assets/icons/plus.png);
 }
 
 #fileList td.margins select {

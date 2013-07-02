@@ -2,7 +2,7 @@
   <%= fields_for "order[documents_attributes][]", document do |i| %>
     <td class="upload">
       <div class="container_for_link_delete_docfile">
-        <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :class => 'link_delete_docfile' %>
+        <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :class => 'link_delete_docfile', :title => 'Удалить файл' %>
         <%= image_tag document.docfile.thumb.url %>
       </div>
     </td>
@@ -13,9 +13,9 @@
       <%= i.select(:paper_type, Document::PAPER_TYPE) %>
     </td>
     <td class="quantity">
-      <%=  button_tag '-', :type => 'button', :class => 'decrease' %>
+      <%=  button_tag ' ', :type => 'button', :class => 'decrease' %>
           <%= i.text_field (:quantity)%>
-      <%=  button_tag '+', :type => 'button', :class => 'increase' %>
+      <%=  button_tag ' ', :type => 'button', :class => 'increase' %>
     </td>
     <td class="margins">
       <%= i.select(:margins, Document::MARGINS) %>
