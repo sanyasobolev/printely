@@ -9,4 +9,5 @@
   <td><%=h (number_to_currency(order_for_admin.cost, :unit => "коп.", :separator => " руб. ")) %></td>
   <td><%= link_to image_tag("icons/details_view_order.png", :border => "0"), order_path(order_for_admin) %></td>
   <td><%= link_to image_tag("icons/edit_order.png", :border => "0"), edit_order_path(order_for_admin), :alt => 'редактировать' %></td>
+  <td><%= link_to image_tag("icons/cover_for_order.png", :border => "0"), cover_order_path(order_for_admin), :target => "_blank" %></td>
 </tr>

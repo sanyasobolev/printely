@@ -1,0 +1,40 @@
+<div id="cover_c6">
+  <h2 class="orange"><%= @title %></h2>
+  <table>
+    <tr>
+      <td><%= label(:order, :client) %>:</td>
+      <td><%= @order.user.first_name %> <%= @order.user.second_name %></td>
+    </tr>
+    <tr>
+      <td><%= User.human_attribute_name("phone") %>:</td>
+      <td><%= @order.user.phone %> </td>
+    </tr>
+    <tr>
+      <td><%= Document.human_attribute_name("quantity") %>:</td>
+      <td><%= @order.documents.count %> </td>
+    </tr>
+  </table>
+  <br />
+  <h2 class="orange"> Доставка </h2>
+  <table>
+    <tr>
+      <td><%= label(:order, :delivery_street)%>:</td>
+      <td><%= @order.delivery_street %></td>
+    </tr>
+    <tr>
+      <td><%= label(:order, :delivery_address)%>:</td>
+      <td><%= @order.delivery_address %></td>
+    </tr>
+    <tr>
+      <td><%= label(:order, :delivery_comment)%>:</td>
+      <td><%= @order.delivery_comment %></td>
+    </tr>
+  </table>
+
+  <div class="container_for_cost_order">
+    <%=h (number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ")) %>
+  </div>
+</div>
+
+
+

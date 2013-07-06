@@ -66,13 +66,23 @@
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
-.order_delivery tr td.delivery_comment textarea{
+.order_delivery tr td.delivery_date input#datepicker {
     border: 1px solid #D6D3D1;
-    height: 50px;
-    width: 250px;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-bottom: 4px;
+    width: 100px;
+    font-size: 1em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+    text-align: center;
+}
+
+.order_delivery tr td.delivery_date input#timepicker_start {
+    border: 1px solid #D6D3D1;
+    width: 50px;
+    font-size: 1em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+.order_delivery tr td.delivery_date input#timepicker_end {
+    border: 1px solid #D6D3D1;
+    width: 50px;
     font-size: 1em;
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
@@ -292,4 +302,23 @@ button.increase {
     float: right
 }
 
+/*------------------------------*/
+/*печать конвертов-----------------------------*/
 
+#cover_c6 {
+    width: 162mm;
+    height: 114mm;
+    margin-left: 5mm;
+    margin-top: 5mm;
+}
+
+#cover_c6 div.container_for_cost_order {
+    position: relative;
+    top: 20px;
+    width: 162mm;
+    padding: 0mm;
+    padding-top: 5mm;
+    padding-bottom: 7mm;
+    font-size: 3em;
+    text-align: center;
+}

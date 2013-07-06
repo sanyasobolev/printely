@@ -17,8 +17,10 @@ Spsite::Application.routes.draw do
     resources :documents
      get 'my', :on => :collection
      get 'admin', :on => :collection
+     get 'cover', :on => :member
   end
   match 'order/ajaxupdate' => 'orders#ajaxupdate'
+#  match 'orders/:id/cover' => 'orders#cover'
 
   controller :sessions do
     get 'login' => :new

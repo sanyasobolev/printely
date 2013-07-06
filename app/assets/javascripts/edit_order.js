@@ -22,6 +22,7 @@ $(document).ready(function(){
 
         var order_id = $("form.edit_order").attr("id"),
             url_for_update_order = "/order/ajaxupdate";
+            
         //подключение хендлеров по управлению ценой (при уже загруженных документах - в случае рефреша страницы)
         $("select[name*='print_format']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
           var selected_print_format = $(this).val(),
@@ -80,6 +81,12 @@ $(document).ready(function(){
           return value
         };
 
+        //календарь
+        $(function() {
+            $("#datepicker").datepicker($.datepicker.regional[ "ru" ]);
+        });
+        $('#timepicker_start').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'disableTimeRanges': ['23:59','07:01'] });
+        $('#timepicker_end').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'disableTimeRanges': ['23:59','07:01'] });
     }
   });
 

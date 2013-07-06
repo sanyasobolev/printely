@@ -130,7 +130,7 @@
       <tr>
         <th><%=  order.label(:delivery_street) %></th>
         <th><%=  order.label(:delivery_address) %></th>
-        <th><%=  order.label(:delivery_comment) %></th>
+        <th></th>
         <th><%=  order.label(:delivery_price) %></th>
       </tr>
       <tr>
@@ -140,12 +140,15 @@
                               { :prompt => true } %>
         </td>
         <td class="delivery_address">
-            <%= order.text_field :delivery_address %>
+            <%= order.text_field :delivery_address%>
         </td>
-        <td class="delivery_comment">
-            <%= order.text_area :delivery_comment,
-                            :rows => Order::DELIVERY_COMMENT_ROWS_SIZE,
-                            :cols => Order::DELIVERY_COMMENT_COLS_SIZE %>
+        <td class="delivery_date">
+          <%= label(:order, :delivery_date) %>
+          <%= order.text_field :delivery_date, :id => "datepicker" %> <br/>
+          <%= label(:order, :delivery_start_time) %>
+          <%= order.text_field :delivery_start_time, :id => "timepicker_start" %>
+          <%= label(:order, :delivery_end_time) %>
+          <%= order.text_field :delivery_end_time, :id => "timepicker_end" %>
         </td>
         <td class="delivery_price">
           <%= h (number_to_currency(@order.delivery_price, :unit => "коп.", :separator => " руб. ")) %>
