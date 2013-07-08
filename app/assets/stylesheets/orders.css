@@ -66,7 +66,7 @@
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
-.order_delivery tr td.delivery_date input#datepicker {
+.order_delivery input#datepicker {
     border: 1px solid #D6D3D1;
     width: 100px;
     font-size: 1em;
@@ -79,12 +79,14 @@
     width: 50px;
     font-size: 1em;
     font-family: "Segoe UI",helvetica,arial,sans-serif;
+    text-align: center;
 }
 .order_delivery tr td.delivery_date input#timepicker_end {
     border: 1px solid #D6D3D1;
     width: 50px;
     font-size: 1em;
     font-family: "Segoe UI",helvetica,arial,sans-serif;
+    text-align: center;
 }
 
 .order_delivery tr td.delivery_price {
@@ -308,17 +310,69 @@ button.increase {
 #cover_c6 {
     width: 162mm;
     height: 114mm;
-    margin-left: 5mm;
-    margin-top: 5mm;
+    padding: 5mm;
 }
+
+#cover_c5 {
+    width: 229mm;
+    height: 162mm;
+    padding: 5mm;
+}
+
+#cover_c4 {
+    width: 324mm;
+    height: 229mm;
+    padding: 5mm;
+}
+
 
 #cover_c6 div.container_for_cost_order {
     position: relative;
-    top: 20px;
-    width: 162mm;
+    top: 5mm;
+    width: 100%;
     padding: 0mm;
     padding-top: 5mm;
     padding-bottom: 7mm;
     font-size: 3em;
     text-align: center;
+}
+
+#cover_c6 img {
+    position: relative;
+    right: -118mm;
+    top: 5mm;
+}
+
+#cover_c5 div.container_for_cost_order {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    padding: 0mm;
+    padding-top: 5mm;
+    padding-bottom: 7mm;
+    font-size: 3em;
+    text-align: center;
+}
+
+#cover_c5 img {
+    position: relative;
+    right: -185mm;
+    top: 5mm;
+}
+
+#cover_c4 div.container_for_cost_order {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    padding: 0mm;
+    padding-top: 5mm;
+    padding-bottom: 7mm;
+    font-size: 3em;
+    text-align: center;
+}
+
+#cover_c4 img {
+    position: relative;
+    right: -280mm;
+    top: 5mm;
 }

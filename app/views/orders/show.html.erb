@@ -29,7 +29,7 @@
 
 <h2 class="orange"> Доставка </h2>
  <table class="order_delivery">
-    <%= render :partial => 'header_table_with_delivery' %>
+    <%= render :partial => 'header_table_with_delivery', :locals => {:order => @order} %>
     <tr>
       <td class="delivery_street">
         <%= @order.delivery_street %>
@@ -37,8 +37,12 @@
       <td class="delivery_address">
         <%= @order.delivery_address %>
       </td>
-      <td class="delivery_comment">
-        <%= @order.delivery_comment %>
+      <td class="delivery_date">
+         время
+          <%= label(:order, :delivery_start_time) %>
+          <%= h (Russian::strftime(@order.delivery_start_time, "%R")) %>
+          <%= label(:order, :delivery_end_time) %>
+          <%= h (Russian::strftime(@order.delivery_end_time, "%R")) %>
       </td>
       <td class="delivery_price">
         <%= h (number_to_currency(@order.delivery_price, :unit => "коп.", :separator => " руб. ")) %>

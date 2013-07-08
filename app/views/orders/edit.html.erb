@@ -130,7 +130,10 @@
       <tr>
         <th><%=  order.label(:delivery_street) %></th>
         <th><%=  order.label(:delivery_address) %></th>
-        <th></th>
+        <th>
+            <%= label(:order, :delivery_date) %>
+            <%= order.text_field :delivery_date, :id => "datepicker" %>
+        </th>
         <th><%=  order.label(:delivery_price) %></th>
       </tr>
       <tr>
@@ -143,8 +146,7 @@
             <%= order.text_field :delivery_address%>
         </td>
         <td class="delivery_date">
-          <%= label(:order, :delivery_date) %>
-          <%= order.text_field :delivery_date, :id => "datepicker" %> <br/>
+          время
           <%= label(:order, :delivery_start_time) %>
           <%= order.text_field :delivery_start_time, :id => "timepicker_start" %>
           <%= label(:order, :delivery_end_time) %>

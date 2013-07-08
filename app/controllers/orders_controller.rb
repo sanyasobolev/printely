@@ -1,7 +1,7 @@
 # encoding: utf-8
 class OrdersController < ApplicationController
   layout 'orders_boardlinks', :only => [:index, :my, :show]
-  layout 'cover_for_order', :only => [:cover]
+#  layout 'cover_for_order', :only => [:cover]
 
   skip_before_filter :authorized?,
                      :only => [:index, :my, :new, :show, :edit, :update, :destroy, :ajaxupdate]
@@ -71,12 +71,18 @@ class OrdersController < ApplicationController
         end
       end
     else #если обычный пользователь
-      if (@order.documents.length == 0 || params[:order][:delivery_street] == "" || params[:order][:delivery_address] == "")
+      if (@order.documents.length == 0 || params[:order][:delivery_street] == "" || params[:order][:delivery_address] == "" || params[:order][:delivery_date] == "")
         flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл и заполнить информацию о доставке.'
         render :action => "edit"
       else
         @order.documents.each do |document|
           document.update_attributes(params[:order][:documents_attributes][document.id.to_s])
+        end
+        if params[:order][:delivery_start_time] == ""
+          params[:order][:delivery_start_time] = Order::DEFAULT_START_TIME
+        end
+        if params[:order][:delivery_end_time] == ""
+          params[:order][:delivery_end_time] = Order::DEFAULT_END_TIME
         end
         if @order.update_attribute('delivery_street', params[:order][:delivery_street]) && @order.update_attribute('delivery_address', params[:order][:delivery_address]) && @order.update_attribute('delivery_date', params[:order][:delivery_date]) && @order.update_attribute('delivery_start_time', params[:order][:delivery_start_time]) && @order.update_attribute('delivery_end_time', params[:order][:delivery_end_time]) && @order.update_attribute('status', Order::STATUS[1]) && @order.update_attribute('created_at', Time.now)
           flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
@@ -131,6 +137,8 @@ class OrdersController < ApplicationController
   def cover
     @order = Order.find_by_id(params[:id])
     @title = "Заказ № #{@order.id}"
+    @format = params[:format]
+    render layout: "cover_for_order"
   end
 
   private

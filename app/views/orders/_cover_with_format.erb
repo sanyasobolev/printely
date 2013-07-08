@@ -1,0 +1,44 @@
+<div id="cover_<%= format %>">
+  <h2 class="orange"><%= title %></h2>
+  <table>
+    <tr>
+      <td><%= label(:order, :client) %>:</td>
+      <td><%= order.user.first_name %> <%= order.user.second_name %></td>
+    </tr>
+    <tr>
+      <td><%= User.human_attribute_name("phone") %>:</td>
+      <td><%= order.user.phone %> </td>
+    </tr>
+    <tr>
+      <td><%= Document.human_attribute_name("quantity") %>:</td>
+      <td><%= order.documents.count %> </td>
+    </tr>
+  </table>
+  <br />
+  <h2 class="orange"> Доставка </h2>
+  <table>
+    <tr>
+      <td><%= label(:order, :delivery_street)%>:</td>
+      <td><%= order.delivery_street %></td>
+    </tr>
+    <tr>
+      <td><%= label(:order, :delivery_address)%>:</td>
+      <td><%= order.delivery_address %></td>
+    </tr>
+    <tr>
+      <td><%= label(:order, :delivery_date)%>:</td>
+      <td><%=h (Russian::strftime(order.delivery_date, "%d %B %Y года")) %></td>
+      <td>
+        <%= label(:order, :delivery_start_time) %>
+        <%= h (Russian::strftime(order.delivery_start_time, "%R")) %>
+        <%= label(:order, :delivery_end_time) %>
+        <%= h (Russian::strftime(order.delivery_end_time, "%R")) %>
+      </td>
+    </tr>
+  </table>
+
+  <div class="container_for_cost_order">
+    <%=h (number_to_currency(order.cost, :unit => "коп.", :separator => " руб. ")) %>
+  </div>
+  <%=  image_tag('logo_sbold_black.png') %>
+</div>
