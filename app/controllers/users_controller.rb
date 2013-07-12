@@ -34,6 +34,9 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
+        #send email
+        UserMailer.welcome_email(@user).deliver
+        UserMailer.email_all_admins_about_new_user(@user)
         self.current_user = @user
         format.html { redirect_to :myoffice, :notice => 'Вы успешно зарегистрированы!' }
         format.xml { render :xml => @user, :status => :created, :location => @user }

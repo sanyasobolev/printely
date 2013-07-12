@@ -1,13 +1,12 @@
 class Letter < ActiveRecord::Base
 
+  attr_accessible :name, :phone, :email, :question
+
   #длины полей
   NAME_MIN_LENGTH = 3
   NAME_MAX_LENGTH = 255
   NAME_RANGE = NAME_MIN_LENGTH..NAME_MAX_LENGTH
 
-  COMPANY_MIN_LENGTH = 3
-  COMPANY_MAX_LENGTH = 255
-  COMPANY_RANGE = COMPANY_MIN_LENGTH..COMPANY_MAX_LENGTH
 
   PHONE_MIN_LENGTH = 3
   PHONE_MAX_LENGTH = 255

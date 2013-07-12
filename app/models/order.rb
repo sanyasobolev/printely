@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Order < ActiveRecord::Base
 
-  attr_accessible :delivery_street, :delivery_address, :delivery_comment, :delivery_price, :delivery_type, :documents_attributes, :status, :cost, :manager_comment
+  attr_accessible :delivery_street, :delivery_address, :delivery_date, :delivery_start_time, :delivery_end_time,  :delivery_price, :delivery_type, :documents_attributes, :status, :cost, :manager_comment, :created_at
   
   #pagination on page
   cattr_reader :per_page

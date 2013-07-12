@@ -17,6 +17,7 @@ class LettersController < ApplicationController
     @letter = Letter.new(params[:letter])
     respond_to do |wants|
       if @letter.save
+        UserMailer.email_all_admins_about_new_letter(@letter)
         flash[:notice] = 'Спасибо! Мы свяжемся с Вами в ближайшее время.'
         wants.html { redirect_to sent_letters_path }
         wants.xml { render :xml => @letter.to_xml }

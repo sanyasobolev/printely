@@ -60,8 +60,13 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     if current_user.has_role?('Administrator') # если администратор или менеджер
+      old_status = @order.status
       respond_to do |wants|
         if @order.update_attributes(params[:order])
+          new_status = @order.status
+          if new_status != old_status #отправка сообщения на почту пользователя, ели статус был изменен
+            UserMailer.email_user_about_change_status(@order).deliver
+          end
           flash[:notice] = 'Заказ обновлен.'
           wants.html { redirect_to admin_orders_path }
           wants.xml { render :xml => @order.to_xml }
@@ -84,7 +89,8 @@ class OrdersController < ApplicationController
         if params[:order][:delivery_end_time] == ""
           params[:order][:delivery_end_time] = Order::DEFAULT_END_TIME
         end
-        if @order.update_attribute('delivery_street', params[:order][:delivery_street]) && @order.update_attribute('delivery_address', params[:order][:delivery_address]) && @order.update_attribute('delivery_date', params[:order][:delivery_date]) && @order.update_attribute('delivery_start_time', params[:order][:delivery_start_time]) && @order.update_attribute('delivery_end_time', params[:order][:delivery_end_time]) && @order.update_attribute('status', Order::STATUS[1]) && @order.update_attribute('created_at', Time.now)
+         if @order.update_attributes(:delivery_street => params[:order][:delivery_street], :delivery_address => params[:order][:delivery_address], :delivery_date => params[:order][:delivery_date], :delivery_start_time => params[:order][:delivery_start_time], :delivery_end_time => params[:order][:delivery_end_time], :status => Order::STATUS[1], :created_at => Time.now)
+          UserMailer.email_all_admins_about_new_order(@order)
           flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
           redirect_to my_orders_path
         end

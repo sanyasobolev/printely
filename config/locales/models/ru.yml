@@ -81,7 +81,6 @@ ru:
         new_password: "Новый пароль"
       letter:
         name: "ФИО"
-        company: "Компания"
         phone: "Телефон"
         email: "Email"
         question: "Текст письма"
