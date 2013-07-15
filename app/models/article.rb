@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Article < ActiveRecord::Base
 
 attr_accessible :title, :synopsis, :body, :category_id, :published, :header_image

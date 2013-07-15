@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PricelistFotoprintsController < ApplicationController
   layout 'wo_boardlinks', :only => [:admin, :new, :edit]
 

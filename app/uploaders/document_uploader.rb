@@ -42,7 +42,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   #    process :scale => [50, 50]
   #  end
   version :thumb do
-    process :resize_to_limit => [100, 0]
+    process :resize_to_limit => [100, 100]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

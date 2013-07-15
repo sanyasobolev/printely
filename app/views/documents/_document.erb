@@ -3,8 +3,8 @@
     <td class="upload">
       <div class="container_for_link_delete_docfile">
         <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :class => 'link_delete_docfile', :title => 'Удалить файл' %>
-        <%= image_tag document.docfile.thumb.url %>
       </div>
+    <%= image_tag document.docfile.thumb.url, :class => 'thumb' %>
     </td>
     <td class="print_format">
       <%= i.select(:print_format, Document::PRINT_FORMAT) %>

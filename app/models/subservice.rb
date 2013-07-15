@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Subservice < ActiveRecord::Base
 
   #paperclipe

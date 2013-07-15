@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Letter < ActiveRecord::Base
 
   attr_accessible :name, :phone, :email, :question

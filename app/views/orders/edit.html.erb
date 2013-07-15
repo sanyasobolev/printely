@@ -103,13 +103,6 @@
   </script>
 <% end %>
 
-<%#*кнопка выбора файлов%>
-<% unless @order.new_record? %>
-  <%= fields_for Document.new do |f| %>
-    <%= f.file_field :docfile, :rel => order_documents_path(@order) %>
-  <% end %>
-<% end %>
-
 <%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id} do |order| -%>
 
   <%#*перечень всех файлов с параметрами печати%>
@@ -124,6 +117,13 @@
     </tr>
     <%= render :partial => 'documents/document', :collection => @order.documents %>
   </table>
+
+<%#*кнопка выбора файлов%>
+<% unless @order.new_record? %>
+  <%= fields_for Document.new do |f| %>
+    <%= f.file_field :docfile, :rel => order_documents_path(@order) %>
+  <% end %>
+<% end %>
 
   <h2 class="orange">Укажите адрес и время доставки</h2>
   <table class="order_delivery" id="<%= @order.id %>">
