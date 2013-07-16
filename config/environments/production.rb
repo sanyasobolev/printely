@@ -61,10 +61,10 @@ Spsite::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
+    :address              => "mail.locum.ru",
     :port                 => 587,
-    :user_name            => 'printely',
-    :password             => 'M8lduBpFWK8i',
+    :user_name            => 'info@printely.ru',
+    :password             => 'n1eCqlROhJ0F',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 
