@@ -45,8 +45,12 @@ class RolesController < ApplicationController
       redirect_to :action => 'index'
     else
       @role_for_update.rights.clear
-#     if params[:role][:right_ids] && @role_for_update.update_attributes(params[:role])
-      if params[:role] && @role_for_update.update_attributes(params[:role])
+     if params[:role][:right_ids]
+       params[:role][:right_ids].each do |right_id|
+         @role_for_update.rights << Right.find_by_id(right_id)
+       end
+     end
+     if @role_for_update.save
         flash[:notice] = 'Обновление прошло удачно'
         redirect_to :action => 'index'
       else
