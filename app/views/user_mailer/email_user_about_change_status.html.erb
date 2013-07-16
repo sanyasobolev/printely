@@ -18,9 +18,9 @@
   </head>
   <body>
     <h1 class="orange">Здравствуйте, <%= @user.first_name %>!</h1>
-    <p>
-      Статус Вашего заказа №<%= @order.id %> - "<%= @order.status %>"
-    </p>
+    <h2>
+      Ваш заказ №<%= @order.id %> - <%= @order.status %>.
+    </h2>
     <p>
       Для просмотра информации о заказе, пройдите по ссылке: <%= @url_show_order %>.
     </p>
