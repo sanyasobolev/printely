@@ -15,7 +15,7 @@ class UserMailer < ActionMailer::Base
     @url_myoffice  = "http://printely.ru/myoffice"
     @url_show_order  = "http://printely.ru/orders/#{order.id}"
     @user = User.find_by_id(order.user_id)
-    mail(:to => @user.email, :subject => "Заказ №#{order.id}. Статус - #{order.status}")
+    mail(:to => @user.email, :subject => "Заказ №#{order.id} #{order.status}")
   end
 
 

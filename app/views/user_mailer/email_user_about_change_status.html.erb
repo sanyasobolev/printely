@@ -14,19 +14,22 @@
       .float_right {
           float: right
       }
+      .bold {
+          font-weight: bold;
+      }
     </style>
   </head>
   <body>
     <h1 class="orange">Здравствуйте, <%= @user.first_name %>!</h1>
-    <h2>
-      Ваш заказ №<%= @order.id %> - <%= @order.status %>.
-    </h2>
+    <p class="bold">
+      Ваш заказ №<%= @order.id %> <%= @order.status %>.
+    </p>
     <p>
       Для просмотра информации о заказе, пройдите по ссылке: <%= @url_show_order %>.
     </p>
     <p>
       Для входа в личный кабинет, пройдите по ссылке: <%= @url_myoffice %>.
     </p>
-    <%=  image_tag('logo_sbold_black.png', :class => "float_right") %>
+    <a href="http://printely.ru"><img src="/assets/logo_sbold_black.png" border="0" class="float_right"></a>
   </body>
 </html>
