@@ -61,12 +61,12 @@ Spsite::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    :address              => "mail.locum.ru",
-    :port                 => 587,
+    :address              => "smtp.locum.ru",
+    :port                 => 25,
     :user_name            => 'info@printely.ru',
     :password             => 'n1eCqlROhJ0F',
     :authentication       => 'plain',
-    :enable_starttls_auto => true  }
+    :enable_starttls_auto => false  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)

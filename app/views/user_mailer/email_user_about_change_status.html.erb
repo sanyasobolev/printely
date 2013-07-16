@@ -4,6 +4,18 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <p>Thanks for joining and have a great day!</p>
+  <body>
+    <h1 class="orange">Здравствуйте, <%= @user.first_name %>!</h1>
+    <p>
+      Статус Вашего заказа №<%= @order.id %> - "<%= @order.status %>"
+    </p>
+    <p>
+      Для просмотра информации о заказе, пройдите по ссылке: <%= @url_show_order %>.
+    </p>
+    <p>
+      Для входа в личный кабинет, пройдите по ссылке: <%= @url_myoffice %>.
+    </p>
+    <%=  image_tag('logo_sbold_black.png', :class => "float_right") %>
+  </body>
   </body>
 </html>

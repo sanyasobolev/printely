@@ -4,13 +4,14 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Welcome to example.com, <%= @user.first_name %></h1>
+    <h1 class="orange">Здравствуйте, <%= @user.first_name %>!</h1>
     <p>
-      You have successfully signed up to example.com<br/>
+      Вы успешно зарегистрировались на сайте Printely.ru! <br/>
     </p>
     <p>
-      To login to the site, just follow this link: <%= @url %>.
+      Для входа в личный кабинет, пройдите по ссылке: <%= @url %>.
     </p>
-    <p>Thanks for joining and have a great day!</p>
+    <p>Спасибо, что Вы с нами и удачного Вам дня!</p>
+    <%=  image_tag('logo_sbold_black.png', :class => "float_right") %>
   </body>
 </html>
