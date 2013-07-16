@@ -1,6 +1,6 @@
 # encoding: utf-8
 class UserMailer < ActionMailer::Base
-  default from: "notifications@printely.ru"
+  default from: "info@printely.ru"
 
   #рассылка при регистрации нового пользователя
   def welcome_email(user)

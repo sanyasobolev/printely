@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :articles
   belongs_to :role
   has_many :pages
-  has_many :orders
+  has_many :orders, :dependent => :destroy
 
   #константы---------------------------------------------------------------------------------
   #максмимальные и минимальные значения для полей
