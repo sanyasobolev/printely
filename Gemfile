@@ -32,6 +32,7 @@ gem "therubyracer"
 group :production do
   gem 'execjs'
   gem 'unicorn'
+  gem 'roadie' #make sending HTML emails by inlining stylesheets
 end
 
 # To use ActiveModel has_secure_password
