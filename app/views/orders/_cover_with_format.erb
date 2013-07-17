@@ -1,5 +1,5 @@
 <div id="cover_<%= format %>">
-  <h2 class="orange"><%= title %></h2>
+  <h2><%= title %></h2>
   <table>
     <tr>
       <td><%= label(:order, :client, :class => 'bold') %>:</td>
@@ -13,9 +13,15 @@
       <td class="bold"><%= Document.human_attribute_name("quantity") %>:</td>
       <td><%= documents_quantity %> </td>
     </tr>
+    <tr>
+      <td class="bold"><%= label(:order, :cost)%>:</td>
+      <td><%=h (number_to_currency(order.cost, :unit => "коп.", :separator => " руб. ")) %></td>
+    </tr>
   </table>
   <br />
-  <h2 class="orange"> Доставка </h2>
+  <br />
+  <br />
+  <h2> Информация о доставке </h2>
   <table>
     <tr>
       <td><%= label(:order, :delivery_street, :class => 'bold')%>:</td>
@@ -36,9 +42,5 @@
       </td>
     </tr>
   </table>
-
-  <div class="container_for_cost_order">
-    <%=h (number_to_currency(order.cost, :unit => "коп.", :separator => " руб. ")) %>
-  </div>
   <%=  image_tag('logo_sbold_black.png') %>
 </div>

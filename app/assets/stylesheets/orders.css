@@ -322,33 +322,12 @@ button.increase {
 }
 
 
-#cover_c6 div.container_for_cost_order {
-    position: relative;
-    top: 5mm;
-    width: 100%;
-    padding: 0mm;
-    padding-top: 5mm;
-    padding-bottom: 7mm;
-    font-size: 3em;
-    text-align: center;
-}
-
 #cover_c6 img {
     position: relative;
-    right: -105mm;
-    top: -93mm;
+    right: -100mm;
+    top: 10mm;
 }
 
-#cover_c5 div.container_for_cost_order {
-    position: relative;
-    top: 20px;
-    width: 100%;
-    padding: 0mm;
-    padding-top: 5mm;
-    padding-bottom: 7mm;
-    font-size: 3em;
-    text-align: center;
-}
 
 #cover_c5 img {
     position: relative;
@@ -356,16 +335,6 @@ button.increase {
     top: 5mm;
 }
 
-#cover_c4 div.container_for_cost_order {
-    position: relative;
-    top: 20px;
-    width: 100%;
-    padding: 0mm;
-    padding-top: 5mm;
-    padding-bottom: 7mm;
-    font-size: 3em;
-    text-align: center;
-}
 
 #cover_c4 img {
     position: relative;
