@@ -304,24 +304,21 @@ button.increase {
 }
 
 /*------------------------------*/
-/*печать конвертов-----------------------------*/
+/*печать конвертов- settings for brother mfc7360n----------------------------*/
 
 #cover_c6 {
-    width: 162mm;
-    height: 114mm;
-    padding: 5mm;
+    width: 154mm;
+    height: 101mm;
 }
 
 #cover_c5 {
-    width: 229mm;
-    height: 162mm;
-    padding: 5mm;
+    width: 221mm;
+    height: 149mm;
 }
 
 #cover_c4 {
-    width: 324mm;
-    height: 229mm;
-    padding: 5mm;
+    width: 316mm;
+    height: 216mm;
 }
 
 
@@ -338,8 +335,8 @@ button.increase {
 
 #cover_c6 img {
     position: relative;
-    right: -118mm;
-    top: 5mm;
+    right: -105mm;
+    top: -93mm;
 }
 
 #cover_c5 div.container_for_cost_order {
@@ -355,7 +352,7 @@ button.increase {
 
 #cover_c5 img {
     position: relative;
-    right: -185mm;
+    right: -175mm;
     top: 5mm;
 }
 
@@ -372,6 +369,6 @@ button.increase {
 
 #cover_c4 img {
     position: relative;
-    right: -280mm;
+    right: -271mm;
     top: 5mm;
 }

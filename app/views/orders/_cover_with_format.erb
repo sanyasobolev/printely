@@ -2,31 +2,31 @@
   <h2 class="orange"><%= title %></h2>
   <table>
     <tr>
-      <td><%= label(:order, :client) %>:</td>
+      <td><%= label(:order, :client, :class => 'bold') %>:</td>
       <td><%= order.user.first_name %> <%= order.user.second_name %></td>
     </tr>
     <tr>
-      <td><%= User.human_attribute_name("phone") %>:</td>
+      <td class="bold"><%= User.human_attribute_name("phone") %>:</td>
       <td><%= order.user.phone %> </td>
     </tr>
     <tr>
-      <td><%= Document.human_attribute_name("quantity") %>:</td>
-      <td><%= order.documents.count %> </td>
+      <td class="bold"><%= Document.human_attribute_name("quantity") %>:</td>
+      <td><%= documents_quantity %> </td>
     </tr>
   </table>
   <br />
   <h2 class="orange"> Доставка </h2>
   <table>
     <tr>
-      <td><%= label(:order, :delivery_street)%>:</td>
+      <td><%= label(:order, :delivery_street, :class => 'bold')%>:</td>
       <td><%= order.delivery_street %></td>
     </tr>
     <tr>
-      <td><%= label(:order, :delivery_address)%>:</td>
+      <td><%= label(:order, :delivery_address, :class => 'bold')%>:</td>
       <td><%= order.delivery_address %></td>
     </tr>
     <tr>
-      <td><%= label(:order, :delivery_date)%>:</td>
+      <td><%= label(:order, :delivery_date, :class => 'bold')%>:</td>
       <td><%=h (Russian::strftime(order.delivery_date, "%d %B %Y года")) %></td>
       <td>
         <%= label(:order, :delivery_start_time) %>

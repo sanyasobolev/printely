@@ -2,6 +2,22 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <style type="text/css">
+      .orange {
+          padding: 10px;
+          background-color: orange;
+      }
+      p {
+          font-size: 1em;
+          line-height: 130%;
+      }
+      .float_right {
+          float: right
+      }
+      .bold {
+          font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <h1 class="orange">Здравствуйте, <%= @user.first_name %>!</h1>
@@ -12,6 +28,6 @@
       Для входа в личный кабинет, пройдите по ссылке: <%= @url %>.
     </p>
     <p>Спасибо, что Вы с нами и удачного Вам дня!</p>
-    <%=  image_tag('logo_sbold_black.png', :class => "float_right") %>
+     <a href="http://printely.ru"><img src="http://printely.ru/assets/logo_sbold_black.png" border="0" class="float_right" alt="&copy; Printely. Все права защищены" /></a>
   </body>
 </html>

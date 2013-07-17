@@ -144,6 +144,10 @@ class OrdersController < ApplicationController
     @order = Order.find_by_id(params[:id])
     @title = "Заказ № #{@order.id}"
     @format = params[:format]
+    @documents_quantity = 0
+    @order.documents.each do |document|
+      @documents_quantity = @documents_quantity + document.quantity.to_i 
+    end
     render layout: "cover_for_order"
   end
 
