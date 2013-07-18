@@ -296,6 +296,12 @@ p {
     line-height: 130%;
 }
 
+p.cover{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
 .big_text {
     font-size: 3em;
 }
