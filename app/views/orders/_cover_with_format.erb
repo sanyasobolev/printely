@@ -13,6 +13,11 @@
   <p class="cover"> <span class="bold"><%= label(:order, :cost)%>:</span>
   <%=h (number_to_currency(order.cost, :unit => "коп.", :separator => " руб. ")) %></p>
   <br/>
+  <% if format == 'c5' || format == 'c4'  %>
+    <br/>
+    <br/>
+    <br/>
+  <% end %>
 
   <h2> Информация о доставке </h2>
   <p class="cover"> <span class="bold"><%= label(:order, :delivery_street, :class => 'bold')%>:</span>
