@@ -27,7 +27,7 @@ class PagesController < ApplicationController
   end
 
   def welcome
-    if params[:id] == 'welcome'
+    if params[:id] == 'printely'
       @page = Page.find_by_permalink(params[:id])
       @title = @page.title
     end

@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   skip_before_filter :login_required, :authorized?,
                      :only => [:new, :create]
 
+  def admin #страница администратора
+
+  end
+
   def index
     @title = 'Администрирование - Пользователи системы'
     @users = params[:role] ? User.where(:role_id => Role.where(:name => params[:role])) : User.all

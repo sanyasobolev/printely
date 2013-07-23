@@ -2,11 +2,13 @@ Spsite::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
 
-  root :to => 'pages#welcome', :id => 'welcome' #отправляет на действие welcome контроллера pages, с Id=welcome
+  root :to => 'pages#welcome', :id => 'printely' #отправляет на действие welcome контроллера pages, с Id=printely
   match "sitemap" => "sitemap#index"
   match "myoffice" => "orders#index", :as => :myoffice
 
-  resources :users
+  resources :users do
+      get 'admin', :on => :collection
+  end
   resources :rights
   resources :roles
 

@@ -13,8 +13,8 @@ class CreatePages < ActiveRecord::Migration
     end
     Page.create(
         :id => '1',
-        :title => 'welcome',
-        :permalink => 'welcome',
+        :title => 'Printely',
+        :permalink => 'printely',
         :body => 'Добро пожаловать',
         :user_id => '1',
         :section_id => '0')
