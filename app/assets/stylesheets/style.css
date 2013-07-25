@@ -45,19 +45,26 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 900px;
-    min-height: 400px;
+    min-height: 700px;
 }
 
-#first_bottom_panel {
+#contact_bottom_panel {
     height: 45px;
     width: 100%;
     background-color: #f2f2f2;
 }
 
-#second_bottom_panel {
+#first_bottom_panel {
     height: 150px;
     width: 100%;
-    background-color: #3f3f3f;
+    background-color: #565656;
+    color: #c3c0b9
+}
+
+#second_bottom_panel {
+    height: 28px;
+    width: 100%;
+    background-color: #363738;
 }
 /*-----------------------------------------------------------------------------------------*/
 /*контейнеры верхней панели---------------------------------------------------------------------*/
@@ -232,6 +239,49 @@ a.top_section:hover {
     padding-top: 3px;
 }
 
+#contact_mail {
+    display: block;
+    height: 100%;
+    margin-left: 20px;
+    width: 200px;
+    float: left;
+}
+
+#contact_mail img#mail {
+    margin-top: 5px;
+    float: left;
+}
+
+#contact_phone {
+    display: block;
+    height: 100%;
+    width: 200px;
+    float: left;
+}
+
+#contact_phone img#phone {
+    margin-top: 5px;
+    float: left;
+}
+
+#contact_skype {
+    display: block;
+    height: 100%;
+    width: 200px;
+    float: left;
+}
+
+#contact_skype img#skype {
+    margin-top: 5px;
+    float: left;
+}
+
+.contact_text {
+    margin-top: 10px;
+    margin-left: 5px;
+    float: left;
+}
+
 #all_rights {
     font-size: 0.9em;
     float: left;
@@ -259,6 +309,10 @@ a.bot_section:link, a.bot_section:visited {
 a.bot_section:hover {
     color: #F7941D;
     text-decoration:none;
+}
+
+#about_us {
+    margin-top: 20px;
 }
 
 /*общие*/

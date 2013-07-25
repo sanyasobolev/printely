@@ -68,7 +68,7 @@ module AuthenticatedSystem
     #
     def login_required
       unless logged_in?
-        flash[:notice] = "Вы должны войти в систему!"
+        flash[:notice] = "Для входа в систему нам нужно знать Ваш логин(email) и пароль. Введите их ниже, пожалуйста."
         store_location
         redirect_to :controller => :sessions, :action => :new
         return false

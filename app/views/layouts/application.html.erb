@@ -47,9 +47,18 @@
   <div id="content_panel">
     <%= content_for?(:content_panel) ? yield(:content_panel) : yield %>
   </div>
-  
-  <div id="first_bottom_panel">
 
+
+  <div id="contact_bottom_panel">
+    <div id="bot_nav">
+      <%= render :partial => 'share/contacts' %>
+    </div>
+  </div>
+
+  <div id="first_bottom_panel">
+    <div id="bot_nav">
+      <%= render :partial => 'share/about_us' %>
+    </div>
   </div>
 
   <div id="second_bottom_panel">

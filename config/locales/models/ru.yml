@@ -23,7 +23,7 @@ ru:
         body: "Текст статьи"
         published: "Опубликована"
         published_at: "Дата публикации"
-        header_image: "Изображение"
+        header_image: "Изображение (100х150px)"
         category_id: "Категория"
         user_id: "Автор"
         created_at: "Дата создания"
