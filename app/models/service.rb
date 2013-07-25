@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Service < ActiveRecord::Base
 
+  attr_accessible :title, :synopsis, :service_header_icon
+
   #paperclipe
   has_attached_file :service_header_icon,
                     :url => "/assets/services/:id_:basename.:extension",
