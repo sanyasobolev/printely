@@ -22,7 +22,7 @@ Spsite::Application.routes.draw do
      get 'cover', :on => :member
   end
   match 'order/ajaxupdate' => 'orders#ajaxupdate'
-#  match 'orders/:id/cover' => 'orders#cover'
+
 
   controller :sessions do
     get 'login' => :new
