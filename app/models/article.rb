@@ -5,8 +5,8 @@ attr_accessible :title, :synopsis, :body, :category_id, :published, :header_imag
 
 #paperclipe
 has_attached_file :header_image,
-                  :url => "/assets/articles/:id_:basename.:extension",
-                  :path => ":rails_root/app/assets/images/articles/:id_:basename.:extension"
+                  :url => "/assets/articles/:basename.:extension",
+                  :path => ":rails_root/app/assets/images/articles/:filename"
 
 #pagination on page
 cattr_reader :per_page
