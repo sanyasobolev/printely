@@ -78,8 +78,8 @@ module ApplicationHelper
       return @str.html_safe
     when 'orders'
       @second = "<div class='boardlink'> #{link_to image_tag("icons/my_office_black.png", :border => 0), myoffice_path}</div>"
-      @third = "<div class='boardlink'> #{link_to "мои заказы", my_orders_path, :class => 'boardlink' } </div>"
-      @fourth = "<div class='boardtext'> заказ №#{Order.find_by_id(params[:id]).id} </div>"
+      @third = "<div class='boardlink'> #{link_to "Мои заказы", my_orders_path, :class => 'boardlink' } </div>"
+      @fourth = "<div class='boardtext'> Заказ №#{Order.find_by_id(params[:id]).id} </div>"
       @str = @first + @separator + @second + @separator + @third + @separator + @fourth
       return @str.html_safe
     else
@@ -107,7 +107,7 @@ module ApplicationHelper
     case @current_controller
     when 'orders'
         @second = "<div class='boardlink'> #{link_to image_tag("icons/my_office_black.png", :border => 0), myoffice_path}</div>"
-        @third = "<div class='boardlink'> мои заказы </div>"
+        @third = "<div class='boardlink'> Мои заказы </div>"
         @str = @first + @separator + @second + @separator + @third
         return @str.html_safe
     end
