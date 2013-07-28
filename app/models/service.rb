@@ -5,8 +5,8 @@ class Service < ActiveRecord::Base
 
   #paperclipe
   has_attached_file :service_header_icon,
-                    :url => "/assets/services/:id_:basename.:extension",
-                    :path => ":rails_root/app/assets/images/services/:id_:basename.:extension"
+                    :url => "/assets/services/:basename.:extension",
+                    :path => ":rails_root/app/assets/images/services/:filename"
 
   has_many :subservices, :dependent => :destroy
   has_one :page
