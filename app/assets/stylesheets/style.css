@@ -227,7 +227,10 @@ a.top_section:hover {
     position: relative;
     margin-left: 150px;
     min-height: 400px;
-    padding: 20px;
+    padding-top: 0px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 /*контейнеры нижних панелей-----------------------------------------------------------------------------------------*/
