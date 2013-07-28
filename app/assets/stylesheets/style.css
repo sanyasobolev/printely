@@ -336,11 +336,16 @@ h2 {
     background-color: orange;
 }
 
-.grey {
+.grey_color {
     padding: 10px;
     background-color: #EAEAEA;
     color: #666666;
 }
+
+.grey_text {
+    color: #666666;
+}
+
 
 .blue {
     padding: 10px;
