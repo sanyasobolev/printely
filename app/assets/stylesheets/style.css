@@ -335,6 +335,13 @@ h2 {
     padding: 10px;
     background-color: orange;
 }
+
+.grey {
+    padding: 10px;
+    background-color: #EAEAEA;
+    color: #666666;
+}
+
 .blue {
     padding: 10px;
     background-color: #a8edfe
@@ -396,6 +403,12 @@ p.cover{
 
 table {
     border-collapse: collapse;
+}
+
+table#contact_info td {
+	width: 400px;
+	font-size: 1.5em;
+	padding: 10px;
 }
 
 .center_container {

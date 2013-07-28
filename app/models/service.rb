@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Service < ActiveRecord::Base
 
-  attr_accessible :title, :synopsis, :service_header_icon
+  attr_accessible :title, :synopsis, :service_header_icon, :service_id
 
   #paperclipe
   has_attached_file :service_header_icon,
