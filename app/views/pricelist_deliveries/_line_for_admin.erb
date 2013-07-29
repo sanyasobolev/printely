@@ -1,6 +1,0 @@
-<tr>
-  <td><%= link_to 'Х', pricelist_delivery_path(line_for_admin), :method => :delete, :confirm => 'Действительно хотите удалить запись?' %></td>
-  <td><%= line_for_admin.delivery_type %></td>
-  <td><%= h (number_to_currency(line_for_admin.price, :unit => "коп.", :separator => " руб. ")) %></td>
-  <td><%= link_to 'Редактировать', edit_pricelist_delivery_path(line_for_admin) %></td>
-</tr>

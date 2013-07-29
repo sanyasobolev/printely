@@ -19,3 +19,9 @@
   <%= f.file_field :service_header_icon,
                    :class => 'req_input'%>
 </div>
+
+<div class="form_align">
+  <%= f.label :pricelist %>
+  <%= f.select "pricelist", ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}, { :prompt => true }  %>
+</div>
+

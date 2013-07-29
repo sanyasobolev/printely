@@ -10,6 +10,14 @@ class SubservicesController < ApplicationController
       @service = Service.find_by_permalink(params[:service_id])
       @title = @service.title
       @page_about_service = Page.find_by_service_id(@service.id.to_i)
+      @pricelist_for_service_model_name = @service.pricelist
+      
+      #convert string to model and get pricelist lines
+      @lines_of_pricelist = @pricelist_for_service_model_name.constantize.all
+      
+      #get table name
+      @pricelist_for_service_table_name = @pricelist_for_service_model_name.constantize.table_name
+      
       @subservices = Subservice.where("service_id=#{@service.id.to_i}").order("created_at DESC")
     else
       @subservices = Subservice.all

@@ -72,7 +72,7 @@ module ApplicationHelper
         return @str.html_safe
     when 'articles'
       article_title = Article.find_by_permalink(params[:id]).title
-      @second = "<div class='boardlink'> #{link_to "Статьи", articles_path, :class => 'boardlink' } </div>"
+      @second = "<div class='boardlink'> #{link_to "статьи", articles_path, :class => 'boardlink' } </div>"
       @third = "<div class='boardtext'> #{article_title} </div>"
       @str = @first + @separator + @second + @separator + @third
       return @str.html_safe
