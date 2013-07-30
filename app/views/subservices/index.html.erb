@@ -6,7 +6,7 @@
 
 <% if @pricelist_for_service_model_name != nil %>
 	<div class=grey_color>
-		<table id="contact_info">
+		<table id="pricelist_for_user">
 	  		<%= render :partial => "#{@pricelist_for_service_table_name}/line", :collection => @lines_of_pricelist %>
 		</table>
 	</div>
