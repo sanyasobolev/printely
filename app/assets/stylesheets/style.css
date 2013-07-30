@@ -597,16 +597,18 @@ a.for_admin:hover,a.for_admin:active{
 .link_container_for_service .service_synopsis {
     float: left;
     margin-left: 20px;
+    margin-right: 20px;
     color: white;
     }
 
 .link_container_for_service .service_title {
     margin-top: 30px;
+    margin-right: 20px;
     height: 100px;
     float: left;
     color: white;
     font-size: 2em;
-    width: 300px;
+    width: 280px;
     }
 
 /*сложные ссылки---------------------------------------------------*/
