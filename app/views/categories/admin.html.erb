@@ -1,5 +1,5 @@
-<h2>Редактирование категорий</h2>
-  <p><%= link_to 'Создать категорию', new_category_path, :class => 'box' %></p>
+<h2>Редактирование категорий статей</h2>
+  <p><%= link_to 'Создать категорию', new_category_path, :class => 'button_style_long' %></p>
   <table class ="admin">
     <tr>
       <th></th>
@@ -10,3 +10,5 @@
     <%= render :partial => 'category_for_admin', :collection => @categories %>
 
   </table>
+  
+<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>

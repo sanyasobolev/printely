@@ -1,5 +1,5 @@
 <h2>Редактирование подуслуг</h2>
-  <p><%= link_to 'Создать подуслугу', new_subservice_path, :class => 'box' %></p>
+  <p><%= link_to 'Создать подуслугу', new_subservice_path, :class => 'button_style_long' %></p>
 <table class ="admin">
   <tr>
     <th></th>
@@ -12,3 +12,4 @@
 
   <%= render :partial => 'subservice_for_admin', :collection => @subservices %>
 </table>
+<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>

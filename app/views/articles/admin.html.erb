@@ -1,5 +1,5 @@
 <h2>Редактирование статей</h2>
-  <p><%= link_to 'Создать статью', new_article_path, :class => 'box' %></p>
+  <p><%= link_to 'Создать статью', new_article_path, :class => 'button_style_long' %></p>
 <table class ="admin">
   <tr>
     <th></th>
@@ -15,3 +15,5 @@
 
 </table>
   <%= will_paginate @articles %>
+  
+<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>

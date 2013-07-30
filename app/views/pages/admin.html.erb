@@ -1,4 +1,6 @@
 <h2>Собственные страницы в системе</h2>
+<%= link_to 'Создать страницу', new_page_path, :class => 'button_style_long' %>
+
   <h3>Стартовая страница</h3>
     <table class ="admin">
     <tr>
@@ -13,7 +15,7 @@
     </tr>
     </table>
 
-  <h3>Страницы, созданные пользователями</h3>
+  <h3>Остальные страницы</h3>
     <table class ="admin">
       <tr>
         <th></th>
@@ -30,6 +32,8 @@
       <%= render :partial => 'page', :collection => @pages %>
 
     </table>
-  <p><%= link_to 'Создать страницу', new_page_path, :class => 'box' %></p>
+<%= will_paginate @pages %>
 
-  <%= will_paginate @pages %>
+
+<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>
+

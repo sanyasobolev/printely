@@ -1,5 +1,5 @@
 <h2>Редактирование разделов сайта</h2>
-  <p><%= link_to 'Создать раздел', new_section_path, :class => 'box' %></p>
+  <p><%= link_to 'Создать раздел', new_section_path, :class => 'button_style_long' %></p>
   <table class ="admin">
     <tr>
       <th></th>
@@ -14,3 +14,5 @@
     <%= render :partial => 'section', :collection => @sections %>
 
   </table>
+  
+<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>

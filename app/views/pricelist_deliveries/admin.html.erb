@@ -1,12 +1,14 @@
 <h2>Редактирование прайс-листа</h2>
-  <p><%= link_to 'Создать запись', new_pricelist_delivery_path, :class => 'box' %></p>
+  <p><%= link_to 'Создать запись', new_pricelist_delivery_path, :class => 'button_style_long' %></p>
 <table class ="admin">
   <tr>
-    <th></th>
     <th><%= PricelistDelivery.human_attribute_name("delivery_type") %></th>
     <th><%= PricelistDelivery.human_attribute_name("price") %></th>
+    <th></th>
     <th></th>
   </tr>
 
   <%= render :partial => 'line', :collection => @lines %>
 </table>
+
+<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>
