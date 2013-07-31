@@ -7,7 +7,7 @@ class Ckeditor::PicturesController < Ckeditor::ApplicationController
   
   def create
     @picture = Ckeditor::Picture.new
-	  respond_with_asset(@picture)
+    respond_with_asset(@picture)
   end
   
   def destroy
@@ -19,5 +19,10 @@ class Ckeditor::PicturesController < Ckeditor::ApplicationController
   
     def find_asset
       @picture = Ckeditor.picture_model.get!(params[:id])
+    end
+
+    def authorize_resource
+      model = (@picture || Ckeditor::Picture)
+      @authorization_adapter.try(:authorize, params[:action], model)
     end
 end

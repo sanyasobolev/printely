@@ -6,7 +6,8 @@ gem "russian"
 gem "rdoc"
 gem "dynamic_form" #отображение ошибок
 gem 'will_paginate', '~> 3.0' #пагинация страниц
-gem "ckeditor", "3.7.1" #WYSIWYG редактор
+#gem "ckeditor", "3.7.1" #WYSIWYG редактор
+gem "ckeditor", "4.0.4" #WYSIWYG редактор
 gem "paperclip", "3.1.4" #загрузка файлов на сервер
 gem "cocaine", "0.3.2" #for piperclip
 gem 'gon', '3.0.5' #for pass variables to JS
