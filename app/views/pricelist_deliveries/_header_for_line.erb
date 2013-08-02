@@ -3,6 +3,8 @@
     <th><%= PricelistDelivery.human_attribute_name("price") %></th>
     <th><%= PricelistDelivery.human_attribute_name("delivery_limit_time") %></th>
     <th><%= PricelistDelivery.human_attribute_name("territory") %></th>
-    <th></th>
-    <th></th>
+    <% if current_user && current_user.has_role?('Administrator') %>
+    	<th></th>
+    	<th></th>
+    <% end %>
   </tr>

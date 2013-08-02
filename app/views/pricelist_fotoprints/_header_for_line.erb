@@ -2,6 +2,8 @@
     <th><%= PricelistFotoprint.human_attribute_name("print_format") %></th>
     <th><%= PricelistFotoprint.human_attribute_name("paper_type") %></th>
     <th><%= PricelistFotoprint.human_attribute_name("price") %></th>
-    <th></th>
-    <th></th>
+    <% if current_user && current_user.has_role?('Administrator') %>
+    	<th></th>
+    	<th></th>
+    <% end %>
   </tr>

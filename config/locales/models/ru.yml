@@ -127,7 +127,7 @@ ru:
         price: "Цена"
       pricelist_delivery:
         delivery_type: "Тип доставки"
-        price: "Цена доставки"
+        price: "Цена"
         territory: "Покрытие"
-        delivery_limit_time: "Время доставки"
+        delivery_limit_time: "Время"
 
