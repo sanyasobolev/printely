@@ -9,11 +9,16 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => "Вы успешно зарегистрированы на сайте Printely.ru!")
   end
 
+  #рассылка при создании нового заказа
+  def email_user_about_new_order(order)
+    @order = order
+    @user = User.find_by_id(order.user_id)
+    mail(:to => @user.email, :subject => "Заказ №#{order.id} создан и #{order.status}")
+  end
+
   #рассылка при изменении статуса заказа
   def email_user_about_change_status(order)
     @order = order
-    @url_myoffice  = "http://printely.ru/myoffice"
-    @url_show_order  = "http://printely.ru/orders/#{order.id}"
     @user = User.find_by_id(order.user_id)
     mail(:to => @user.email, :subject => "Заказ №#{order.id} #{order.status}")
   end

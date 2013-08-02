@@ -1,7 +1,6 @@
 # encoding: utf-8
 class OrdersController < ApplicationController
   layout 'orders_boardlinks', :only => [:index, :my, :show]
-#  layout 'cover_for_order', :only => [:cover]
 
   skip_before_filter :authorized?,
                      :only => [:index, :my, :new, :show, :edit, :update, :destroy, :ajaxupdate]
@@ -91,6 +90,7 @@ class OrdersController < ApplicationController
         end
          if @order.update_attributes(:delivery_street => params[:order][:delivery_street], :delivery_address => params[:order][:delivery_address], :delivery_date => params[:order][:delivery_date], :delivery_start_time => params[:order][:delivery_start_time], :delivery_end_time => params[:order][:delivery_end_time], :status => Order::STATUS[1], :created_at => Time.now)
           UserMailer.email_all_admins_about_new_order(@order)
+          UserMailer.email_user_about_new_order(@order).deliver
           flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
           redirect_to my_orders_path
         end

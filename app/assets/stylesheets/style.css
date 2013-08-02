@@ -419,9 +419,13 @@ table#contact_info td {
 	padding: 10px;
 }
 
-table#pricelist_for_user td {
-	width: 400px;
+table#pricelist_for_user {
 	font-size: 1.5em;
+}
+
+table#pricelist_for_user td, th {
+	text-align: left;
+	width: 400px;
 	padding: 10px;
 }
 
