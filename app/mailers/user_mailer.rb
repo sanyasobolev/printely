@@ -12,8 +12,10 @@ class UserMailer < ActionMailer::Base
   #рассылка при создании нового заказа
   def email_user_about_new_order(order)
     @order = order
+    @myoffice  = "http://printely.ru/myoffice"
+    @url_to_order = "http://printely.ru/order/#{@order.id}"
     @user = User.find_by_id(order.user_id)
-    mail(:to => @user.email, :subject => "Заказ №#{order.id} создан и #{order.status}")
+    mail(:to => @user.email, :subject => "Заказ №#{order.id} создан и находится #{order.status}")
   end
 
   #рассылка при изменении статуса заказа
