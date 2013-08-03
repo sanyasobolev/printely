@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
   DELIVERY_COMMENT_COLS_SIZE = 40
 
   #статусы
-  #to_remove - заказ должен бть удален немедленно
+  #draft - заказ должен бть удален немедленно
   STATUS = ['draft','на обработке', 'печатается', 'едет к Вам', 'выполнен', 'отклонен']
   DEFAULT_START_TIME = '07:00'
   DEFAULT_END_TIME = '00:00'

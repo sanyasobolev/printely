@@ -64,7 +64,11 @@ class OrdersController < ApplicationController
         if @order.update_attributes(params[:order])
           new_status = @order.status
           if new_status != old_status #отправка сообщения на почту пользователя, ели статус был изменен
-            UserMailer.email_user_about_change_status(@order).deliver
+            if new_status == 'выполнен'
+              UserMailer.email_user_about_complete_order(@order).deliver
+            else
+              UserMailer.email_user_about_change_status(@order).deliver
+            end
           end
           flash[:notice] = 'Заказ обновлен.'
           wants.html { redirect_to admin_orders_path }

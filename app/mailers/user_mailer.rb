@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
   #рассылка при регистрации нового пользователя
   def welcome_email(user)
     @user = user
-    @url  = "http://printely.ru/myoffice"
+    @myoffice  = "http://printely.ru/myoffice"
     mail(:to => user.email, :subject => "Вы успешно зарегистрированы на сайте Printely.ru!")
   end
 
@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
   def email_user_about_new_order(order)
     @order = order
     @myoffice  = "http://printely.ru/myoffice"
-    @url_to_order = "http://printely.ru/order/#{@order.id}"
+    @url_to_order = "http://printely.ru/orders/#{@order.id}"
     @user = User.find_by_id(order.user_id)
     mail(:to => @user.email, :subject => "Заказ №#{order.id} создан и находится #{order.status}")
   end
@@ -21,6 +21,8 @@ class UserMailer < ActionMailer::Base
   #рассылка при изменении статуса заказа
   def email_user_about_change_status(order)
     @order = order
+    @myoffice  = "http://printely.ru/myoffice"
+    @url_to_order = "http://printely.ru/orders/#{@order.id}"
     @user = User.find_by_id(order.user_id)
     mail(:to => @user.email, :subject => "Заказ №#{order.id} #{order.status}")
   end

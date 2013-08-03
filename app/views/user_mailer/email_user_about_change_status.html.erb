@@ -25,10 +25,10 @@
       Ваш заказ №<%= @order.id %> <%= @order.status %>.
     </p>
     <p>
-      Для просмотра информации о заказе, пройдите по <%= link_to 'ссылке', order_path(@order.id) %>.
+      Для просмотра информации о заказе, пройдите по <%= link_to 'ссылке', @url_to_order%>.
     </p>
     <p>
-      Для входа в личный кабинет, пройдите по <%= link_to 'ссылке', myoffice_path %>.
+      Для входа в личный кабинет, пройдите по <%= link_to 'ссылке', @myoffice %>.
     </p>
     <a href="http://printely.ru"><img src="http://printely.ru/assets/logo_sbold_black.png" border="0" class="float_right" alt="&copy; Printely. Все права защищены" /></a>
   </body>
