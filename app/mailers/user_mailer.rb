@@ -27,6 +27,15 @@ class UserMailer < ActionMailer::Base
     mail(:to => @user.email, :subject => "Заказ №#{order.id} #{order.status}")
   end
 
+  #рассылка при выполнении заказа
+  def email_user_about_complete_order(order)
+    @order = order
+    @url_to_letters = "http://printely.ru/letters/new"
+    @user = User.find_by_id(order.user_id)
+    mail(:to => @user.email, :subject => "Заказ №#{order.id} #{order.status}")
+  end
+
+
 
   #рассылка всем админам о регистрации нового юзера
    def self.email_all_admins_about_new_user(new_user)
