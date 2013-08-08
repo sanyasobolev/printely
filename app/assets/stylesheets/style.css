@@ -286,8 +286,9 @@ a.top_section:hover {
 }
 
 .contact_text {
-    margin-top: 10px;
+    margin-top: 7px;
     margin-left: 5px;
+    margin-bottom: 3px;
     float: left;
 }
 
