@@ -30,8 +30,7 @@ $(function() {
                             width: $(window).width(),
                             cookie: true,
                             auto : {
-                                pauseDuration: 7000,
-                                pauseOnHover    : "immediate"
+                                pauseDuration: 7000
                             },
                             pagination: {
                                     container: '#slide_img_pag'

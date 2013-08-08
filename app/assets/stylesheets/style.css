@@ -223,7 +223,7 @@ a.top_section:hover {
     float: left;
 }
 
-#content {
+#content_article {
     position: relative;
     margin-left: 150px;
     min-height: 400px;
@@ -231,6 +231,12 @@ a.top_section:hover {
     padding-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
+}
+
+#bottombar {
+	position:relative;
+	width: 100%;
+	min-height: 200px;
 }
 
 /*контейнеры нижних панелей-----------------------------------------------------------------------------------------*/
@@ -401,6 +407,13 @@ p.cover{
 .fl_clear {
     float: none;
     clear: both;
+}
+
+.header_for_news {
+	position:absolute;
+	top:80px;
+	left:20px;
+
 }
 
 .multi_form {
@@ -903,7 +916,7 @@ a.boardlink:hover, a.boardlink:active {
 }
 
 
-/*оформление статей-----------------------------------------------*/
+/*оформление статей и новостей-----------------------------------------------*/
 .article {
     position: relative;
     margin: 10px;
@@ -958,6 +971,55 @@ a.boardlink:hover, a.boardlink:active {
     position: absolute;
     left: 60px;
 }
+
+.news {
+    margin-left: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100px;
+    width: 600px;
+    background:#F4F4F4
+}
+
+.news:hover {
+    background:#DFDFDF;
+    cursor:pointer;
+}
+
+.news_created_at {
+	width: 25%;
+	height: 100%;
+	float:left;
+	text-align:right;
+	margin-right: 2%;
+	font-style:italic;
+
+	color:#4b4b4b;
+}
+
+.news_title {
+	float:left;
+	width:70%;
+	height: 30%;
+	font-style:italic;
+	font-weight:bold;
+	color:#4b4b4b;
+}
+
+.news_synopsis {
+	float:left;
+	width: 70%;
+	height:70%;
+	vertical-align: top;
+}
+
+.news_synopsis p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-style:italic;
+	color:#4b4b4b;
+}
+
 
 /*карта сайта-------------------------------------*/
 .left_site_map {

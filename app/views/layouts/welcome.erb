@@ -6,4 +6,12 @@
   <%= render :partial => 'share/slide_panel' %>
 <% end %>
 
+<% content_for :content_panel do %>
+  <%= yield %>
+  <div id="bottombar">
+    <%= render :partial => 'share/bottombar_for_welcome', :locals => {:news_for_user => @news_for_user} %>
+  </div>
+<% end %>
+
+
 <%= render :template => 'layouts/application' %>

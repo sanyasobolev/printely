@@ -30,6 +30,9 @@ class PagesController < ApplicationController
     if params[:id] == 'printely'
       @page = Page.find_by_permalink(params[:id])
       @title = @page.title
+      #get news list for user
+      category_id_for_user_news = Category.where(:name => "Архив новостей").first.id
+      @news_for_user = Article.where(:category_id => category_id_for_user_news).order("published_at DESC").limit(2)
     end
     respond_to do |format|
         format.html
