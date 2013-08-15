@@ -28,16 +28,25 @@ $(document).ready(function(){
           var selected_print_format = $(this).val(),
               document_id = this.parentNode.parentNode.id;
               url = "/document/ajaxupdate";
-          $.post( url, {id: document_id, print_format: selected_print_format} );
-          $.post( url_for_update_order, {id: order_id} );
+          $.post( url, 
+          	{id: document_id, print_format: selected_print_format},
+          	function() {
+               $.post( url_for_update_order, {id: order_id} );
+  				}
+          	);
         });
 
         $("select[name*='paper_type']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
           var selected_paper_type = $(this).val(),
               document_id = this.parentNode.parentNode.id;
               url = "/document/ajaxupdate";
-          $.post( url, {id: document_id, paper_type: selected_paper_type} );
-          $.post( url_for_update_order, {id: order_id} );
+          $.post( url, 
+          	{id: document_id, paper_type: selected_paper_type},
+          	function() {
+               $.post( url_for_update_order, {id: order_id} );
+  				}
+          	);
+
         });
 
         $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
@@ -46,8 +55,12 @@ $(document).ready(function(){
               url = "/document/ajaxupdate";
           selected_quantity = validate(parseInt(selected_quantity));
           $(this).val(selected_quantity);
-          $.post( url, {id: document_id, quantity: selected_quantity} );
-          $.post( url_for_update_order, {id: order_id} );
+          $.post( url, 
+          	{id: document_id, quantity: selected_quantity},
+          	function() {
+               $.post( url_for_update_order, {id: order_id} );
+  				}
+          	 );
         });
 
         //обновление цены после удаления одного документа

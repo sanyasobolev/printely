@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   has_many :documents, :dependent => :destroy
   accepts_nested_attributes_for :documents, :allow_destroy => true
   #варианты доставки
-  DELIVERY_STREET = ['КЭЧ', 'Тарасково', 'Фабричная']
+  DELIVERY_STREET = ['КЭЧ', 'Тарасково']
   DELIVERY_TYPE= ['Курьер']
 
   #размер боксов полей в формах
