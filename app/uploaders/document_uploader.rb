@@ -54,12 +54,12 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    if File.exists?(Rails.root.join("uploads/order_#{model.order.id}" + "#{file.filename}")) && !path.to_s.eql?(Rails.root.join("uploads/order_#{model.order.id}" + original_filename).to_s)
-      @name ||= File.basename(original_filename, '.*') + "_pp_#{self.model.attributes["print_format"].parameterize}_#{self.model.attributes["paper_type"].parameterize}_#{self.model.attributes["quantity"]}_#{self.model.attributes["margins"].parameterize}"
-      "#{@name}.#{file.extension}"
-    else
+#    if File.exists?(Rails.root.join("uploads/order_#{model.order.id}" + "#{file.filename}")) && !path.to_s.eql?(Rails.root.join("uploads/order_#{model.order.id}" + original_filename).to_s)
+#      @name ||= File.basename(original_filename, '.*') + "_pp_#{self.model.attributes["print_format"].parameterize}_#{self.model.attributes["paper_type"].parameterize}_#{self.model.attributes["quantity"]}_#{self.model.attributes["margins"].parameterize}"
+#      "#{@name}.#{file.extension}"
+#    else
       "#{original_filename}_pp_#{self.model.attributes["print_format"].parameterize}_#{self.model.attributes["paper_type"].parameterize}_#{self.model.attributes["quantity"]}_#{self.model.attributes["margins"].parameterize}" if original_filename
-    end
+#    end
   end
 
 end
