@@ -15,6 +15,7 @@ class DocumentsController < ApplicationController
   def create
     #set_defaults_params
     @document.quantity = '1'
+    @document.margins = Document::MARGINS[0]
     @document.print_format = Document::PRINT_FORMAT[0]
     @document.paper_type = Document::PAPER_TYPE[0]
     set_price(@document.print_format, @document.paper_type, @document.quantity)
@@ -38,9 +39,12 @@ class DocumentsController < ApplicationController
       @document.update_attribute(:paper_type, params[:paper_type])
     elsif params[:quantity]
       @document.update_attribute(:quantity, params[:quantity])
+    elsif params[:margins]
+      @document.update_attribute(:margins, params[:margins])
     end
     set_price(@document.print_format, @document.paper_type, @document.quantity)
     @document.update_attribute(:price, @document.price)
+    change_file_name
     respond_to do |format|
         format.js
       end
@@ -67,6 +71,11 @@ class DocumentsController < ApplicationController
 
     def set_price(print_format, paper_type, quantity)
       @document.price = (PricelistFotoprint.where(:print_format => print_format).where(:paper_type => paper_type).first.price)*quantity
+    end
+    
+    def change_file_name
+      @document.docfile.recreate_versions!
+      @document.docfile.save!
     end
 
 end
