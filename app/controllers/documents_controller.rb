@@ -75,7 +75,7 @@ class DocumentsController < ApplicationController
     
     def change_file_name
       @document.docfile.recreate_versions!
-      @document.docfile.save!
+      @document.save!
     end
 
 end
