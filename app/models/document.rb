@@ -5,7 +5,7 @@ class Document < ActiveRecord::Base
 
   mount_uploader :docfile, DocumentUploader
 
-  attr_accessible :docfile, :print_format, :user_comment, :paper_type, :quantity, :margins, :price
+  attr_accessible :docfile, :print_format, :user_comment, :paper_type, :quantity, :margins, :price, :original_filename
 
   #варианты форматов печати
   PRINT_FORMAT = ['10x15', 'А4']
