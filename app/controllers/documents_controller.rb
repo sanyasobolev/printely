@@ -18,7 +18,7 @@ class DocumentsController < ApplicationController
     @document.margins = Document::MARGINS[0]
     @document.print_format = Document::PRINT_FORMAT[0]
     @document.paper_type = Document::PAPER_TYPE[0]
-    @document.user_filename = params[:filename] #save user file name
+    @document.user_filename = params[:Filename] #save user file name
     set_price(@document.print_format, @document.paper_type, @document.quantity)
     #---------------------
     @document.docfile = params[:file]
