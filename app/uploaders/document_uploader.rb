@@ -58,7 +58,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
 #      @name ||= File.basename(original_filename, '.*') + "_pp_#{self.model.attributes["print_format"].parameterize}_#{self.model.attributes["paper_type"].parameterize}_#{self.model.attributes["quantity"]}_#{self.model.attributes["margins"].parameterize}"
 #      "#{@name}.#{file.extension}"
 #    else
-      "#{model.id}_PP_#{self.model.attributes["print_format"].parameterize}_#{self.model.attributes["paper_type"].parameterize}_#{self.model.attributes["quantity"]}_#{self.model.attributes["margins"].parameterize}" if original_filename
+      "#{self.model.attributes["id"]}_PP_#{self.model.attributes["print_format"].parameterize}_#{self.model.attributes["paper_type"].parameterize}_#{self.model.attributes["quantity"]}_#{self.model.attributes["margins"].parameterize}" if original_filename
 #    end
   end
 
