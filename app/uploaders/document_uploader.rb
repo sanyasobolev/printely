@@ -55,12 +55,22 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   #"#{model.object_id}_pp_#{self.model.attributes['print_format'].parameterize}_#{self.model.attributes['paper_type'].parameterize}_#{self.model.attributes['quantity']}_#{self.model.attributes['margins'].parameterize}"
 
+#  def filename
+#      if original_filename
+#        quid = SecureRandom.hex(6)
+#        name = "#{quid}_PP_#{model.print_format.parameterize}_#{model.paper_type.parameterize}_#{model.quantity}_#{model.margins.parameterize}"
+#        "#{name}.#{file.extension}"
+#     end
+#  end
+
   def filename
-      if original_filename
-        quid = SecureRandom.hex(6)
-        name = "#{quid}_PP_#{model.print_format.parameterize}_#{model.paper_type.parameterize}_#{model.quantity}_#{model.margins.parameterize}"
-        "#{name}.#{file.extension}"
-      end
+     "#{secure_token}_PP_#{model.print_format.parameterize}_#{model.paper_type.parameterize}_#{model.quantity}_#{model.margins.parameterize}.#{file.extension}" if original_filename.present?
+  end
+
+  protected
+  def secure_token
+    var = :"@#{mounted_as}_secure_token"
+    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.hex(4))
   end
 
 end

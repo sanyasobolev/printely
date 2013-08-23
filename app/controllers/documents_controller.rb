@@ -13,12 +13,6 @@ class DocumentsController < ApplicationController
                 :only => [:create, :destroy]
 
   def create
-    
-    @document = Document.create!
-    @document.docfile = DocumentUploader.new
-    @document.docfile.store!(params[:file])
-    @document.docfile = @document.docfile.filename
-    
     #set_defaults_params
     @document.quantity = '1'
     @document.margins = Document::MARGINS[0]
@@ -27,7 +21,7 @@ class DocumentsController < ApplicationController
     @document.user_filename = params[:Filename] #save user file name
     set_price(@document.print_format, @document.paper_type, @document.quantity)
     #---------------------
-    #@document.docfile = params[:file]
+    @document.docfile = params[:file]
     respond_to do |format|
       unless @document.save
         flash[:error] = 'Photo could not be uploaded'
@@ -51,7 +45,7 @@ class DocumentsController < ApplicationController
     end
     set_price(@document.print_format, @document.paper_type, @document.quantity)
     @document.update_attribute(:price, @document.price)
-    change_file_name #update filename
+    change_file_name
     respond_to do |format|
         format.js
       end
@@ -82,7 +76,6 @@ class DocumentsController < ApplicationController
     
     def change_file_name
       @document.docfile.recreate_versions!
-      @document.save!
+      @document.save!      
     end
-
 end
