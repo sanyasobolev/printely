@@ -23,7 +23,7 @@ class DocumentsController < ApplicationController
     #---------------------
     @document.docfile = params[:file]
     respond_to do |format|
-      unless @document.save
+      unless @document.save!
         flash[:error] = 'Photo could not be uploaded'
       end
       format.js do
