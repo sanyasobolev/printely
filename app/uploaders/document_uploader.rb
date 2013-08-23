@@ -53,10 +53,14 @@ class DocumentUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
+  #"#{model.object_id}_pp_#{self.model.attributes['print_format'].parameterize}_#{self.model.attributes['paper_type'].parameterize}_#{self.model.attributes['quantity']}_#{self.model.attributes['margins'].parameterize}"
+
   def filename
-      #"#{model.object_id}_pp_#{self.model.attributes['print_format'].parameterize}_#{self.model.attributes['paper_type'].parameterize}_#{self.model.attributes['quantity']}_#{self.model.attributes['margins'].parameterize}"
-      quid = SecureRandom.hex
-      "#{quid}_PP_#{model.print_format.parameterize}_#{model.paper_type.parameterize}_#{model.quantity}_#{model.margins.parameterize}" if original_filename
+      if original_filename
+        quid = SecureRandom.hex(6)
+        name = "#{quid}_PP_#{model.print_format.parameterize}_#{model.paper_type.parameterize}_#{model.quantity}_#{model.margins.parameterize}"
+        "#{name}.#{file.extension}"
+      end
   end
 
 end
