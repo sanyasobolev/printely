@@ -55,7 +55,8 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
       #"#{model.object_id}_pp_#{self.model.attributes['print_format'].parameterize}_#{self.model.attributes['paper_type'].parameterize}_#{self.model.attributes['quantity']}_#{self.model.attributes['margins'].parameterize}"
-      "#{model.object_id}_PP_#{model.print_format.parameterize}_#{model.paper_type.parameterize}_#{model.quantity}_#{model.margins.parameterize}"
+      quid = SecureRandom.hex
+      "#{quid}_PP_#{model.print_format.parameterize}_#{model.paper_type.parameterize}_#{model.quantity}_#{model.margins.parameterize}"
   end
 
 end
