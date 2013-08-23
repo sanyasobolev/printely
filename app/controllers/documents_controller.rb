@@ -45,7 +45,7 @@ class DocumentsController < ApplicationController
     end
     set_price(@document.print_format, @document.paper_type, @document.quantity)
     @document.update_attribute(:price, @document.price)
-    change_file_name
+    change_file_name #update filename
     respond_to do |format|
         format.js
       end
