@@ -2,9 +2,11 @@
   <td><%=h (order_for_admin.id) %></td>
   <td><%= order_for_admin.user.first_name %> <%= order_for_admin.user.second_name %> <br /> <%= order_for_admin.user.email %> <br /> <%= order_for_admin.user.phone %> </td>
   <td>
-  	<%=h (Russian::strftime(order_for_admin.delivery_date, "%d %B %Y года")) %> <br />
-  	<%= render :partial => 'delivery_period', :locals => {:order => order_for_admin} %>
-  </td>
+  	<% if order_for_admin.delivery_date != nil %>
+	  	<%=h (Russian::strftime(order_for_admin.delivery_date, "%d %B %Y года")) %> <br />
+	  	<%= render :partial => 'delivery_period', :locals => {:order => order_for_admin} %>
+	<% end %>
+  </td>	
   <td><%=h (order_for_admin.delivery_street) %></td>
   <td><%=h (order_for_admin.delivery_address) %></td>
   <td><%=h (order_for_admin.status) %></td>
