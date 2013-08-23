@@ -38,11 +38,7 @@
         <%= @order.delivery_address %>
       </td>
       <td class="delivery_date">
-         время
-          <%= label(:order, :delivery_start_time) %>
-          <%= h (Russian::strftime(@order.delivery_start_time, "%R")) %>
-          <%= label(:order, :delivery_end_time) %>
-          <%= h (Russian::strftime(@order.delivery_end_time, "%R")) %>
+         время <%= render :partial => 'delivery_period', :locals => {:order => @order} %>
       </td>
       <td class="delivery_price">
         <%= h (number_to_currency(@order.delivery_price, :unit => "коп.", :separator => " руб. ")) %>
