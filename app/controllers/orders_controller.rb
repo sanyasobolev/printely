@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
 
   def my
     @title = 'Мои заказы'
-    @draft_orders = Order.delete_all(:status => Order::STATUS[0]).
+    @draft_orders = Order.delete_all(:status => Order::STATUS[0])
     @orders = Order.paginate :page => params[:page],
                              :order => 'created_at DESC',
                              :include => :user,
