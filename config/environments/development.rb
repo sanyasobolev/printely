@@ -38,7 +38,7 @@ Spsite::Application.configure do
   #paperclip options
 #  Paperclip.options[:command_path] = 'C:\Program Files (x86)\ImageMagick-6.8.2-Q16'
 #  Paperclip.options[:swallow_stderr] = false
-  Paperclip.options[:command_path] = "/usr/local/bin/"
+  Paperclip.options[:command_path] = "/usr/bin/"
 
   Paperclip.interpolates :order_created do |attachment, style|
     attachment.instance.order.created_at.to_formatted_s(:day_month_year)
