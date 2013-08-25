@@ -17,7 +17,12 @@ class OrdersController < ApplicationController
 
   def my
     @title = 'Мои заказы'
-    @draft_orders = Order.delete_all(:status => Order::STATUS[0])
+    @draft_orders = Order.where(:status => Order::STATUS[0], :user_id => current_user.id)
+    @draft_orders.each do |draft_order|
+      draft_order.documents.destroy_all
+      remove_dir(draft_order.id)
+    end
+    @draft_orders.destroy_all
     @orders = Order.paginate :page => params[:page],
                              :order => 'created_at DESC',
                              :include => :user,
@@ -116,6 +121,7 @@ class OrdersController < ApplicationController
     @order.documents.each do |document|
       document.remove_docfile!
     end
+    remove_dir(@order.id)
     @order.destroy
     respond_to do |wants|
       wants.html { redirect_to myoffice_path }
@@ -156,24 +162,29 @@ class OrdersController < ApplicationController
   end
 
   private
-  def order_set_price
-    if @order.delivery_type
-      #ищем цену доставки в прайсе
-      delivery_price = PricelistDelivery.where(:delivery_type => @order.delivery_type).first.price
-    else
-      delivery_price = 0
-    end
-    @order.update_attribute(:delivery_price, delivery_price)
-
-    #считаем стоимость всех документов
-    documents_cost = 0
-    if @order.documents.length > 0
-      @order.documents.each do |document|
-        documents_cost = documents_cost + document.price
+    def order_set_price
+      if @order.delivery_type
+        #ищем цену доставки в прайсе
+        delivery_price = PricelistDelivery.where(:delivery_type => @order.delivery_type).first.price
+      else
+        delivery_price = 0
       end
+      @order.update_attribute(:delivery_price, delivery_price)
+  
+      #считаем стоимость всех документов
+      documents_cost = 0
+      if @order.documents.length > 0
+        @order.documents.each do |document|
+          documents_cost = documents_cost + document.price
+        end
+      end
+      order_cost = @order.delivery_price + documents_cost
+      @order.update_attribute(:cost, order_cost)
     end
-    order_cost = @order.delivery_price + documents_cost
-    @order.update_attribute(:cost, order_cost)
-  end
+  
+    def remove_dir(order_id) #delete order folder
+      FileUtils.remove_dir("#{Rails.root}/public/uploads/order_#{order_id}", :force => true)
+    end
+  
 end
 
