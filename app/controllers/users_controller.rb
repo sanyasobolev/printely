@@ -1,9 +1,9 @@
 # encoding: utf-8
 class UsersController < ApplicationController
-  layout 'signin', :only => [:new, :create]
+  layout 'signin', :only => [:new, :create, :forgot_password]
   
   skip_before_filter :login_required, :authorized?,
-                     :only => [:new, :create]
+                     :only => [:new, :create, :forgot_password, :reset_password]
 
   def admin #страница администратора
 
@@ -86,6 +86,28 @@ class UsersController < ApplicationController
       end
       wants.html { redirect_to users_path }
       wants.xml { render :nothing => true }
+    end
+  end
+  
+  def forgot_password
+    @title = 'Сброс пароля'
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @user }
+    end
+  end
+  
+  def reset_password
+    @user_for_reset = User.find_by_email(params[:user][:email])
+    if @user_for_reset != nil
+      random_password = SecureRandom.hex(3)
+      @user_for_reset.update_attribute('password', random_password)
+      flash[:notice] = "Ваш новый пароль направлен Вам на электронную почту."
+      UserMailer.reset_password(@user_for_reset, random_password).deliver
+      redirect_to :login
+    else
+      flash[:error] = "Пользователя с таким email у нас пока не зарегистрировано!"
+      redirect_to forgot_password_users_path
     end
   end
 

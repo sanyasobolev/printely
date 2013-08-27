@@ -112,5 +112,11 @@ module ApplicationHelper
         return @str.html_safe
     end
    end
+   if @current_action == 'forgot_password'
+      @second = "<div class='boardtext'> #{link_to 'Вход в систему', :login, :class => 'boardlink'} </div>"
+      @third = "<div class='boardlink'> Сброс пароля </div>"
+      @str = @first + @separator + @second + @separator + @third
+      return @str.html_safe
+   end
   end
 end

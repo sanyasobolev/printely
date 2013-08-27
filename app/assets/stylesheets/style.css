@@ -198,6 +198,13 @@ a.top_section:hover {
     background-color: #009999;
 }
 
+.image_title_reset_password {
+    height: 200px;
+    width: 100%;
+    background-color: #009999;
+}
+
+
 .image_title_signin {
     height: 200px;
     width: 100%;
@@ -514,7 +521,6 @@ a.button_style_long:hover {
 
 a.button_style_long_orange:link, a.button_style_long_orange:visited {
     display:block;
-    font-weight:bold;
     text-align:center;
     text-decoration:none;
     background-color: #1BA1E2;
@@ -1110,6 +1116,7 @@ a.site_map_link:hover {
 .form_shape {
     padding:10px;
     width: 700px;
+    position: relative;
 }
 
 .form_align {
@@ -1182,4 +1189,14 @@ a.site_map_link:hover {
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
+.form_shape div#forgot_password {
+	width: 160px;
+	position: absolute;
+	left: 740px;
+	top: 75px;
+}
+
 /*------------------------------------------------------------------*/
+
+
+

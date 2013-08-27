@@ -8,6 +8,8 @@ Spsite::Application.routes.draw do
 
   resources :users do
       get 'admin', :on => :collection
+      get 'forgot_password', :on => :collection
+      post 'reset_password', :on => :collection
   end
   resources :rights
   resources :roles

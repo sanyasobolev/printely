@@ -8,7 +8,12 @@
       <%= boardlinks %>
     </div>
   </div>
-  <%= render :partial => 'share/image_title_signin' %>
+  <% if action_name == 'new' %>
+  	<%= render :partial => 'share/image_title_signin' %>
+  <% end %>
+  <% if action_name == 'forgot_password' %>
+  	<%= render :partial => 'share/image_title_reset_password' %>
+  <% end %>
 <% end %>
 
 <%= render :template => 'layouts/application' %>

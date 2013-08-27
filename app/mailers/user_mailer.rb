@@ -35,8 +35,6 @@ class UserMailer < ActionMailer::Base
     mail(:to => @user.email, :subject => "Заказ №#{order.id} #{order.status}")
   end
 
-
-
   #рассылка всем админам о регистрации нового юзера
    def self.email_all_admins_about_new_user(new_user)
      @admins = User.where(:role_id => "1")
@@ -70,9 +68,15 @@ class UserMailer < ActionMailer::Base
      end
    end
 
-
   def email_about_new_letter(recipient, new_letter)
     mail(:to => recipient.email, :subject => "Новое письмо от пользователя - #{new_letter.name}")
+  end
+  
+  #рассылка при сбросе пароля
+  def reset_password(user, new_password)
+    @user = user
+    @new_password = new_password
+    mail(:to => user.email, :subject => "Ваш новый пароль на сайте Printely.ru")
   end
 
 end
