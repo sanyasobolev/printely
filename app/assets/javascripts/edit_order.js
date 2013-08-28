@@ -95,11 +95,10 @@ $(document).ready(function(){
         };
 
         //календарь
-        $(function() {
-            $("#datepicker").datepicker($.datepicker.regional[ "ru" ]);
-        });
-        $('#timepicker_start').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'disableTimeRanges': ['23:59','07:01'] });
-        $('#timepicker_end').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'disableTimeRanges': ['23:59','07:01'] });
+        $("#datepicker").datepicker();
+
+        $('#timepicker_start').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:00', 'maxTime': '23:30' });
+        $('#timepicker_end').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:30', 'maxTime': '00:00' });
     }
   });
 
