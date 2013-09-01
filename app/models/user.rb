@@ -1,6 +1,6 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-
+  
   attr_accessible :id, :first_name, :second_name, :email, :phone, :password, :password_confirmation, :role_id, :current_password
 
   require 'digest/sha1'
@@ -34,51 +34,66 @@ class User < ActiveRecord::Base
   PASSWORD_SIZE = 30
 
 # проверка имени и фамилии--------------------------------------------------------------------
+    validates :first_name, :second_name, :presence => {
+      :message => "Не должно быть пустым."
+    }
+    
     validates :first_name, :length => {
       :within => FIRST_AND_SECOND_NAME_RANGE,
-      :message => "Не заполнено или слишком короткое имя (3 символа или больше)"
+      :message => "Слишком короткое имя."
       }
 
     validates :second_name, :length => {
       :within => FIRST_AND_SECOND_NAME_RANGE,
-      :message => "Не заполнена или слишком короткая фамилия (3 символа или больше)"
+      :message => "Слишком короткая фамилия."
     }
 
     validates :first_name, :second_name, :format => {
-      :with => /^[#{RUSSIAN_ABC}A-Z0-9#{' -'}]*$/i,
-      :message => "Поле может содержать только буквы, цифры, знаки тире и пробела"
+      :with => /^[#{RUSSIAN_ABC}A-Z\-}]*$/i,
+      :message => "Можно только буквы и знаки тире."
     }
 
   # проверка email--------------------------------------------------------------------------------
-    validates :email, :uniqueness => {
-      :message => 'Такой email уже зарегистрирован'
+    validates :email, :presence => {
+      :message => "Не должно быть пустым."
     }
 
     validates :email, :format => {
       :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
-      :message => "Не заполнен или неправильный формат email"
+      :message => "Email введен неправильно."
+    }
+    
+    validates :email, :uniqueness => {
+      :message => 'Такой email уже зарегистрирован.'
     }
 
     #проверка телефона
-    validates :phone, :presence => true
+    validates :phone, :presence => {
+      :message => "Не должно быть пустым."
+    }
+    
+    validates :phone, :format => {
+      :with => /\A(8|\+7)([\d]){10}\Z/,
+      :message => "Телефон введен неправильно."
+    }
+    
     validates :phone, :uniqueness => {
-      :message => 'Такой телефон уже зарегистрирован'
+      :message => 'Такой телефон уже зарегистрирован.'
     }
-
-    validates :phone, :length => {
-      :maximum => PHONE_MAX_LENGTH,
-      :message => "Номер мобильного телефона слишком длинный"
-    }
-
 
   # проверка password и password_confirmation------------------------------------------------------
-    validates :password,
-      :confirmation => true,
-      :if => :password_required?
-
-    validates :password_confirmation,
-      :presence => true,
-      :if => :password_required?
+    validates :password, :presence => {
+      :message => "Не должно быть пустым."
+    }
+    
+    validates :password, :format => {
+      :with => /[A-Za-z0-9]/,
+      :message => "Можно только цифры и буквы латинского алфавита."
+    }
+    
+    validates :password, :confirmation => {
+      :message => "Подтвердите пароль."
+    }
 
   #создание виртуальных атрибутов current_password и password
   attr_accessor :current_password

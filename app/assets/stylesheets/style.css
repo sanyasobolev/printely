@@ -1121,6 +1121,7 @@ a.site_map_link:hover {
 
 .form_align {
     margin-top: 20px;
+    position: relative;
 }
 
 .form_align label {
@@ -1194,6 +1195,35 @@ a.site_map_link:hover {
 	position: absolute;
 	left: 740px;
 	top: 75px;
+}
+
+.keyboardLayout { 
+	position: absolute; 
+	width: 150px; 
+	height: 20px; 
+	color: #999; 
+	text-align: right; 
+	right: 30px;
+	bottom: 10px;
+}
+
+.field_with_errors {
+  display: inline;
+}
+
+.field_with_errors .message {
+	position: absolute;
+	display: table-cell;
+	vertical-align: middle;
+	
+  	color: red;
+	
+	right: -310px;
+	bottom: -1px;
+	width: 280px; 
+	height: 30px; 
+	
+	text-align: left;
 }
 
 /*------------------------------------------------------------------*/
