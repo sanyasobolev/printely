@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
 
     validates :first_name, :second_name, :format => {
       :with => /^[#{RUSSIAN_ABC}A-Z\-}]*$/i,
-      :message => "Можно только буквы и знаки тире."
+      :message => "Можно только буквы и тире."
     }
 
   # проверка email--------------------------------------------------------------------------------
@@ -88,12 +88,17 @@ class User < ActiveRecord::Base
     
     validates :password, :format => {
       :with => /[A-Za-z0-9]/,
-      :message => "Можно только цифры и буквы латинского алфавита."
+      :message => "Можно только цифры и латинские буквы."
     }
     
     validates :password, :confirmation => {
-      :message => "Подтвердите пароль."
+      :message => "Корректно подтвердите пароль."
     }
+    
+    validates :current_password, :presence => {
+      :message => "Не должно быть пустым."
+    },
+    :on => :update
 
   #создание виртуальных атрибутов current_password и password
   attr_accessor :current_password
@@ -110,7 +115,6 @@ class User < ActiveRecord::Base
     self.hashed_password = User.encrypted_password(self.password, self.salt) #шифруем пароль
   end
 	#---------------------------------------------------//
-
   def self.authenticate(email, password)
     user = self.find_by_email(email) #ищем юзера с введенным майлом
     if user                          #если юзер есть в БД

@@ -1,0 +1,21 @@
+<%= error_messages_for :user %>
+<h1>Редактирование профиля пользователя</h1>
+<div class="form_shape">
+  <%= form_for @user, :validate => true, :url => update_profile_user_path(@user), :html => {:method => :put} do |f| %>
+
+    <%= hidden_field_tag "attribute", "email", :id => nil %>
+    <%= render :partial => 'profile', :locals => {:form => f} %>
+    <%  if @user != current_user %>
+      <%= render :partial => 'edit_role', :locals => {:form => f} %>
+    <%  end %>
+
+    <div class="submit_area">
+      <%= submit_tag 'Изменить данные', :class => 'submit' %>
+      <%= link_to "Отмена", edit_user_path(@user), :class => "button_style" %>
+    </div>
+  <% end %>
+</div>
+
+<p>
+<%= link_to 'К списку пользователей >>', users_path if current_user.has_role?('Administrator') %>
+</p>

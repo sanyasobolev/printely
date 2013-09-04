@@ -60,21 +60,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
-    @user = User.find(params[:id])
-    attribute = params[:attribute]
-    case attribute
-      when "email"
-        try_to_update(@user)
-      when "password"
-        if @user.correct_password?(params)
-          try_to_update(@user)
-        else
-          @user.password_errors(params)
-          render :action => "edit"
-        end
-    end
-  end
+
 
   def destroy
     user_for_delete = User.find(params[:id])
@@ -110,6 +96,58 @@ class UsersController < ApplicationController
       redirect_to forgot_password_users_path
     end
   end
+  
+  def edit_password
+    @user = User.find(params[:id])
+    @title = "Редактирование пароля пользователя - #{@user.first_name} #{@user.second_name}"
+    if !your_profile?(@user)
+      flash[:error] = 'Вы не можете изменять чужой пароль!'
+      redirect_to :login
+    end
+  end
+
+
+  def update_password
+    @user = User.find(params[:id])
+    attribute = params[:attribute]
+    if params[:attribute] == "password" && your_profile?(@user)
+      if @user.correct_password?(params)
+        @user.update_attribute("password", params[:user][:password])
+        flash[:notice] = 'Ваш пароль изменен успешно!'
+        redirect_to edit_user_path(@user)
+      else
+        flash[:error] = 'Текущий пароль введен неверно.'
+        render :action => "edit_password"
+      end    
+    else
+      flash[:error] = 'Редактирование профиля невозможно.'
+      redirect_to :login
+    end   
+  end
+
+  def edit_profile
+    @user = User.find(params[:id])
+    @title = "Редактирование профиля пользователя - #{@user.first_name} #{@user.second_name}"
+    if !your_profile?(@user)
+      flash[:error] = 'Вы не можете редактировать чужой профиль!'
+      redirect_to :controller => :sessions, :action => :new
+    end
+  end
+  
+  def update_profile
+    @user = User.find(params[:id])
+    if params[:attribute]== "email" && your_profile?(@user)
+      params[:user].each_pair do |key, value|
+        @user.update_attribute(key, value)
+      end  
+      flash[:notice] = 'Ваш профиль изменен успешно!'
+      redirect_to edit_user_path(@user) 
+    else
+      flash[:error] = 'Редактирование профиля невозможно.'
+      redirect_to :login
+    end
+  end
+  
 
 private
 

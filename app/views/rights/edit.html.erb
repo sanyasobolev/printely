@@ -1,8 +1,12 @@
 <%= error_messages_for 'right' %>
 <h1>Редактирование права</h1>
 
-<% form_for :right, :url => right_path(@right), :html => {:method => :put} do %>
-  <%= render :partial => 'form' %>
+<%= form_for :right, :url => right_path(@right), :html => {:method => :put} do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+    <div class="submit_area">
+      <%= submit_tag 'Сохранить', :class => 'submit' %>
+    </div>
+  
 <% end %>
 
 

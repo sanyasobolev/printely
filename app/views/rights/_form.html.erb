@@ -1,16 +1,22 @@
+<div class="form_align">
+	<%= f.label :name %>
+	<%= f.text_field :name  %>
+</div>
 
-<!--[form:rights]-->
-<p><%= Right.human_attribute_name("name") %><br/>
-<%= text_field 'right', 'name'  %></p>
+<div class="form_align">
+	<%= f.label :controller %>
+	<%= f.text_field :controller %>
+</div>
 
-<p><%= Right.human_attribute_name("controller") %><br/>
-<%= text_field 'right', 'controller'  %></p>
+<div class="form_align">
+	<%= f.label :action %>
+	<%= f.text_field :action %>
+</div>
 
-<p><%= Right.human_attribute_name("action") %><br/>
-<%= text_field 'right', 'action'  %></p>
+<div class="form_align">
+	<%= f.label :description %>
+	<%= f.text_field :description %>
+</div>
 
-<p><%= Right.human_attribute_name("description") %><br/>
-<%= text_field 'right', 'description'  %></p>
-<!--[eoform:rights]-->
-<%= submit_tag "Сохранить" %> или <%= link_to 'Вернуться', rights_path %>
+
 

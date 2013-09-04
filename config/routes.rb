@@ -10,6 +10,10 @@ Spsite::Application.routes.draw do
       get 'admin', :on => :collection
       get 'forgot_password', :on => :collection
       post 'reset_password', :on => :collection
+      get 'edit_profile', :on => :member
+      get 'edit_password', :on => :member
+      put 'update_profile', :on => :member
+      put 'update_password', :on => :member
   end
   resources :rights
   resources :roles
