@@ -112,11 +112,41 @@ module ApplicationHelper
         return @str.html_safe
     end
    end
+   
    if @current_action == 'forgot_password'
       @second = "<div class='boardtext'> #{link_to 'Вход в систему', :login, :class => 'boardlink'} </div>"
       @third = "<div class='boardlink'> Сброс пароля </div>"
       @str = @first + @separator + @second + @separator + @third
       return @str.html_safe
    end
+   
+   if @current_action == 'edit'
+     case @current_controller
+     when 'users'
+        @second = "<div class='boardlink'> #{link_to image_tag("icons/my_office_black.png", :border => 0), myoffice_path}</div>"
+        @third = "<div class='boardlink'> Изменение данных пользователя </div>"
+        @str = @first + @separator + @second + @separator + @third
+        return @str.html_safe
+     end
+   end
+   
+  if @current_action == 'edit_profile'
+      @second = "<div class='boardlink'> #{link_to image_tag("icons/my_office_black.png", :border => 0), myoffice_path}</div>"
+      @third = "<div class='boardlink'> #{ link_to 'Изменение данных пользователя', edit_user_path(User.find(params[:id])), :class => 'boardlink'} </div>"
+      @fourth = "<div class='boardtext'> Изменение профиля </div>"
+      @str = @first + @separator + @second + @separator + @third + @separator + @fourth
+      return @str.html_safe
+   end
+
+  if @current_action == 'edit_password' || @current_action == 'update_password'
+      @second = "<div class='boardlink'> #{link_to image_tag("icons/my_office_black.png", :border => 0), myoffice_path}</div>"
+      @third = "<div class='boardlink'> #{ link_to 'Изменение данных пользователя', edit_user_path(User.find(params[:id])), :class => 'boardlink'} </div>"
+      @fourth = "<div class='boardtext'> Изменение пароля </div>"
+      @str = @first + @separator + @second + @separator + @third + @separator + @fourth
+      return @str.html_safe
+   end
+
+
+   
   end
 end

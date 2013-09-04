@@ -1,6 +1,6 @@
 # encoding: utf-8
 class UsersController < ApplicationController
-  layout 'signin', :only => [:new, :create, :forgot_password]
+  layout 'signin', :only => [:new, :create, :forgot_password, :edit, :edit_profile, :edit_password, :update_password]
   
   skip_before_filter :login_required, :authorized?,
                      :only => [:new, :create, :forgot_password, :reset_password]
@@ -53,14 +53,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    @title = "Редактирование данных пользователя - #{@user.first_name} #{@user.second_name}"
+    @title = "Изменение данных пользователя - #{@user.first_name} #{@user.second_name}"
     if !your_profile?(@user)
-      flash[:notice] = 'Вы не можете редактировать чужой профиль!'
+      flash[:notice] = 'Вы не можете изменять чужой профиль!'
       redirect_to :controller => :sessions, :action => :new
     end
   end
-
-
 
   def destroy
     user_for_delete = User.find(params[:id])
@@ -99,13 +97,12 @@ class UsersController < ApplicationController
   
   def edit_password
     @user = User.find(params[:id])
-    @title = "Редактирование пароля пользователя - #{@user.first_name} #{@user.second_name}"
+    @title = "Изменение пароля пользователя - #{@user.first_name} #{@user.second_name}"
     if !your_profile?(@user)
       flash[:error] = 'Вы не можете изменять чужой пароль!'
       redirect_to :login
     end
   end
-
 
   def update_password
     @user = User.find(params[:id])
@@ -117,19 +114,19 @@ class UsersController < ApplicationController
         redirect_to edit_user_path(@user)
       else
         flash[:error] = 'Текущий пароль введен неверно.'
-        render :action => "edit_password"
+        redirect_to edit_password_user_path(@user)
       end    
     else
-      flash[:error] = 'Редактирование профиля невозможно.'
+      flash[:error] = 'Изменение пароля невозможно.'
       redirect_to :login
     end   
   end
 
   def edit_profile
     @user = User.find(params[:id])
-    @title = "Редактирование профиля пользователя - #{@user.first_name} #{@user.second_name}"
+    @title = "Изменение профиля пользователя - #{@user.first_name} #{@user.second_name}"
     if !your_profile?(@user)
-      flash[:error] = 'Вы не можете редактировать чужой профиль!'
+      flash[:error] = 'Вы не можете изменять чужой профиль!'
       redirect_to :controller => :sessions, :action => :new
     end
   end
@@ -143,7 +140,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'Ваш профиль изменен успешно!'
       redirect_to edit_user_path(@user) 
     else
-      flash[:error] = 'Редактирование профиля невозможно.'
+      flash[:error] = 'Изменение профиля невозможно.'
       redirect_to :login
     end
   end
