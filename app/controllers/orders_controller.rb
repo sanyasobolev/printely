@@ -68,7 +68,7 @@ class OrdersController < ApplicationController
         respond_to do |wants|
           if @order.update_attributes(:status => params[:order][:status], :manager_comment => params[:order][:manager_comment])
             if new_status != old_status #отправка сообщения на почту пользователя, ели статус был изменен
-              if new_status == Order::STATUS[0]
+              if new_status == Order::STATUS[4]
                 UserMailer.email_user_about_complete_order(@order).deliver
               else
                 UserMailer.email_user_about_change_status(@order).deliver
