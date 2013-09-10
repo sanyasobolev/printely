@@ -1,11 +1,11 @@
-
-<p><%= Role.human_attribute_name("name") %><br/>
-  <%= text_field 'role', 'name' %>
-</p>
+<div class="form_align">
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+</div>
 
 <h2>Дополнительные права</h2>
 <% Right.all.each do |t| %>
   <p><%= check_box_tag('role[right_ids][]', t.id, @role.rights.include?(t)) %> <%= t.name %></p>
 <% end %>
 
- <%= submit_tag "Сохранить" %> или <%= link_to 'Вернуться', roles_path %>
+

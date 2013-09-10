@@ -62,7 +62,7 @@ class DocumentsController < ApplicationController
 
   private
     def find_order
-      @order = current_user.orders.find(params[:order_id])
+      @order = Order.find_by_id(params[:order_id])
       raise ActiveRecord::RecordNotFound unless @order
     end
 

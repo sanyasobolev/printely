@@ -3,7 +3,7 @@ $(document).ready(function(){
         //контроль ухода пользователя со страницы
         $(".edit_order").FormNavigate({
           message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
-          aOutConfirm: "a.button_style"
+          aOutConfirm: "a.button_style, a.link_delete_docfile"
         });
 
         //clear value 'выберите' in select

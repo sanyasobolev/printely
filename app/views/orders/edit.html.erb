@@ -187,9 +187,21 @@
   </div>
   <div class="fl_clear"></div>
 
-  <div class="submit_area">
-   <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
-   <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
-  </div>
+  <% if @admin_edit %>
+  	<br />
+  	
+    <h2 class="orange">Обновление статуса</h2>
+	<%= render :partial => 'form', :locals => {:f => order} %>
+
+	<div class="submit_area">
+	 <%= submit_tag 'Сохранить изменения', :class => 'submit'  %>
+	 <%= link_to 'Отмена', admin_orders_path, :class => 'button_style' %>
+	</div>
+  <% else %>
+	<div class="submit_area">
+	 <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
+	 <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
+	</div>
+  <% end %>
 <% end -%>
  

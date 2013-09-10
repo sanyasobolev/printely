@@ -16,7 +16,7 @@
       <th><%= Order.human_attribute_name(:manager_comment) %></th>
       <th><%= Order.human_attribute_name(:details) %></th>
     </tr>
-    <%= render :partial => 'order', :collection => @orders  %>
+    <%= render :partial => 'order_for_user', :collection => @orders  %>
   </table>
 <% else %>
   <%= render 'no_orders' %>

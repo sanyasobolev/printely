@@ -1,7 +1,10 @@
 <%= error_messages_for 'role' %>
 <h1>Редактирование роли</h1>
 
-<%= form_for :role, :url => role_path(@role), :html => {:method => :put} do %>
- <%= render :partial => 'form' %>
+<%= form_for :role, :url => role_path(@role), :html => {:method => :put} do |f| %>
+ <%= render :partial => 'form', :locals => {:f => f}  %>
+    <div class="submit_area">
+      <%= submit_tag 'Сохранить', :class => 'submit' %>
+    </div>
 <% end %>
 

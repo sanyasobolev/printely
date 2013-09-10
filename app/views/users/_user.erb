@@ -6,5 +6,4 @@
   <td><%=h (user.phone) %></td>
   <td><%=h (Russian::strftime(user.created_at, "%d %B %Y")) %></td>
   <td> <%=h (user.role.name) %> </td>
-  <td><%= link_to 'Редактировать', edit_user_path(user) %></td>
 </tr>

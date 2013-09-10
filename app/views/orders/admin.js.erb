@@ -1,0 +1,5 @@
+<% status_for_add_class = params[:status].parameterize.to_s %>
+<% ids = 'a#' + 'toggle_' + status_for_add_class %>
+$("a.article_nav").removeClass("article_nav");
+$("<%= ids %>").addClass("article_nav");
+$(".admin").html('<%= escape_javascript(render @orders) %>');

@@ -49,46 +49,57 @@ class OrdersController < ApplicationController
   def edit
     if current_user.has_role?('Administrator')
       @title = "Обновление заказа №#{@order.id}"
-      render 'adminedit'
-    else
-      if @order.status == Order::STATUS[0]
+      @admin_edit = true
+    elsif @order.status == Order::STATUS[0]
         @title = "Заказ №#{@order.id}"
-        render 'edit'
+        @admin_edit = false
       else
         flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
         redirect_to my_orders_path
-      end
     end
   end
 
   def update
     @order = Order.find(params[:id])
-    if current_user.has_role?('Administrator') # если администратор или менеджер
-      old_status = @order.status
-      respond_to do |wants|
-        if @order.update_attributes(params[:order])
-          new_status = @order.status
-          if new_status != old_status #отправка сообщения на почту пользователя, ели статус был изменен
-            if new_status == 'выполнен'
-              UserMailer.email_user_about_complete_order(@order).deliver
-            else
-              UserMailer.email_user_about_change_status(@order).deliver
+    if current_user.has_role?('Administrator')  # если администратор или менеджер
+      if attr_update(@order)
+        old_status = @order.status
+        new_status = params[:order][:status]
+        respond_to do |wants|
+          if @order.update_attributes(:status => params[:order][:status], :manager_comment => params[:order][:manager_comment])
+            if new_status != old_status #отправка сообщения на почту пользователя, ели статус был изменен
+              if new_status == Order::STATUS[0]
+                UserMailer.email_user_about_complete_order(@order).deliver
+              else
+                UserMailer.email_user_about_change_status(@order).deliver
+              end
             end
+            flash[:notice] = 'Заказ обновлен.'
+            wants.html { redirect_to admin_orders_path }
+            wants.xml { render :xml => @order.to_xml }
+          else
+            wants.html { render :action => "edit" }
+            wants.xml {render :xml => @order.errors}
           end
-          flash[:notice] = 'Заказ обновлен.'
-          wants.html { redirect_to admin_orders_path }
-          wants.xml { render :xml => @order.to_xml }
-        else
-          wants.html { render :action => "adminedit" }
-          wants.xml {render :xml => @order.errors}
         end
       end
     else #если обычный пользователь
-      if (@order.documents.length == 0 || params[:order][:delivery_street] == "" || params[:order][:delivery_address] == "" || params[:order][:delivery_date] == "")
+        if attr_update(@order)
+          UserMailer.email_all_admins_about_new_order(@order)
+          UserMailer.email_user_about_new_order(@order).deliver
+          flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
+          redirect_to my_orders_path
+        end
+    end
+  end
+
+  def attr_update(order) #update main user attributes of order
+      if (order.documents.length == 0 || params[:order][:delivery_street] == "" || params[:order][:delivery_address] == "" || params[:order][:delivery_date] == "")
         flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл и заполнить информацию о доставке.'
-        render :action => "edit"
+        redirect_to :action => "edit"
+        return false
       else
-        @order.documents.each do |document|
+        order.documents.each do |document|
           document.update_attributes(params[:order][:documents_attributes][document.id.to_s])
         end
         if params[:order][:delivery_start_time] == ""
@@ -97,17 +108,10 @@ class OrdersController < ApplicationController
         if params[:order][:delivery_end_time] == ""
           params[:order][:delivery_end_time] = Order::DEFAULT_END_TIME
         end
-         if @order.update_attributes(:delivery_street => params[:order][:delivery_street], :delivery_address => params[:order][:delivery_address], :delivery_date => params[:order][:delivery_date], :delivery_start_time => params[:order][:delivery_start_time], :delivery_end_time => params[:order][:delivery_end_time], :status => Order::STATUS[1], :created_at => Time.now)
-          UserMailer.email_all_admins_about_new_order(@order)
-          UserMailer.email_user_about_new_order(@order).deliver
-          flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
-          redirect_to my_orders_path
-        end
+        order.update_attributes(:delivery_street => params[:order][:delivery_street], :delivery_address => params[:order][:delivery_address], :delivery_date => params[:order][:delivery_date], :delivery_start_time => params[:order][:delivery_start_time], :delivery_end_time => params[:order][:delivery_end_time], :status => Order::STATUS[1], :created_at => Time.now)
+        return true
       end
-    end
   end
-
-
 
   def show
     @title = "Заказ № #{@order.id}"
@@ -130,13 +134,10 @@ class OrdersController < ApplicationController
 
   def admin
     @title = "Управление заказами"
-    @orders = Order.paginate :page => params[:page],
-                             :order => 'created_at DESC',
-                             :include => :user,
-                             :per_page => '50'
-    respond_to do |wants|
-      wants.html
-      wants.xml { render :xml => @services.to_xml }
+    @orders = params[:status] ? Order.where(:status => params[:status]).order('created_at DESC') : Order.where('status != ?', 'draft').order('created_at DESC')
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

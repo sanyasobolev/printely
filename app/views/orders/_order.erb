@@ -1,8 +1,21 @@
 <tr>
   <td><%=h (order.id) %></td>
-  <td><%=h (Russian::strftime(order.created_at, "%R, %d %B %Y года")) %></td>
+  <td><%= order.user.first_name %> <%= order.user.second_name %> <br /> <%= order.user.email %> <br /> <%= order.user.phone %> </td>
+  <td>
+  	<% if order.delivery_date != nil %>
+	  	<%=h (Russian::strftime(order.delivery_date, "%d %B %Y года")) %> <br />
+	  	<%= render :partial => 'delivery_period', :locals => {:order => order} %>
+	<% end %>
+  </td>	
+  <td><%=h (order.delivery_street) %></td>
+  <td><%=h (order.delivery_address) %></td>
   <td><%=h (order.status) %></td>
   <td><%=h (number_to_currency(order.cost, :unit => "коп.", :separator => " руб. ")) %></td>
-  <td><%=h (order.manager_comment) %></td>
   <td><%= link_to image_tag("icons/details_view_order.png", :border => "0"), order_path(order) %></td>
+  <td><%= link_to image_tag("icons/edit_order.png", :border => "0"), edit_order_path(order), :alt => 'редактировать' %></td>
+  <td>
+    <%= link_to 'C6', cover_order_path(order, :format => 'c6'), :target => "_blank", :title => '10x15 до 20ти шт.' %>
+    <%= link_to 'C5', cover_order_path(order, :format => 'c5'), :target => "_blank", :title => '10x15 более 20ти шт.'  %>
+    <%= link_to 'C4', cover_order_path(order, :format => 'c4'), :target => "_blank", :title => 'A4'  %>
+  </td>
 </tr>

@@ -1,7 +1,7 @@
 <h2>
   Пользователи,
     <span>
-      <%= link_to "все",
+      <%= link_to "показать админов",
           users_path(:role => 'Administrator'),
           :remote => true,
           :id => 'toggle' %>
@@ -16,7 +16,6 @@
   <th><%= User.human_attribute_name(:phone) %></th>
   <th><%= User.human_attribute_name(:created_at) %></th>
   <th><%= User.human_attribute_name(:role_id) %></th>
-  <th></th>
 </tr>
 <%= render :partial => 'user', :collection => @users  %>
 </table>

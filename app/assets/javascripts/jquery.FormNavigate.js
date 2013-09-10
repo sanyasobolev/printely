@@ -33,14 +33,10 @@ jQuery.fn.extend({
       return formdata_original;
     });
 
-//
-//    if($("#form_edit_order").exists()) {
-//       formdata_original = false;
-//    }
-
     jQuery(this).find(":submit, input[type='submit']").click(function(){
       formdata_original = true;
     });
+    
   }
 });
 

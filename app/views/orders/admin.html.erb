@@ -1,4 +1,13 @@
 <h2>Управление заказами</h2>
+
+<p>Фильтры по статусу:
+      <% Order::STATUS.each do |status| %>
+      		<%= link_to status,
+        	admin_orders_path(:status => status),
+        	:remote => true,
+        	:id => "toggle_#{status.parameterize}" %>,
+      <% end %>	
+</p>
 <table class ="admin">
   <tr>
     <th><%= Order.human_attribute_name(:id) %></th>
@@ -13,10 +22,9 @@
     <th></th>
   </tr>
 
-  <%= render :partial => 'order_for_admin', :collection => @orders %>
+  <%= render :partial => 'order', :collection => @orders %>
 
 </table>
-  <%= will_paginate @orders %>
   
 <%= link_to 'Назад', admin_users_path, :class => 'button_style' %>
 
