@@ -62,11 +62,11 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     if current_user.has_role?('Administrator')  # если администратор или менеджер
-      if attr_update(@order)
-        old_status = @order.status
-        new_status = params[:order][:status]
+      old_status = @order.status
+      new_status = params[:order][:status]
+      if attr_update(@order, new_status) 
         respond_to do |wants|
-          if @order.update_attributes(:status => params[:order][:status], :manager_comment => params[:order][:manager_comment])
+          if @order.update_attributes(:manager_comment => params[:order][:manager_comment])
             if new_status != old_status #отправка сообщения на почту пользователя, ели статус был изменен
               if new_status == Order::STATUS[4]
                 UserMailer.email_user_about_complete_order(@order).deliver
@@ -84,7 +84,7 @@ class OrdersController < ApplicationController
         end
       end
     else #если обычный пользователь
-        if attr_update(@order)
+        if attr_update(@order, Order::STATUS[1])
           UserMailer.email_all_admins_about_new_order(@order)
           UserMailer.email_user_about_new_order(@order).deliver
           flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
@@ -93,7 +93,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def attr_update(order) #update main user attributes of order
+  def attr_update(order, status) #update main user attributes of order
       if (order.documents.length == 0 || params[:order][:delivery_street] == "" || params[:order][:delivery_address] == "" || params[:order][:delivery_date] == "")
         flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл и заполнить информацию о доставке.'
         redirect_to :action => "edit"
@@ -108,7 +108,7 @@ class OrdersController < ApplicationController
         if params[:order][:delivery_end_time] == ""
           params[:order][:delivery_end_time] = Order::DEFAULT_END_TIME
         end
-        order.update_attributes(:delivery_street => params[:order][:delivery_street], :delivery_address => params[:order][:delivery_address], :delivery_date => params[:order][:delivery_date], :delivery_start_time => params[:order][:delivery_start_time], :delivery_end_time => params[:order][:delivery_end_time], :status => Order::STATUS[1], :created_at => Time.now)
+        order.update_attributes(:delivery_street => params[:order][:delivery_street], :delivery_address => params[:order][:delivery_address], :delivery_date => params[:order][:delivery_date], :delivery_start_time => params[:order][:delivery_start_time], :delivery_end_time => params[:order][:delivery_end_time], :status => status, :created_at => Time.now)
         return true
       end
   end
