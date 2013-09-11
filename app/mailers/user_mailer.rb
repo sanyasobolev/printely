@@ -34,6 +34,14 @@ class UserMailer < ActionMailer::Base
     @user = User.find_by_id(order.user_id)
     mail(:to => @user.email, :subject => "Заказ №#{order.id} #{order.status}")
   end
+  
+  #рассылка при удалении заказа
+  def email_user_about_remove_order(order)
+    @order = order
+    @user = User.find_by_id(order.user_id)
+    mail(:to => @user.email, :subject => "Заказ №#{order.id} будет удален из системы")
+  end
+
 
   #рассылка всем админам о регистрации нового юзера
    def self.email_all_admins_about_new_user(new_user)

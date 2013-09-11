@@ -70,6 +70,8 @@ class OrdersController < ApplicationController
             if new_status != old_status #отправка сообщения на почту пользователя, ели статус был изменен
               if new_status == Order::STATUS[4]
                 UserMailer.email_user_about_complete_order(@order).deliver
+              elsif new_status == Order::STATUS[0]
+                UserMailer.email_user_about_remove_order(@order).deliver
               else
                 UserMailer.email_user_about_change_status(@order).deliver
               end
