@@ -303,6 +303,17 @@ ru:
       two_words_connector: " и "
       last_word_connector: " и "
 
-  will_paginate:
-    next_label: ">"
-    previous_label: "<"
+  ransack:
+    asc: "по возрастанию"
+    desc: "по убыванию"
+    predicates:
+      cont: "содержит"
+      not_cont: "не содержит"
+      start: "начинается с"
+      end: "оканчивается на"
+      gt: "больше"
+      lt: "меньше"
+      lteq: "меньше или равно"
+      qteq: "больше или равно"
+      eq: "равно"
+      not_eq: "не равно"

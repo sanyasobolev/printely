@@ -7,9 +7,6 @@ class Page < ActiveRecord::Base
   before_save :update_permalink
   before_save :update_published_at
 
-  cattr_reader :per_page
-  @@per_page = 10
-
   belongs_to :section
   belongs_to :user
   belongs_to :service

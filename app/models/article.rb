@@ -8,10 +8,6 @@ has_attached_file :header_image,
                   :url => "/assets/articles/:basename.:extension",
                   :path => ":rails_root/app/assets/images/articles/:filename"
 
-#pagination on page
-cattr_reader :per_page
-@@per_page = 3
-
 belongs_to :user
 belongs_to :category
 

@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    if($(".edit_order").exists()) {
+    if($(".edit_print_order").exists()) {
         //контроль ухода пользователя со страницы
-        $(".edit_order").FormNavigate({
+        $(".edit_print_order").FormNavigate({
           message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
           aOutConfirm: "a.button_style, a.link_delete_docfile"
         });
@@ -11,17 +11,15 @@ $(document).ready(function(){
             $('[value=""]',event.target).remove();
         });
 
+		
+        var order_id = $("form.edit_print_order").attr("id"),
+            url_for_update_order = "/order/ajaxupdate";
+
         //при любом изменении в таблице, устанавливаем тип доставки "курьер"
         $("table.order_delivery").change(function(event){
-            var url = '/order/ajaxupdate',
-                selected_delivery = 'Курьер',
-                order_id = this.id;
-            $.post( url, {id: order_id, delivery_type: selected_delivery} )
+            var selected_delivery = 'Курьер'
+            $.post( url_for_update_order, {id: order_id, delivery_type: selected_delivery} )
         });
-
-
-        var order_id = $("form.edit_order").attr("id"),
-            url_for_update_order = "/order/ajaxupdate";
             
         //подключение хендлеров по управлению ценой (при уже загруженных документах - в случае рефреша страницы)
         $("select[name*='print_format']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
@@ -93,10 +91,7 @@ $(document).ready(function(){
           }
           return value
         };
-
-        //календарь
-        $("#datepicker").datepicker();
-
+		//time
         $('#timepicker_start').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:00', 'maxTime': '23:30' });
         $('#timepicker_end').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:30', 'maxTime': '00:00' });
     }

@@ -1,23 +1,36 @@
 <h2 class="orange">Здравствуйте, <%= current_user.first_name %> <%= current_user.second_name %>!</h2>
-<p>Вы находитесь в личном кабинете. Здесь Вы можете создавать новые заказы на печать и просматривать информацию о ранее созданных заказах. </p>
+<p>Вы находитесь в личном кабинете. Здесь Вы можете создавать новые заказы и просматривать информацию о ранее созданных заказах. </p>
 
-<% @str_1 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new';\">" %>
+<% @str_1 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new_print';\">" %>
 <% @str_2 = "</div>" %>
 
 <%= @str_1.html_safe %>
   <%= image_tag("orders/document_add.png", :border => '0') %>
   <div class="flash_link_title">
-    Новый заказ
+    Распечатать
   </div>
   <div class="flash_link_synopsis">
-    Распечатайте Ваши фотографии
+    Создайте новый заказ на печать Ваших фотографий
   </div>
 <%= @str_2.html_safe %>
 
-<% @str_1 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/my';\">" %>
-<% @str_2 = "</div>" %>
+<% @str_3 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new_scan';\">" %>
+<% @str_4 = "</div>" %>
 
-<%= @str_1.html_safe %>
+<%= @str_3.html_safe %>
+  <%= image_tag("orders/scan_add.png", :border => '0') %>
+  <div class="flash_link_title">
+    Отсканировать
+  </div>
+  <div class="flash_link_synopsis">
+    Создайте новый заказ на сканирование Ваших фотографий или документов
+  </div>
+<%= @str_4.html_safe %>
+
+<% @str_5 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/my';\">" %>
+<% @str_6 = "</div>" %>
+
+<%= @str_5.html_safe %>
   <%= image_tag("orders/my_orders.png", :border => '0') %>
   <div class="flash_link_title">
     Мои заказы
@@ -25,4 +38,4 @@
   <div class="flash_link_synopsis">
     Посмотрите текущий статус Ваших заказов
   </div>
-<%= @str_2.html_safe %>
+<%= @str_6.html_safe %>

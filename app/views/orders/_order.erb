@@ -8,9 +8,10 @@
 	<% end %>
   </td>	
   <td><%=h (order.delivery_street) %></td>
-  <td><%=h (order.delivery_address) %></td>
   <td><%=h (order.status) %></td>
-  <td><%=h (number_to_currency(order.cost, :unit => "коп.", :separator => " руб. ")) %></td>
+  <td><%=h (read_cost_min_max(order)) %></td>
+  <td><%=h (read_cost(order)) %></td>
+  <td><%=h (order.order_type) %></td>
   <td><%= link_to image_tag("icons/details_view_order.png", :border => "0"), order_path(order) %></td>
   <td><%= link_to image_tag("icons/edit_order.png", :border => "0"), edit_order_path(order), :alt => 'редактировать' %></td>
   <td>

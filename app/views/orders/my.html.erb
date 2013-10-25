@@ -6,25 +6,48 @@
   </tr>
 </table>
 <h2 class="orange">Мои заказы</h2>
-<% if @orders.count > 0 %>
-  <table class ="user_order">
-    <tr>
-      <th><%= Order.human_attribute_name(:id) %></th>
-      <th><%= Order.human_attribute_name(:created_at) %></th>
-      <th><%= Order.human_attribute_name(:status) %></th>
-      <th><%= Order.human_attribute_name(:cost) %></th>
-      <th><%= Order.human_attribute_name(:manager_comment) %></th>
-      <th><%= Order.human_attribute_name(:details) %></th>
-    </tr>
-    <%= render :partial => 'order_for_user', :collection => @orders  %>
-  </table>
-<% else %>
-  <%= render 'no_orders' %>
-<% end %>
 
-<%= will_paginate @orders %>
+  <div id="slide_img_pag" class="orders_pagination" ></div>
+  
+  <div id="slide_orders">
+    <div id="slide_1">
+		<% if @print_orders.count > 0 %>
+		  <table class ="user_order">
+		    <tr>
+		      <th><%= Order.human_attribute_name(:id) %></th>
+		      <th><%= Order.human_attribute_name(:created_at) %></th>
+		      <th><%= Order.human_attribute_name(:status) %></th>
+		      <th><%= Order.human_attribute_name(:cost) %></th>
+		      <th><%= Order.human_attribute_name(:manager_comment) %></th>
+		      <th><%= Order.human_attribute_name(:details) %></th>
+		    </tr>
+		    <%= render :partial => 'print_order_for_user', :collection => @print_orders  %>
+		  </table>
+		<% else %>
+		  <%= render :partial => 'no_orders', :locals => {:href => new_doc_orders_path}  %>
+		<% end %>
+    </div>
+    <div id="slide_2">
+		<% if @scan_orders.count > 0 %>
+		  <table class ="user_order">
+		    <tr>
+		      <th><%= Order.human_attribute_name(:id) %></th>
+		      <th><%= Order.human_attribute_name(:created_at) %></th>
+		      <th><%= Order.human_attribute_name(:status) %></th>
+		      <th><%= Order.human_attribute_name(:cost_min_max_name) %></th>
+		      <th><%= Order.human_attribute_name(:cost) %></th>
+		      <th><%= Order.human_attribute_name(:manager_comment) %></th>
+		      <th><%= Order.human_attribute_name(:details) %></th>
+		    </tr>
+		    <%= render :partial => 'scan_order_for_user', :collection => @scan_orders  %>
+		  </table>
+		<% else %>
+		  <%= render :partial => 'no_orders', :locals => {:href => new_scan_orders_path} %>
+		<% end %>
+    </div>
+  </div>
+  <div class="fl_clear"></div>
 
-<br />
 <table>
   <tr>
     <td>

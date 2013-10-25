@@ -30,7 +30,7 @@
        },
       onAllComplete : function(){
         var status = $("#fileList_header").attr("style"),
-            order_id = $("form.edit_order").attr("id"),
+            order_id = $("form.edit_print_order").attr("id"),
             url_for_update_order = "/order/ajaxupdate";
 
         if (status == 'display: none;') {
@@ -125,7 +125,7 @@
   </script>
 <% end %>
 
-<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id} do |order| -%>
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id, :class => "edit_print_order"} do |order| -%>
 
   <%#*перечень всех файлов с параметрами печати%>
   <table id="fileList">
@@ -148,37 +148,9 @@
 <% end %>
 
   <h2 class="orange">Укажите адрес и время доставки</h2>
-  <table class="order_delivery" id="<%= @order.id %>">
-      <tr>
-        <th><%=  order.label(:delivery_street) %></th>
-        <th><%=  order.label(:delivery_address) %></th>
-        <th>
-            <%= label(:order, :delivery_date) %>
-            <%= order.text_field :delivery_date, :id => "datepicker" %>
-        </th>
-        <th><%=  order.label(:delivery_price) %></th>
-      </tr>
-      <tr>
-        <td class="delivery_street">
-            <%= order.select :delivery_street,
-                              Order::DELIVERY_STREET,
-                              { :prompt => true } %>
-        </td>
-        <td class="delivery_address">
-            <%= order.text_field :delivery_address%>
-        </td>
-        <td class="delivery_date">
-          время
-          <%= label(:order, :delivery_start_time) %>
-          <%= order.text_field :delivery_start_time, :id => "timepicker_start" %>
-          <%= label(:order, :delivery_end_time) %>
-          <%= order.text_field :delivery_end_time, :id => "timepicker_end" %>
-        </td>
-        <td class="delivery_price">
-          <%= h (number_to_currency(@order.delivery_price, :unit => "коп.", :separator => " руб. ")) %>
-        </td>
-      </tr>
-    </table>
+  
+  <%= render :partial => 'delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
+  
   <div class="total_cost_order">
     <%= h (number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ")) %>
   </div>

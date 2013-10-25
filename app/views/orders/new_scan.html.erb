@@ -1,0 +1,132 @@
+<h2><%= @title %></h2>
+<h2 class="orange">Рассчитайте стоимость Вашего заказа</h2>
+
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :class => "edit_scan_order", :id => @order.id } do |order| -%>
+
+  <%= order.fields_for Scan.new do |scan| %>
+	<div id="scan_documents">
+		<h2 class="red_line">Сколько страниц Вы хотите отсканировать (неважно что, фото или документы)?</h2>
+		<div id="scan_documents_quantity">
+			<%=  button_tag ' ', :type => 'button', :class => 'decrease_large' %>
+          		<%= scan.text_field :scan_documents_quantity %>
+      		<%=  button_tag ' ', :type => 'button', :class => 'increase_large' %>
+		</div>
+		<div id="scan_documents_cost"></div>
+	</div>  
+	<div class="fl_clear"></div>  
+
+	<br />
+	<%=  button_tag 'Улучшить отсканированные документы', :type => 'button', :id => 'improve_documents_toggle', :class => "button_style_long_orange"  %>
+	<div class="fl_clear"></div> 
+	
+	<div id="improve_document_parameters">
+	  	<div class="form_align">
+	      <%=  button_tag 'Пример', :type => 'button', :id => 'base_correction_example', :class => "button_style_long_orange" %>
+	      <%=  button_tag Scan.human_attribute_name('base_correction'), :type => 'button', :id => 'scan_base_correction', :class => "button_style_long_orange" %>
+	      <div id="base_correction_documents_quantity">
+	      	<span>применить к</span> 
+	      	<%=  button_tag ' ', :type => 'button', :class => 'decrease', :id => 'base_correction' %>
+          	<%= scan.text_field :base_correction_documents_quantity %>
+      		<%=  button_tag ' ', :type => 'button', :class => 'increase', :id => 'base_correction' %>
+      		<span>документам.</span> 
+	      </div>
+	      <div class="fl_clear"/></div>	   
+	    </div>
+
+	  	<div class="form_align" id="base_correction_example_area">
+		  <p>В услугу базовой коррекции входят следующие работы: обрезка краев, поворот и автоматическая цветокоррекция (коррекция контрастности, цвета и яркости) отсканированного изображения.</p>
+		  <%= image_tag("orders/base_correction_example.png") %>
+	      <div class="fl_clear"/></div>	   
+	    </div>
+
+	    <div class="fl_clear"></div> 
+	    
+	    <div class="form_align">
+	      <%=  button_tag 'Пример', :type => 'button', :id => 'coloring_example', :class => "button_style_long_orange" %>
+	      <%=  button_tag Scan.human_attribute_name('coloring'), :type => 'button', :id => 'scan_coloring', :class => "button_style_long_orange" %>
+	      <div id="coloring_documents_quantity">
+	      	<span>применить к</span> 
+	      	<%=  button_tag ' ', :type => 'button', :class => 'decrease', :id => 'coloring' %>
+          	<%= scan.text_field :coloring_documents_quantity %>
+      		<%=  button_tag ' ', :type => 'button', :class => 'increase', :id => 'coloring' %>
+      		<span>документам.</span> 
+	      </div>
+	      <div class="fl_clear"/></div>
+	    </div>
+	    
+	  	<div class="form_align" id="coloring_example_area">
+		  <p>
+		  	Благодаря услуге раскраски Вы можете придать цвет своим черно-белым фотографиям.
+		  	Раскраска включает в себя услуги базовой коррекции.
+		  </p>
+		  <%= image_tag("orders/coloring_example.png") %>
+	      <div class="fl_clear"/></div>	   
+	    </div>
+	    
+	    <div class="fl_clear"></div>
+	    
+	    <div class="form_align">
+	      <%=  button_tag 'Пример', :type => 'button', :id => 'restoration_example', :class => "button_style_long_orange" %>    
+	      <%=  button_tag Scan.human_attribute_name('restoration'), :type => 'button', :id => 'scan_restoration', :class => "button_style_long_orange" %>
+	      <div id="restoration_documents_quantity">
+	      	<span>применить к</span> 
+	      	<%=  button_tag ' ', :type => 'button', :class => 'decrease', :id => 'restoration' %>
+          	<%= scan.text_field :restoration_documents_quantity %>
+      		<%=  button_tag ' ', :type => 'button', :class => 'increase', :id => 'restoration' %>
+      		<span>документам.</span> 
+	      </div>
+	      <div class="fl_clear"></div>
+	    </div>
+	    
+	  	<div class="form_align" id="restoration_example_area">
+		  <p>
+		  	Благодаря услуге реставрации Вы сможете востановить свои старые или поврежденные фотографии и документы.
+		  	Реставрация включает в себя услуги базовой коррекции.
+		  </p>
+		  <%= image_tag("orders/restoration_example.png") %>
+	      <div class="fl_clear"/></div>	   
+	    </div>	    
+	  <div class="fl_clear"></div>
+	</div>
+
+  <% end %>
+
+  <div class="fl_clear"></div>
+	<br />
+  <h2 class="orange">Когда и куда приехать, чтобы провести сканирование?</h2>
+	
+	<%= render :partial => 'delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
+    
+  <div class="total_cost_order">  </div>
+  <div class="total_cost_order_label">  </div>
+  
+  <div class="fl_clear"></div>
+  
+  <div id="why_pre_cost_link"><%= button_tag 'Почему примерная?', :type => 'button', :id => 'why_pre_cost_link' %></div>
+  <div class="fl_clear"></div>
+  <div id="why_pre_cost_text">
+  	Мы указываем примерную стоимость Вашего заказа, потому что не можем точно определить его стоимость, пока не увидим
+  	оригиналы сканируемых страниц. Например, если Вы хотите отреставрировать фотографию, то стоимость реставрации будет 
+  	зависеть от степени повреждения фотографии. Точная стоимость заказа будет обозначена при встрече с Вами и будет находится
+  	в диапазоне, указанном выше. 
+  </div>
+  <div class="fl_clear"></div>
+<% if @admin_edit %>
+  	<br />
+  	
+    <h2 class="orange">Обновление статуса</h2>
+	<%= render :partial => 'form', :locals => {:f => order} %>
+
+	<div class="submit_area">
+	 <%= submit_tag 'Сохранить изменения', :class => 'submit'  %>
+	 <%= link_to 'Отмена', admin_orders_path, :class => 'button_style' %>
+	</div>
+  <% else %>
+	<div class="submit_area">
+	 <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
+	 <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
+	</div>
+  <% end %>
+<% end -%>
+
+ 

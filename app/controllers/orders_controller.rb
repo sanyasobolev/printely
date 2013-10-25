@@ -3,10 +3,10 @@ class OrdersController < ApplicationController
   layout 'orders_boardlinks', :only => [:index, :my, :show]
 
   skip_before_filter :authorized?,
-                     :only => [:index, :my, :new, :show, :edit, :update, :destroy, :ajaxupdate]
+                     :only => [:index, :my, :new_print, :new_scan, :show, :edit, :update, :destroy, :ajaxupdate]
 
   skip_before_filter :verify_authenticity_token,
-                     :only => [:new, :edit, :update, :show]
+                     :only => [:new_print, :edit, :update, :show]
 
   before_filter :your_order?,
                 :only => [:edit, :show, :destroy, :ajaxupdate]
@@ -17,25 +17,36 @@ class OrdersController < ApplicationController
 
   def my
     @title = 'Мои заказы'
+    
     @draft_orders = Order.where(:status => Order::STATUS[0], :user_id => current_user.id)
     @draft_orders.each do |draft_order|
       draft_order.documents.destroy_all
       remove_dir(draft_order.id)
     end
     @draft_orders.destroy_all
-    @orders = Order.paginate :page => params[:page],
-                             :order => 'created_at DESC',
-                             :include => :user,
-                             :per_page => '10',
-                             :conditions => "user_id=#{current_user.id}"
+        
+    @print_orders = Order.where("user_id=#{current_user.id} AND order_type='print'", :include => :user).order('created_at DESC')
+    @scan_orders = Order.where("user_id=#{current_user.id} AND order_type='scan'", :include => :user).order('created_at DESC')
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @orders }
     end
   end
 
-  def new #create empty order and redirect to edit it
-    @order = Order.new(:status => Order::STATUS[0])
+  def new_print #create empty order and redirect to edit it
+    @order = Order.new(:status => Order::STATUS[0], :order_type => 'print')
+    order_set_price
+    current_user.orders << @order
+    respond_to do |wants|
+        if @order.save(:validate => false)
+          wants.html {redirect_to edit_order_path(@order)}
+          wants.xml { render :xml => @order.to_xml }
+        end
+      end
+  end
+  
+  def new_scan 
+    @order = Order.new(:status => Order::STATUS[0], :order_type => 'scan')
     order_set_price
     current_user.orders << @order
     respond_to do |wants|
@@ -47,15 +58,29 @@ class OrdersController < ApplicationController
   end
 
   def edit
+    #установка начальных переменных
     if current_user.has_role?('Administrator')
       @title = "Обновление заказа №#{@order.id}"
       @admin_edit = true
     elsif @order.status == Order::STATUS[0]
-        @title = "Заказ №#{@order.id}"
-        @admin_edit = false
+      @title = "Заказ №#{@order.id}"
+      @admin_edit = false
       else
         flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
         redirect_to my_orders_path
+    end
+    #рендер view в зависимости от типа заказа
+    respond_to do |format|
+      case @order.order_type
+      when 'print'
+        format.html { render :new_print }      
+      when 'scan'
+        if @admin_edit == false  
+          format.html { render :new_scan }
+        else
+          format.html { render :admin_edit_scan }
+        end
+      end 
     end
   end
 
@@ -96,30 +121,57 @@ class OrdersController < ApplicationController
   end
 
   def attr_update(order, status) #update main user attributes of order
-      if (order.documents.length == 0 || params[:order][:delivery_street] == "" || params[:order][:delivery_address] == "" || params[:order][:delivery_date] == "")
-        flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл и заполнить информацию о доставке.'
+    case order.order_type
+    when 'print'
+      if (order.documents.length == 0)
+        flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл.'
         redirect_to :action => "edit"
         return false
       else
         order.documents.each do |document|
           document.update_attributes(params[:order][:documents_attributes][document.id.to_s])
         end
+      end
+    when 'scan'
+      order.scan.update_attributes(params[:order][:scan_attributes])
+    end
+    
+    if (params[:order][:delivery_street] == "" || params[:order][:delivery_address] == "" || params[:order][:delivery_date] == "")  
+        flash[:error] = 'Для оформления заказа необходимо заполнить информацию о доставке.'
+        redirect_to :action => "edit"
+        return false
+      else
         if params[:order][:delivery_start_time] == ""
           params[:order][:delivery_start_time] = Order::DEFAULT_START_TIME
         end
         if params[:order][:delivery_end_time] == ""
           params[:order][:delivery_end_time] = Order::DEFAULT_END_TIME
         end
-        order.update_attributes(:delivery_street => params[:order][:delivery_street], :delivery_address => params[:order][:delivery_address], :delivery_date => params[:order][:delivery_date], :delivery_start_time => params[:order][:delivery_start_time], :delivery_end_time => params[:order][:delivery_end_time], :status => status, :created_at => Time.now)
+        if params[:order][:cost]
+          order.update_attribute(:cost, params[:order][:cost])
+        end
+        order.update_attributes(
+            :delivery_street => params[:order][:delivery_street], 
+            :delivery_address => params[:order][:delivery_address], 
+            :delivery_date => params[:order][:delivery_date], 
+            :delivery_start_time => params[:order][:delivery_start_time], 
+            :delivery_end_time => params[:order][:delivery_end_time],
+            :status => status, 
+            :created_at => Time.now
+            )
         return true
-      end
+    end
   end
 
   def show
     @title = "Заказ № #{@order.id}"
-    respond_to do |wants|
-      wants.html
-      wants.xml { render :xml => @order.to_xml }
+    respond_to do |format|
+      case @order.order_type
+      when 'print'
+         format.html { render :show_print_order }
+      when 'scan'
+         format.html { render :show_scan_order } 
+      end
     end
   end
 
@@ -134,13 +186,20 @@ class OrdersController < ApplicationController
     end
   end
 
+#  def admin
+#   @title = "Управление заказами"
+#   @orders = params[:status] ? Order.where(:status => params[:status]).order('created_at DESC') : Order.where('status != ?', 'draft').order('created_at DESC')
+#   respond_to do |format|
+#     format.html
+#     format.js
+#   end
+#  end
+  
   def admin
     @title = "Управление заказами"
-    @orders = params[:status] ? Order.where(:status => params[:status]).order('created_at DESC') : Order.where('status != ?', 'draft').order('created_at DESC')
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    @search = Order.search(params[:q])
+    @orders = @search.result 
+    @search.build_condition
   end
 
   def ajaxupdate
@@ -149,8 +208,12 @@ class OrdersController < ApplicationController
     end
     order_set_price
     respond_to do |format|
-        format.js
+      if @order.cost_min == @order.cost_max || @order.cost_min == nil
+         format.js { render :single_cost }
+      else
+         format.js { render :min_max_cost } 
       end
+    end
   end
 
   def cover
@@ -166,6 +229,7 @@ class OrdersController < ApplicationController
 
   private
     def order_set_price
+      #cчитаем доставку
       if @order.delivery_type
         #ищем цену доставки в прайсе
         delivery_price = PricelistDelivery.where(:delivery_type => @order.delivery_type).first.price
@@ -173,17 +237,34 @@ class OrdersController < ApplicationController
         delivery_price = 0
       end
       @order.update_attribute(:delivery_price, delivery_price)
-  
-      #считаем стоимость всех документов
+
       documents_cost = 0
-      if @order.documents.length > 0
-        @order.documents.each do |document|
-          documents_cost = documents_cost + document.price
+      order_cost_min = 0
+      order_cost_max = 0
+      order_cost = 0
+        
+      
+      case @order.order_type
+      when 'print' #считаем документы, если они есть
+        if @order.documents.size > 0
+          @order.documents.each do |document|
+            documents_cost = documents_cost + document.price
+          end
+        end
+        order_cost = @order.delivery_price + documents_cost
+        order_cost_min = order_cost
+        order_cost_max = order_cost
+      when 'scan' #считаем сканы, если они есть
+        if @order.scan
+          order_cost_min = @order.scan.cost_min + @order.delivery_price
+          order_cost_max = @order.scan.cost_max + @order.delivery_price
+          if order_cost_min == order_cost_max && order_cost_min != 0
+            order_cost = order_cost_min
+          end
         end
       end
-      order_cost = @order.delivery_price + documents_cost
-      @order.update_attribute(:cost, order_cost)
-    end
+     @order.update_attributes(:cost => order_cost ,:cost_min => order_cost_min, :cost_max => order_cost_max)
+     end
   
     def remove_dir(order_id) #delete order folder
       FileUtils.remove_dir("#{Rails.root}/public/uploads/order_#{order_id}", :force => true)

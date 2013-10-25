@@ -1,0 +1,69 @@
+<h2><%= @title %></h2>
+<h2 class="orange">Рассчитайте стоимость Вашего заказа</h2>
+
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :class => "admin_scan_order", :id => @order.id } do |order| -%>
+
+  <%= order.fields_for :scan do |scan| %>
+		<h2 class="red_line">Сколько страниц Вы хотите отсканировать (неважно что, фото или документы)?</h2>
+		<div id="scan_documents_quantity">
+			<%=  button_tag ' ', :type => 'button', :class => 'decrease_large' %>
+          		<%= scan.text_field :scan_documents_quantity %>
+      		<%=  button_tag ' ', :type => 'button', :class => 'increase_large' %>
+		</div>
+		<div id="scan_documents_cost"></div>
+	<div class="fl_clear"></div>  
+
+<p class="red_line">Включая страницы:</p>
+	      	<%=  button_tag ' ', :type => 'button', :class => 'decrease', :id => 'base_correction' %>
+          	<%= scan.text_field :base_correction_documents_quantity %>
+      		<%=  button_tag ' ', :type => 'button', :class => 'increase', :id => 'base_correction' %>
+ 			с базовой коррекцией.
+<div class="fl_clear"></div>
+<br/>
+	      	<%=  button_tag ' ', :type => 'button', :class => 'decrease', :id => 'coloring' %>
+          	<%= scan.text_field :coloring_documents_quantity %>
+      		<%=  button_tag ' ', :type => 'button', :class => 'increase', :id => 'coloring' %>
+	 		с раскраской.
+<div class="fl_clear"></div>
+<br/>
+			<%=  button_tag ' ', :type => 'button', :class => 'decrease', :id => 'restoration' %>
+          	<%= scan.text_field :restoration_documents_quantity %>
+      		<%=  button_tag ' ', :type => 'button', :class => 'increase', :id => 'restoration' %>
+		 	 с реставрацией.
+<div class="fl_clear"></div>
+  <% end %>
+
+  <div class="fl_clear"></div>
+	<br />
+  <h2 class="orange">Когда и куда приехать, чтобы провести сканирование?</h2>
+	
+	<%= render :partial => 'delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
+    
+  <div class="total_cost_order">  </div>
+  <div class="total_cost_order_label">  </div>
+  
+  <div class="fl_clear"></div>
+
+<% if @admin_edit %>
+  	<br />
+  	
+    <h2 class="orange">Уточнение заказа и смена статуса</h2>
+    <div class="form_align">
+	  <%= order.label(:cost) %>
+	  <%= order.text_field(:cost) %>
+	</div>
+	<%= render :partial => 'form', :locals => {:f => order} %>
+
+	<div class="submit_area">
+	 <%= submit_tag 'Сохранить изменения', :class => 'submit'  %>
+	 <%= link_to 'Отмена', admin_orders_path, :class => 'button_style' %>
+	</div>
+  <% else %>
+	<div class="submit_area">
+	 <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
+	 <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
+	</div>
+  <% end %>
+<% end -%>
+
+ 

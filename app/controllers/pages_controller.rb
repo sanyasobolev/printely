@@ -121,10 +121,7 @@ class PagesController < ApplicationController
   def admin
     @title = 'Администрирование - Страницы'
     @main_page = Page.find_by_id(1)
-    @pages = Page.paginate :page => params[:page],
-                           :order => 'published_at DESC',
-                           :include => :user,
-                           :conditions => "id!=1"
+    @pages = Page.find(:all, :order => 'published_at DESC', :conditions => "id!=1")
   end
 
 end

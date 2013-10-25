@@ -1,8 +1,0 @@
-<tr>
-  <td><%=h (order_for_user.id) %></td>
-  <td><%=h (Russian::strftime(order_for_user.created_at, "%R, %d %B %Y года")) %></td>
-  <td><%=h (order_for_user.status) %></td>
-  <td><%=h (number_to_currency(order_for_user.cost, :unit => "коп.", :separator => " руб. ")) %></td>
-  <td><%=h (order_for_user.manager_comment) %></td>
-  <td><%= link_to image_tag("icons/details_view_order.png", :border => "0"), order_path(order_for_user) %></td>
-</tr>

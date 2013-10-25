@@ -9,15 +9,9 @@ class ArticlesController < ApplicationController
     @title = current_section_title
     if params[:category_id]
       @category = Category.find_by_permalink(params[:category_id])
-      @articles = Article.paginate :page => params[:page],
-                             :order => 'published_at DESC',
-                             :include => :user, #оптимизация - запрос выполняется один раз, данные извлекаются из двух таблиц
-                             :conditions => "category_id=#{@category.id.to_i} AND published=true" #соответствие условиям
+      @articles = Article.where("category_id=#{@category.id.to_i} AND published=true").order('published_at DESC')
     else
-         @articles = Article.paginate :page => params[:page],
-                             :order => 'published_at DESC',
-                             :include => :user,
-                             :conditions => "published=true" #соответствие условиям
+      @articles = Article.where("published=true").order('published_at DESC')    
     end
     respond_to do |wants| #web-сервис
       wants.html
@@ -87,10 +81,7 @@ class ArticlesController < ApplicationController
 
   def admin
     @title = "Администрирование - #{current_section_title}"
-    @articles = Article.paginate :page => params[:page],
-                                 :order => 'published_at DESC',
-                                 :include => :user,
-                                 :per_page => '10'
+    @articles = Article.find(:all, :order => 'published_at DESC')
   end
 
 end

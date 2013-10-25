@@ -2,7 +2,7 @@
 <div class="container_for_label_cost_order">
   <%= label(:order, :cost) %>
     <div class="container_for_cost_order">
-      <%=h (number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ")) %>
+		<%= read_cost(@order) %>
     </div>
 </div>
 <div class="container_for_label_status_order">
@@ -28,23 +28,8 @@
 </table>
 
 <h2 class="orange"> Доставка </h2>
- <table class="order_delivery">
-    <%= render :partial => 'header_table_with_delivery', :locals => {:order => @order} %>
-    <tr>
-      <td class="delivery_street">
-        <%= @order.delivery_street %>
-      </td>
-      <td class="delivery_address">
-        <%= @order.delivery_address %>
-      </td>
-      <td class="delivery_date">
-         время <%= render :partial => 'delivery_period', :locals => {:order => @order} %>
-      </td>
-      <td class="delivery_price">
-        <%= h (number_to_currency(@order.delivery_price, :unit => "коп.", :separator => " руб. ")) %>
-      </td>
-    </tr>
-  </table>
+    <%= render :partial => 'delivery_order_show', :locals => {:order => @order} %>
+
 <br />
 <table>
   <tr>

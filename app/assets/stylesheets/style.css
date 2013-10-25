@@ -146,12 +146,26 @@ a.top_section:hover {
     width: 100%;
 }
 
+#slide_orders {
+	position:relative;
+	top:-30px;
+    width: 100%;
+}
+
 #slide_image > div {
     width: 1200px;
     height: 300px;
     float: left;
     overflow: hidden;
 }
+
+#slide_orders > div {
+    width: 900px;
+    min-height: 200px;
+    float: left;
+    overflow: hidden;
+}
+
 
 #slide_image img {
     display: block;
@@ -179,6 +193,30 @@ a.top_section:hover {
 .slide_pagination a span {
     display: none;
 }
+
+.orders_pagination a:link {
+	position:relative;
+	top:-55px;
+	right: -200px;
+    background: orange;
+    width: 150px;
+    height: 30px;
+    margin: 0 5px 0 0;
+    padding-top:5px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+.orders_pagination a:hover {
+	background: #CC8400
+}
+
+.orders_pagination a.selected {
+    background: #B27300;
+    cursor: default;
+    }
 
 .image_title_letters {
     height: 200px;
@@ -347,6 +385,10 @@ h2 {
     font-weight: normal;
 }
 
+.red_line {
+    text-indent: 35px;
+}
+
 
 .orange {
     padding: 10px;
@@ -465,7 +507,7 @@ table.pricelist_for_user th {
 /*списки*/
 ul.square {
     list-style-type: square;
-    float: left;
+    margin-left:50px;
 }
 
 /*ссылки и кнопки --------------------------------------------------------------------------*/
@@ -476,6 +518,16 @@ a:hover {text-decoration: underline;}
 a.logo {text-decoration: none; color: white}
 
 a.article_nav {text-decoration: none; color: #999999}
+
+a.grey:link, a.grey:visited {
+    color: grey;
+    text-decoration:none;
+}
+
+a.grey:hover {
+    color: orange;
+    text-decoration:none;
+}
 
 a.button_style:link, a.button_style:visited {
     background-color: #1BA1E2;
@@ -537,6 +589,8 @@ a.button_style_long_orange:hover {
     cursor: pointer;
     background-color: orange;
 }
+
+
 
 .container_for_link_box {
     display:table;
@@ -666,6 +720,7 @@ a.for_admin:hover,a.for_admin:active{
     float: left;
     margin-left: 20px;
     color: white;
+    width: 380px;
     }
 
 .link_container_for_flash_link .flash_link_title {
@@ -1133,6 +1188,19 @@ a.site_map_link:hover {
     margin-top: 9px;
 }
 
+.form_align p {
+    float: left;
+    display: block;
+    text-align: right;
+    width: 212px;
+    margin-right: 20px;
+    margin-top: 9px;
+}
+
+.form_align img {
+    display: block;
+}
+
 .form_align input {
     border: 1px solid #D6D3D1;
     height: 30px;
@@ -1142,6 +1210,11 @@ a.site_map_link:hover {
     padding-bottom: 4px;
     font-size: 1.3em;
     font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_align button.button_style_long_orange, button.button_style_long_orange_pressed, button.button_style_long_orange_inactive {
+	float: left;
+	margin-right: 10px;
 }
 
 .form_align select {

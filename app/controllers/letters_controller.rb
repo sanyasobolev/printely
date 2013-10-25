@@ -49,9 +49,7 @@ class LettersController < ApplicationController
 
   def admin
     @title = 'Администрирование - Обратная связь'
-    @letters = Letter.paginate :page => params[:page],
-                               :order => 'created_at DESC',
-                               :per_page => '10'
+    @letters = Letter.find(:all, :order => 'created_at DESC')
   end
   
 end

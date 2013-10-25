@@ -1,14 +1,16 @@
 # encoding: utf-8
 class Order < ActiveRecord::Base
 
-  attr_accessible :delivery_street, :delivery_address, :delivery_date, :delivery_start_time, :delivery_end_time,  :delivery_price, :delivery_type, :documents_attributes, :status, :cost, :manager_comment, :created_at
-  
-  #pagination on page
-  cattr_reader :per_page
+  attr_accessible :delivery_street, :delivery_address, :delivery_date, :delivery_start_time, :delivery_end_time,  :delivery_price, :delivery_type, :documents_attributes, :scan_attributes, :scan, :status, :cost, :manager_comment, :created_at, :cost_min, :cost_max, :order_type
 
   belongs_to :user
   has_many :documents, :dependent => :destroy
   accepts_nested_attributes_for :documents, :allow_destroy => true
+  
+  has_one :scan, :dependent => :destroy
+  accepts_nested_attributes_for :scan, :allow_destroy => true
+  
+  
   #варианты доставки
   DELIVERY_STREET = ['КЭЧ', 'Тарасково']
   DELIVERY_TYPE= ['Курьер']
@@ -23,8 +25,5 @@ class Order < ActiveRecord::Base
   DEFAULT_START_TIME = '07:00'
   DEFAULT_END_TIME = '00:00'
 
-#    validate do |order|
-#      order.errors.add(:delivery_address, "Поле \"#{Order.human_attribute_name(:delivery_address)}\" не должно быть пустым" ) if order.delivery_address.blank?
-#    end
-
+  
 end

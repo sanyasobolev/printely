@@ -20,13 +20,21 @@ Spsite::Application.routes.draw do
 
   resources :documents
   match 'document/ajaxupdate' => 'documents#ajaxupdate'
+  
+  resources :scans
+  match 'scan/ajaxupdate' => 'scans#ajaxupdate'
+  match 'scan/create' => 'scans#create'
 
   resources :orders do
     resources :documents
+    resources :scans
      get 'my', :on => :collection
      get 'admin', :on => :collection
      get 'cover', :on => :member
+     get 'new_print', :on => :collection
+     get 'new_scan', :on => :collection
   end
+  
   match 'order/ajaxupdate' => 'orders#ajaxupdate'
 
 
@@ -46,6 +54,10 @@ Spsite::Application.routes.draw do
   end
 
   resources :pricelist_deliveries do
+    get 'admin', :on => :collection
+  end
+  
+  resources :pricelist_scans do
     get 'admin', :on => :collection
   end
 
@@ -79,7 +91,6 @@ Spsite::Application.routes.draw do
 
 
   Ckeditor::Engine.routes.draw do
-
     resources :pictures, :only => [:index, :create, :destroy]
     resources :attachment_files, :only => [:index, :create, :destroy]
   end
