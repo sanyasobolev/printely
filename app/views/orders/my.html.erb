@@ -24,7 +24,7 @@
 		    <%= render :partial => 'print_order_for_user', :collection => @print_orders  %>
 		  </table>
 		<% else %>
-		  <%= render :partial => 'no_orders', :locals => {:href => new_doc_orders_path}  %>
+		  <%= render :partial => 'no_orders', :locals => {:href => new_print_orders_path}  %>
 		<% end %>
     </div>
     <div id="slide_2">
