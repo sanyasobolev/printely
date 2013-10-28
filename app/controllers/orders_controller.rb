@@ -58,27 +58,39 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    #установка начальных переменных
+    #проверка роли
     if current_user.has_role?('Administrator')
       @title = "Обновление заказа №#{@order.id}"
       @admin_edit = true
-    elsif @order.status == Order::STATUS[0]
+    else 
       @title = "Заказ №#{@order.id}"
       @admin_edit = false
-      else
-        flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
-        redirect_to my_orders_path
     end
+    #проверка возможности редактировать заказ
+    if @order.status == Order::STATUS[0] || @admin_edit == true
+      user_can_edit = true
+    else
+      user_can_edit = false
+    end
+
     #рендер view в зависимости от типа заказа
     respond_to do |format|
       case @order.order_type
       when 'print'
-        format.html { render :new_print }      
+        if user_can_edit == true
+          format.html { render :new_print } 
+        else
+          flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
+          format.html { redirect_to my_orders_path}
+        end
       when 'scan'
-        if @admin_edit == false  
+        if @admin_edit == true
+          format.html { render :admin_edit_scan }
+        elsif user_can_edit == true
           format.html { render :new_scan }
         else
-          format.html { render :admin_edit_scan }
+          flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
+          format.html { redirect_to my_orders_path}      
         end
       end 
     end
