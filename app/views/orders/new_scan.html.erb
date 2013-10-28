@@ -5,7 +5,7 @@
 
   <%= order.fields_for Scan.new do |scan| %>
 	<div id="scan_documents">
-		<h2 class="red_line">Сколько страниц Вы хотите отсканировать (неважно что, фото или документы)?</h2>
+		<h2 class="red_line">Сколько страниц Вы хотите отсканировать (неважно что, фото или документы, любого формата до А4)?</h2>
 		<div id="scan_documents_quantity">
 			<%=  button_tag ' ', :type => 'button', :class => 'decrease_large' %>
           		<%= scan.text_field :scan_documents_quantity %>
