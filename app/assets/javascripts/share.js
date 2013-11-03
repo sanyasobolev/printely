@@ -11,7 +11,7 @@ $(document).ready(function(){
 			}
 		);
    
-	    $( ".date_from" ).datepicker({
+	    $( "#date_from" ).datepicker({
 	      defaultDate: "+1w",
 	      changeMonth: true,
 	      numberOfMonths: 3,
@@ -20,7 +20,7 @@ $(document).ready(function(){
 	      }
 	    });
 	    
-	    $( ".date_to" ).datepicker({
+	    $( "#date_to" ).datepicker({
 	      defaultDate: "+1w",
 	      changeMonth: true,
 	      numberOfMonths: 3,
@@ -28,5 +28,24 @@ $(document).ready(function(){
 	        $( "#date_from" ).datepicker( "option", "maxDate", selectedDate );
 	      }
 	    });
+
+	    $( "#date_from_2" ).datepicker({
+	      defaultDate: "+1w",
+	      changeMonth: true,
+	      numberOfMonths: 3,
+	      onClose: function( selectedDate ) {
+	        $( "#date_to_2" ).datepicker( "option", "minDate", selectedDate );
+	      }
+	    });
+	    
+	    $( "#date_to_2" ).datepicker({
+	      defaultDate: "+1w",
+	      changeMonth: true,
+	      numberOfMonths: 3,
+	      onClose: function( selectedDate ) {
+	        $( "#date_from_2" ).datepicker( "option", "maxDate", selectedDate );
+	      }
+	    });
+
 	  });
 	  

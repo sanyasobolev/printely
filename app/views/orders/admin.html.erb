@@ -7,15 +7,15 @@
   </div>
   <div class="field">
     <%= f.label :created_at_gteq, "#{Order.human_attribute_name(:created_at)} от:" %>
-    <%= f.text_field :created_at_gteq, :class => "date_from" %>
+    <%= f.text_field :created_at_gteq, :id => "date_from" %>
     <%= f.label :created_at_lteq, "до" %>
-    <%= f.text_field :created_at_lteq, :class => "date_to" %>    
+    <%= f.text_field :created_at_lteq, :id => "date_to" %>    
   </div>
   <div class="field">
     <%= f.label :delivery_date_gteq, "#{Order.human_attribute_name(:delivery_date)} от:" %>
-    <%= f.text_field :delivery_date_gteq, :class => "date_from" %>
+    <%= f.text_field :delivery_date_gteq, :id => "date_from_2" %>
     <%= f.label :delivery_date_lteq, "до" %>
-    <%= f.text_field :delivery_date_lteq, :class => "date_to" %>    
+    <%= f.text_field :delivery_date_lteq, :id => "date_to_2" %>    
   </div>
   
   <div class="actions"><%= f.submit "Искать" %></div>
@@ -37,7 +37,7 @@
     <th><%= Order.human_attribute_name(:client) %></th>
     <th><%= sort_link(@search, :delivery_date ,Order.human_attribute_name(:delivery_date)) %></th>
     <th><%= Order.human_attribute_name(:delivery_street) %></th>
-    <th><%= Order.human_attribute_name(:status) %></th>
+    <th><%= Order.human_attribute_name(:order_status_id) %></th>
     <th><%= Order.human_attribute_name(:cost_min_max_name) %></th>
     <th><%= Order.human_attribute_name(:cost) %></th>
     <th><%= Order.human_attribute_name(:order_type) %></th>

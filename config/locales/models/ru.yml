@@ -16,6 +16,8 @@ ru:
       order: "Заказ"
       document: "Документ"
       pricelist_fotoprint: "Прайс на печать фото"
+      pricelist_delivery: "Прайс на доставку"
+      lists/order_status: "Статус заказа"
     attributes:
       article:
         title: "Название"
@@ -106,7 +108,7 @@ ru:
         delivery_start_time: "c"
         delivery_end_time: "до"
         delivery_price: "Цена"
-        status: "Статус"
+        order_status_id: "Статус"
         created_at: "Дата создания"
         details: "Детали"
         cost_min_max_name: "Примерная стоимость"
@@ -150,4 +152,7 @@ ru:
         work_desc: "Работы"
         price_min: "Цена, от"
         price_max:  "Цена, до"
+      lists/order_status:
+        title: "Название"
+        key: "Ключ"
 

@@ -1,7 +1,7 @@
 <tr>
   <td><%=h (scan_order_for_user.id) %></td>
   <td><%=h (Russian::strftime(scan_order_for_user.created_at, "%R, %d %B %Y года")) %></td>
-  <td><%=h (scan_order_for_user.status) %></td>
+  <td><%=h (scan_order_for_user.order_status.title) %></td>
   <td><%= h (read_cost_min_max(scan_order_for_user)) %></td>
   <td><%= h (read_cost(scan_order_for_user)) %>  </td>
   <td><%=h (scan_order_for_user.manager_comment) %></td>

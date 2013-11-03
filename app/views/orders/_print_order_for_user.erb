@@ -1,7 +1,7 @@
 <tr>
   <td><%=h (print_order_for_user.id) %></td>
   <td><%=h (Russian::strftime(print_order_for_user.created_at, "%R, %d %B %Y года")) %></td>
-  <td><%=h (print_order_for_user.status) %></td>
+  <td><%=h (print_order_for_user.order_status.title) %></td>
   <td><%=h (read_cost(print_order_for_user)) %></td>
   <td><%=h (print_order_for_user.manager_comment) %></td>
   <td><%= link_to image_tag("icons/details_view_order.png", :border => "0"), order_path(print_order_for_user) %></td>

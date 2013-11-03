@@ -66,14 +66,15 @@ Spsite::Application.routes.draw do
     get 'admin', :on => :collection
   end
 
-  resources :articles do
-    get 'admin', :on => :collection
-  end
-
   resources :categories do
     resources :articles
     get 'admin', :on => :collection
   end
+
+  resources :articles do
+    get 'admin', :on => :collection
+  end
+
 
   resources :subservices do
     get 'admin', :on => :collection
@@ -88,6 +89,14 @@ Spsite::Application.routes.draw do
     get 'admin', :on => :collection
     get 'sent', :on => :collection
   end
+
+#  match 'list/:controller/:action/:id'
+  match '/lists/all' => 'lists/order_statuses#all', :as => :all_lists
+
+  namespace :lists do
+    resources :order_statuses
+  end
+  
 
 
   Ckeditor::Engine.routes.draw do

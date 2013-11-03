@@ -8,9 +8,15 @@
               <%= link_to section.title, section_pages_path(section), :class => 'top_section' %>
             </div>
           <% else %>
-            <div class="top_section_nav">
-              <%= link_to section.title, {:controller => section.controller, :action => section.action, :category_id => nil}, {:class => 'top_section'} %>
-            </div>
+	          <% if section.action == 'index' %>
+	            <div class="top_section_nav">
+	              <%= link_to section.title, "/#{section.controller}", {:category_id => nil, :class => "top_section"} %>
+	            </div>
+			  <% else %>
+	            <div class="top_section_nav">
+	              <%= link_to section.title, "/#{section.controller}/#{section.action}", {:category_id => nil, :class => "top_section"} %>
+	            </div>
+	          <% end %>
           <% end %>
         <% end %>
       <% end %>

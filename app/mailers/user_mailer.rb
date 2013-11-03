@@ -12,34 +12,37 @@ class UserMailer < ActionMailer::Base
   #рассылка при создании нового заказа
   def email_user_about_new_order(order)
     @order = order
+    @status = Lists::OrderStatus.where(:id => order.order_status_id).first.title
     @myoffice  = "http://printely.ru/myoffice"
     @url_to_order = "http://printely.ru/orders/#{@order.id}"
     @user = User.find_by_id(order.user_id)
-    mail(:to => @user.email, :subject => "Заказ №#{order.id} создан и находится #{order.status}")
+    mail(:to => @user.email, :subject => "Заказ №#{@order.id} создан и находится #{@status}")
   end
 
   #рассылка при изменении статуса заказа
   def email_user_about_change_status(order)
     @order = order
+    @status = Lists::OrderStatus.where(:id => order.order_status_id).first.title
     @myoffice  = "http://printely.ru/myoffice"
     @url_to_order = "http://printely.ru/orders/#{@order.id}"
     @user = User.find_by_id(order.user_id)
-    mail(:to => @user.email, :subject => "Заказ №#{order.id} #{order.status}")
+    mail(:to => @user.email, :subject => "Заказ №#{@order.id} #{@status}")
   end
 
   #рассылка при выполнении заказа
   def email_user_about_complete_order(order)
     @order = order
+    @status = Lists::OrderStatus.where(:id => order.order_status_id).first.title
     @url_to_letters = "http://printely.ru/letters/new"
     @user = User.find_by_id(order.user_id)
-    mail(:to => @user.email, :subject => "Заказ №#{order.id} #{order.status}")
+    mail(:to => @user.email, :subject => "Заказ №#{@order.id} #{@status}")
   end
   
   #рассылка при удалении заказа
   def email_user_about_remove_order(order)
     @order = order
     @user = User.find_by_id(order.user_id)
-    mail(:to => @user.email, :subject => "Заказ №#{order.id} будет удален из системы")
+    mail(:to => @user.email, :subject => "Заказ №#{@order.id} будет удален из системы")
   end
 
 

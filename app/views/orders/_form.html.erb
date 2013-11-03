@@ -1,6 +1,6 @@
 <div class="form_align">
-  <%= f.label(:status) %>
-  <%= f.select(:status, Order::STATUS) %>
+  <%= f.label(:order_status_id) %>
+  <%= f.collection_select :order_status_id, Lists::OrderStatus.all, :id, :title %>
 </div>
 <div class="form_align">
   <%= f.label(:manager_comment) %>

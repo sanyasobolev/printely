@@ -8,7 +8,7 @@
 	<% end %>
   </td>	
   <td><%=h (order.delivery_street) %></td>
-  <td><%=h (order.status) %></td>
+  <td><%=h (order.order_status.title) %></td>
   <td><%=h (read_cost_min_max(order)) %></td>
   <td><%=h (read_cost(order)) %></td>
   <td><%=h (order.order_type) %></td>

@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   def my
     @title = 'Мои заказы'
     
-    @draft_orders = Order.where(:status => Order::STATUS[0], :user_id => current_user.id)
+    @draft_orders = Order.where(:order_status_id => get_status_id_from_key(10), :user_id => current_user.id)
     @draft_orders.each do |draft_order|
       draft_order.documents.destroy_all
       remove_dir(draft_order.id)
@@ -34,7 +34,8 @@ class OrdersController < ApplicationController
   end
 
   def new_print #create empty order and redirect to edit it
-    @order = Order.new(:status => Order::STATUS[0], :order_type => 'print')
+    @order = Order.new(:order_type => 'print')
+    @order.set_status(10)
     order_set_price
     current_user.orders << @order
     respond_to do |wants|
@@ -46,7 +47,8 @@ class OrdersController < ApplicationController
   end
   
   def new_scan 
-    @order = Order.new(:status => Order::STATUS[0], :order_type => 'scan')
+    @order = Order.new(:order_type => 'scan')
+    @order.set_status(10)
     order_set_price
     current_user.orders << @order
     respond_to do |wants|
@@ -67,7 +69,7 @@ class OrdersController < ApplicationController
       @admin_edit = false
     end
     #проверка возможности редактировать заказ
-    if @order.status == Order::STATUS[0] || @admin_edit == true
+    if @order.read_status_key == 10 || @admin_edit == true
       user_can_edit = true
     else
       user_can_edit = false
@@ -99,15 +101,15 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     if current_user.has_role?('Administrator')  # если администратор или менеджер
-      old_status = @order.status
-      new_status = params[:order][:status]
-      if attr_update(@order, new_status) 
+      old_status_key = @order.order_status.key
+      new_status_key = get_status_key_from_id(params[:order][:order_status_id])
+      if attr_update(@order, new_status_key) 
         respond_to do |wants|
           if @order.update_attributes(:manager_comment => params[:order][:manager_comment])
-            if new_status != old_status #отправка сообщения на почту пользователя, ели статус был изменен
-              if new_status == Order::STATUS[4]
+            if new_status_key != old_status_key #отправка сообщения на почту пользователя, ели статус был изменен
+              if new_status_key == 50
                 UserMailer.email_user_about_complete_order(@order).deliver
-              elsif new_status == Order::STATUS[0]
+              elsif new_status_key == 10
                 UserMailer.email_user_about_remove_order(@order).deliver
               else
                 UserMailer.email_user_about_change_status(@order).deliver
@@ -123,7 +125,7 @@ class OrdersController < ApplicationController
         end
       end
     else #если обычный пользователь
-        if attr_update(@order, Order::STATUS[1])
+        if attr_update(@order, 20)
           UserMailer.email_all_admins_about_new_order(@order)
           UserMailer.email_user_about_new_order(@order).deliver
           flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
@@ -132,7 +134,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def attr_update(order, status) #update main user attributes of order
+  def attr_update(order, status_key) #update main user attributes of order
     case order.order_type
     when 'print'
       if (order.documents.length == 0)
@@ -168,7 +170,7 @@ class OrdersController < ApplicationController
             :delivery_date => params[:order][:delivery_date], 
             :delivery_start_time => params[:order][:delivery_start_time], 
             :delivery_end_time => params[:order][:delivery_end_time],
-            :status => status, 
+            :order_status_id => get_status_id_from_key(status_key), 
             :created_at => Time.now
             )
         return true
@@ -281,6 +283,14 @@ class OrdersController < ApplicationController
     def remove_dir(order_id) #delete order folder
       FileUtils.remove_dir("#{Rails.root}/public/uploads/order_#{order_id}", :force => true)
     end
-  
+    
+    def get_status_id_from_key(key)
+      Lists::OrderStatus.where(:key => key).first.id
+    end
+    
+    def get_status_key_from_id(id)
+      Lists::OrderStatus.where(:id => id).first.key
+    end
+
 end
 

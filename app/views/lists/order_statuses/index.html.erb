@@ -1,0 +1,17 @@
+<h2>Cтатусы заказов</h2>
+<p><%= link_to 'Создать', new_lists_order_status_path, :class => 'button_style_long' %></p>
+<table class="admin">
+  <tr>
+    <th></th>
+    <th><%= Lists::OrderStatus.human_attribute_name("title") %></th>
+    <th><%= Lists::OrderStatus.human_attribute_name("key") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'status' , :collection => @statuses %>
+
+</table>
+<%= link_to 'Назад', all_lists_path, :class => 'button_style' %>
+    
+    
+    

@@ -14,9 +14,9 @@
 </div>
 
 <div class="container_for_label_status_order">
-    <%= label(:order, :status) %>
+    <%= label(:order, :order_status_id) %>
   <div class="container_for_status_order">
-    <%=h @order.status %>
+    <%=h @order.order_status.title %>
   </div>
 </div>
 <div class="container_for_label_created_at_order">
