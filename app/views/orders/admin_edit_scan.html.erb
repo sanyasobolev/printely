@@ -1,5 +1,5 @@
 <h2><%= @title %></h2>
-<h2 class="orange">Рассчитайте стоимость Вашего заказа</h2>
+<h2 class="orange">Создайте заказ на сканирование</h2>
 
 <%= form_for @order, :url => order_path(@order), :html => { :method => :put, :class => "admin_scan_order", :id => @order.id } do |order| -%>
 
