@@ -1,6 +1,6 @@
 <div class="field">
   <%= f.attribute_fields do |a| %>
-    <%= a.attribute_select associations: [:user] %>
+    <%= a.attribute_select associations: [:user, :order_status] %>
   <% end %>
   <%= f.predicate_select ({:only => [:cont, :not_cont, :eq, :not_eq, :start, :end, :lt, :qt, :qteq, :lteq], :compounds => false}) %>
   <%= f.value_fields do |v| %>

@@ -153,6 +153,7 @@ ru:
         price_min: "Цена, от"
         price_max:  "Цена, до"
       lists/order_status:
+        id: "ИД статуса"
         title: "Название"
         key: "Ключ"
 

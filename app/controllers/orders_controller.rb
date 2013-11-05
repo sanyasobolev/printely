@@ -211,7 +211,12 @@ class OrdersController < ApplicationController
   
   def admin
     @title = "Управление заказами"
-    @search = Order.search(params[:q])
+    if params[:q]
+      @search = Order.search(params[:q]) 
+    else
+      @search = Order.search(:order_status_key_not_eq => 10) 
+    end
+    @search.sorts = 'id desc' if @search.sorts.empty?
     @orders = @search.result 
     @search.build_condition
   end
