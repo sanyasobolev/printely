@@ -38,6 +38,7 @@
 }
 
 .order_delivery {
+	position: relative;
     width: 100%;
 }
 
@@ -109,8 +110,16 @@
     background-color: #e8e8e8;
 }
 
-#fileList td.upload, td.print_format, td.paper_type, td.quantity, td.margins, td.user_comment, td.document_price {
+#fileList td.upload, td.paper_type, td.quantity, td.user_comment, td.document_price {
     width: 128px;
+}
+
+#fileList td.margins {
+	width: 100px;
+}
+
+#fileList td.paper_size {
+	width: 156px;
 }
 
 #fileList td.upload .container_for_link_delete_docfile {
@@ -129,9 +138,9 @@
     float: right;
 }
 
-#fileList td.print_format select {
+#fileList td.paper_size select {
     display: block;
-    width: 70px;
+    width: 98px;
     margin-left: auto;
     margin-right: auto;
     border: 1px solid #D6D3D1;
@@ -179,7 +188,7 @@ button.increase {
 
 #fileList td.margins select {
     display: block;
-    width: 120px;
+    width: 92px;
     margin-left: auto;
     margin-right: auto;
     border: 1px solid #D6D3D1;

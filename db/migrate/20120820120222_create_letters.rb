@@ -4,7 +4,7 @@ class CreateLetters < ActiveRecord::Migration
       t.column :name, :string
       t.column :phone, :string
       t.column :email, :string
-      t.column :question, :string
+      t.column :question, :text
       t.timestamps
     end
   end

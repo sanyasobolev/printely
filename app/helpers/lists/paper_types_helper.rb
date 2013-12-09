@@ -1,0 +1,2 @@
+module Lists::PaperTypesHelper
+end

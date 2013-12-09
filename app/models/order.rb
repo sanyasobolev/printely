@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   
   
   #варианты доставки
-  DELIVERY_STREET = ['КЭЧ', 'Тарасково']
+  DELIVERY_STREET = ['КЭЧ', 'Тарасково', 'Бурцево', 'Петровское']
   DELIVERY_TYPE= ['Курьер']
 
   #размер боксов полей в формах
@@ -23,6 +23,18 @@ class Order < ActiveRecord::Base
 
   DEFAULT_START_TIME = '07:00'
   DEFAULT_END_TIME = '00:00'
+  
+  validates :delivery_street, :presence => {
+    :message => "Заполните, пожалуйста, регион доставки."
+  }
+  
+  validates :delivery_address, :presence => {
+    :message => "Заполните, пожалуйста, адрес доставки."
+  }
+  
+  validates :delivery_date, :presence => {
+    :message => "Заполните, пожалуйста, дату доставки."
+  }
   
   def read_status_key #get status key for current order
     Lists::OrderStatus.where(:id => self.order_status_id).first.key

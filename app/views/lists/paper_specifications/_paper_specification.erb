@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to 'X', lists_paper_specification_path(paper_specification), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%= h (paper_specification.paper_type.paper_type) unless paper_specification.paper_type.nil? %></td>
+  <td><%= h (paper_specification.paper_size.size) unless paper_specification.paper_size.nil? %></td>
+  <td><%= boolean_to_ru(paper_specification.in_stock) %></td>
+  <td><%= link_to 'Редактировать', edit_lists_paper_specification_path(paper_specification) %></td>
+</tr>

@@ -1,4 +1,4 @@
-<tr class="document" id="<%= document.id %>">
+<tr class="document" id="<%= document.id %>" name="document" >
   <%= fields_for "order[documents_attributes][]", document do |i| %>
     <td class="upload">
       <div class="container_for_link_delete_docfile">
@@ -6,11 +6,11 @@
       </div>
     <%= image_tag document.docfile.thumb.url, :class => 'thumb' %>
     </td>
-    <td class="print_format">
-      <%= i.select(:print_format, Document::PRINT_FORMAT) %>
+    <td class="paper_size">  
+      	<%= select_tag("order[documents_attributes][#{document.id}][paper_size]") %>
     </td>
     <td class="paper_type">
-      <%= i.select(:paper_type, Document::PAPER_TYPE) %>
+    	<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true}) %>
     </td>
     <td class="quantity">
       <%=  button_tag ' ', :type => 'button', :class => 'decrease' %>
@@ -18,7 +18,7 @@
       <%=  button_tag ' ', :type => 'button', :class => 'increase' %>
     </td>
     <td class="margins">
-      <%= i.select(:margins, Document::MARGINS) %>
+      <%= select_tag("order[documents_attributes][#{document.id}][margins]", {}, {:disabled => true}) %>
     </td>
     <td class="user_comment">
       <%= i.text_area :user_comment %>

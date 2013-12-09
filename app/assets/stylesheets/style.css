@@ -1109,11 +1109,6 @@ a.site_map_link:hover {
     margin-top: 30px;
 }
 
-.zero_level a {
-    position: relative;
-    top: -5px;
-}
-
 .first_level {
     font-size: 1.5em;
     position: relative;
@@ -1125,6 +1120,21 @@ a.site_map_link:hover {
     position: relative;
     right: -100px;
 }
+
+.zero_level a {
+    position: relative;
+    top: -5px;
+}
+
+.zero_level p {
+    margin-bottom: 0px;
+}
+
+.first_level p {
+	margin: 0px;
+}
+
+
 
 /*------------------------------------------------*/
 
@@ -1280,6 +1290,7 @@ a.site_map_link:hover {
 	bottom: 10px;
 }
 
+/*client side validation*/
 .field_with_errors {
   display: inline;
 }
@@ -1298,6 +1309,38 @@ a.site_map_link:hover {
 	
 	text-align: left;
 }
+
+/*jquery validate*/
+label.error {
+	font-weight: bold;
+	font-size: 1.5em;
+	position: absolute;
+	display: table-cell;
+  	color: red;
+	width: 10px; 
+	height: 20px; 
+	right: 135px;
+	top: -3px;
+
+}
+table.order_delivery td.delivery_street label.error {
+	right: 660px;
+	top: 32px;
+}
+
+table.order_delivery td.delivery_address label.error {
+	right: 400px;
+	top: 32px;
+}
+
+label.error[for=quantity_documents_for_validate] {
+	right: 480px;
+	top: 205px;
+	width: 300px;
+}
+
+
+
 
 /*------------------------------------------------------------------*/
 

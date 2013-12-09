@@ -14,6 +14,26 @@ module OrdersHelper
     return cost
   end
   
+  def read_paper_size(document)
+    dspec = document.document_specification
+    pspec = dspec.paper_specification
+    paper_size = pspec.paper_size.size
+    return paper_size
+  end
+  
+  def read_paper_type(document)
+    dspec = document.document_specification
+    pspec = dspec.paper_specification
+    paper_type = pspec.paper_type.paper_type
+    return paper_type
+  end
+  
+  def read_print_margins(document)
+    dspec = document.document_specification
+    print_margins = dspec.print_margin.margin
+    return print_margins
+  end
+  
   def read_cost_min_max(object) #order or order.scan
     if object.cost_min == nil && object.cost_max == nil
       cost_min = ''

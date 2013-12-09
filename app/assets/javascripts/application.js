@@ -12,4 +12,5 @@
 
 //= require jquery
 //= require rails.validations
+//= require jquery.validate
 //= require_tree

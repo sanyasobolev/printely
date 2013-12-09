@@ -1,5 +1,5 @@
 <h1>Редактирование cтатуса</h1>
-
+<%= error_messages_for :order_status %>
 <%= form_for :status, :url => lists_order_status_path(@status), :html => {:method => :put} do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
     <div class="submit_area">

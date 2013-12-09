@@ -19,7 +19,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/order_#{model.order.id}"
+    "uploads/order_#{model.order.id}" unless model.order.nil?
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -56,7 +56,15 @@ class DocumentUploader < CarrierWave::Uploader::Base
   #"#{model.object_id}_pp_#{self.model.attributes['print_format'].parameterize}_#{self.model.attributes['paper_type'].parameterize}_#{self.model.attributes['quantity']}_#{self.model.attributes['margins'].parameterize}"
 
   def filename
-     "#{secure_token}_PP_#{model.print_format.parameterize}_#{model.paper_type.parameterize}_#{model.quantity}_#{model.margins.parameterize}.#{file.extension}" if original_filename.present?
+    if model.document_specification_id
+      document_specification = Lists::DocumentSpecification.find_by_id(model.document_specification_id)
+      margins = Lists::PrintMargin.find_by_id(document_specification.print_margin_id).margin
+      paper_type = Lists::PaperType.find_by_id(Lists::PaperSpecification.find_by_id(document_specification.paper_specification_id).paper_type_id).paper_type
+      paper_size = Lists::PaperSize.find_by_id(Lists::PaperSpecification.find_by_id(document_specification.paper_specification_id).paper_size_id).size
+      "#{secure_token}_PP_#{paper_size.parameterize}_#{paper_type.parameterize}_#{model.quantity}_#{margins.parameterize}.#{file.extension}" if original_filename.present?
+    else
+      "#{secure_token}_PP_not_set_spesification"
+    end
   end
 
   protected

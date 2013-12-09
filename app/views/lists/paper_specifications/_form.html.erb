@@ -1,0 +1,24 @@
+<div class="form_align">
+	<%= f.label :paper_type_id %>
+	<%= f.collection_select(:paper_type_id,
+                      Lists::PaperType.find(:all),
+                      :id,
+                      :paper_type) %>
+</div>
+
+<div class="form_align">
+	<%= f.label :paper_size_id %>
+	<%= f.collection_select(:paper_size_id,
+                      Lists::PaperSize.find(:all),
+                      :id,
+                      :size) %>
+</div>
+
+<div class="form_align">
+	<%= f.label :in_stock %>
+  	<%= f.check_box :in_stock %>
+</div>
+
+
+
+

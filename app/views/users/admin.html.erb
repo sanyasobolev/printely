@@ -1,17 +1,59 @@
-<h2>
+<h1 class="orange">
   Администрирование системы
-</h2>
+</h1>
 
-<%= link_to 'Разделы сайта', admin_sections_path %><br/>
-<%= link_to 'Страницы сайта', admin_pages_path %><br/>
-<%= link_to 'Пользователи', users_path %><br/>
-<%= link_to 'Роли', roles_path %><br/>
-<%= link_to 'Права', rights_path %><br/>
-<%= link_to 'Статьи', admin_articles_path %><br/>
-<%= link_to 'Категории статей', admin_categories_path %><br/>
-<%= link_to 'Обратная связь',  admin_letters_path%><br/>
-<%= link_to 'Услуги',  admin_services_path%><br/>
-<%= link_to 'Подуслуги',  admin_subservices_path%><br/>
-<%= link_to 'Заказы',  admin_orders_path%><br/>
-<%= link_to 'Прайсы',  pricelist_deliveries_path%><br/>
-<%= link_to 'Справочники',  all_lists_path %><br/>
+	<div class="zero_level">
+		<p>Контент сайта</p>
+	</div>
+	<div class="first_level">
+	<%= link_to 'Разделы верхнего меню', admin_sections_path %><br/>
+	<%= link_to 'Страницы', admin_pages_path %><br/>
+	<%= link_to 'Статьи', admin_articles_path %><br/>
+	<%= link_to 'Категории статей', admin_categories_path %><br/>
+	<%= link_to 'Услуги',  admin_services_path%><br/>
+	<%= link_to 'Подуслуги',  admin_subservices_path%><br/>
+	</div>
+	<div class="zero_level">
+		<p>Доступ</p>
+	</div>
+	<div class="first_level">
+	<%= link_to 'Пользователи', users_path %><br/>
+	<%= link_to 'Роли', roles_path %><br/>
+	<%= link_to 'Права', rights_path %><br/>	
+	</div>
+	
+	<div class="zero_level">
+		<p>Управление заказами</p>
+	</div>
+	<div class="first_level">
+	<%= link_to 'Заказы',  admin_orders_path%><br/>
+	<%= link_to 'Спецификации бумаг',  lists_paper_specifications_path%><br/>
+	<%= link_to 'Спецификации готовых документов',  lists_document_specifications_path%><br/>
+	</div>
+
+
+
+	<div class="zero_level">
+		<p>Справочники</p>
+	</div>
+	<div class="first_level">
+		<%= link_to 'Cтатусы заказов',  lists_order_statuses_path %> <br />
+		<%= link_to 'Классы бумаги',  lists_paper_grades_path %> <br />
+		<%= link_to 'Типы бумаги',  lists_paper_types_path %> <br />
+		<%= link_to 'Размеры бумаги',  lists_paper_sizes_path %><br />
+		<%= link_to 'Поля и отступы',  lists_print_margins_path %>
+		<p> Прайсы </p>
+	</div>
+	<div class="second_level">
+		<%= link_to 'Прайс на печать фото',  admin_pricelist_fotoprints_path %> <br />
+		<%= link_to 'Прайс на сканирование',  admin_pricelist_scans_path %> <br />
+		<%= link_to 'Прайс на доставку',  admin_pricelist_deliveries_path %> <br />
+
+	</div>
+	
+	<div class="zero_level">
+		<%= link_to 'Обратная связь',  admin_letters_path%><br/>
+	</div>
+
+<br/><br/><br/><br/><br/>
+

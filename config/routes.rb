@@ -18,8 +18,12 @@ Spsite::Application.routes.draw do
   resources :rights
   resources :roles
 
+  
+  match 'document/price_update' => 'documents#price_update'
+  match 'document/get_paper_sizes' => 'documents#get_paper_sizes'
+  match 'document/get_paper_types' => 'documents#get_paper_types'
+  match 'document/get_print_margins' => 'documents#get_print_margins'
   resources :documents
-  match 'document/ajaxupdate' => 'documents#ajaxupdate'
   
   resources :scans
   match 'scan/ajaxupdate' => 'scans#ajaxupdate'
@@ -90,11 +94,14 @@ Spsite::Application.routes.draw do
     get 'sent', :on => :collection
   end
 
-#  match 'list/:controller/:action/:id'
-  match '/lists/all' => 'lists/order_statuses#all', :as => :all_lists
-
   namespace :lists do
     resources :order_statuses
+    resources :paper_grades
+    resources :paper_types
+    resources :paper_sizes
+    resources :paper_specifications
+    resources :document_specifications
+    resources :print_margins
   end
   
 

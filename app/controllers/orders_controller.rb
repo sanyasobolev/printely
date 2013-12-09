@@ -36,12 +36,12 @@ class OrdersController < ApplicationController
   def new_print #create empty order and redirect to edit it
     @order = Order.new(:order_type => 'print')
     @order.set_status(10)
-    order_set_price
+    set_price(@order)
     current_user.orders << @order
     respond_to do |wants|
         if @order.save(:validate => false)
           wants.html {redirect_to edit_order_path(@order)}
-          wants.xml { render :xml => @order.to_xml }
+          wants.xml {render :xml => @order.to_xml}
         end
       end
   end
@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
   def new_scan 
     @order = Order.new(:order_type => 'scan')
     @order.set_status(10)
-    order_set_price
+    set_price(@order)
     current_user.orders << @order
     respond_to do |wants|
         if @order.save(:validate => false)
@@ -143,7 +143,14 @@ class OrdersController < ApplicationController
         return false
       else
         order.documents.each do |document|
-          document.update_attributes(params[:order][:documents_attributes][document.id.to_s])
+          unless params[:order][:documents_attributes].nil?
+            @dspec_id = Lists::DocumentSpecification.joins(paper_specification: :paper_type).where("lists_paper_types.paper_type = '#{params[:order][:documents_attributes][document.id.to_s][:paper_type]}'").joins(paper_specification: :paper_size).where("lists_paper_sizes.size = '#{params[:order][:documents_attributes][document.id.to_s][:paper_size]}'").joins(:print_margin).where("lists_print_margins.margin = '#{params[:order][:documents_attributes][document.id.to_s][:margins]}'").first.id
+            document.update_attributes(
+                    :quantity => params[:order][:documents_attributes][document.id.to_s][:quantity],
+                    :user_comment => params[:order][:documents_attributes][document.id.to_s][:user_comment],
+                    :document_specification_id => @dspec_id
+                    )
+          end
         end
       end
     when 'scan'
@@ -200,15 +207,6 @@ class OrdersController < ApplicationController
     end
   end
 
-#  def admin
-#   @title = "Управление заказами"
-#   @orders = params[:status] ? Order.where(:status => params[:status]).order('created_at DESC') : Order.where('status != ?', 'draft').order('created_at DESC')
-#   respond_to do |format|
-#     format.html
-#     format.js
-#   end
-#  end
-  
   def admin
     @title = "Управление заказами"
     if params[:q]
@@ -225,7 +223,7 @@ class OrdersController < ApplicationController
     if params[:delivery_type]
       @order.update_attribute(:delivery_type, params[:delivery_type])
     end
-    order_set_price
+    set_price(@order)
     respond_to do |format|
       if @order.cost_min == @order.cost_max || @order.cost_min == nil
          format.js { render :single_cost }
@@ -247,42 +245,43 @@ class OrdersController < ApplicationController
   end
 
   private
-    def order_set_price
+    def set_price(order)
       #cчитаем доставку
-      if @order.delivery_type
+      if order.delivery_type
         #ищем цену доставки в прайсе
-        delivery_price = PricelistDelivery.where(:delivery_type => @order.delivery_type).first.price
+        delivery_price = PricelistDelivery.where(:delivery_type => order.delivery_type).first.price
       else
         delivery_price = 0
       end
-      @order.update_attribute(:delivery_price, delivery_price)
+      order.update_attribute(:delivery_price, delivery_price)
 
       documents_cost = 0
       order_cost_min = 0
       order_cost_max = 0
       order_cost = 0
-        
       
-      case @order.order_type
+      case order.order_type
       when 'print' #считаем документы, если они есть
-        if @order.documents.size > 0
-          @order.documents.each do |document|
+        if order.documents.size > 0
+          order.documents.each do |document|
             documents_cost = documents_cost + document.price
           end
         end
-        order_cost = @order.delivery_price + documents_cost
+        order_cost = order.delivery_price + documents_cost
         order_cost_min = order_cost
         order_cost_max = order_cost
       when 'scan' #считаем сканы, если они есть
-        if @order.scan
-          order_cost_min = @order.scan.cost_min + @order.delivery_price
-          order_cost_max = @order.scan.cost_max + @order.delivery_price
+        if order.scan
+          order_cost_min = order.scan.cost_min + order.delivery_price
+          order_cost_max = order.scan.cost_max + order.delivery_price
           if order_cost_min == order_cost_max && order_cost_min != 0
             order_cost = order_cost_min
           end
         end
       end
-     @order.update_attributes(:cost => order_cost ,:cost_min => order_cost_min, :cost_max => order_cost_max)
+     order.update_attribute(:cost, order_cost) 
+     order.update_attribute(:cost_min, order_cost_min) 
+     order.update_attribute(:cost_max, order_cost_max) 
      end
   
     def remove_dir(order_id) #delete order folder

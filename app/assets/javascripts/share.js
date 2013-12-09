@@ -1,13 +1,13 @@
 jQuery.fn.exists = function() {
     return $(this).length;
-}
+};
 
 
 $(document).ready(function(){
 	   //календарь
         $("#datepicker, #datepicker_2, #datepicker_3, #datepicker_4").datepicker({
 			minDate: 0,
-			firstDay: 1,
+			firstDay: 1
 			}
 		);
    

@@ -1,0 +1,13 @@
+<h1>Создание</h1>
+
+<%= form_for :dspec, :url => lists_document_specifications_path do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  
+    <div class="submit_area">
+      <%= submit_tag 'Сохранить', :class => 'submit' %>
+      <%= link_to 'Назад', lists_document_specifications_path, :class => 'button_style' %>
+    </div>
+
+<% end %>
+
+ 

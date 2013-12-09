@@ -1,0 +1,16 @@
+<div class="form_align">
+	<%= f.label :paper_type %>
+	<%= f.text_field :paper_type  %>
+</div>
+
+<div class="form_align">
+	<%= f.label :paper_grade_id %>
+	<%= f.collection_select(:paper_grade_id,
+                      Lists::PaperGrade.find(:all),
+                      :id,
+                      :grade) %>
+</div>
+
+
+
+

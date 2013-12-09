@@ -1,0 +1,6 @@
+<option value="<%= available_paper_size.size %>">
+	<%= available_paper_size.size %>
+	<% unless available_paper_size.size_iso_216.blank? %>
+		<%= "| #{available_paper_size.size_iso_216}" %>
+	<% end %>
+</option>

@@ -2,9 +2,6 @@
 class PricelistDeliveriesController < ApplicationController
   layout 'wo_boardlinks', :only => [:admin, :new, :edit]
 
-  def index
-
-  end
   
   def admin
     @title = "Администрирование прайс-листа "

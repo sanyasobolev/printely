@@ -1,11 +1,7 @@
 $(document).ready(function(){
     if(($(".edit_scan_order").exists()) || ($(".admin_scan_order").exists())) {
         //контроль ухода пользователя со страницы
-        $(".edit_scan_order").FormNavigate({
-          message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
-          aOutConfirm: "a.button_style"
-        });
-
+       
 		var url_for_update_order = "/order/ajaxupdate",
         url_for_update_scan = "/scan/ajaxupdate",
         url_for_create_scan = "/scan/create",
@@ -16,6 +12,27 @@ $(document).ready(function(){
         selected_restoration_documents_quantity = $("input#order_scan_restoration_documents_quantity");
 
 		if ($(".edit_scan_order").exists()) {
+			//set out control
+	        $(".edit_scan_order").FormNavigate({
+    	      message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
+        	  aOutConfirm: "a.button_style"
+    	    });
+
+			//client validator
+	        $("form.edit_scan_order").validate({
+	    		rules: {
+	    			'order[delivery_address]': "required",
+	    			'order[delivery_street]':"required",
+	    			'order[delivery_date]':"required"
+	    		},
+	    		messages: {
+	    			'order[delivery_address]': "?",
+	    			'order[delivery_street]':"?",
+	    			'order[delivery_date]':"?"
+	    		}
+	    		}
+	        );
+
 			//set default
 			var order_id = $("form.edit_scan_order").attr("id"),
 				button_improve_documents = $("button#improve_documents_toggle"),
@@ -326,6 +343,27 @@ $(document).ready(function(){
 		}; //конец функции для edit_scan_order
 				
 		if ($(".admin_scan_order").exists()){
+			
+			//set out control
+	        $(".admin_scan_order").FormNavigate({
+    	      message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
+        	  aOutConfirm: "a.button_style"
+    	    });
+			
+			//client validator
+	        $("form.admin_scan_order").validate({
+	    		rules: {
+	    			'order[delivery_address]': "required",
+	    			'order[delivery_street]':"required",
+	    			'order[delivery_date]':"required"
+	    		},
+	    		messages: {
+	    			'order[delivery_address]': "?",
+	    			'order[delivery_street]':"?",
+	    			'order[delivery_date]':"?"
+	    		}
+	    		}
+	        );
 			
 			var order_id = $("form.admin_scan_order").attr("id"),
 		        selected_scan_documents_quantity = $("input#order_scan_attributes_scan_documents_quantity"),

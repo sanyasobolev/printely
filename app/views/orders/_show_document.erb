@@ -2,14 +2,14 @@
     <td class="upload">
       <%= image_tag show_document.docfile.thumb.url, :class => 'thumb' %>
     </td>
-    <td class="print_format">
+    <td class="paper_size">
       <p class="center">
-        <%= show_document.print_format %>
+        <%= read_paper_size(show_document) %>
       </p>
     </td>
     <td class="paper_type">
       <p class="center">
-        <%= show_document.paper_type %>
+        <%= read_paper_type(show_document) %>
       </p>
     </td>
     <td class="quantity">
@@ -19,7 +19,7 @@
     </td>
     <td class="margins">
       <p class="center">
-        <%= show_document.margins %>
+        <%= read_print_margins(show_document) %>
       </p>
     </td>
     <td class="user_comment">

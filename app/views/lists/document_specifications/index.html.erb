@@ -1,0 +1,20 @@
+<h2>Спецификация готовых документов</h2>
+<p>Если параметр "<%= Lists::DocumentSpecification.human_attribute_name("available") %>" имеет положительное значение, то документ будет доступен для заказа пользователям.</p>
+<p><%= link_to 'Создать', new_lists_document_specification_path, :class => 'button_style_long' %></p>
+<table class="admin">
+  <tr>
+    <th></th>
+    <th><%= Lists::DocumentSpecification.human_attribute_name("paper_specification_id") %></th>
+    <th><%= Lists::DocumentSpecification.human_attribute_name("print_margin_id") %></th>
+	<th><%= Lists::DocumentSpecification.human_attribute_name("price") %></th>
+	<th><%= Lists::DocumentSpecification.human_attribute_name("available") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'document_specification' , :collection => @dspecs%>
+
+</table>
+<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>
+    
+    
+    

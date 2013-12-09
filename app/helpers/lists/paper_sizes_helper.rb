@@ -1,0 +1,2 @@
+module Lists::PaperSizesHelper
+end

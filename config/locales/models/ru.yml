@@ -18,6 +18,12 @@ ru:
       pricelist_fotoprint: "Прайс на печать фото"
       pricelist_delivery: "Прайс на доставку"
       lists/order_status: "Статус заказа"
+      lists/paper_grade: "Класс бумаги"
+      lists/paper_type: "Тип бумаги"
+      lists/paper_size: "Размер бумаги"
+      lists/paper_specification: "Спецификация бумаги"
+      lists/print_margin: "Поля"
+      lists/document_specification: "Спецификация готового документа"
     attributes:
       article:
         title: "Название"
@@ -156,4 +162,23 @@ ru:
         id: "ИД статуса"
         title: "Название"
         key: "Ключ"
+      lists/paper_grade:
+        grade: "Класс бумаги"
+      lists/paper_type:
+        paper_type: "Тип бумаги"
+        paper_grade_id: "Класс бумаги"
+      lists/paper_size:
+        size: "Размер бумаги, см"
+        size_iso_216: "Размер по ISO 216"
+      lists/paper_specification:
+        paper_type_id: "Тип бумаги"
+        paper_size_id: "Размер бумаги"
+        in_stock: "В наличии"
+      lists/print_margin:
+        margin: "Поля"
+      lists/document_specification:
+        paper_specification_id: "Спецификация бумаги"
+        print_margin_id: "Поля"
+        price: "Цена"
+        available: "Доступно к продаже"
 

@@ -1,11 +1,6 @@
 # encoding: utf-8
 class Lists::OrderStatusesController < ApplicationController
 
-  
-  def all
-    
-  end
-
   def index
     @title = 'Статусы заказов'
     @statuses = Lists::OrderStatus.all

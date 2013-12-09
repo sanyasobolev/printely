@@ -1,0 +1,2 @@
+module Lists::DocumentSpecificationsHelper
+end
