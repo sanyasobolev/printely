@@ -1,3 +1,4 @@
+ # encoding: utf-8
         require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
         namespace :utils do
           desc "change documents attributes to document specification"
