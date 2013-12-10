@@ -11,7 +11,7 @@
                 document.print_format = nil
                 document.paper_type = nil
                 document.margins= nil
-                puts "completed document #{document.id}"
+                puts "completed document #{document.id} with #{document.print_format}, #{document.paper_type}, #{document.margins} "
               end
             end
           end
