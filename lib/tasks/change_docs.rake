@@ -9,9 +9,6 @@
                 @dspec = Lists::DocumentSpecification.joins(:paper_specification => :paper_size).where("lists_paper_sizes.size = '#{document.print_format}'").joins(:paper_specification => :paper_type).where("lists_paper_types.paper_type = '#{document.paper_type}'").joins(:print_margin).where("lists_print_margins.margin = '#{document.margins}'").first
                 document.document_specification = @dspec
                 document.save 
-                document.print_format = nil
-                document.paper_type = nil
-                document.margins= nil
                 puts "completed document #{document.id} with #{document.print_format}, #{document.paper_type}, #{document.margins} "
               end
             end
