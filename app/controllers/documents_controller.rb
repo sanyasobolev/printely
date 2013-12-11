@@ -4,7 +4,7 @@ class DocumentsController < ApplicationController
                      :only => [:create, :destroy, :price_update, :get_paper_sizes, :get_paper_types, :get_print_margins]
 
   skip_before_filter :verify_authenticity_token,
-                     :only => [:create, :destroy]
+                     :only => [:create]
 
   before_filter :find_order,
                 :only => [:create, :destroy]
@@ -132,10 +132,11 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-    @doc_id = @document.id
-    @document.destroy
     respond_to do |format|
-      format.js
+      unless @document.destroy
+        flash[:error] = 'Документ не может быть удален.'
+      end
+        format.js
     end
   end
 
