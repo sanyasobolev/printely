@@ -18,12 +18,11 @@ Spsite::Application.routes.draw do
   resources :rights
   resources :roles
 
-  
+  resources :documents
   match 'document/price_update' => 'documents#price_update'
   match 'document/get_paper_sizes' => 'documents#get_paper_sizes'
   match 'document/get_paper_types' => 'documents#get_paper_types'
   match 'document/get_print_margins' => 'documents#get_print_margins'
-  resources :documents
   
   resources :scans
   match 'scan/ajaxupdate' => 'scans#ajaxupdate'
