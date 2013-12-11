@@ -136,7 +136,7 @@ class DocumentsController < ApplicationController
       unless @document.destroy
         flash[:error] = 'Документ не может быть удален.'
       end
-        format.js
+        format.js { render :template => 'documents/destroy.js.erb', :layout => false }
     end
   end
 
