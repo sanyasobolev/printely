@@ -132,11 +132,9 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
+    @document.destroy
     respond_to do |format|
-      unless @document.destroy
-        flash[:error] = 'Документ не может быть удален.'
-      end
-        format.js
+      format.js
     end
   end
 
