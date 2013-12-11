@@ -16,7 +16,7 @@
                 delivered_docs = delivered_docs + 1
               end
             end
-            puts 'all #{@documents.count} documents'
-            puts 'delivered #{delivered_docs} documents'
+            puts "all #{@documents.count} documents"
+            puts "delivered #{delivered_docs} documents"
           end
         end
