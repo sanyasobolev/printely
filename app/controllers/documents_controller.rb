@@ -4,8 +4,7 @@ class DocumentsController < ApplicationController
                      :only => [:create, :destroy, :price_update, :get_paper_sizes, :get_paper_types, :get_print_margins]
 
   skip_before_filter :verify_authenticity_token,
-                     :only => [:create]
-
+                     :only => [:create, :destroy]
 
   before_filter :find_order,
                 :only => [:create, :destroy]
