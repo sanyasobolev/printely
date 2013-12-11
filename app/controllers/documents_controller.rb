@@ -132,6 +132,7 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
+    @doc_id = @document.id
     @document.destroy
     respond_to do |format|
       format.js
