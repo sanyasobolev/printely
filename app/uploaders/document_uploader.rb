@@ -63,7 +63,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
       paper_size = Lists::PaperSize.find_by_id(Lists::PaperSpecification.find_by_id(document_specification.paper_specification_id).paper_size_id).size
       "#{secure_token}_PP_#{paper_size.parameterize}_#{paper_type.parameterize}_#{model.quantity}_#{margins.parameterize}.#{file.extension}" if original_filename.present?
     else
-      "#{secure_token}_PP_not_set_spesification"
+      "#{secure_token}_PP_not_set_spesification.#{file.extension}" if original_filename.present?
     end
   end
 

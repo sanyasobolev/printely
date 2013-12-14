@@ -10,14 +10,37 @@ class SubservicesController < ApplicationController
       @service = Service.find_by_permalink(params[:service_id])
       @title = @service.title
       @page_about_service = Page.find_by_service_id(@service.id.to_i)
-      @pricelist_for_service_model_name = @service.pricelist
+      
+      @pricelist_for_service_model_name = @service.pricelist.to_s #model name
+      
+      if @pricelist_for_service_model_name =~ /\A(Lists)/ #if get price from lists
+        prefics = @pricelist_for_service_model_name.slice!('Lists') #Lists
+        @pricelist_for_service_model_name_wo_prefics = @pricelist_for_service_model_name #model name wo lists
+        prefics = prefics + '::' #Lists::
+        @pricelist_for_service_model_name = prefics + @pricelist_for_service_model_name_wo_prefics #model name with Lists:: prefics
+        
+        #get subdirectory from table name
+        @pricelist_for_service_table_name = @pricelist_for_service_model_name.constantize.table_name
+        @subdirectory = ''
+        @subdirectory = @subdirectory + @pricelist_for_service_table_name.to_s
+        @subdirectory.slice!('lists_')
+        
+        #get partial from subdirectory
+        @partial_name = ''
+        @partial_name = @partial_name + @subdirectory
+        @partial_name.slice!(-1,1)
+        
+        #get header from partial
+        @header_name = ''
+        @header_name = @partial_name + '_header'
+      else
+        #get table name
+        @pricelist_for_service_table_name = @pricelist_for_service_model_name.constantize.table_name  
+      end
       
       #convert string to model and get pricelist lines
       @lines_of_pricelist = @pricelist_for_service_model_name.constantize.all
-      
-      #get table name
-      @pricelist_for_service_table_name = @pricelist_for_service_model_name.constantize.table_name
-      
+
       @subservices = Subservice.where("service_id=#{@service.id.to_i}").order("created_at DESC")
     else
       @subservices = Subservice.all

@@ -1334,8 +1334,9 @@ table.order_delivery td.delivery_address label.error {
 }
 
 label.error[for=quantity_documents_for_validate] {
-	right: 480px;
-	top: 205px;
+	position:absolute;
+	left: 200px;
+	top: 65px;
 	width: 300px;
 }
 

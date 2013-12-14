@@ -7,9 +7,11 @@ class Lists::DocumentSpecification < ActiveRecord::Base
   belongs_to :paper_specification
   belongs_to :print_margin
 
-    validates :paper_specification_id, :uniqueness => { 
+  validates :paper_specification_id, :uniqueness => { 
     :scope => :print_margin_id,
     :message => "Такая спецификация документа уже есть."
-    }
+  }
+
+  default_scope joins(:paper_specification => :paper_size).order('lists_paper_sizes.size').joins(:paper_specification => :paper_type).order('lists_paper_types.paper_type')
 
 end

@@ -18,6 +18,10 @@
     height: 50px;
 }
 
+.edit_print_order{
+	position: relative;
+}
+
 /*стиль для таблиц для заказов*/
 .user_order {
     width: 900px;

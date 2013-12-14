@@ -1,9 +1,0 @@
-<tr>
-  <td><%= line.print_format %></td>
-  <td><%= line.paper_type %></td>
-  <td><%= h (number_to_currency(line.price, :unit => "коп.", :separator => " руб. ")) %></td>
-	<% if current_user && current_user.has_role?('Administrator') %>
-	  <td><%= link_to 'Редактировать', edit_pricelist_fotoprint_path(line) %></td>
-	  <td><%= link_to 'Х', pricelist_fotoprint_path(line), :method => :delete, :confirm => 'Действительно хотите удалить запись?' %></td>
-	<% end %>
-</tr>

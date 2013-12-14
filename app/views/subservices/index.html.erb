@@ -5,12 +5,21 @@
 <% end %>
 
 <% if @pricelist_for_service_model_name != nil %>
-	<div class=grey_color>
-		<table class="pricelist_for_user">
-	  		<%= render :partial => "#{@pricelist_for_service_table_name}/header_for_line" %>
-	  		<%= render :partial => "#{@pricelist_for_service_table_name}/line", :collection => @lines_of_pricelist %>
-		</table>
-	</div>
+	<% if @pricelist_for_service_model_name =~ /\A(Lists)/ %>
+		<div class=grey_color>
+			<table class="pricelist_for_user">
+		  		<%= render :partial => "lists/#{@subdirectory}/#{@header_name}" %>
+		  		<%= render :partial => "lists/#{@subdirectory}/#{@partial_name}", :collection => @lines_of_pricelist %>
+			</table>
+		</div>		
+	<% else %>
+		<div class=grey_color>
+			<table class="pricelist_for_user">
+		  		<%= render :partial => "#{@pricelist_for_service_table_name}/header_for_line" %>
+		  		<%= render :partial => "#{@pricelist_for_service_table_name}/line", :collection => @lines_of_pricelist %>
+			</table>
+		</div>
+	<% end %>
 <% else %>
   <p>Прайс-листа на эту услугу нет.</p>
 <% end %>
