@@ -14,4 +14,6 @@ class Lists::PaperSize < ActiveRecord::Base
       :message => 'Такое значение уже есть.'
     }
   
+  default_scope order('size asc')
+  
 end
