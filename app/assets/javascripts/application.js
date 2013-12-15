@@ -11,6 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 
 //= require jquery
-//= require rails.validations
 //= require jquery.validate
+//= require rails.validations
 //= require_tree
