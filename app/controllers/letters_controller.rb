@@ -51,5 +51,5 @@ class LettersController < ApplicationController
     @title = 'Администрирование - Обратная связь'
     @letters = Letter.find(:all, :order => 'created_at DESC')
   end
-  
+
 end

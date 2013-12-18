@@ -15,6 +15,7 @@ ru:
       subservice: "Услуга"
       order: "Заказ"
       document: "Документ"
+      mailing: "Рассылка"
       pricelist_fotoprint: "Прайс на печать фото"
       pricelist_delivery: "Прайс на доставку"
       lists/order_status: "Статус заказа"
@@ -181,4 +182,12 @@ ru:
         print_margin_id: "Поля"
         price: "Цена"
         available: "Доступно к продаже"
+      mailing:
+        subject: "Тема"
+        body: "Письмо"
+        sent_mails: "Отправлено писем"
+        all_mails: "Всего писем в рассылке"
+        published: "Опубликовано"
+        published_at: "Дата публикации"
+        created_at: "Дата создания"
 

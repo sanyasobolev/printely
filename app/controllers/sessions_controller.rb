@@ -15,7 +15,11 @@ class SessionsController < ApplicationController
         current_user.remember_me unless current_user.remember_token?
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      redirect_to myoffice_path
+      if current_user.has_role?("Administrator")
+        redirect_to admin_users_path
+      else
+        redirect_to myoffice_path
+      end
     else
       flash[:error] = "Вы ввели неверный логин или пароль!"
       redirect_to :action => :new

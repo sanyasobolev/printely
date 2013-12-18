@@ -45,7 +45,6 @@ class UserMailer < ActionMailer::Base
     mail(:to => @user.email, :subject => "Заказ №#{@order.id} будет удален из системы")
   end
 
-
   #рассылка всем админам о регистрации нового юзера
    def self.email_all_admins_about_new_user(new_user)
      @admins = User.where(:role_id => "1")
@@ -81,6 +80,21 @@ class UserMailer < ActionMailer::Base
 
   def email_about_new_letter(recipient, new_letter)
     mail(:to => recipient.email, :subject => "Новое письмо от пользователя - #{new_letter.name}")
+  end
+  
+   #рассылка всем юзерам системы
+   def self.mailing_to_all_users(mailing)
+     @mailing = mailing
+     @users = User.all
+     @users.each do |user|
+       mailing_to_user(user, mailing).deliver
+       mailing.sent_mails = mailing.sent_mails + 1
+       mailing.save
+     end
+   end
+
+  def mailing_to_user(user, mailing)
+    mail(:to => user.email, :subject => mailing.subject)
   end
   
   #рассылка при сбросе пароля

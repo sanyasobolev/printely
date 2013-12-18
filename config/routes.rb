@@ -92,6 +92,10 @@ Spsite::Application.routes.draw do
     get 'admin', :on => :collection
     get 'sent', :on => :collection
   end
+  
+  resources :mailings do
+    get 'admin', :on => :collection
+  end
 
   namespace :lists do
     resources :order_statuses

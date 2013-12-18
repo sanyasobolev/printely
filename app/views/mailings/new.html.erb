@@ -1,0 +1,10 @@
+<h2><%= @title %></h2>
+  <%= form_for :mailing, :url => mailings_path, :html => { :method => :post } do |f| -%>
+
+	<%= render :partial => 'form', :locals => {:f => f} %>
+
+	<div class="submit_area">
+	 <%= submit_tag 'Подтвердить', :class => 'submit'  %>
+	 <%= link_to 'Вернуться', admin_mailings_path, :class => 'button_style' %>
+	</div>
+  <% end -%>
