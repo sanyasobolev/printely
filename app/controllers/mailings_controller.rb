@@ -36,11 +36,11 @@ class MailingsController < ApplicationController
   end
 
   def destroy
-    @letter = Letter.find(params[:id])
-    @letter.destroy
+    @mailing = Mailing.find(params[:id])
+    @mailing.destroy
     respond_to do |wants|
       flash[:notice] = 'Запись удалена'
-      wants.html { redirect_to admin_letters_path }
+      wants.html { redirect_to admin_mailings_path }
       wants.xml { render :nothing => true }
     end
   end
