@@ -84,7 +84,6 @@ class UserMailer < ActionMailer::Base
   
    #рассылка всем юзерам системы
    def self.mailing_to_all_users(mailing)
-     @mailing = mailing
      @users = User.all
      @users.each do |user|
        mailing_to_user(user, mailing).deliver
@@ -94,7 +93,9 @@ class UserMailer < ActionMailer::Base
    end
 
   def mailing_to_user(user, mailing)
-    mail(:to => user.email, :subject => mailing.subject)
+    @user = user
+    @mailing = mailing
+    mail(:to => @user.email, :subject => @mailing.subject)
   end
   
   #рассылка при сбросе пароля
