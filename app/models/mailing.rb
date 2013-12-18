@@ -1,5 +1,5 @@
 class Mailing < ActiveRecord::Base
-   attr_accessible :subject, :body, :sent_mails, :all_mails
+   attr_accessible :subject, :body, :sent_mails, :all_mails, :published
    
   #размер боксов полей в форме
   BODY_COLS_SIZE = 60

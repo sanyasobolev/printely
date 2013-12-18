@@ -11,7 +11,7 @@ class MailingsController < ApplicationController
     @mailing.all_mails = User.all.count
     respond_to do |wants|
       if @mailing.save
-        if params[:mailing][:published] == true
+        if params[:mailing][:published] == 1
           UserMailer.mailing_to_all_users(@mailing)
           flash[:notice] = 'Рассылка сохранена и отправлена в очередь.'
         else
@@ -47,7 +47,7 @@ class MailingsController < ApplicationController
 
   def admin
     @title = 'Рассылки'
-    @mailing = Mailing.find(:all, :order => 'created_at DESC')
+    @mailings = Mailing.find(:all, :order => 'created_at DESC')
   end
   
   
