@@ -79,7 +79,11 @@ Spsite::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   Paperclip.options[:command_path] = "/usr/bin/"
-  
+
+  Paperclip.interpolates :assets_host  do |attachment, style|
+      "http://printely.ru"
+  end
+
   Paperclip.interpolates :order_created do |attachment, style|
     attachment.instance.order.created_at.to_formatted_s(:day_month_year)
   end
