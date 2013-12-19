@@ -81,7 +81,7 @@ Spsite::Application.configure do
   Paperclip.options[:command_path] = "/usr/bin/"
 
   Paperclip.interpolates :assets_host  do |attachment, style|
-      "http://printely.ru"
+      "http://test.printely.ru"
   end
 
   Paperclip.interpolates :order_created do |attachment, style|
