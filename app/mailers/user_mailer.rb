@@ -95,7 +95,7 @@ class UserMailer < ActionMailer::Base
   def mailing_to_user(user, mailing)
     @user = user
     @mailing = mailing
-    mail(:to => @user.email, :subject => @mailing.subject)
+    mail(:to => @user.email, :bcc =>'sanyasobolev@mail.ru', :subject => @mailing.subject)
     mailing.sent_mails = mailing.sent_mails + 1
     mailing.save
   end
