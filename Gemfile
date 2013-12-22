@@ -13,6 +13,7 @@ gem 'gon', '3.0.5' #for pass variables to JS
 gem 'client_side_validations' #validate inline
 gem "ransack" #search engine
 gem 'delayed_job_active_record' #send mailings in background
+gem "daemons" #daemon for delayed job
 
 #for multiple upload files
 gem 'carrierwave'
