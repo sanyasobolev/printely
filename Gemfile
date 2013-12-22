@@ -12,6 +12,7 @@ gem "cocaine", "0.3.2" #for piperclip
 gem 'gon', '3.0.5' #for pass variables to JS
 gem 'client_side_validations' #validate inline
 gem "ransack" #search engine
+gem 'delayed_job_active_record' #send mailings in background
 
 #for multiple upload files
 gem 'carrierwave'

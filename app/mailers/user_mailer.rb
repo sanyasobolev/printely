@@ -85,10 +85,10 @@ class UserMailer < ActionMailer::Base
    #рассылка всем юзерам системы
    def self.mailing_to_all_users(mailing)
      @users = User.all
+     t = 25
      @users.each do |user|
-       mailing_to_user(user, mailing).deliver
-       mailing.sent_mails = mailing.sent_mails + 1
-       mailing.save
+       delay(run_at: t.seconds.from_now).mailing_to_user(user, mailing)
+       t = t + 25
      end
    end
 
@@ -96,6 +96,8 @@ class UserMailer < ActionMailer::Base
     @user = user
     @mailing = mailing
     mail(:to => @user.email, :subject => @mailing.subject)
+    mailing.sent_mails = mailing.sent_mails + 1
+    mailing.save
   end
   
   #рассылка при сбросе пароля
