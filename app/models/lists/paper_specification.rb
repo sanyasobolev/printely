@@ -23,6 +23,10 @@ class Lists::PaperSpecification < ActiveRecord::Base
       "#{self.paper_size.size}, #{self.paper_type.paper_type}, #{in_stock}"
     end
     
+    def full_paper_format_wo_stock
+      "#{self.paper_size.size}, #{self.paper_type.paper_type}"
+    end
+    
     def paper_size_with_iso
       if self.paper_size.size_iso_216.blank?
         "#{self.paper_size.size}" 

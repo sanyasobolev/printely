@@ -12,7 +12,7 @@
   <td><%=h (read_cost_min_max(order)) %></td>
   <td><%=h (read_cost(order)) %></td>
   <td><%=h (order.order_type) %></td>
-  <td><%= link_to image_tag("icons/details_view_order.png", :border => "0"), order_path(order) %></td>
+  <td><%= link_to image_tag("icons/materials.png", :border => "0"), get_materials_order_path(order), target: "_blank" %></td>
   <td><%= link_to image_tag("icons/edit_order.png", :border => "0"), edit_order_path(order), :alt => 'редактировать' %></td>
   <td>
     <%= link_to 'C6', cover_order_path(order, :format => 'c6'), :target => "_blank", :title => '10x15 до 20ти шт.' %>

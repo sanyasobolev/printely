@@ -243,6 +243,24 @@ class OrdersController < ApplicationController
     end
     render layout: "cover_for_order"
   end
+  
+  def get_materials
+     @order = Order.find_by_id(params[:id])
+     @title = "Использование материалов в заказе №#{@order.id}"
+     @lines = Hash.new
+     Lists::PaperSpecification.all.each do |pspec|
+       @documents_quantity = 0
+       @order.documents.each do |document|
+         if pspec == document.get_paper_specification
+           @documents_quantity = @documents_quantity + document.quantity.to_i
+         end
+         unless @documents_quantity == 0
+           @lines.merge!(pspec.full_paper_format_wo_stock => @documents_quantity)
+         end
+       end 
+     end
+     render layout: "cover_for_order"
+  end
 
   private
     def set_price(order)

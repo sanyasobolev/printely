@@ -36,6 +36,7 @@ Spsite::Application.routes.draw do
      get 'cover', :on => :member
      get 'new_print', :on => :collection
      get 'new_scan', :on => :collection
+     get 'get_materials', :on => :member
   end
   
   match 'order/ajaxupdate' => 'orders#ajaxupdate'
