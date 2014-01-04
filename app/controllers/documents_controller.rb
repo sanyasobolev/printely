@@ -7,9 +7,9 @@ class DocumentsController < ApplicationController
                      :only => [:create]
 
   before_filter :find_order,
-                :only => [:create, :destroy]
+                :only => [:create, :destroy, :get_paper_sizes]
   before_filter :find_or_build_document,
-                :only => [:create, :destroy]
+                :only => [:create, :destroy, :get_paper_sizes]
 
   def create
     #set_defaults_params
@@ -64,9 +64,28 @@ class DocumentsController < ApplicationController
       end
     end
     @available_paper_sizes = @available_paper_sizes.uniq.sort_by{|e| e[:size]}
+
+    @select_list = ''
+    for available_paper_size in @available_paper_sizes
+      value = available_paper_size.size
+      if @document.get_paper_size && @document.get_paper_size == available_paper_size.size
+        selected = "selected='selected'"
+      else
+        selected = ""
+      end
+      unless available_paper_size.size_iso_216.blank?
+         select = "#{available_paper_size.size} | #{available_paper_size.size_iso_216}"
+      else
+         select = "#{available_paper_size.size}"
+      end 
+      option_end = "</option>"
+      
+      @select_list = @select_list + "<option value='#{value}' "+"#{selected}"+">"+"#{select}"+"#{option_end}"
+    end
+    
     respond_to do |format|
         format.html do
-          render :partial => 'available_paper_size' , :collection => @available_paper_sizes
+          render :partial => 'available_paper_size' 
         end
     end
   end

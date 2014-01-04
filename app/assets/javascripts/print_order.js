@@ -1,14 +1,31 @@
 $(document).ready(function(){
+	if(($(".edit_print_order").exists()) || ($(".admin_print_order").exists())) {
+        
+        //clear value 'выберите' in select
+        $("select#order_delivery_street").change(function(event){
+            $('[value=""]',event.target).remove();
+        });
+
+        //при любом изменении в таблице, устанавливаем тип доставки "курьер"
+        $("table.order_delivery").change(function(event){
+            var selected_delivery = 'Курьер';
+            $.post( url_for_update_order, {id: order_id, delivery_type: selected_delivery} );
+        });    
+    
+        var url_for_update_order = "/order/ajaxupdate",
+            url_for_update_document = "/document/price_update",
+            url_for_load_paper_sizes = "/document/get_paper_sizes",
+            url_for_load_paper_types = "/document/get_paper_types",
+            url_for_load_print_margins = "/document/get_print_margins";
+    
     if($(".edit_print_order").exists()) {
+    	
+    	var order_id = $("form.edit_print_order").attr("id");
+    	
         //контроль ухода пользователя со страницы
         $(".edit_print_order").FormNavigate({
           message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
           aOutConfirm: "a.button_style, a.link_delete_docfile"
-        });
-
-        //clear value 'выберите' in select
-        $("select#order_delivery_street").change(function(event){
-            $('[value=""]',event.target).remove();
         });
         
         //client validator
@@ -26,34 +43,58 @@ $(document).ready(function(){
     			'order[delivery_date]':"?",
     			'quantity_documents_for_validate':"Загрузите файлы."
     		}
-    		}
-        );
-
-		
-        var order_id = $("form.edit_print_order").attr("id"),
-            url_for_update_order = "/order/ajaxupdate",
-            url_for_update_document = "/document/price_update",
-            url_for_load_paper_sizes = "/document/get_paper_sizes",
-            url_for_load_paper_types = "/document/get_paper_types",
-            url_for_load_print_margins = "/document/get_print_margins";
-
-        //при любом изменении в таблице, устанавливаем тип доставки "курьер"
-        $("table.order_delivery").change(function(event){
-            var selected_delivery = 'Курьер';
-            $.post( url_for_update_order, {id: order_id, delivery_type: selected_delivery} );
+    		});
+    }//end edit_print_order
+	
+    if($(".admin_print_order").exists()) {
+    	
+    	var order_id = $("form.admin_print_order").attr("id");
+    	
+        //контроль ухода пользователя со страницы
+        $(".admin_print_order").FormNavigate({
+          message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
+          aOutConfirm: "a.button_style, a.link_delete_docfile"
         });
-            
+        
+        //client validator
+        $("form.admin_print_order").validate({
+        	ignore: "",
+    		rules: {
+    			'order[delivery_address]': "required",
+    			'order[delivery_street]':"required",
+    			'order[delivery_date]':"required",
+    			'quantity_documents_for_validate':"required"
+    		},
+    		messages: {
+    			'order[delivery_address]': "?",
+    			'order[delivery_street]':"?",
+    			'order[delivery_date]':"?",
+    			'quantity_documents_for_validate':"Загрузите файлы."
+    		}
+    		});
+        };//end admin_print_order
+
+                  
         //подключение хендлеров по управлению ценой (при уже загруженных документах - в случае рефреша страницы)
-		//есть ли уже установленные значения списков
+
+        //load paper_sizes------------------------------------------------------------------------------------
+        $("select[name*='paper_size']").on("load_sizes", function(event) {
+        	var document_id = this.parentNode.parentNode.id;
+        	$(this).load(
+	     		url_for_load_paper_sizes, 
+	        	{order_id: order_id, id: document_id},
+	        	function(){
+	        		$(this).change();
+	        		});        	
+        	});
+		$("select[name*='paper_size']:not([class*='with_loaded_paper_sizes'])").addClass("with_loaded_paper_sizes").trigger("load_sizes");
+ 
 		
-
-         //load paper_sizes------------------------------------------------------------------------------------
-        $("select[name*='paper_size']:not([class='with_loaded_paper_sizes'])").addClass("with_loaded_paper_sizes").load(url_for_load_paper_sizes, function(){$(this).change();});
-
         //change handler for load paper_types
-        $("select[name*='paper_size']").change(function(event){
+        $("select[name*='paper_size']:not([class*='with_bind_change_event'])").addClass("with_bind_change_event").change(function(event){
         	var selected_paper_size = $(this).val(),
         	document_id = this.parentNode.parentNode.id;
+        	show_loader_for_price(document_id);
         	$("select[name*='["+document_id+"][paper_type]']").load(
         		url_for_load_paper_types, 
         		{selected_paper_size: selected_paper_size},
@@ -68,10 +109,11 @@ $(document).ready(function(){
 
 
         //change handler for load print margins
-        $("select[name*='paper_type']").change(function(event){
+        $("select[name*='paper_type']:not([class*='with_loaded_paper_types'])").addClass("with_loaded_paper_types").change(function(event){
         	var document_id = this.parentNode.parentNode.id, 
         	selected_paper_type = $(this).val(),
         	selected_paper_size = $("select[name*='["+document_id+"][paper_size]']").val();
+        	show_loader_for_price(document_id);
         	$("select[name*='["+document_id+"][margins]']").load(
         		url_for_load_print_margins, 
         		{selected_paper_size: selected_paper_size, selected_paper_type: selected_paper_type},
@@ -89,36 +131,45 @@ $(document).ready(function(){
           var document_id = this.parentNode.parentNode.id, 
           	  selected_margins = $(this).val(),
           	  selected_paper_size = $("select[name*='["+document_id+"][paper_size]']").val(),
-          	  selected_paper_type = $("select[name*='["+document_id+"][paper_type]']").val();
+          	  selected_paper_type = $("select[name*='["+document_id+"][paper_type]']").val(),
           	  selected_quantity = $("input[name*='["+document_id+"][quantity]']").val();
+          	  
+          show_loader_for_price(document_id);
           $.post( url_for_update_document, 
           	{id: document_id, paper_size: selected_paper_size, paper_type: selected_paper_type, margins: selected_margins, quantity: selected_quantity},
           	function() {
+          	   hide_loader_for_price(document_id);
                $.post( url_for_update_order, {id: order_id} );
   				}
           	 	);
         });
         
-		//change handler for quantity
-        $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
+		//change handler for quantity with debounce (if user click many times)
+        $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
           var selected_quantity = $(this).val(),
               document_id = this.parentNode.parentNode.id;
+          
           selected_quantity = validate(parseInt(selected_quantity));
           $(this).val(selected_quantity);
-          $.post( url_for_update_document, 
-          	{id: document_id, quantity: selected_quantity},
-          	function() {
-               $.post( url_for_update_order, {id: order_id} );
-  				}
-          	);
-        });
+          
+		  $.ajax({
+			type: 'POST',
+			url: url_for_update_document,
+			beforeSend: show_loader_for_price(document_id),
+			data: {id: document_id, quantity: selected_quantity},
+			success: function() {
+			       	   hide_loader_for_price(document_id);
+			           $.post( url_for_update_order, {id: order_id} );
+  					 }
+			});
+        }));
+
 
 
         //обновление цены после удаления одного документа
         $("a.link_delete_docfile:not([handler-status='with_priceEventHandler'])").attr('handler-status', 'with_priceEventHandler').bind('click', function(event){
           setTimeout(function(){$.post(url_for_update_order, {id: order_id} );}, 1000);
           setTimeout(function(){validate_documents()}, 1000);
-
         });
 
         //работа переключателя количества файлов
@@ -147,6 +198,11 @@ $(document).ready(function(){
           return value;
         };
         
+
+		//time
+        $('#timepicker_start').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:00', 'maxTime': '23:30' });
+        $('#timepicker_end').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:30', 'maxTime': '00:00' });
+    
         //cчитаем кол-во документов в форме
         function validate_documents(){
         	var quantity_documents = $("tr.document").length;
@@ -157,9 +213,21 @@ $(document).ready(function(){
         	}
         };
 
-		//time
-        $('#timepicker_start').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:00', 'maxTime': '23:30' });
-        $('#timepicker_end').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:30', 'maxTime': '00:00' });
+        //устанавливаем css аниматор загрузки цены
+        function show_loader_for_price(document_id){
+        	$("table#fileList tr#"+document_id+" td.document_price .document_price_value").hide();
+        	$("table#fileList tr#"+document_id+" td.document_price .floatingBarsG").show();
+        };
+        
+        function hide_loader_for_price(document_id){
+        	var loader = $("table#fileList tr#"+document_id+" td.document_price .floatingBarsG"),
+        		price = $("table#fileList tr#"+document_id+" td.document_price .document_price_value");
+
+	        	price.show();
+	        	loader.hide();       		
+        };
+        
     }
+
   });
 

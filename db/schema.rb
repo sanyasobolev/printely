@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130619143126) do
+ActiveRecord::Schema.define(:version => 20131221144729) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -53,41 +53,121 @@ ActiveRecord::Schema.define(:version => 20130619143126) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0, :null => false
+    t.integer  "attempts",   :default => 0, :null => false
+    t.text     "handler",                   :null => false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "documents", :force => true do |t|
     t.integer  "order_id"
     t.string   "docfile"
-    t.string   "print_format"
     t.text     "user_comment"
-    t.string   "paper_type"
     t.integer  "quantity"
-    t.string   "margins"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.float    "price"
+    t.string   "user_filename"
+    t.integer  "document_specification_id"
   end
 
   create_table "letters", :force => true do |t|
     t.string   "name"
-    t.string   "company"
     t.string   "phone"
     t.string   "email"
-    t.string   "question"
+    t.text     "question"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "lists_document_specifications", :force => true do |t|
+    t.integer  "paper_specification_id"
+    t.integer  "print_margin_id"
+    t.boolean  "available",              :default => true
+    t.float    "price"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  create_table "lists_order_statuses", :force => true do |t|
+    t.string   "title"
+    t.integer  "key"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "lists_paper_grades", :force => true do |t|
+    t.string   "grade"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "lists_paper_sizes", :force => true do |t|
+    t.string   "size"
+    t.string   "size_iso_216"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "lists_paper_specifications", :force => true do |t|
+    t.integer  "paper_type_id"
+    t.integer  "paper_size_id"
+    t.boolean  "in_stock"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "lists_paper_types", :force => true do |t|
+    t.string   "paper_type"
+    t.integer  "paper_grade_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "lists_print_margins", :force => true do |t|
+    t.string   "margin"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "mailings", :force => true do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "sent_mails",   :default => 0
+    t.integer  "all_mails",    :default => 0
+    t.boolean  "published",    :default => false
+    t.datetime "published_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "orders", :force => true do |t|
     t.integer  "user_id"
     t.string   "delivery_street"
     t.string   "delivery_address"
-    t.text     "delivery_comment"
-    t.string   "status"
+    t.date     "delivery_date"
+    t.time     "delivery_start_time"
+    t.time     "delivery_end_time"
     t.float    "cost"
     t.text     "manager_comment"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.float    "delivery_price"
     t.string   "delivery_type"
+    t.float    "cost_min"
+    t.float    "cost_max"
+    t.string   "order_type"
+    t.integer  "order_status_id"
   end
 
   create_table "pages", :force => true do |t|
@@ -107,16 +187,19 @@ ActiveRecord::Schema.define(:version => 20130619143126) do
   create_table "pricelist_deliveries", :force => true do |t|
     t.string   "delivery_type"
     t.float    "price"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.text     "territory"
+    t.string   "delivery_limit_time"
   end
 
-  create_table "pricelist_fotoprints", :force => true do |t|
-    t.string   "print_format"
-    t.string   "paper_type"
-    t.float    "price"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+  create_table "pricelist_scans", :force => true do |t|
+    t.string   "work_name"
+    t.string   "work_desc"
+    t.float    "price_min",  :default => 0.0
+    t.float    "price_max",  :default => 0.0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "rights", :force => true do |t|
@@ -133,6 +216,18 @@ ActiveRecord::Schema.define(:version => 20130619143126) do
 
   create_table "roles", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "scans", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "scan_documents_quantity",            :default => 1
+    t.integer  "base_correction_documents_quantity", :default => 0
+    t.integer  "coloring_documents_quantity",        :default => 0
+    t.integer  "restoration_documents_quantity",     :default => 0
+    t.float    "cost_min"
+    t.float    "cost_max"
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
   end
 
   create_table "sections", :force => true do |t|
@@ -156,6 +251,7 @@ ActiveRecord::Schema.define(:version => 20130619143126) do
     t.datetime "service_header_icon_updated_at"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.string   "pricelist"
   end
 
   create_table "sessions", :force => true do |t|

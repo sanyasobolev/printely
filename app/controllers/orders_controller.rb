@@ -79,7 +79,9 @@ class OrdersController < ApplicationController
     respond_to do |format|
       case @order.order_type
       when 'print'
-        if user_can_edit == true
+        if @admin_edit == true
+          format.html { render :admin_edit_print }
+        elsif user_can_edit == true
           format.html { render :new_print } 
         else
           flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'

@@ -4,12 +4,12 @@
     </td>
     <td class="paper_size">
       <p class="center">
-        <%= read_paper_size(show_document) %>
+        <%= show_document.get_paper_size_with_iso %>
       </p>
     </td>
     <td class="paper_type">
       <p class="center">
-        <%= read_paper_type(show_document) %>
+        <%= show_document.get_paper_type %>
       </p>
     </td>
     <td class="quantity">
@@ -19,7 +19,7 @@
     </td>
     <td class="margins">
       <p class="center">
-        <%= read_print_margins(show_document) %>
+        <%= show_document.get_print_margins %>
       </p>
     </td>
     <td class="user_comment">

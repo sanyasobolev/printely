@@ -24,7 +24,19 @@
       <%= i.text_area :user_comment %>
     </td>
     <td class="document_price">
-      <%= h (number_to_currency(document.price, :unit => "коп.", :separator => " руб. ")) %>
+		<div class='floatingBarsG'>
+			<div class='blockG' id='rotateG_01'></div>
+			<div class='blockG' id='rotateG_02'></div>
+			<div class='blockG' id='rotateG_03'></div>
+			<div class='blockG' id='rotateG_04'></div>
+			<div class='blockG' id='rotateG_05'></div>
+			<div class='blockG' id='rotateG_06'></div>
+			<div class='blockG' id='rotateG_07'></div>
+			<div class='blockG' id='rotateG_08'></div>
+		</div>
+		<div class='document_price_value'>
+      		<%= h (number_to_currency(document.price, :unit => "коп.", :separator => " руб. ")) %>
+    	</div>
     </td>
   <% end %>
 </tr>

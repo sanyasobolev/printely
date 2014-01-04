@@ -1,6 +1,5 @@
 $(document).ready(function(){
     if(($(".edit_scan_order").exists()) || ($(".admin_scan_order").exists())) {
-        //контроль ухода пользователя со страницы
        
 		var url_for_update_order = "/order/ajaxupdate",
         url_for_update_scan = "/scan/ajaxupdate",
@@ -490,15 +489,15 @@ $(document).ready(function(){
           } else if (value > up_limit) {
             value = up_limit;
           }
-          return value
+          return value;
         };
 
 
 		
         //при любом изменении в таблице, устанавливаем тип доставки "курьер"
         $("table.order_delivery").change(function(event){
-            var selected_delivery = 'Курьер'
-            $.post( url_for_update_order, {id: order_id, delivery_type: selected_delivery} )
+            var selected_delivery = 'Курьер';
+            $.post( url_for_update_order, {id: order_id, delivery_type: selected_delivery} );
         });
 
         //clear value 'выберите' in select

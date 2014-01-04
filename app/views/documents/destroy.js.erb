@@ -1,5 +1,5 @@
 <%- if flash[:error].blank? -%>
-  $('tr#<%= @document.id %>').remove();
+  $('tr#<%= @document.id %>').fadeOut('fast', function() { $(this).remove(); });
   <% if @order.documents.count == 0 %>
     $('#fileList_header').fadeOut('slow');
   <% end %>
