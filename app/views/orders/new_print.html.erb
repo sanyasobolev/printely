@@ -25,7 +25,7 @@
       scriptData : upload_params,
       auto : true,
       onComplete : function(e, id, obj, response, data) {
-        $(response).hide().appendTo('#fileList').fadeIn("slow");
+        $(response).hide().appendTo('#fileList').prop("style", null).fadeIn("slow");
        },
       onAllComplete : function(){
         var status_fileList_header = $("#fileList_header").attr("style"),
