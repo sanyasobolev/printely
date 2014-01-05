@@ -284,7 +284,7 @@ class OrdersController < ApplicationController
       when 'print' #считаем документы, если они есть
         if order.documents.size > 0
           order.documents.each do |document|
-            documents_cost = documents_cost + document.price
+            (documents_cost = documents_cost + document.price) unless document.price.nil?
           end
         end
         order_cost = order.delivery_price + documents_cost
