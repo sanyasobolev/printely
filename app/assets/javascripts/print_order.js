@@ -97,7 +97,7 @@ $(document).ready(function(){
         	show_loader_for_price(document_id);
         	$("select[name*='["+document_id+"][paper_type]']").load(
         		url_for_load_paper_types, 
-        		{selected_paper_size: selected_paper_size},
+        		{selected_paper_size: selected_paper_size, order_id: order_id, id: document_id},
         		function(){
         			$(this).attr("disabled",false);
         			$("select[name*='["+document_id+"][margins]']").attr("disabled",false);
@@ -116,7 +116,7 @@ $(document).ready(function(){
         	show_loader_for_price(document_id);
         	$("select[name*='["+document_id+"][margins]']").load(
         		url_for_load_print_margins, 
-        		{selected_paper_size: selected_paper_size, selected_paper_type: selected_paper_type},
+        		{selected_paper_size: selected_paper_size, selected_paper_type: selected_paper_type, order_id: order_id, id: document_id},
         		function(){
         			$(this).attr("disabled",false);
         			$(this).change(); //for update document price

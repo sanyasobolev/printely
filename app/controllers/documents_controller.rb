@@ -7,9 +7,9 @@ class DocumentsController < ApplicationController
                      :only => [:create]
 
   before_filter :find_order,
-                :only => [:create, :destroy, :get_paper_sizes]
+                :only => [:create, :destroy, :get_paper_sizes, :get_paper_types, :get_print_margins]
   before_filter :find_or_build_document,
-                :only => [:create, :destroy, :get_paper_sizes]
+                :only => [:create, :destroy, :get_paper_sizes, :get_paper_types, :get_print_margins]
 
   def create
     #set_defaults_params
@@ -68,7 +68,7 @@ class DocumentsController < ApplicationController
     @select_list = ''
     for available_paper_size in @available_paper_sizes
       value = available_paper_size.size
-      if @document.get_paper_size && @document.get_paper_size == available_paper_size.size
+      if @document.get_paper_size && @document.get_paper_size == value
         selected = "selected='selected'"
       else
         selected = ""
@@ -85,7 +85,7 @@ class DocumentsController < ApplicationController
     
     respond_to do |format|
         format.html do
-          render :partial => 'available_paper_size' 
+          render :partial => 'available_paper_sizes' 
         end
     end
   end
@@ -123,7 +123,17 @@ class DocumentsController < ApplicationController
     @select_list = @select_list + "<optgroup label= #{available_paper_grade.grade}>"
       for available_paper_type in @available_paper_types
         if available_paper_type.paper_grade.grade == available_paper_grade.grade
-          @select_list = @select_list + "<option value=#{available_paper_type.paper_type}>#{available_paper_type.paper_type}</option>"
+          
+            value = available_paper_type.paper_type
+            if @document.get_paper_type && @document.get_paper_type == value
+              selected = "selected='selected'"
+            else
+              selected = ""
+            end
+            select = "#{available_paper_type.paper_type}"
+            option_end = "</option>"
+            
+            @select_list = @select_list + "<option value='#{value}' "+"#{selected}"+">"+"#{select}"+"#{option_end}"
         end
       end
       @select_list = @select_list + "</optgroup>"
@@ -143,9 +153,24 @@ class DocumentsController < ApplicationController
       @available_margins << available_document.print_margin
     end
     @available_margins = @available_margins.uniq.sort_by{|e| e[:margin]}
+    
+    @select_list = ''
+    for available_margin in @available_margins
+      value = available_margin.margin
+      if @document.get_print_margins && @document.get_print_margins == value
+        selected = "selected='selected'"
+      else
+        selected = ""
+      end
+      select = "#{available_margin.margin}"
+      option_end = "</option>"
+      
+      @select_list = @select_list + "<option value='#{value}' "+"#{selected}"+">"+"#{select}"+"#{option_end}"
+    end
+    
     respond_to do |format|
         format.html do
-          render :partial => 'available_margin' , :collection => @available_margins
+          render :partial => 'available_print_margins'
         end
     end
   end
