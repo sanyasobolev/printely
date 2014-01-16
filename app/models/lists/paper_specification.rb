@@ -14,6 +14,9 @@ class Lists::PaperSpecification < ActiveRecord::Base
     :message => "Такая спецификация бумаги уже есть."
     }
 
+    default_scope joins(:paper_size).order('lists_paper_sizes.size').readonly(false)
+    scope :pricelist, joins(:paper_size).order('lists_paper_sizes.size').joins(:document_specifications).where('lists_document_specifications.available = 1').group('lists_document_specifications.paper_specification_id')
+
     def full_paper_format
       if self.in_stock == true
         in_stock = 'в наличии'
@@ -39,4 +42,18 @@ class Lists::PaperSpecification < ActiveRecord::Base
       "#{self.paper_type.paper_type} (#{self.paper_type.paper_grade.grade})"
     end 
     
+    def margins_list
+      list = "<ul>"
+      available_dspecs = Array.new 
+      self.document_specifications.each do |dspec|
+        available_dspecs << dspec if dspec.available == true
+      end
+      available_dspecs.each do |dspec|
+        list += "<li>" + "#{dspec.print_margin.margin}" + "</li>"
+      end
+      list += "</ul>"
+      return list.html_safe
+    end
+    
+
 end

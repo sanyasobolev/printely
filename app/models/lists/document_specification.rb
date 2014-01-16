@@ -12,6 +12,6 @@ class Lists::DocumentSpecification < ActiveRecord::Base
     :message => "Такая спецификация документа уже есть."
   }
 
-  default_scope joins(:paper_specification => :paper_size).order('lists_paper_sizes.size').joins(:paper_specification => :paper_type).order('lists_paper_types.paper_type')
+  scope :admin_order, joins(:paper_specification => :paper_size).order('lists_paper_sizes.size').joins(:paper_specification => :paper_type).order('lists_paper_types.paper_type').readonly(false)
 
 end

@@ -6,7 +6,7 @@ class Document < ActiveRecord::Base
  
   mount_uploader :docfile, DocumentUploader
 
-  attr_accessible :docfile, :print_format, :user_comment, :paper_type, :quantity, :margins, :price, :original_filename, :document_specification_id
+  attr_accessible :docfile, :user_comment, :quantity, :price, :original_filename, :document_specification_id
 
   def get_paper_specification
     if self.document_specification.nil?

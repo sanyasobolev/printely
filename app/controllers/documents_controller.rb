@@ -150,7 +150,9 @@ class DocumentsController < ApplicationController
     @available_documents = Lists::DocumentSpecification.joins(:paper_specification => :paper_size).where("lists_paper_sizes.size = '#{params[:selected_paper_size]}'").joins(:paper_specification => :paper_type).where("lists_paper_types.paper_type = '#{params[:selected_paper_type]}'")
     @available_margins= Array.new
     @available_documents.each do |available_document|
-      @available_margins << available_document.print_margin
+      if available_document.available == true
+        @available_margins << available_document.print_margin
+       end
     end
     @available_margins = @available_margins.uniq.sort_by{|e| e[:margin]}
     

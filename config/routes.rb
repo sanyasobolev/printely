@@ -103,8 +103,12 @@ Spsite::Application.routes.draw do
     resources :paper_grades
     resources :paper_types
     resources :paper_sizes
-    resources :paper_specifications
-    resources :document_specifications
+    resources :paper_specifications do
+      get 'admin', :on => :collection
+    end
+    resources :document_specifications do
+      get 'admin', :on => :collection
+    end
     resources :print_margins
   end
   

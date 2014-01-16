@@ -3,13 +3,13 @@
 <table class="admin">
   <tr>
     <th></th>
-    <th><%= Lists::PaperSpecification.human_attribute_name("paper_type_id") %></th>
     <th><%= Lists::PaperSpecification.human_attribute_name("paper_size_id") %></th>
+    <th><%= Lists::PaperSpecification.human_attribute_name("paper_type_id") %></th>
 	<th><%= Lists::PaperSpecification.human_attribute_name("in_stock") %></th>
     <th></th>
   </tr>
 
-  <%= render :partial => 'paper_specification' , :collection => @pspecs %>
+  <%= render :partial => 'paper_specification_for_admin' , :collection => @pspecs %>
 
 </table>
 <%= link_to 'Назад', admin_users_path, :class => 'button_style' %>

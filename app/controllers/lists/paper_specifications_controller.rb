@@ -1,9 +1,5 @@
 # encoding: utf-8
 class Lists::PaperSpecificationsController < ApplicationController
-  def index
-    @title = 'Спецификации бумаги'
-    @pspecs = Lists::PaperSpecification.joins(:paper_size).order('lists_paper_sizes.size')
-  end
 
   def edit
     @pspec = Lists::PaperSpecification.find(params[:id])
@@ -17,7 +13,7 @@ class Lists::PaperSpecificationsController < ApplicationController
     end    
     if @pspec.update_attributes(params[:pspec])
       flash[:notice] = 'Обновление прошло успешно.'
-      redirect_to :action => 'index'
+      redirect_to :action => 'admin'
     else
       render :action => 'edit'
     end
@@ -32,7 +28,7 @@ class Lists::PaperSpecificationsController < ApplicationController
     @pspec = Lists::PaperSpecification.new(params[:pspec])
     if @pspec.save
       flash[:notice] = 'Параметр создан удачно.'
-      redirect_to :action => 'index'
+      redirect_to :action => 'admin'
     else
       render :action => 'new'
     end
@@ -40,8 +36,12 @@ class Lists::PaperSpecificationsController < ApplicationController
 
   def destroy
     Lists::PaperSpecification.find(params[:id]).destroy
-    redirect_to :action => 'index'
+    redirect_to :action => 'admin'
   end
-  
+
+  def admin
+    @title = 'Спецификации бумаги'
+    @pspecs = Lists::PaperSpecification.all
+  end
   
 end

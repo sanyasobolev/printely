@@ -1,4 +1,3 @@
-<% if current_user && current_user.has_role?('Administrator')  %>
   <tr>
     <th></th>
     <th><%= Lists::DocumentSpecification.human_attribute_name("paper_specification_id") %></th>
@@ -7,11 +6,4 @@
 	<th><%= Lists::DocumentSpecification.human_attribute_name("available") %></th>
     <th></th>
   </tr>
-<% else  %>    
-  <tr>
-    <th><%= Lists::PaperSize.human_attribute_name("size") %></th>
-    <th><%= Lists::PaperType.human_attribute_name("paper_type") %></th>
-    <th><%= Lists::DocumentSpecification.human_attribute_name("print_margin_id") %></th>
-    <th><%= Lists::DocumentSpecification.human_attribute_name("price") %></th>
-  </tr>
-<% end %>
+
