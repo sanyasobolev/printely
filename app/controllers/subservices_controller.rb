@@ -33,13 +33,17 @@ class SubservicesController < ApplicationController
         #get header from partial
         @header_name = ''
         @header_name = @partial_name + '_header'
+
+        #convert string to model and get pricelist lines
+        @lines_of_pricelist = @pricelist_for_service_model_name.constantize.pricelist
       else
         #get table name
         @pricelist_for_service_table_name = @pricelist_for_service_model_name.constantize.table_name  
+
+        #convert string to model and get pricelist lines
+        @lines_of_pricelist = @pricelist_for_service_model_name.constantize.all
       end
       
-      #convert string to model and get pricelist lines
-      @lines_of_pricelist = @pricelist_for_service_model_name.constantize.pricelist
 
       @subservices = Subservice.where("service_id=#{@service.id.to_i}").order("created_at DESC")
     else

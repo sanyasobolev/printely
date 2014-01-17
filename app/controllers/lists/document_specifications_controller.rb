@@ -33,7 +33,7 @@ class Lists::DocumentSpecificationsController < ApplicationController
 
   def destroy
     Lists::DocumentSpecification.find(params[:id]).destroy
-    redirect_to :action => 'index'
+    redirect_to :action => 'admin'
   end
   
   def admin

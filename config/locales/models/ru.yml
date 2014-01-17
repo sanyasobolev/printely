@@ -182,6 +182,7 @@ ru:
         print_margin_id: "Поля"
         price: "Цена"
         available: "Доступно к продаже"
+        service_id: "Услуга"
       mailing:
         subject: "Тема"
         body: "Письмо"

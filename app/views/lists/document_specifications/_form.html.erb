@@ -15,6 +15,11 @@
 </div>
 
 <div class="form_align">
+	<%= f.label :service_id %>
+	<%= f.collection_select :service_id, Service.all, :id, :title, :prompt => 'Нет' %>
+</div>
+
+<div class="form_align">
 	<%= f.label :price %>
   	<%= f.text_field :price %>
 </div>
