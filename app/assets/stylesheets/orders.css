@@ -114,7 +114,7 @@
     background-color: #e8e8e8;
 }
 
-#fileList td.upload, td.paper_type, td.quantity, td.user_comment, td.document_price {
+#fileList td.upload, td.pages_count, td.paper_type, td.quantity, td.user_comment, td.document_price {
     width: 128px;
 }
 
@@ -124,6 +124,10 @@
 
 #fileList td.paper_size {
 	width: 156px;
+}
+
+#fileList td.pages_count {
+	text-align: center;
 }
 
 #fileList td.upload .container_for_link_delete_docfile {

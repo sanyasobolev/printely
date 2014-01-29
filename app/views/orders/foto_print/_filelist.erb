@@ -6,9 +6,9 @@
 	      <% else %>
 	        style="display: none;">
 	      <% end %>
-	    <%= render :partial=>'header_table_with_documents' %>
+	    <%= render :partial=>'orders/foto_print/header_table_with_documents' %>
 	    </tr>
-	    <%= render :partial => 'documents/document', :collection => order.documents %>
+	    <%= render :partial => 'documents/foto_print/document', :collection => order.documents %>
 	  </table>
 	
 	  <%#*кнопка выбора файлов%>

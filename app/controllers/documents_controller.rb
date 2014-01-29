@@ -1,5 +1,6 @@
 # encoding: utf-8
 class DocumentsController < ApplicationController
+
   skip_before_filter :authorized?,
                      :only => [:create, :destroy, :price_update, :get_paper_sizes, :get_paper_types, :get_print_margins]
 
@@ -18,10 +19,15 @@ class DocumentsController < ApplicationController
     @document.docfile = params[:file]
     respond_to do |format|
       unless @document.save
-        flash[:error] = 'Photo could not be uploaded'
-      end
-      format.js do
-        render :text => render_to_string(:partial => 'documents/document', :locals => {:document => @document})
+        flash[:error] = 'File could not be uploaded'
+      else
+        format.js do
+          if @order.order_type == 'foto_print'
+            render :text => render_to_string(:partial => 'documents/foto_print/document', :locals => {:document => @document})
+          elsif @order.order_type == 'doc_print'
+            render :text => render_to_string(:partial => 'documents/doc_print/document', :locals => {:document => @document})
+          end
+        end
       end
     end
   end

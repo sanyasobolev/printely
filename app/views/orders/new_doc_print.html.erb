@@ -1,0 +1,153 @@
+<h2><%= @title %></h2>
+
+<% key = Rails.application.config.session_options[:key] %>
+
+<%= content_for :scripts do %>
+  <script type="text/javascript">
+    var upload_params = {
+      '<%= key %>' : '<%= cookies[key] %>',
+      '<%= request_forgery_protection_token %>' : '<%= form_authenticity_token %>',
+      '_http_accept': 'application/javascript'
+    };
+
+    var url = $('input#document_docfile').attr('rel');
+
+    $('input#document_docfile').uploadify({
+      uploader : '/assets/uploadify/uploadify.swf',
+      buttonImg : '/assets/uploadify/upload_button.png',
+      script : url,
+      fileDataName : 'document[docfile]',
+      fileDesc : 'Documents (.pdf, .doc, .docx)',
+      fileExt : '*.doc;*.docx;*.pdf',
+      sizeLimit : 10240000, //10MB
+      cancelImg : '/assets/uploadify/cancel.png',
+      multi : true,
+      scriptData : upload_params,
+      auto : true,
+      onComplete : function(e, id, obj, response, data) {
+        $(response).hide().appendTo('#fileList').prop("style", null).fadeIn("slow");
+       },
+      onAllComplete : function(){
+        var status_fileList_header = $("#fileList_header").attr("style"),
+            order_id = $("form.edit_doc_print_order").attr("id"),
+			url_for_update_document = "/document/price_update";
+            url_for_update_order = "/order/ajaxupdate";
+
+        if (status_fileList_header == 'display: none;') {
+          $("#fileList_header").fadeIn("slow");
+        }
+        
+        
+		//change handler for quantity with debounce (if user click many times)
+        $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
+          var selected_quantity = $(this).val(),
+              document_id = this.parentNode.parentNode.id;
+          
+          selected_quantity = validate(parseInt(selected_quantity));
+          $(this).val(selected_quantity);
+          
+		  $.ajax({
+			type: 'POST',
+			url: url_for_update_document,
+			beforeSend: show_loader_for_price(document_id),
+			data: {id: document_id, quantity: selected_quantity},
+			success: function() {
+			       	   hide_loader_for_price(document_id);
+			           $.post( url_for_update_order, {id: order_id} );
+  					 }
+			});
+        }));
+
+
+        //обновление цены после удаления одного документа
+        $("a.link_delete_docfile:not([handler-status='with_priceEventHandler'])").attr('handler-status', 'with_priceEventHandler').bind('click', function(event){
+          setTimeout(function(){$.post( url_for_update_order, {id: order_id} )}, 1000);
+          setTimeout(function(){validate_documents()}, 1000);
+          
+        });
+
+        //работа переключателя количества файлов
+        $("button.increase:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+          var selected_input_quantity = $(this).siblings("input[id*='quantity']");
+          new_value = parseInt(selected_input_quantity.val()) + 1 ;
+          new_value = validate(new_value);
+          selected_input_quantity.val(new_value);
+          selected_input_quantity.change();
+        });
+        $("button.decrease:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+          var selected_input_quantity = $(this).siblings("input[id*='quantity']");
+          new_value = parseInt(selected_input_quantity.val()) - 1 ;
+          new_value = validate(new_value);
+          selected_input_quantity.val(new_value);
+          selected_input_quantity.change();
+        });
+        
+        //delete error messages
+        if ($("label[for='quantity_documents_for_validate']")) {
+        	$("label[for='quantity_documents_for_validate']").fadeOut("fast");
+        };
+        
+
+        //проверка значения количества файлов для печати
+        function validate(value){
+          if (value < 1 || isNaN(value) == true) {
+            value = 1;
+          } else if (value > 999) {
+            value = 999;
+          }
+          return value
+        };
+        
+        //cчитаем кол-во документов в форме
+        function validate_documents(){
+        	var quantity_documents = $("tr.document").length;
+        	if (quantity_documents == 0){
+        		$("input#quantity_documents_for_validate").val('');
+        	} else {
+        		$("input#quantity_documents_for_validate").val(quantity_documents);
+        	}
+        };
+        
+        //устанавливаем css аниматор загрузки цены
+        function show_loader_for_price(document_id){
+        	$("table#fileList tr#"+document_id+" td.document_price .document_price_value").hide();
+        	$("table#fileList tr#"+document_id+" td.document_price .floatingBarsG").show();
+        };
+        
+        function hide_loader_for_price(document_id){
+        	var loader = $("table#fileList tr#"+document_id+" td.document_price .floatingBarsG"),
+        		price = $("table#fileList tr#"+document_id+" td.document_price .document_price_value");
+
+	        	price.show();
+	        	loader.hide();       		
+        };
+
+      }
+    });
+  </script>
+<% end %>
+
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id, :class => "edit_doc_print_order"} do |order| -%>
+
+  <h2 class="orange">Загрузите Ваши файлы</h2>
+
+  <%= render :partial => 'orders/doc_print/filelist', :locals => {:order => @order} %>	
+
+  <h2 class="orange">Укажите адрес и время доставки</h2>
+  
+  <%= render :partial => 'delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
+  
+  <div class="total_cost_order">
+    <%= h (number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ")) %>
+  </div>
+  <div class="total_cost_order_label">
+    Итого:
+  </div>
+  <div class="fl_clear"></div>
+
+	<div class="submit_area">
+	 <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
+	 <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
+	</div>
+<% end -%>
+ 

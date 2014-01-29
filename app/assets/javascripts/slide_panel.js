@@ -41,8 +41,10 @@ $(document).ready(function(){
 					                 container: '#slide_img_pag',
 					                 anchorBuilder: function(nr) { 
 					                 	if (nr == '1'){
-					                 		return '<a href="#"><span>На печать</span></a>';
+					                 		return '<a href="#"><span>На печать фото</span></a>';
 					                 	} else if (nr == '2'){
+					                 		return '<a href="#"><span>На печать документов</span></a>';	
+					                 	} else if (nr == '3'){
 					                 		return '<a href="#"><span>На сканирование</span></a>';
 					                 	}					                 	
 					                 	}

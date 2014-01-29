@@ -1,45 +1,82 @@
-<h2><%= @title %></h2>
+$(document).ready(function(){
+	if(($(".edit_foto_print_order").exists()) || ($(".admin_foto_print_order").exists())) {
+        
+        //clear value 'выберите' in select
+        $("select#order_delivery_street").change(function(event){
+            $('[value=""]',event.target).remove();
+        });
 
-<% key = Rails.application.config.session_options[:key] %>
-
-<%= content_for :scripts do %>
-  <script type="text/javascript">
-    var upload_params = {
-      '<%= key %>' : '<%= cookies[key] %>',
-      '<%= request_forgery_protection_token %>' : '<%= form_authenticity_token %>',
-      '_http_accept': 'application/javascript'
-    };
-
-    var url = $('input#document_docfile').attr('rel');
-
-    $('input#document_docfile').uploadify({
-      uploader : '/assets/uploadify/uploadify.swf',
-      buttonImg : '/assets/uploadify/upload_button.png',
-      script : url,
-      fileDataName : 'document[docfile]',
-      fileDesc : 'Images (.png, .jpg, .jpeg)',
-      fileExt : '*.png;*.jpg;*.jpeg;*.JPG',
-      sizeLimit : 10240000, //10MB
-      cancelImg : '/assets/uploadify/cancel.png',
-      multi : true,
-      scriptData : upload_params,
-      auto : true,
-      onComplete : function(e, id, obj, response, data) {
-        $(response).hide().appendTo('#fileList').prop("style", null).fadeIn("slow");
-       },
-      onAllComplete : function(){
-        var status_fileList_header = $("#fileList_header").attr("style"),
-            order_id = $("form.edit_print_order").attr("id"),
-			url_for_update_document = "/document/price_update";
-            url_for_update_order = "/order/ajaxupdate",
+        //при любом изменении в таблице, устанавливаем тип доставки "курьер"
+        $("table.order_delivery").change(function(event){
+            var selected_delivery = 'Курьер';
+            $.post( url_for_update_order, {id: order_id, delivery_type: selected_delivery} );
+        });    
+    
+        var url_for_update_order = "/order/ajaxupdate",
+            url_for_update_document = "/document/price_update",
             url_for_load_paper_sizes = "/document/get_paper_sizes",
             url_for_load_paper_types = "/document/get_paper_types",
             url_for_load_print_margins = "/document/get_print_margins";
-
-        if (status_fileList_header == 'display: none;') {
-          $("#fileList_header").fadeIn("slow");
-        }
+    
+    if($(".edit_foto_print_order").exists()) {
+    	
+    	var order_id = $("form.edit_foto_print_order").attr("id");
+    	
+        //контроль ухода пользователя со страницы
+        $(".edit_foto_print_order").FormNavigate({
+          message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
+          aOutConfirm: "a.button_style, a.link_delete_docfile"
+        });
         
+        //client validator
+        $("form.edit_foto_print_order").validate({
+        	ignore: "",
+    		rules: {
+    			'order[delivery_address]': "required",
+    			'order[delivery_street]':"required",
+    			'order[delivery_date]':"required",
+    			'quantity_documents_for_validate':"required"
+    		},
+    		messages: {
+    			'order[delivery_address]': "?",
+    			'order[delivery_street]':"?",
+    			'order[delivery_date]':"?",
+    			'quantity_documents_for_validate':"Загрузите файлы."
+    		}
+    		});
+    }//end edit_foto_print_order
+	
+    if($(".admin_foto_print_order").exists()) {
+    	
+    	var order_id = $("form.admin_foto_print_order").attr("id");
+    	
+        //контроль ухода пользователя со страницы
+        $(".admin_foto_print_order").FormNavigate({
+          message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
+          aOutConfirm: "a.button_style, a.link_delete_docfile"
+        });
+        
+        //client validator
+        $("form.admin_foto_print_order").validate({
+        	ignore: "",
+    		rules: {
+    			'order[delivery_address]': "required",
+    			'order[delivery_street]':"required",
+    			'order[delivery_date]':"required",
+    			'quantity_documents_for_validate':"required"
+    		},
+    		messages: {
+    			'order[delivery_address]': "?",
+    			'order[delivery_street]':"?",
+    			'order[delivery_date]':"?",
+    			'quantity_documents_for_validate':"Загрузите файлы."
+    		}
+    		});
+        };//end admin_foto_print_order
+
+                  
+        //подключение хендлеров по управлению ценой (при уже загруженных документах - в случае рефреша страницы)
+
         //load paper_sizes------------------------------------------------------------------------------------
         $("select[name*='paper_size']").on("load_sizes", function(event) {
         	var document_id = this.parentNode.parentNode.id;
@@ -51,7 +88,8 @@
 	        		});        	
         	});
 		$("select[name*='paper_size']:not([class*='with_loaded_paper_sizes'])").addClass("with_loaded_paper_sizes").trigger("load_sizes");
-        
+ 
+		
         //change handler for load paper_types
         $("select[name*='paper_size']:not([class*='with_bind_change_event'])").addClass("with_bind_change_event").change(function(event){
         	var selected_paper_size = $(this).val(),
@@ -127,11 +165,11 @@
         }));
 
 
+
         //обновление цены после удаления одного документа
         $("a.link_delete_docfile:not([handler-status='with_priceEventHandler'])").attr('handler-status', 'with_priceEventHandler').bind('click', function(event){
-          setTimeout(function(){$.post( url_for_update_order, {id: order_id} )}, 1000);
+          setTimeout(function(){$.post(url_for_update_order, {id: order_id} );}, 1000);
           setTimeout(function(){validate_documents()}, 1000);
-          
         });
 
         //работа переключателя количества файлов
@@ -149,12 +187,6 @@
           selected_input_quantity.val(new_value);
           selected_input_quantity.change();
         });
-        
-        //delete error messages
-        if ($("label[for='quantity_documents_for_validate']")) {
-        	$("label[for='quantity_documents_for_validate']").fadeOut("fast");
-        };
-        
 
         //проверка значения количества файлов для печати
         function validate(value){
@@ -163,9 +195,14 @@
           } else if (value > 999) {
             value = 999;
           }
-          return value
+          return value;
         };
         
+
+		//time
+        $('#timepicker_start').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:00', 'maxTime': '23:30' });
+        $('#timepicker_end').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:30', 'maxTime': '00:00' });
+    
         //cчитаем кол-во документов в форме
         function validate_documents(){
         	var quantity_documents = $("tr.document").length;
@@ -175,7 +212,7 @@
         		$("input#quantity_documents_for_validate").val(quantity_documents);
         	}
         };
-        
+
         //устанавливаем css аниматор загрузки цены
         function show_loader_for_price(document_id){
         	$("table#fileList tr#"+document_id+" td.document_price .document_price_value").hide();
@@ -189,33 +226,8 @@
 	        	price.show();
 	        	loader.hide();       		
         };
+        
+    }
 
-      }
-    });
-  </script>
-<% end %>
+  });
 
-<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id, :class => "edit_print_order"} do |order| -%>
-
-  <h2 class="orange">Загрузите Ваши файлы</h2>
-
-  <%= render :partial => 'filelist', :locals => {:order => @order} %>	
-
-  <h2 class="orange">Укажите адрес и время доставки</h2>
-  
-  <%= render :partial => 'delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
-  
-  <div class="total_cost_order">
-    <%= h (number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ")) %>
-  </div>
-  <div class="total_cost_order_label">
-    Итого:
-  </div>
-  <div class="fl_clear"></div>
-
-	<div class="submit_area">
-	 <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
-	 <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
-	</div>
-<% end -%>
- 

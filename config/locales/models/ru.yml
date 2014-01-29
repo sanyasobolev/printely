@@ -134,6 +134,7 @@ ru:
         quantity: "Количество отпечатков"
         margins: "Поля"
         document_price: "Цена"
+        pages_count: "Количество страниц"
       pricelist_fotoprint:
         print_format: "Формат"
         paper_type: "Тип бумаги"
@@ -182,7 +183,7 @@ ru:
         print_margin_id: "Поля"
         price: "Цена"
         available: "Доступно к продаже"
-        service_id: "Услуга"
+        order_type: "Тип заказа"
       mailing:
         subject: "Тема"
         body: "Письмо"

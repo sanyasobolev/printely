@@ -1,0 +1,42 @@
+<tr class="document" id="<%= document.id %>" name="document" >
+  <%= fields_for "order[documents_attributes][]", document do |i| %>
+    <td class="upload">
+      <div class="container_for_link_delete_docfile">
+        <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :class => 'link_delete_docfile', :title => 'Удалить файл' %>
+      </div>
+      <%= thumb_for_doc(document) %>
+    </td>
+    <td class="pages_count">
+    	<%= page_count_for_doc(document) %>
+    </td>
+    <td class="paper_size">  
+    	
+    </td>
+    <td class="paper_type">
+
+    </td>
+    <td class="quantity">
+      <%=  button_tag ' ', :type => 'button', :class => 'decrease' %>
+          <%= i.text_field (:quantity)%>
+      <%=  button_tag ' ', :type => 'button', :class => 'increase' %>
+    </td>
+    <td class="user_comment">
+      <%= i.text_area :user_comment %>
+    </td>
+    <td class="document_price">
+		<div class='floatingBarsG'>
+			<div class='blockG' id='rotateG_01'></div>
+			<div class='blockG' id='rotateG_02'></div>
+			<div class='blockG' id='rotateG_03'></div>
+			<div class='blockG' id='rotateG_04'></div>
+			<div class='blockG' id='rotateG_05'></div>
+			<div class='blockG' id='rotateG_06'></div>
+			<div class='blockG' id='rotateG_07'></div>
+			<div class='blockG' id='rotateG_08'></div>
+		</div>
+		<div class='document_price_value'>
+      		<%= h (number_to_currency(document.price, :unit => "коп.", :separator => " руб. ")) %>
+    	</div>
+    </td>
+  <% end %>
+</tr>

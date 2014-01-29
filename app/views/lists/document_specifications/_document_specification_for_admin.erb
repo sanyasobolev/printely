@@ -3,7 +3,7 @@
 	  <td><%= h (document_specification_for_admin.paper_specification.full_paper_format) %></td>
 	  <td><%= h (document_specification_for_admin.print_margin.margin) %></td>
 	  <td><%= h (document_specification_for_admin.price) %></td>
-	  <td><%= h (document_specification_for_admin.service.title) if document_specification_for_admin.service %></td>
+	  <td><%= h (document_specification_for_admin.order_type) if document_specification_for_admin.order_type %></td>
 	  <td><%= h (boolean_to_ru(document_specification_for_admin.available)) %></td>
 	  <td><%= link_to 'Редактировать', edit_lists_document_specification_path(document_specification_for_admin) %></td>
 	</tr>

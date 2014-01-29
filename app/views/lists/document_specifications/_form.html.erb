@@ -15,8 +15,8 @@
 </div>
 
 <div class="form_align">
-	<%= f.label :service_id %>
-	<%= f.collection_select :service_id, Service.all, :id, :title, :prompt => 'Нет' %>
+	<%= f.label :order_type %>
+	<%= f.text_field :order_type %>
 </div>
 
 <div class="form_align">

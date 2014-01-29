@@ -3,10 +3,10 @@ class OrdersController < ApplicationController
   layout 'orders_boardlinks', :only => [:index, :my, :show]
 
   skip_before_filter :authorized?,
-                     :only => [:index, :my, :new_print, :new_scan, :show, :edit, :update, :destroy, :ajaxupdate]
+                     :only => [:index, :my, :new, :show, :edit, :update, :destroy, :ajaxupdate]
 
   skip_before_filter :verify_authenticity_token,
-                     :only => [:new_print, :edit, :update, :show]
+                     :only => [:new, :edit, :update, :show]
 
   before_filter :your_order?,
                 :only => [:edit, :show, :destroy, :ajaxupdate]
@@ -25,7 +25,8 @@ class OrdersController < ApplicationController
     end
     @draft_orders.destroy_all
         
-    @print_orders = Order.where("user_id=#{current_user.id} AND order_type='print'", :include => :user).order('created_at DESC')
+    @foto_print_orders = Order.where("user_id=#{current_user.id} AND order_type='foto_print'", :include => :user).order('created_at DESC')
+    @doc_print_orders = Order.where("user_id=#{current_user.id} AND order_type='doc_print'", :include => :user).order('created_at DESC')
     @scan_orders = Order.where("user_id=#{current_user.id} AND order_type='scan'", :include => :user).order('created_at DESC')
     respond_to do |format|
       format.html # index.html.erb
@@ -33,8 +34,8 @@ class OrdersController < ApplicationController
     end
   end
 
-  def new_print #create empty order and redirect to edit it
-    @order = Order.new(:order_type => 'print')
+  def new #create empty order and redirect to edit it
+    @order = Order.new(:order_type => params[:order_type])
     @order.set_status(10)
     set_price(@order)
     current_user.orders << @order
@@ -46,19 +47,6 @@ class OrdersController < ApplicationController
       end
   end
   
-  def new_scan 
-    @order = Order.new(:order_type => 'scan')
-    @order.set_status(10)
-    set_price(@order)
-    current_user.orders << @order
-    respond_to do |wants|
-        if @order.save(:validate => false)
-          wants.html {redirect_to edit_order_path(@order)}
-          wants.xml { render :xml => @order.to_xml }
-        end
-      end
-  end
-
   def edit
     #проверка роли
     if current_user.has_role?('Administrator')
@@ -78,11 +66,20 @@ class OrdersController < ApplicationController
     #рендер view в зависимости от типа заказа
     respond_to do |format|
       case @order.order_type
-      when 'print'
+      when 'foto_print'
         if @admin_edit == true
-          format.html { render :admin_edit_print }
+          format.html { render :admin_edit_foto_print }
         elsif user_can_edit == true
-          format.html { render :new_print } 
+          format.html { render :new_foto_print } 
+        else
+          flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
+          format.html { redirect_to my_orders_path}
+        end
+      when 'doc_print'
+        if @admin_edit == true
+          format.html { render :admin_edit_doc_print }
+        elsif user_can_edit == true
+          format.html { render :new_doc_print } 
         else
           flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
           format.html { redirect_to my_orders_path}
@@ -138,7 +135,7 @@ class OrdersController < ApplicationController
 
   def attr_update(order, status_key) #update main user attributes of order
     case order.order_type
-    when 'print'
+    when 'foto_print'
       if (order.documents.length == 0)
         flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл.'
         redirect_to :action => "edit"
@@ -190,8 +187,8 @@ class OrdersController < ApplicationController
     @title = "Заказ № #{@order.id}"
     respond_to do |format|
       case @order.order_type
-      when 'print'
-         format.html { render :show_print_order }
+      when 'foto_print'
+         format.html { render 'orders/foto_print/show_foto_print_order' }
       when 'scan'
          format.html { render :show_scan_order } 
       end
@@ -281,7 +278,7 @@ class OrdersController < ApplicationController
       order_cost = 0
       
       case order.order_type
-      when 'print' #считаем документы, если они есть
+      when 'foto_print' #считаем документы, если они есть
         if order.documents.size > 0
           order.documents.each do |document|
             (documents_cost = documents_cost + document.price) unless document.price.nil?

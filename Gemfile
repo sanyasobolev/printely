@@ -5,7 +5,6 @@ gem 'mysql2'
 gem "russian"
 gem "rdoc"
 gem "dynamic_form" #отображение ошибок
-#gem "ckeditor", "3.7.1" #WYSIWYG редактор
 gem "ckeditor", "4.0.4" #WYSIWYG редактор
 gem "paperclip", "3.1.4" #загрузка файлов на сервер
 gem "cocaine", "0.3.2" #for piperclip
@@ -14,10 +13,14 @@ gem 'client_side_validations' #validate inline
 gem "ransack" #search engine
 gem 'delayed_job_active_record' #send mailings in background
 gem "daemons" #daemon for delayed job
+gem 'pdf-reader', "~> 1.3.3" #for get count pages in pdf
+gem 'docsplit' #for manipulate office document
+
+
 
 #for multiple upload files
 gem 'carrierwave'
-gem 'mini_magick'
+gem 'rmagick'
 gem 'flash_cookie_session'
 gem 'haml-rails'
 

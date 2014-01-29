@@ -1,0 +1,31 @@
+<tr class="document" id="document_<%= show_foto.id %>">
+    <td class="upload">
+      <%= image_tag show_foto.docfile.thumb.url, :class => 'thumb' %>
+    </td>
+    <td class="paper_size">
+      <p class="center">
+        <%= show_foto.get_paper_size_with_iso %>
+      </p>
+    </td>
+    <td class="paper_type">
+      <p class="center">
+        <%= show_foto.get_paper_type %>
+      </p>
+    </td>
+    <td class="quantity">
+      <p class="center">
+        <%= show_foto.quantity %>
+      </p>
+    </td>
+    <td class="margins">
+      <p class="center">
+        <%= show_foto.get_print_margins %>
+      </p>
+    </td>
+    <td class="user_comment">
+      <%= show_foto.user_comment %>
+    </td>
+    <td class="document_price ">
+      <%= h (number_to_currency(show_foto.price, :unit => "коп.", :separator => " руб. ")) %>
+    </td>
+</tr>
