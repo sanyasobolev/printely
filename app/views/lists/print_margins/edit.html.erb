@@ -1,5 +1,5 @@
 <h1>Редактирование</h1>
-<%= error_messages_for :paper_margin %>
+<%= error_messages_for :print_margin %>
 <%= form_for :margin, :url => lists_print_margin_path(@margin), :html => {:method => :put} do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
     <div class="submit_area">

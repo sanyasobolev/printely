@@ -1,0 +1,19 @@
+<h2><%= @title %></h2>
+
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :class => "admin_scan_order", :id => @order.id } do |order| -%>
+
+    <h2 class="orange">Уточнение заказа и смена статуса</h2>
+    <div class="form_align">
+	  <%= order.label(:cost) %>
+	  <%= order.text_field(:cost) %>
+	</div>
+	<%= render :partial => 'orders/share/form', :locals => {:f => order} %>
+
+	<div class="submit_area">
+	 <%= submit_tag 'Сохранить изменения', :class => 'submit'  %>
+	 <%= link_to 'Отмена', admin_orders_path, :class => 'button_style' %>
+	</div>
+
+<% end -%>
+
+ 

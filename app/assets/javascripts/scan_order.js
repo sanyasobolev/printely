@@ -230,7 +230,7 @@ $(document).ready(function(){
 	        };
 	
 	        //работа переключателя количества документов для базовой коррекции
-	        $("button.increase#base_correction").bind('click', function(event){
+	        $("button.increase_quantity#base_correction").bind('click', function(event){
 	           selected_base_correction_documents_quantity = $(this).siblings("input[id*='quantity']");
 	          if (button_coloring.hasClass("button_style_long_orange_pressed") & button_restoration.hasClass("button_style_long_orange_pressed")){
 	          	if (selected_coloring_documents_quantity.val() > selected_restoration_documents_quantity.val()){
@@ -262,7 +262,7 @@ $(document).ready(function(){
 			  
 	        });
 	        
-	        $("button.decrease#base_correction").bind('click', function(event){
+	        $("button.decrease_quantity#base_correction").bind('click', function(event){
 	          selected_base_correction_documents_quantity = $(this).siblings("input[id*='quantity']");
 	          decrease_quantity(selected_base_correction_documents_quantity, selected_scan_documents_quantity.val());
 	          if (selected_base_correction_documents_quantity.val() != selected_scan_documents_quantity.val()){
@@ -273,7 +273,7 @@ $(document).ready(function(){
 	        });
 	
 	        //работа переключателя количества документов для раскраски
-	        $("button.increase#coloring").bind('click', function(event){
+	        $("button.increase_quantity#coloring").bind('click', function(event){
 	          selected_coloring_documents_quantity = $(this).siblings("input[id*='quantity']");
 	          
 		      if (button_base_correction.hasClass("button_style_long_orange_pressed")){
@@ -288,7 +288,7 @@ $(document).ready(function(){
 			  }
 			  
 	        });
-	        $("button.decrease#coloring").bind('click', function(event){
+	        $("button.decrease_quantity#coloring").bind('click', function(event){
 	          selected_coloring_documents_quantity = $(this).siblings("input[id*='quantity']");
 	          decrease_quantity(selected_coloring_documents_quantity, selected_scan_documents_quantity.val());
 	       	  if (selected_coloring_documents_quantity.val() != selected_scan_documents_quantity.val() & selected_restoration_documents_quantity.val() != selected_scan_documents_quantity.val()){
@@ -297,7 +297,7 @@ $(document).ready(function(){
 	        });
 	
 	        //работа переключателя количества документов для реставрации
-	        $("button.increase#restoration").bind('click', function(event){
+	        $("button.increase_quantity#restoration").bind('click', function(event){
 	          selected_restoration_documents_quantity = $(this).siblings("input[id*='quantity']");
 	          
 		      if (button_base_correction.hasClass("button_style_long_orange_pressed")){
@@ -312,7 +312,7 @@ $(document).ready(function(){
 			  }
 			  
 	        });
-	        $("button.decrease#restoration").bind('click', function(event){
+	        $("button.decrease_quantity#restoration").bind('click', function(event){
 	          selected_restoration_documents_quantity = $(this).siblings("input[id*='quantity']");
 	          decrease_quantity(selected_restoration_documents_quantity, selected_scan_documents_quantity.val());
 	       	  if (selected_restoration_documents_quantity.val() != selected_scan_documents_quantity.val() & selected_coloring_documents_quantity.val() != selected_scan_documents_quantity.val()){
@@ -378,13 +378,13 @@ $(document).ready(function(){
 			
 			
 	        //события переключателя количества документов для базовой коррекции
-	        $("button.increase#base_correction").bind('click', function(event){
+	        $("button.increase_quantity#base_correction").bind('click', function(event){
 	          new_value = parseInt(selected_base_correction_documents_quantity.val()) + 1 ;
 	          new_value = validate(new_value, 100, 0);
 	          selected_base_correction_documents_quantity.val(new_value);
 	          selected_base_correction_documents_quantity.change();
 	        });
-	        $("button.decrease#base_correction").bind('click', function(event){
+	        $("button.decrease_quantity#base_correction").bind('click', function(event){
 	          new_value = parseInt(selected_base_correction_documents_quantity.val()) - 1 ;
 	          new_value = validate(new_value, 100, 0);
 	          selected_base_correction_documents_quantity.val(new_value);
@@ -392,13 +392,13 @@ $(document).ready(function(){
 	        });
 	        
 	        //события переключателя количества документов для раскраски
-	        $("button.increase#coloring").bind('click', function(event){
+	        $("button.increase_quantity#coloring").bind('click', function(event){
 	          new_value = parseInt(selected_coloring_documents_quantity.val()) + 1 ;
 	          new_value = validate(new_value, 100, 0);
 	          selected_coloring_documents_quantity.val(new_value);
 	          selected_coloring_documents_quantity.change();
 	        });
-	        $("button.decrease#coloring").bind('click', function(event){
+	        $("button.decrease_quantity#coloring").bind('click', function(event){
 	          new_value = parseInt(selected_coloring_documents_quantity.val()) - 1 ;
 	          new_value = validate(new_value, 100, 0);
 	          selected_coloring_documents_quantity.val(new_value);
@@ -406,13 +406,13 @@ $(document).ready(function(){
 	        });
 	        
 	        //события переключателя количества документов для реставрации
-	        $("button.increase#restoration").bind('click', function(event){
+	        $("button.increase_quantity#restoration").bind('click', function(event){
 	          new_value = parseInt(selected_restoration_documents_quantity.val()) + 1 ;
 	          new_value = validate(new_value, 100, 0);
 	          selected_restoration_documents_quantity.val(new_value);
 	          selected_restoration_documents_quantity.change();
 	        });
-	        $("button.decrease#restoration").bind('click', function(event){
+	        $("button.decrease_quantity#restoration").bind('click', function(event){
 	          new_value = parseInt(selected_restoration_documents_quantity.val()) - 1 ;
 	          new_value = validate(new_value, 100, 0);
 	          selected_restoration_documents_quantity.val(new_value);
@@ -491,15 +491,7 @@ $(document).ready(function(){
           }
           return value;
         };
-
-
 		
-        //при любом изменении в таблице, устанавливаем тип доставки "курьер"
-        $("table.order_delivery").change(function(event){
-            var selected_delivery = 'Курьер';
-            $.post( url_for_update_order, {id: order_id, delivery_type: selected_delivery} );
-        });
-
         //clear value 'выберите' in select
         $("select#order_delivery_street").change(function(event){
             $('[value=""]',event.target).remove();

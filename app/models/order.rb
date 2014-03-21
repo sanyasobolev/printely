@@ -1,10 +1,11 @@
 # encoding: utf-8
 class Order < ActiveRecord::Base
 
-  attr_accessible :delivery_street, :delivery_address, :delivery_date, :delivery_start_time, :delivery_end_time,  :delivery_price, :delivery_type, :documents_attributes, :scan_attributes, :scan, :order_status_id, :cost, :manager_comment, :created_at, :cost_min, :cost_max, :order_type
+  attr_accessible :delivery_street, :delivery_address, :delivery_date, :delivery_start_time, :delivery_end_time,  :delivery_price, :delivery_type, :documents_attributes, :scan_attributes, :scan, :order_status_id, :cost, :manager_comment, :created_at, :cost_min, :cost_max, :order_type_id
 
   belongs_to :user
   belongs_to :order_status, :class_name => "Lists::OrderStatus"
+  belongs_to :order_type, :class_name => "Lists::OrderType"
   
   has_many :documents, :dependent => :destroy
   accepts_nested_attributes_for :documents, :allow_destroy => true

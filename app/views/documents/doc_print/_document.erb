@@ -6,24 +6,50 @@
       </div>
       <%= thumb_for_doc(document) %>
     </td>
-    <td class="pages_count">
-    	<%= page_count_for_doc(document) %>
+    <td class="page_count">
+    	<% unless page_count_for_doc(document) %>
+	        <%= button_tag(' ', :type => 'button', :class => 'increase_page_count') %>
+	        <%= i.text_field(:page_count) %>
+	        <%= button_tag(' ', :type => 'button', :class => 'decrease_page_count') %>
+ 		<% else %>
+ 		    <%= page_count_for_doc(document) %>
+ 		<% end %>
     </td>
-    <td class="paper_size">  
-    	
+    
+    <td class="paper">
+	    <div class="paper_size">  
+	      	<%= select_tag("order[documents_attributes][#{document.id}][paper_size]") %>
+	    	<%= i.label :paper_size %>
+	    </div>
+	    <div class="fl_clear"></div>
+	    <div class="paper_type">
+	    	<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true}) %>
+			<%= i.label :paper_type %>
+	    </div>
+	    <div class="fl_clear"></div>
+	    <div class="quantity">	      
+	      <%=  button_tag ' ', :type => 'button', :class => 'increase_quantity' %>
+	      <%= i.text_field (:quantity)%>
+	      <%=  button_tag ' ', :type => 'button', :class => 'decrease_quantity' %>
+	      <%= i.label :quantity %>
+	    </div>
+	    <div class="fl_clear"></div>
     </td>
-    <td class="paper_type">
 
+    <td class="print_settings">
+    	<div class="print_color">
+    		<%= i.label :print_color %>
+      		<%= select_tag("order[documents_attributes][#{document.id}][print_color]", {}, {:disabled => true}) %>
+    	</div> 
+    	<div class="fl_clear"></div> 
+	    <div class="user_comment">
+	      <%= i.text_area :user_comment, :placeholder => Document.human_attribute_name("user_comment") %>
+	    </div>
+	    <div class="fl_clear"></div> 
+ 	
     </td>
-    <td class="quantity">
-      <%=  button_tag ' ', :type => 'button', :class => 'decrease' %>
-          <%= i.text_field (:quantity)%>
-      <%=  button_tag ' ', :type => 'button', :class => 'increase' %>
-    </td>
-    <td class="user_comment">
-      <%= i.text_area :user_comment %>
-    </td>
-    <td class="document_price">
+
+    <td class="document_cost">
 		<div class='floatingBarsG'>
 			<div class='blockG' id='rotateG_01'></div>
 			<div class='blockG' id='rotateG_02'></div>
@@ -34,8 +60,8 @@
 			<div class='blockG' id='rotateG_07'></div>
 			<div class='blockG' id='rotateG_08'></div>
 		</div>
-		<div class='document_price_value'>
-      		<%= h (number_to_currency(document.price, :unit => "коп.", :separator => " руб. ")) %>
+		<div class='document_cost_value'>
+      		<%= h (number_to_currency(document.cost, :unit => "коп.", :separator => " руб. ")) %>
     	</div>
     </td>
   <% end %>

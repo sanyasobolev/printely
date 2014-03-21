@@ -9,10 +9,10 @@ class OrdersController < ApplicationController
                      :only => [:new, :edit, :update, :show]
 
   before_filter :your_order?,
-                :only => [:edit, :show, :destroy, :ajaxupdate]
+                :only => [:edit, :show, :destroy, :ajaxupdate, :edit_files, :edit_delivery, :edit_status]
 
   def index
-
+    @title = 'Личный кабинет'
   end
 
   def my
@@ -25,9 +25,9 @@ class OrdersController < ApplicationController
     end
     @draft_orders.destroy_all
         
-    @foto_print_orders = Order.where("user_id=#{current_user.id} AND order_type='foto_print'", :include => :user).order('created_at DESC')
-    @doc_print_orders = Order.where("user_id=#{current_user.id} AND order_type='doc_print'", :include => :user).order('created_at DESC')
-    @scan_orders = Order.where("user_id=#{current_user.id} AND order_type='scan'", :include => :user).order('created_at DESC')
+    @foto_print_orders = Order.where("user_id=#{current_user.id} AND order_type_id=2", :include => :user).order('created_at DESC').page(params[:foto_print_orders_page])
+    @doc_print_orders = Order.where("user_id=#{current_user.id} AND order_type_id=3", :include => :user).order('created_at DESC').page(params[:doc_print_orders_page])
+    @scan_orders = Order.where("user_id=#{current_user.id} AND order_type_id=4", :include => :user).order('created_at DESC').page(params[:scan_orders_page])
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @orders }
@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
   end
 
   def new #create empty order and redirect to edit it
-    @order = Order.new(:order_type => params[:order_type])
+    @order = Order.new(:order_type_id => Lists::OrderType.where(:title => params[:order_type]).first.id)
     @order.set_status(10)
     set_price(@order)
     current_user.orders << @order
@@ -48,51 +48,88 @@ class OrdersController < ApplicationController
   end
   
   def edit
-    #проверка роли
-    if current_user.has_role?('Administrator')
-      @title = "Обновление заказа №#{@order.id}"
-      @admin_edit = true
-    else 
-      @title = "Заказ №#{@order.id}"
-      @admin_edit = false
-    end
+    @title = "Заказ №#{@order.id}"
     #проверка возможности редактировать заказ
-    if @order.read_status_key == 10 || @admin_edit == true
+    if @order.read_status_key == 10
       user_can_edit = true
+      gon.delivery_dates = current_user.get_delivery_dates
     else
       user_can_edit = false
     end
 
     #рендер view в зависимости от типа заказа
     respond_to do |format|
-      case @order.order_type
+      case @order.order_type.title
       when 'foto_print'
-        if @admin_edit == true
-          format.html { render :admin_edit_foto_print }
-        elsif user_can_edit == true
-          format.html { render :new_foto_print } 
+        if user_can_edit == true
+          format.html { render 'orders/foto_print/new_foto_print' } 
         else
           flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
           format.html { redirect_to my_orders_path}
         end
       when 'doc_print'
-        if @admin_edit == true
-          format.html { render :admin_edit_doc_print }
-        elsif user_can_edit == true
-          format.html { render :new_doc_print } 
+        if user_can_edit == true
+          format.html { render 'orders/doc_print/new_doc_print' } 
         else
           flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
           format.html { redirect_to my_orders_path}
         end
       when 'scan'
-        if @admin_edit == true
-          format.html { render :admin_edit_scan }
-        elsif user_can_edit == true
-          format.html { render :new_scan }
+        if user_can_edit == true
+          format.html { render 'orders/scan/new_scan'}
         else
           flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
           format.html { redirect_to my_orders_path}      
         end
+      end 
+    end
+  end
+  
+  def edit_files
+    @title = "Обновление заказа №#{@order.id}"
+    #рендер view в зависимости от типа заказа
+    respond_to do |format|
+      case @order.order_type.title
+      when 'foto_print'
+        format.html { render 'orders/foto_print/admin_edit_files' }
+      when 'doc_print'
+        format.html { render 'orders/doc_print/admin_edit_files' }
+      when 'scan'
+        format.html { render 'orders/scan/admin_edit_files'}
+      end 
+    end
+  end
+  
+  def edit_delivery
+    @title = "Обновление заказа №#{@order.id}"
+    #рендер view в зависимости от типа заказа
+    respond_to do |format|
+      case @order.order_type.title
+      when 'foto_print'
+        @order_class = 'admin_foto_print_order'
+        format.html { render 'orders/share/admin_edit_delivery' }
+      when 'doc_print'
+        @order_class = "admin_doc_print_order"
+        format.html { render 'orders/share/admin_edit_delivery' }
+      when 'scan'
+        format.html { render 'orders/scan/admin_edit_delivery'}
+      end 
+    end
+  end
+
+  def edit_status
+    @title = "Обновление заказа №#{@order.id}"
+    #рендер view в зависимости от типа заказа
+    respond_to do |format|
+      case @order.order_type.title
+      when 'foto_print'
+        @order_class = 'admin_foto_print_order'
+        format.html { render 'orders/share/admin_edit_status' }
+      when 'doc_print'
+        @order_class = "admin_doc_print_order"
+        format.html { render 'orders/share/admin_edit_status' }
+      when 'scan'
+        format.html { render 'orders/scan/admin_edit_status'}
       end 
     end
   end
@@ -101,10 +138,9 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if current_user.has_role?('Administrator')  # если администратор или менеджер
       old_status_key = @order.order_status.key
-      new_status_key = get_status_key_from_id(params[:order][:order_status_id])
-      if attr_update(@order, new_status_key) 
-        respond_to do |wants|
-          if @order.update_attributes(:manager_comment => params[:order][:manager_comment])
+      new_status_key = params[:order][:order_status_id].nil? ? old_status_key : get_status_key_from_id(params[:order][:order_status_id])
+      respond_to do |wants|
+        if attr_update(@order, new_status_key) 
             if new_status_key != old_status_key #отправка сообщения на почту пользователя, ели статус был изменен
               if new_status_key == 50
                 UserMailer.email_user_about_complete_order(@order).deliver
@@ -120,11 +156,11 @@ class OrdersController < ApplicationController
           else
             wants.html { render :action => "edit" }
             wants.xml {render :xml => @order.errors}
-          end
         end
       end
     else #если обычный пользователь
         if attr_update(@order, 20)
+          @order.update_attribute(:created_at, Time.now)
           UserMailer.email_all_admins_about_new_order(@order)
           UserMailer.email_user_about_new_order(@order).deliver
           flash[:notice] = 'Спасибо! Заказ создан. В ближайшее время мы свяжемся с вами.'
@@ -134,8 +170,8 @@ class OrdersController < ApplicationController
   end
 
   def attr_update(order, status_key) #update main user attributes of order
-    case order.order_type
-    when 'foto_print'
+    case order.order_type.title
+    when 'foto_print', 'doc_print'
       if (order.documents.length == 0)
         flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл.'
         redirect_to :action => "edit"
@@ -143,11 +179,8 @@ class OrdersController < ApplicationController
       else
         order.documents.each do |document|
           unless params[:order][:documents_attributes].nil?
-            @dspec_id = Lists::DocumentSpecification.joins(paper_specification: :paper_type).where("lists_paper_types.paper_type = '#{params[:order][:documents_attributes][document.id.to_s][:paper_type]}'").joins(paper_specification: :paper_size).where("lists_paper_sizes.size = '#{params[:order][:documents_attributes][document.id.to_s][:paper_size]}'").joins(:print_margin).where("lists_print_margins.margin = '#{params[:order][:documents_attributes][document.id.to_s][:margins]}'").first.id
-            document.update_attributes(
-                    :quantity => params[:order][:documents_attributes][document.id.to_s][:quantity],
-                    :user_comment => params[:order][:documents_attributes][document.id.to_s][:user_comment],
-                    :document_specification_id => @dspec_id
+            document.update_attribute(
+                    :user_comment, params[:order][:documents_attributes][document.id.to_s][:user_comment],
                     )
           end
         end
@@ -160,37 +193,44 @@ class OrdersController < ApplicationController
         flash[:error] = 'Для оформления заказа необходимо заполнить информацию о доставке.'
         redirect_to :action => "edit"
         return false
-      else
-        if params[:order][:delivery_start_time] == ""
-          params[:order][:delivery_start_time] = Order::DEFAULT_START_TIME
-        end
-        if params[:order][:delivery_end_time] == ""
-          params[:order][:delivery_end_time] = Order::DEFAULT_END_TIME
-        end
-        if params[:order][:cost]
-          order.update_attribute(:cost, params[:order][:cost])
-        end
+    elsif params[:order][:delivery_street] && params[:order][:delivery_address] && params[:order][:delivery_date]
         order.update_attributes(
             :delivery_street => params[:order][:delivery_street], 
             :delivery_address => params[:order][:delivery_address], 
-            :delivery_date => params[:order][:delivery_date], 
-            :delivery_start_time => params[:order][:delivery_start_time], 
-            :delivery_end_time => params[:order][:delivery_end_time],
-            :order_status_id => get_status_id_from_key(status_key), 
-            :created_at => Time.now
-            )
-        return true
+            :delivery_date => params[:order][:delivery_date])
     end
+    if params[:order][:delivery_start_time] == ""
+       params[:order][:delivery_start_time] = Order::DEFAULT_START_TIME
+    end
+    if params[:order][:delivery_end_time] == ""
+       params[:order][:delivery_end_time] = Order::DEFAULT_END_TIME
+    end
+    if params[:order][:cost]
+       order.update_attribute(:cost, params[:order][:cost])
+    end
+    if params[:order][:delivery_start_time] && params[:order][:delivery_end_time]
+       order.update_attributes(
+            :delivery_start_time => params[:order][:delivery_start_time], 
+            :delivery_end_time => params[:order][:delivery_end_time])
+    end
+    if params[:order][:manager_comment]
+       order.update_attribute(:manager_comment, params[:order][:manager_comment])
+    end
+    
+    order.update_attribute(:order_status_id, get_status_id_from_key(status_key))
+    return true
   end
 
   def show
     @title = "Заказ № #{@order.id}"
     respond_to do |format|
-      case @order.order_type
+      case @order.order_type.title
       when 'foto_print'
          format.html { render 'orders/foto_print/show_foto_print_order' }
+      when 'doc_print'
+         format.html { render 'orders/doc_print/show_doc_print_order' }
       when 'scan'
-         format.html { render :show_scan_order } 
+         format.html { render 'orders/scan/show_scan_order' } 
       end
     end
   end
@@ -214,13 +254,16 @@ class OrdersController < ApplicationController
       @search = Order.search(:order_status_key_not_eq => 10) 
     end
     @search.sorts = 'id desc' if @search.sorts.empty?
-    @orders = @search.result 
+    @orders = @search.result.page(params[:page])
     @search.build_condition
   end
 
   def ajaxupdate
     if params[:delivery_type]
       @order.update_attribute(:delivery_type, params[:delivery_type])
+    end
+    if params[:delivery_date]
+      @order.update_attribute(:delivery_date, params[:delivery_date])
     end
     set_price(@order)
     respond_to do |format|
@@ -250,8 +293,8 @@ class OrdersController < ApplicationController
      Lists::PaperSpecification.all.each do |pspec|
        @documents_quantity = 0
        @order.documents.each do |document|
-         if pspec == document.get_paper_specification
-           @documents_quantity = @documents_quantity + document.quantity.to_i
+         if pspec == document.paper_specification
+           @documents_quantity = @documents_quantity + document.page_count.to_i*document.quantity.to_i
          end
          unless @documents_quantity == 0
            @lines.merge!(pspec.full_paper_format_wo_stock => @documents_quantity)
@@ -265,8 +308,12 @@ class OrdersController < ApplicationController
     def set_price(order)
       #cчитаем доставку
       if order.delivery_type
-        #ищем цену доставки в прайсе
-        delivery_price = PricelistDelivery.where(:delivery_type => order.delivery_type).first.price
+        #ищем цену доставки в прайсе и проверяем есть ли уже заказы на дату
+        if current_user.get_delivery_dates.include?(order.delivery_date)
+          delivery_price = 0
+        else
+          delivery_price = PricelistDelivery.where(:delivery_type => order.delivery_type).first.price
+        end
       else
         delivery_price = 0
       end
@@ -277,11 +324,11 @@ class OrdersController < ApplicationController
       order_cost_max = 0
       order_cost = 0
       
-      case order.order_type
-      when 'foto_print' #считаем документы, если они есть
+      case order.order_type.title
+      when 'foto_print', 'doc_print'  #считаем документы, если они есть
         if order.documents.size > 0
           order.documents.each do |document|
-            (documents_cost = documents_cost + document.price) unless document.price.nil?
+            (documents_cost = documents_cost + document.cost) unless document.cost.nil?
           end
         end
         order_cost = order.delivery_price + documents_cost

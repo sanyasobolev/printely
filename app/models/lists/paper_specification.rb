@@ -1,17 +1,21 @@
 # encoding: utf-8
 class Lists::PaperSpecification < ActiveRecord::Base
-    attr_accessible :paper_type_id, :paper_size_id, :in_stock, :id
+    attr_accessible :paper_type_id, :paper_size_id, :in_stock, :id, :price, :order_type_id
     
-    has_many :document_specifications
-    has_many :documents, :through => :document_specifications
-    has_many :print_margins, :through => :document_specifications
+    has_many :documents
+    has_many :print_margins, :through => :documents
 
     belongs_to :paper_type
     belongs_to :paper_size
+    belongs_to :order_type
 
     validates :paper_type_id, :uniqueness => { 
     :scope => :paper_size_id,
     :message => "Такая спецификация бумаги уже есть."
+    }
+
+    validates :price, :presence => {
+      :message => "Не должно быть пустым."
     }
 
     default_scope joins(:paper_size).order('lists_paper_sizes.size').readonly(false)
@@ -42,18 +46,4 @@ class Lists::PaperSpecification < ActiveRecord::Base
       "#{self.paper_type.paper_type} (#{self.paper_type.paper_grade.grade})"
     end 
     
-    def margins_list
-      list = "<ul>"
-      available_dspecs = Array.new 
-      self.document_specifications.each do |dspec|
-        available_dspecs << dspec if dspec.available == true
-      end
-      available_dspecs.each do |dspec|
-        list += "<li>" + "#{dspec.print_margin.margin}" + "</li>"
-      end
-      list += "</ul>"
-      return list.html_safe
-    end
-    
-
 end

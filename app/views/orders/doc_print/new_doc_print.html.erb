@@ -1,0 +1,265 @@
+<h2><%= @title %></h2>
+
+<% key = Rails.application.config.session_options[:key] %>
+
+<%= content_for :scripts do %>
+  <script type="text/javascript">
+    var upload_params = {
+      '<%= key %>' : '<%= cookies[key] %>',
+      '<%= request_forgery_protection_token %>' : '<%= form_authenticity_token %>',
+      '_http_accept': 'application/javascript'
+    };
+
+    var url = $('input#document_docfile').attr('rel');
+
+    $('input#document_docfile').uploadify({
+      uploader : '/assets/uploadify/uploadify.swf',
+      buttonImg : '/assets/uploadify/upload_button.png',
+      script : url,
+      fileDataName : 'document[docfile]',
+      fileDesc : 'Documents (.pdf, .doc, .docx, .ppt, .pptx)',
+      fileExt : '*.doc;*.docx;*.pdf;*.ppt;*.pptx',
+      sizeLimit : 10240000, //10MB
+      cancelImg : '/assets/uploadify/cancel.png',
+      multi : true,
+      scriptData : upload_params,
+      auto : true,
+      onComplete : function(e, id, obj, response, data) {
+        $(response).hide().appendTo('#fileList').prop("style", null).fadeIn("slow");
+       },
+      onAllComplete : function(){
+        var status_fileList_header = $("#fileList_header").attr("style"),
+            order_id = $("form.edit_doc_print_order").attr("id"),
+			url_for_update_document = "/document/price_update";
+			url_for_load_paper_sizes = "/document/get_paper_sizes",
+            url_for_load_paper_types = "/document/get_paper_types",
+            url_for_load_print_colors = "/document/get_print_colors",
+            url_for_update_order = "/order/ajaxupdate";
+
+        if (status_fileList_header == 'display: none;') {
+          $("#fileList_header").fadeIn("slow", function(){
+          	$('table#fileList').floatThead({
+				floatTableClass: 'floatTheadfileListOrder',
+				debounceResizeMs: 100
+			});
+          });
+        }
+        
+   		//load paper_sizes------------------------------------------------------------------------------------
+        $("select[name*='paper_size']").on("load_sizes", function(event) {
+        	var document_id = this.parentNode.parentNode.parentNode.id;
+        	$(this).load(
+	     		url_for_load_paper_sizes, 
+	        	{order_id: order_id, id: document_id, order_type: 'doc_print'},
+	        	function(){
+	        		$(this).change();
+	        		});        	
+        	});
+		$("select[name*='paper_size']:not([class*='with_loaded_paper_sizes'])").addClass("with_loaded_paper_sizes").trigger("load_sizes");
+
+        //change handler for load paper_types
+        $("select[name*='paper_size']:not([class*='with_bind_change_event'])").addClass("with_bind_change_event").change(function(event){
+        	var selected_paper_size = $(this).val(),
+        	document_id = this.parentNode.parentNode.parentNode.id;
+        	show_loader_for_price(document_id);
+        	$("select[name*='["+document_id+"][paper_type]']").load(
+        		url_for_load_paper_types, 
+        		{selected_paper_size: selected_paper_size, order_id: order_id, id: document_id, order_type: 'doc_print'},
+        		function(){
+        			$(this).attr("disabled",false);
+        			$("select[name*='["+document_id+"][print_color]']").attr("disabled",false);
+        			$(this).change();
+        		}
+        		);
+        	
+        });
+
+       
+        //change handler for load print colors
+        $("select[name*='paper_type']:not([class*='with_loaded_paper_types'])").addClass("with_loaded_paper_types").change(function(event){
+        	var document_id = this.parentNode.parentNode.parentNode.id; 
+        	show_loader_for_price(document_id);
+        	$("select[name*='["+document_id+"][print_color]']").load(
+        		url_for_load_print_colors, 
+        		{order_id: order_id, id: document_id, order_type: 'doc_print'},
+        		function(){
+        			$(this).attr("disabled",false);
+        			$(this).change(); //for update document price
+        			validate_documents();
+        		}
+        		);
+        	
+        });
+        
+        //подключение хендлеров по управлению ценой по состоянию print_color
+        $("select[name*='print_color']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
+          var document_id = this.parentNode.parentNode.parentNode.id, 
+          	  selected_paper_type = $("select[name*='["+document_id+"][paper_type]']").val(),
+          	  selected_paper_size = $("select[name*='["+document_id+"][paper_size]']").val(),
+          	  selected_print_color = $(this).val(),
+          	  selected_quantity = $("input[name*='["+document_id+"][quantity]']").val();
+          	  if ($("input[name*='["+document_id+"][page_count]']")){
+          	  	  selected_page_count = $("input[name*='["+document_id+"][page_count]']").val();
+	          	  } else {
+	          	  selected_page_count = false;
+          	  }
+          	  
+          show_loader_for_price(document_id);
+          $.post( url_for_update_document, 
+          	{id: document_id, paper_size: selected_paper_size, paper_type: selected_paper_type, print_color: selected_print_color, quantity: selected_quantity, page_count: selected_page_count, order_type: 'doc_print'},
+          	function() {
+          	   hide_loader_for_price(document_id);
+               $.post( url_for_update_order, {id: order_id} );
+  				}
+          	 	);
+        });
+
+		//change handler for quantity with debounce (if user click many times)
+        $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
+          var selected_quantity = $(this).val(),
+              document_id = this.parentNode.parentNode.parentNode.id;
+          
+          selected_quantity = validate(parseInt(selected_quantity));
+          $(this).val(selected_quantity);
+          
+		  $.ajax({
+			type: 'POST',
+			url: url_for_update_document,
+			beforeSend: show_loader_for_price(document_id),
+			data: {id: document_id, quantity: selected_quantity},
+			success: function() {
+			       	   hide_loader_for_price(document_id);
+			           $.post( url_for_update_order, {id: order_id} );
+  					 }
+			});
+        }));
+        
+		//change handler for page_count with debounce (if user click many times)
+        $("input[name*='page_count']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
+          var selected_page_count = $(this).val(),
+              document_id = this.parentNode.parentNode.id;
+          
+          selected_page_count = validate(parseInt(selected_page_count));
+          $(this).val(selected_page_count);
+          
+		  $.ajax({
+			type: 'POST',
+			url: url_for_update_document,
+			beforeSend: show_loader_for_price(document_id),
+			data: {id: document_id, page_count: selected_page_count},
+			success: function() {
+			       	   hide_loader_for_price(document_id);
+			           $.post( url_for_update_order, {id: order_id} );
+  					 }
+			});
+        }));
+
+
+        //обновление цены после удаления одного документа
+        $("a.link_delete_docfile:not([handler-status='with_priceEventHandler'])").attr('handler-status', 'with_priceEventHandler').bind('click', function(event){
+          setTimeout(function(){$.post( url_for_update_order, {id: order_id} )}, 1000);
+          setTimeout(function(){validate_documents()}, 1000);
+          
+        });
+
+        //работа переключателя количества копий
+        $("button.increase_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+          var selected_input_quantity = $(this).siblings("input[id*='quantity']");
+          new_value = parseInt(selected_input_quantity.val()) + 1 ;
+          new_value = validate(new_value);
+          selected_input_quantity.val(new_value);
+          selected_input_quantity.change();
+        });
+        $("button.decrease_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+          var selected_input_quantity = $(this).siblings("input[id*='quantity']");
+          new_value = parseInt(selected_input_quantity.val()) - 1 ;
+          new_value = validate(new_value);
+          selected_input_quantity.val(new_value);
+          selected_input_quantity.change();
+        });
+        
+        //работа переключателя количества страниц в документе
+        $("button.increase_page_count:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+          var selected_input_page_count = $(this).siblings("input[id*='page_count']");
+          new_value = parseInt(selected_input_page_count.val()) + 1 ;
+          new_value = validate(new_value);
+          selected_input_page_count.val(new_value);
+          selected_input_page_count.change();
+        });
+        $("button.decrease_page_count:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+          var selected_input_page_count = $(this).siblings("input[id*='page_count']");
+          new_value = parseInt(selected_input_page_count.val()) - 1 ;
+          new_value = validate(new_value);
+          selected_input_page_count.val(new_value);
+          selected_input_page_count.change();
+        });
+        
+        //delete error messages
+        if ($("label[for='quantity_documents_for_validate']")) {
+        	$("label[for='quantity_documents_for_validate']").fadeOut("fast");
+        };
+        
+
+        //проверка значения количества
+        function validate(value){
+          if (value < 1 || isNaN(value) == true) {
+            value = 1;
+          } else if (value > 999) {
+            value = 999;
+          }
+          return value
+        };
+        
+        //cчитаем кол-во документов в форме
+        function validate_documents(){
+        	var quantity_documents = $("tr.document").length;
+        	if (quantity_documents == 0){
+        		$("input#quantity_documents_for_validate").val('');
+        	} else {
+        		$("input#quantity_documents_for_validate").val(quantity_documents);
+        	}
+        };
+        
+        //устанавливаем css аниматор загрузки цены
+        function show_loader_for_price(document_id){
+        	$("table#fileList tr#"+document_id+" td.document_cost .document_cost_value").hide();
+        	$("table#fileList tr#"+document_id+" td.document_cost .floatingBarsG").show();
+        };
+        
+        function hide_loader_for_price(document_id){
+        	var loader = $("table#fileList tr#"+document_id+" td.document_cost .floatingBarsG"),
+        		price = $("table#fileList tr#"+document_id+" td.document_cost .document_cost_value");
+
+	        	price.show();
+	        	loader.hide();       		
+        };
+
+      }
+    });
+  </script>
+<% end %>
+
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id, :class => "edit_doc_print_order"} do |order| -%>
+
+  <h2 class="orange">Загрузите Ваши файлы</h2>
+
+  <%= render :partial => 'orders/doc_print/filelist', :locals => {:order => @order} %>	
+
+  <h2 class="orange">Укажите адрес и время доставки</h2>
+  
+  <%= render :partial => 'orders/share/delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
+  
+  <div class="total_cost_order">
+    <%= h (number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ")) %>
+  </div>
+  <div class="total_cost_order_label">
+    Итого:
+  </div>
+  <div class="fl_clear"></div>
+
+	<div class="submit_area">
+	 <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
+	 <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
+	</div>
+<% end -%>
+ 

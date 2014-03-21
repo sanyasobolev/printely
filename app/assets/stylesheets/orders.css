@@ -104,30 +104,45 @@
 
 /*форма для загружки файлов------------------------------------------------------------*/
 
+table#fileList {
+	border-collapse:separate;
+}
+
 #fileList th {
-    width: 150px;
     font-weight: normal;
-    text-align: center;
+    text-align: center; 
+    height: 30px;   
+}
+
+.floatTheadfileListOrder {
+	border-collapse:separate;
+}
+
+.floatTheadfileListOrder th {
+	background-color: #517B93;
+	font-weight: normal;
+	height: 30px;  
+	color: white;
 }
 
 #fileList tr:hover{
     background-color: #e8e8e8;
 }
 
-#fileList td.upload, td.pages_count, td.paper_type, td.quantity, td.user_comment, td.document_price {
-    width: 128px;
+#fileList tr#fileList_header{
+    background-color: #517B93;
+    color: white;
 }
 
-#fileList td.margins {
-	width: 100px;
+#fileList tr#fileList_header:hover{
+    background-color: #517B93;
 }
 
-#fileList td.paper_size {
-	width: 156px;
-}
-
-#fileList td.pages_count {
-	text-align: center;
+#fileList td.upload {
+    width: 161px;
+    height: 152px;
+    border-bottom: 20px solid white;
+    padding: 0px;
 }
 
 #fileList td.upload .container_for_link_delete_docfile {
@@ -140,72 +155,264 @@
 }
 
 #fileList td.upload img.thumb {
-    margin-bottom: 17px;
     margin-top: 13px;
     margin-right: 11px;
     float: right;
 }
 
-#fileList td.paper_size select {
-    display: block;
-    width: 98px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid #D6D3D1;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
+#fileList td.page_count {
+    width: 190px;
+	border-bottom: 20px solid white;
+	padding: 0px;
+	text-align: center;
 }
 
-#fileList td.paper_type select {
-    display: block;
-    width: 120px;
-    margin-left: auto;
-    margin-right: auto;
+#fileList td.page_count input {
+    width: 66px;
+	float: right;
     border: 1px solid #D6D3D1;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
-}
-
-#fileList td.quantity input {
-    display: block;
-    float: left;
-    width: 25px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid #D6D3D1;
+    margin-top: 10px;
     font-family: "Segoe UI",helvetica,arial,sans-serif;
     text-align: center;
 }
 
-button.decrease {
+#fileList td.page_count button.decrease_page_count {
+    margin-top: 10px;
+}
+
+#fileList td.page_count button.increase_page_count {
+    margin-top: 10px;
+    margin-right: 40px;
+}
+
+#fileList td.paper {
+	width: 210px;
+	border-bottom: 20px solid white;
+	padding: 0px;
+}
+
+#fileList td.paper div.paper_size {
+	width: 190px;
+	height: 43px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+#fileList td.paper div.paper_size label {
+	float: right;
+	margin-top: 10px;
+}
+#fileList td.paper div.paper_size select {
+    display: block;
+    width: 120px;
+	float: right;
+    border: 1px solid #D6D3D1;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+#fileList td.paper div.paper_type {
+	width: 190px;
+	height: 43px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+#fileList td.paper div.paper_type label {
+	float: right;
+	margin-top: 10px;
+}
+#fileList td.paper div.paper_type select {
+    display: block;
+    width: 120px;
+	float: right;
+    border: 1px solid #D6D3D1;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+#fileList td.paper div.quantity {
+	width: 190px;
+	height: 43px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+#fileList td.paper div.quantity label {
+	float: right;
+	margin-top: 10px;
+}
+#fileList td.paper div.quantity input {
+    width: 78px;
+	float: right;
+    border: 1px solid #D6D3D1;
+    margin-top: 10px;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+    text-align: center;
+}
+
+#fileList td.paper div.quantity button.decrease_quantity {
+    margin-top: 10px;
+}
+
+#fileList td.paper div.quantity button.increase_quantity {
+    margin-top: 10px;
+}
+
+#fileList td.print_settings {
+	width: 200px;
+	border-bottom: 20px solid white;
+    padding: 0px;
+}
+
+#fileList td.print_settings div.margins {
+	width: 190px;
+	height: 43px;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+#fileList td.print_settings div.margins select{
+    display: block;
+    float: right;
+    width: 120px;
+    margin-left: 10px;
+    margin-top: 10px;
+    border: 1px solid #D6D3D1;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+#fileList td.print_settings div.margins label {
+    float: right;
+    margin-top: 10px;
+}
+
+#fileList td.print_settings div.print_color {
+	width: 190px;
+	height: 86px;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+#fileList td.print_settings div.print_color label {
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+#fileList td.print_settings div.print_color select {
+    display: block;
+    width: 180px;
+	float: right;
+    border: 1px solid #D6D3D1;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+#fileList td.print_settings div.print_color span {
+	padding-top: 20px;
+	display: block;
+}
+
+#fileList td.print_settings div.user_comment {
+	width: 190px;
+	height: 43px;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+#fileList td.print_settings div.user_comment textarea {
+    width: 180px;
+    height: 42px;
+    resize: none;
+    display: block;
+    float: right;
+    border: 1px solid #D6D3D1;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+#fileList td.print_settings div.user_comment span {
+	font-style: italic;
+	display: block;
+}
+
+#fileList td.print_settings div.print_setting_1 {
+	width: 190px;
+	height: 43px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#fileList td.image_process {
+	width: 190px;
+	border-bottom: 20px solid white;
+    padding: 0px;
+}
+
+#fileList td.image_process div.pre_print_operation {
+	width: 180px;
+	height: 43px;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+#fileList td.document_cost {
+    width: 128px;
+    border-bottom: 20px solid white;
+    padding: 0px;
+}
+
+#fileList td.document_cost div.document_cost_value {
+	width: 110px;
+   	margin-right: 9px;
+	margin-left: 9px;
+}
+
+button.decrease_quantity {
     cursor: pointer;
-    float: left;
-    margin-left: 22px;
+    float: right;
     width: 21px;
     height: 23px;
     border: 0px;
+    margin-left: 10px;
     background-image: url(/assets/icons/minus.png);
 }
 
-button.increase {
+button.increase_quantity {
     cursor: pointer;
-    float: left;
+    float: right;
     width: 21px;
     height: 23px;
     border: 0px;
     background-image: url(/assets/icons/plus.png);
 }
 
-#fileList td.margins select {
-    display: block;
-    width: 92px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid #D6D3D1;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
+button.decrease_page_count {
+    cursor: pointer;
+    float: right;
+    width: 21px;
+    height: 23px;
+    border: 0px;
+    background-image: url(/assets/icons/minus.png);
 }
+
+button.increase_page_count {
+    cursor: pointer;
+    float: right;
+    width: 21px;
+    height: 23px;
+    border: 0px;
+    background-image: url(/assets/icons/plus.png);
+}
+
+
 
 #fileList td.user_comment textarea {
     width: 140px;
-    height: 70px;
+    height: 64px;
+    resize: none;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -323,6 +530,9 @@ button.increase_large {
 	margin-left: 20px;
 }
 
+#base_correction_documents_quantity button, #coloring_documents_quantity button, #restoration_documents_quantity button {
+	float: left;
+}
 
 button.button_style_long_orange {
     display:block;
@@ -381,6 +591,14 @@ button#scan_base_correction, #scan_coloring, #scan_restoration {
 button#improve_documents_toggle {
 	width: 100%;
 	margin-bottom: 0px;
+}
+
+button.decrease_quantity#base_correction, #coloring, #restoration{
+	float: left;
+}
+
+button.increase_quantity#base_correction, #coloring, #restoration{
+	float: left;
 }
 
 #base_correction_example_area{

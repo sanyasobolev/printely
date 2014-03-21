@@ -1,0 +1,21 @@
+<h2><%= @title %></h2>
+
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id, :class => @order_class} do |order| -%>
+  <h2 class="orange">Адрес и время доставки</h2>
+  
+  <%= render :partial => 'orders/share/delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
+  
+  <div class="total_cost_order">
+    <%= h (number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ")) %>
+  </div>
+  <div class="total_cost_order_label">
+    Итого:
+  </div>
+  <div class="fl_clear"></div>
+
+	<div class="submit_area">
+	 <%= submit_tag 'Сохранить изменения', :class => 'submit'  %>
+	 <%= link_to 'Отмена', admin_orders_path, :class => 'button_style' %>
+	</div>
+<% end -%>
+ 

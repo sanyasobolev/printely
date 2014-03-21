@@ -1,1 +1,1 @@
-$('table#fileList tr#<%= @document.id %> td.document_price .document_price_value').html("<%= j number_to_currency(@document.price, :unit => "коп.", :separator => " руб. ") %>");
+$('table#fileList tr#<%= @document.id %> td.document_cost .document_cost_value').html("<%= j number_to_currency(@document.cost, :unit => "коп.", :separator => " руб. ") %>");

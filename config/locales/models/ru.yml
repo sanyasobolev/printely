@@ -126,15 +126,19 @@ ru:
         manager_comment: "Комментарии менеджера"
         order_type: "Тип заказа"
       document:
+        paper: "Бумага"
+        print_settings: "Настройки печати"
         order_id: "Номер заказа"
-        print_format: "Формат"
+        paper_size: "Формат"
         user_comment: "Комментарии"
-        paper_type: "Бумага"
+        paper_type: "Тип"
         docfile: "Файл"
-        quantity: "Количество отпечатков"
+        quantity: "Копий"
         margins: "Поля"
-        document_price: "Цена"
+        document_cost: "Цена"
         pages_count: "Количество страниц"
+        image_process: "Обработка изображения"
+        print_color: "Цветность" 
       pricelist_fotoprint:
         print_format: "Формат"
         paper_type: "Тип бумаги"
@@ -176,14 +180,23 @@ ru:
         paper_type_id: "Тип бумаги"
         paper_size_id: "Размер бумаги"
         in_stock: "В наличии"
+        price: "Цена"
+        order_type_id: "Тип заказа"
       lists/print_margin:
         margin: "Поля"
-      lists/document_specification:
-        paper_specification_id: "Спецификация бумаги"
-        print_margin_id: "Поля"
         price: "Цена"
-        available: "Доступно к продаже"
-        order_type: "Тип заказа"
+        order_type_id: "Тип заказа"
+      lists/print_color:
+        color: "Цветность"
+        price: "Цена"
+        order_type_id: "Тип заказа"
+      lists/pre_print_operation:
+        operation: "Операция"
+        price: "Цена"
+        order_type_id: "Тип заказа"
+      lists/binding:
+        binding: "Тип переплета"
+        price: "Цена"
       mailing:
         subject: "Тема"
         body: "Письмо"

@@ -3,6 +3,16 @@
 	<%= f.text_field :margin  %>
 </div>
 
+<div class="form_align">
+	<%= f.label :price %>
+	<%= f.text_field :price  %>
+</div>
 
-
+<div class="form_align">
+	<%= f.label :order_type_id %>
+	<%= f.collection_select(:order_type_id,
+                      Lists::OrderType.find(:all),
+                      :id,
+                      :title) %>
+</div>
 

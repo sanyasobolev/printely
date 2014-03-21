@@ -5,24 +5,26 @@
 <% @str_2 = "</div>" %>
 
 <%= @str_1.html_safe %>
-  <%= image_tag("orders/document_add.png", :border => '0') %>
+  <%= image_tag("orders/add_foto_print.png", :border => '0') %>
   <div class="flash_link_title">
     Распечатать фото
   </div>
   <div class="flash_link_synopsis">
-    Создайте новый заказ на печать Ваших фотографий
+    Создайте новый заказ на печать Ваших фотографий.
+    Принимаем файлы: .png, .jpg.
   </div> 
 <%= @str_2.html_safe %>
 
 <% @str_3 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new?order_type=doc_print';\">" %>
 <% @str_4 = "</div>" %>
 <%= @str_3.html_safe %>
-  <%= image_tag("orders/document_add.png", :border => '0') %>
+  <%= image_tag("orders/add_doc_print.png", :border => '0') %>
   <div class="flash_link_title">
     Распечатать документы
   </div>
   <div class="flash_link_synopsis">
-    Создайте новый заказ на печать Ваших документов в формате .doc, .docx или .pdf.
+    Создайте новый заказ на печать Ваших документов. 
+	Принимаем файлы: .doc, .docx, .pdf, .ppt, .pptx.
   </div>
 <%= @str_4.html_safe %>
 
@@ -30,7 +32,7 @@
 <% @str_6 = "</div>" %>
 
 <%= @str_5.html_safe %>
-  <%= image_tag("orders/scan_add.png", :border => '0') %>
+  <%= image_tag("orders/add_scan.png", :border => '0') %>
   <div class="flash_link_title">
     Отсканировать
   </div>

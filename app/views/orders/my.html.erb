@@ -21,8 +21,11 @@
 		      <th><%= Order.human_attribute_name(:manager_comment) %></th>
 		      <th><%= Order.human_attribute_name(:details) %></th>
 		    </tr>
-		    <%= render :partial => 'print_order_for_user', :collection => @foto_print_orders  %>
+		    <%= render :partial => 'orders/foto_print/order_for_user', :collection => @foto_print_orders  %>
 		  </table>
+		  <div class="paginator">
+			<%= paginate @foto_print_orders, :param_name => :foto_print_orders_page %>
+		  </div>
 		<% else %>
 		  <%= render :partial => 'no_orders', :locals => {:href => '/orders/new?order_type=foto_print'}  %>
 		<% end %>
@@ -39,8 +42,11 @@
 		      <th><%= Order.human_attribute_name(:manager_comment) %></th>
 		      <th><%= Order.human_attribute_name(:details) %></th>
 		    </tr>
-		    <%= render :partial => 'print_order_for_user', :collection => @doc_print_orders  %>
+		    <%= render :partial => 'orders/doc_print/order_for_user', :collection => @doc_print_orders  %>
 		  </table>
+		  <div class="paginator">
+			<%= paginate @doc_print_orders, :param_name => :doc_print_orders_page  %>
+		  </div>
 		<% else %>
 		  <%= render :partial => 'no_orders', :locals => {:href => '/orders/new?order_type=doc_print'}  %>
 		<% end %>
@@ -58,8 +64,11 @@
 		      <th><%= Order.human_attribute_name(:manager_comment) %></th>
 		      <th><%= Order.human_attribute_name(:details) %></th>
 		    </tr>
-		    <%= render :partial => 'scan_order_for_user', :collection => @scan_orders  %>
+		    <%= render :partial => 'orders/scan/order_for_user', :collection => @scan_orders  %>
 		  </table>
+		  <div class="paginator">
+			<%= paginate @scan_orders, :param_name => :scan_orders_page %>
+		  </div>
 		<% else %>
 		  <%= render :partial => 'no_orders', :locals => {:href => '/orders/new?order_type=scan'} %>
 		<% end %>

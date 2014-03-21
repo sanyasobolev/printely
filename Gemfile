@@ -14,9 +14,8 @@ gem "ransack" #search engine
 gem 'delayed_job_active_record' #send mailings in background
 gem "daemons" #daemon for delayed job
 gem 'pdf-reader', "~> 1.3.3" #for get count pages in pdf
-gem 'docsplit' #for manipulate office document
-
-
+gem 'ruby-ole' #for information from office document
+gem 'kaminari' #pagination
 
 #for multiple upload files
 gem 'carrierwave'

@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to 'X', lists_pre_print_operation_path(operation), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%=h (operation.operation) %></td>
+  <td><%=h (operation.price) %></td>
+  <td><%=h (operation.order_type.title) %></td>
+  <td><%= link_to 'Редактировать', edit_lists_pre_print_operation_path(operation) %></td>
+</tr>

@@ -8,9 +8,6 @@ class Lists::PaperSpecificationsController < ApplicationController
 
   def update
     @pspec = Lists::PaperSpecification.find(params[:id])
-    @pspec.document_specifications.each do |document_specification|
-      document_specification.update_attribute("available", params[:pspec][:in_stock])
-    end    
     if @pspec.update_attributes(params[:pspec])
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'admin'

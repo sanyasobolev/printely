@@ -6,7 +6,7 @@ class Lists::PaperType < ActiveRecord::Base
   
   has_many :paper_specifications
   has_many :paper_sizes, :through => :paper_specifications
-  has_many :document_specifications, :through => :paper_specifications
+  has_many :documents, :through => :paper_specifications
   
     validates :paper_type, :presence => {
       :message => "Не должно быть пустым."

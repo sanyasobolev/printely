@@ -1,0 +1,18 @@
+<h2><%= @title %></h2>
+<p><%= link_to 'Создать', new_lists_pre_print_operation_path, :class => 'button_style_long' %></p>
+<table class="admin">
+  <tr>
+    <th></th>
+    <th><%= Lists::PrePrintOperation.human_attribute_name("operation") %></th>
+    <th><%= Lists::PrePrintOperation.human_attribute_name("price") %></th>
+    <th><%= Lists::PrePrintOperation.human_attribute_name("order_type_id") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'operation' , :collection => @operations %>
+
+</table>
+<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>
+    
+    
+    

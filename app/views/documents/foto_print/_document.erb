@@ -6,24 +6,51 @@
       </div>
     <%= image_tag document.docfile.thumb.url, :class => 'thumb' %>
     </td>
-    <td class="paper_size">  
-      	<%= select_tag("order[documents_attributes][#{document.id}][paper_size]") %>
+
+    <td class="image_process">
+    	<% Lists::PrePrintOperation.all.each do |t| %>
+    		<div class="pre_print_operation">
+  				<%= check_box_tag("order[documents_attributes][#{document.id}][pre_print_operation_ids][#{t.id}]", t.id, document.pre_print_operations.include?(t)) %> 
+  				<%= t.operation %>
+  			</div>
+		<% end %>
     </td>
-    <td class="paper_type">
-    	<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true}) %>
+
+    <td class="paper">
+	    <div class="paper_size">  
+	      	<%= select_tag("order[documents_attributes][#{document.id}][paper_size]") %>
+	    	<%= i.label :paper_size %>
+	    </div>
+	    <div class="fl_clear"></div>
+	    <div class="paper_type">
+	    	<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true}) %>
+			<%= i.label :paper_type %>
+	    </div>
+	    <div class="fl_clear"></div>
+	    <div class="quantity">	      
+	      <%=  button_tag ' ', :type => 'button', :class => 'increase_quantity' %>
+	      <%= i.text_field (:quantity)%>
+	      <%=  button_tag ' ', :type => 'button', :class => 'decrease_quantity' %>
+	      <%= i.label :quantity %>
+	    </div>
+	    <div class="fl_clear"></div>
     </td>
-    <td class="quantity">
-      <%=  button_tag ' ', :type => 'button', :class => 'decrease' %>
-          <%= i.text_field (:quantity)%>
-      <%=  button_tag ' ', :type => 'button', :class => 'increase' %>
+    <td class="print_settings">
+    	<div class="margins">
+      		<%= select_tag("order[documents_attributes][#{document.id}][margins]", {}, {:disabled => true}) %>
+    		<%= i.label :margins %>
+    	</div> 
+    	<div class="fl_clear"></div> 
+	    <div class="user_comment">
+	      <%= i.text_area :user_comment, :placeholder => Document.human_attribute_name("user_comment") %>
+	    </div>
+	    <div class="fl_clear"></div> 
+	    <div class="print_setting_1">
+
+	    </div>   	
     </td>
-    <td class="margins">
-      <%= select_tag("order[documents_attributes][#{document.id}][margins]", {}, {:disabled => true}) %>
-    </td>
-    <td class="user_comment">
-      <%= i.text_area :user_comment %>
-    </td>
-    <td class="document_price">
+
+    <td class="document_cost">
 		<div class='floatingBarsG'>
 			<div class='blockG' id='rotateG_01'></div>
 			<div class='blockG' id='rotateG_02'></div>
@@ -34,8 +61,8 @@
 			<div class='blockG' id='rotateG_07'></div>
 			<div class='blockG' id='rotateG_08'></div>
 		</div>
-		<div class='document_price_value'>
-      		<%= h (number_to_currency(document.price, :unit => "коп.", :separator => " руб. ")) %>
+		<div class='document_cost_value'>
+      		<%= h (number_to_currency(document.cost, :unit => "коп.", :separator => " руб. ")) %>
     	</div>
     </td>
   <% end %>

@@ -1,0 +1,13 @@
+<h1>Редактирование</h1>
+<%= error_messages_for :pre_print_operation %>
+<%= form_for :operation, :url => lists_pre_print_operation_path(@operation), :html => {:method => :put} do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+    <div class="submit_area">
+      <%= submit_tag 'Сохранить', :class => 'submit' %>
+      <%= link_to 'Назад', lists_pre_print_operations_path, :class => 'button_style' %>
+   </div>
+  
+<% end %>
+
+
+

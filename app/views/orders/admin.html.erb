@@ -33,7 +33,9 @@
   <div class="actions"><%= f.submit "Искать" %></div>
 <% end %>
 
-<br />
+<div class="paginator">
+	<%= paginate @orders %>
+</div>
 
 <table class ="admin">
   <tr>
@@ -42,9 +44,10 @@
     <th><%= sort_link(@search, :delivery_date ,Order.human_attribute_name(:delivery_date)) %></th>
     <th><%= Order.human_attribute_name(:delivery_street) %></th>
     <th><%= Order.human_attribute_name(:order_status_id) %></th>
-    <th><%= Order.human_attribute_name(:cost_min_max_name) %></th>
     <th><%= Order.human_attribute_name(:cost) %></th>
     <th><%= Order.human_attribute_name(:order_type) %></th>
+    <th></th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -54,7 +57,11 @@
   <%= render :partial => 'order', :collection => @orders %>
 
 </table>
-  
+
+<div class="paginator">
+	<%= paginate @orders %>
+</div>
+
 <%= link_to 'Назад', admin_users_path, :class => 'button_style' %>
 
 

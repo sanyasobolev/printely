@@ -1,7 +1,5 @@
 <h1>Редактирование</h1>
 <%= error_messages_for :paper_specification %>
-<p>При изменении параметра "<%= Lists::PaperSpecification.human_attribute_name("in_stock") %>" будет меняться доступность к продаже
-соответствующих готовых документов.</p>
 <%= form_for :pspec, :url => lists_paper_specification_path(@pspec), :html => {:method => :put} do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
     <div class="submit_area">

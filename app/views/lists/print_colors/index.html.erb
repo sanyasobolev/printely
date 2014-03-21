@@ -1,0 +1,18 @@
+<h2><%= @title %></h2>
+<p><%= link_to 'Создать', new_lists_print_color_path, :class => 'button_style_long' %></p>
+<table class="admin">
+  <tr>
+    <th></th>
+    <th><%= Lists::PrintColor.human_attribute_name("color") %></th>
+    <th><%= Lists::PrintColor.human_attribute_name("price") %></th>
+    <th><%= Lists::PrintColor.human_attribute_name("order_type_id") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'color' , :collection => @colors %>
+
+</table>
+<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>
+    
+    
+    

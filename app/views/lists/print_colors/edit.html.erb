@@ -1,0 +1,13 @@
+<h1>Редактирование</h1>
+<%= error_messages_for :print_color %>
+<%= form_for :color, :url => lists_print_color_path(@color), :html => {:method => :put} do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+    <div class="submit_area">
+      <%= submit_tag 'Сохранить', :class => 'submit' %>
+      <%= link_to 'Назад', lists_print_colors_path, :class => 'button_style' %>
+   </div>
+  
+<% end %>
+
+
+

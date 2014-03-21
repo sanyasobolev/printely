@@ -58,21 +58,24 @@ class DocumentUploader < CarrierWave::Uploader::Base
 #  end
 
   version :thumb, :if => :image? do
-    process :resize_to_limit => [100, 100]
+    process :resize_to_limit => [135, 135]
     def store_dir
       "uploads/order_#{model.order.id}/thumbs" unless model.order.nil?
     end
   end
 
   def filename
-    if model.document_specification_id
-      document_specification = Lists::DocumentSpecification.find_by_id(model.document_specification_id)
-      margins = Lists::PrintMargin.find_by_id(document_specification.print_margin_id).margin
-      paper_type = Lists::PaperType.find_by_id(Lists::PaperSpecification.find_by_id(document_specification.paper_specification_id).paper_type_id).paper_type
-      paper_size = Lists::PaperSize.find_by_id(Lists::PaperSpecification.find_by_id(document_specification.paper_specification_id).paper_size_id).size
-      "#{secure_token}_PP_#{paper_size.parameterize}_#{paper_type.parameterize}_#{model.quantity}_#{margins.parameterize}.#{file.extension}" if original_filename.present?
+    if model.paper_specification_id
+      paper_specification = Lists::PaperSpecification.find_by_id(model.paper_specification_id)
+      margins = model.print_margin.nil? ? '' : ("_#{Lists::PrintMargin.find_by_id(model.print_margin_id).margin}").parameterize
+      paper_type = Lists::PaperType.find_by_id(paper_specification.paper_type_id)
+      paper_grade = paper_type.paper_grade.grade
+      paper_size = Lists::PaperSize.find_by_id(paper_specification.paper_size_id).size
+      print_color = model.print_color.nil? ? '' : ("_#{Lists::PrintColor.find_by_id(model.print_color_id).color}").parameterize
+      img_proc = model.pre_print_operations.size == 0 ? '_' : '_img_proc_yes_' 
+      "#{secure_token}_PP#{img_proc}#{paper_size.parameterize}_#{paper_type.paper_type.parameterize}_#{paper_grade.parameterize}_#{model.quantity}#{margins}#{print_color}.#{file.extension}" if original_filename.present?
     else
-      "#{secure_token}_PP_not_set_spesification.#{file.extension}" if original_filename.present?
+      "#{secure_token}_PP_not_set_specification.#{file.extension}" if original_filename.present?
     end
   end
 

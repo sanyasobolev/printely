@@ -1,0 +1,21 @@
+<h2><%= @title %></h2>
+
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :class => "admin_scan_order", :id => @order.id } do |order| -%>
+
+  <h2 class="orange">Когда и куда приехать, чтобы провести сканирование?</h2>
+	
+	<%= render :partial => 'orders/share/delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
+    
+  <div class="total_cost_order">  </div>
+  <div class="total_cost_order_label">  </div>
+  
+  <div class="fl_clear"></div>
+
+	<div class="submit_area">
+	 <%= submit_tag 'Сохранить изменения', :class => 'submit'  %>
+	 <%= link_to 'Отмена', admin_orders_path, :class => 'button_style' %>
+	</div>
+
+<% end -%>
+
+ 

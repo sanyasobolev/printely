@@ -28,7 +28,6 @@
 	<div class="first_level">
 	<%= link_to 'Заказы',  admin_orders_path %><br/>
 	<%= link_to 'Спецификации бумаг',  admin_lists_paper_specifications_path %><br/>
-	<%= link_to 'Спецификации готовых документов',  admin_lists_document_specifications_path %><br/>
 	</div>
 	<div class="zero_level">
 		<p>Справочники</p>
@@ -38,7 +37,10 @@
 		<%= link_to 'Классы бумаги',  lists_paper_grades_path %> <br />
 		<%= link_to 'Типы бумаги',  lists_paper_types_path %> <br />
 		<%= link_to 'Размеры бумаги',  lists_paper_sizes_path %><br />
-		<%= link_to 'Поля и отступы',  lists_print_margins_path %>
+		<%= link_to 'Поля и отступы',  lists_print_margins_path %><br />
+		<%= link_to 'Цветность печати',  lists_print_colors_path %><br />
+		<%= link_to 'Допечатные операции',  lists_pre_print_operations_path %><br />
+		<%= link_to 'Переплет',  lists_bindings_path %>
 		<p> Прайсы </p>
 	</div>
 	<div class="second_level">

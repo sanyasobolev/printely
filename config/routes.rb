@@ -23,6 +23,7 @@ Spsite::Application.routes.draw do
   match 'document/get_paper_sizes' => 'documents#get_paper_sizes'
   match 'document/get_paper_types' => 'documents#get_paper_types'
   match 'document/get_print_margins' => 'documents#get_print_margins'
+  match 'document/get_print_colors' => 'documents#get_print_colors'
   
   resources :scans
   match 'scan/ajaxupdate' => 'scans#ajaxupdate'
@@ -37,6 +38,9 @@ Spsite::Application.routes.draw do
      get 'new_print', :on => :collection
      get 'new_scan', :on => :collection
      get 'get_materials', :on => :member
+     get 'edit_files', :on => :member
+     get 'edit_delivery', :on => :member
+     get 'edit_status', :on => :member
   end
   
   match 'order/ajaxupdate' => 'orders#ajaxupdate'
@@ -110,6 +114,9 @@ Spsite::Application.routes.draw do
       get 'admin', :on => :collection
     end
     resources :print_margins
+    resources :print_colors
+    resources :pre_print_operations
+    resources :bindings
   end
   
 

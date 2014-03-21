@@ -1,13 +1,15 @@
 	  <%#*перечень всех файлов с параметрами печати%>
 	  <table id="fileList">
-	    <tr id="fileList_header"
-	      <% if order.documents.count > 0 %>
-	        >
-	      <% else %>
-	        style="display: none;">
-	      <% end %>
-	    <%= render :partial=>'orders/foto_print/header_table_with_documents' %>
-	    </tr>
+	  	<thead>
+		    <tr id="fileList_header"
+		      <% if order.documents.count > 0 %>
+		        >
+		      <% else %>
+		        style="display: none;">
+		      <% end %>
+		    <%= render :partial=>'orders/foto_print/header_table_with_documents' %>
+		    </tr>
+	    </thead>
 	    <%= render :partial => 'documents/foto_print/document', :collection => order.documents %>
 	  </table>
 	
