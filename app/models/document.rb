@@ -39,4 +39,23 @@ class Document < ActiveRecord::Base
     end
   end
 
+  def get_print_margins
+    if self.document_specification.nil?
+      return false
+    else
+      dspec = self.document_specification
+      print_margins = dspec.print_margin.margin
+      return print_margins
+    end
+  end
+  
+  def get_paper_specification
+    if self.document_specification.nil?
+      return false
+    else
+      pspec = self.document_specification.paper_specification
+      return pspec
+    end
+  end
+
 end
