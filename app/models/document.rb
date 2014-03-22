@@ -2,7 +2,6 @@
 class Document < ActiveRecord::Base
 
   belongs_to :order
-  belongs_to :document_specification, :class_name => "Lists::DocumentSpecification"
   belongs_to :paper_specification, :class_name => "Lists::PaperSpecification"
   belongs_to :print_margin, :class_name => "Lists::PrintMargin"
   belongs_to :print_color, :class_name => "Lists::PrintColor"
@@ -37,25 +36,6 @@ class Document < ActiveRecord::Base
     else
       paper_size = self.paper_specification.paper_size_with_iso
       return paper_size      
-    end
-  end
-
-  def get_print_margins
-    if self.document_specification.nil?
-      return false
-    else
-      dspec = self.document_specification
-      print_margins = dspec.print_margin
-      return print_margins
-    end
-  end
-  
-  def get_paper_specification
-    if self.document_specification.nil?
-      return false
-    else
-      pspec = self.document_specification.paper_specification
-      return pspec
     end
   end
 
