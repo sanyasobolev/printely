@@ -2,6 +2,7 @@
 class Document < ActiveRecord::Base
 
   belongs_to :order
+  belongs_to :document_specification, :class_name => "Lists::DocumentSpecification"
   belongs_to :paper_specification, :class_name => "Lists::PaperSpecification"
   belongs_to :print_margin, :class_name => "Lists::PrintMargin"
   belongs_to :print_color, :class_name => "Lists::PrintColor"
