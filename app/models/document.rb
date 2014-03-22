@@ -45,7 +45,7 @@ class Document < ActiveRecord::Base
       return false
     else
       dspec = self.document_specification
-      print_margins = dspec.print_margin.margin
+      print_margins = dspec.print_margin
       return print_margins
     end
   end
