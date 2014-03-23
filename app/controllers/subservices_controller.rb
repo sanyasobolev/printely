@@ -35,7 +35,7 @@ class SubservicesController < ApplicationController
         @header_name = @partial_name + '_header'
 
         #convert string to model and get pricelist lines
-        @lines_of_pricelist = @pricelist_for_service_model_name.constantize.pricelist
+        @lines_of_pricelist = @pricelist_for_service_model_name.constantize.pricelist(@service.order_type)
       else
         #get table name
         @pricelist_for_service_table_name = @pricelist_for_service_model_name.constantize.table_name  

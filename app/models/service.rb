@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Service < ActiveRecord::Base
 
-  attr_accessible :title, :synopsis, :service_header_icon, :service_id, :pricelist
+  attr_accessible :title, :synopsis, :service_header_icon, :service_id, :pricelist, :order_type_id
 
   #paperclipe
   has_attached_file :service_header_icon,
@@ -10,6 +10,7 @@ class Service < ActiveRecord::Base
 
   has_many :subservices, :dependent => :destroy
   has_one :page
+  belongs_to :order_type, :class_name => "Lists::OrderType"
 
   before_create :create_permalink
   before_save :update_permalink

@@ -100,12 +100,14 @@ ru:
         service_header_icon: "Иконка"
         permalink: "Название в URL"
         pricelist: "Прайс"
+        order_type_id: "Тип заказа"
       subservice:
         title: "Название"
         synopsis: "Краткий обзор"
         subservice_header_icon: "Иконка"
         permalink: "Название в URL"
         service_id: "Услуга"
+        order_type_id: "Тип заказа"
       order:
         id: "№"
         user_id: "ИД пользователя"

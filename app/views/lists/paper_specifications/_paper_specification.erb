@@ -1,8 +1,8 @@
-<% if paper_specification.in_stock == true %>
+
 	<tr>
 	  <td><%= h (paper_specification.paper_size_with_iso) %></td>
 	  <td><%= h (paper_specification.paper_type_with_grade) %></td>
 	  <td><%= h (number_to_currency(paper_specification.price, :unit => "руб.", delimiter: ".", precision: 2)) %></td>
 	</tr>
-<% end %>
+
 
