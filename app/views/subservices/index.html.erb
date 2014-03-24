@@ -7,10 +7,15 @@
 <% if @pricelist_for_service_model_name != nil %>
 	<% if @pricelist_for_service_model_name =~ /\A(Lists)/ %>
 		<div class=grey_color>
-			<table class="pricelist_for_user">
-		  		<%= render :partial => "lists/#{@subdirectory}/#{@header_name}" %>
-		  		<%= render :partial => "lists/#{@subdirectory}/#{@partial_name}", :collection => @lines_of_pricelist %>
-			</table>
+			<% @lines_of_print_color.each do |print_color| %>
+				<h2><%= print_color.color %></h2>
+					<table class="pricelist_for_user">
+						<%= render :partial => "lists/#{@subdirectory}/#{@header_name}" %>
+						<% @lines_of_pricelist.each do |line_of_pricelist| %>
+						  	<%= render :partial => "lists/#{@subdirectory}/#{@partial_name}", :locals =>{:paper_specification => line_of_pricelist, :print_color => print_color}  %>
+						<% end %>
+					</table>
+			<% end %>
 		</div>		
 	<% else %>
 		<div class=grey_color>

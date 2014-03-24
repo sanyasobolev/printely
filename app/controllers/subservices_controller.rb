@@ -36,6 +36,7 @@ class SubservicesController < ApplicationController
 
         #convert string to model and get pricelist lines
         @lines_of_pricelist = @pricelist_for_service_model_name.constantize.pricelist(@service.order_type)
+        @lines_of_print_color = Lists::PrintColor.where(:order_type_id => @service.order_type)
       else
         #get table name
         @pricelist_for_service_table_name = @pricelist_for_service_model_name.constantize.table_name  
