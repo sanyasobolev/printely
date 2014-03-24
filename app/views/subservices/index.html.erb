@@ -6,9 +6,9 @@
 
 <% if @pricelist_for_service_model_name != nil %>
 	<% if @pricelist_for_service_model_name =~ /\A(Lists)/ %>
-		<div class=grey_color>
+		<div class="grey_color">
 			<% @lines_of_print_color.each do |print_color| %>
-				<h2><%= print_color.color %></h2>
+				<h2 class="dark_grey_color"><%= print_color.color %></h2>
 					<table class="pricelist_for_user">
 						<%= render :partial => "lists/#{@subdirectory}/#{@header_name}" %>
 						<% @lines_of_pricelist.each do |line_of_pricelist| %>
