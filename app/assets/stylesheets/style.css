@@ -913,6 +913,20 @@ a.boardlink:hover, a.boardlink:active {
     background-color: red;
 }
 
+div.page_not_found {
+	display:block;
+	width: 300px;
+	position:relative;
+	top: 100px;
+	left:550px;
+}
+
+img.error_image {
+	position:absolute;
+	z-index:-1;	
+	width: 900px;
+}
+
 /*сообщение о неправильно выбранном порядковом номере раздела*/
 #number_busy {
     font-style: italic;

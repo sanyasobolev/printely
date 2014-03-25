@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   private
   def render_error(status, exception)
     respond_to do |format|
-      format.html { render template: "share/error_#{status}.html.erb", layout: 'layouts/application', status: status }
+      format.html { render template: "errors/error_#{status}", layout: 'layouts/application', status: status }
       format.all { render nothing: true, status: status }
     end
   end

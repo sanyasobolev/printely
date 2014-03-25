@@ -125,7 +125,11 @@ Spsite::Application.routes.draw do
     resources :pictures, :only => [:index, :create, :destroy]
     resources :attachment_files, :only => [:index, :create, :destroy]
   end
-  
+
+  unless Rails.application.config.consider_all_requests_local
+    match '*not_found', to: 'errors#error_404'
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
