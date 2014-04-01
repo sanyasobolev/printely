@@ -19,7 +19,7 @@ class Lists::PaperSpecification < ActiveRecord::Base
     }
 
     default_scope joins(:paper_size).order('lists_paper_sizes.size').readonly(false)
-    scope :pricelist, lambda { |order_type| where("order_type_id=#{order_type.id} OR order_type_id=1").where(:in_stock => true ).joins(:paper_size).order('lists_paper_sizes.size') }
+    scope :pricelist, lambda { |order_type| where("order_type_id=#{order_type.id} OR order_type_id=1").where(:in_stock => true ).joins(:paper_size).order('lists_paper_sizes.size').order('lists_paper_specifications.price') }
 
     def full_paper_format
       if self.in_stock == true

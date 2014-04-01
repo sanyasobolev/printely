@@ -9,7 +9,9 @@ class SubservicesController < ApplicationController
     if params[:service_id]
       @service = Service.find_by_permalink(params[:service_id])
       @title = @service.title
-      @page_about_service = Page.find_by_service_id(@service.id.to_i)
+      @page_about_service = Page.find_by_service_id(@service.id.to_i,
+                                                    :include => :user,
+                                                    :conditions => "published=true" )
       
       @pricelist_for_service_model_name = @service.pricelist.to_s #model name
       
@@ -60,7 +62,9 @@ class SubservicesController < ApplicationController
     @service = Service.find_by_permalink(params[:service_id])
     @subservice = Subservice.find_by_permalink(params[:id])
     @title = @subservice.title
-    @page_about_subservice = Page.find_by_subservice_id(@subservice.id.to_i)
+    @page_about_subservice = Page.find_by_subservice_id(@subservice.id.to_i,
+                                                       :include => :user,
+                                                       :conditions => "published=true" )
     respond_to do |wants|
       wants.html
       wants.xml { render :xml => @subservice.to_xml }
