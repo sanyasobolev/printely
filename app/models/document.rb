@@ -20,6 +20,15 @@ class Document < ActiveRecord::Base
       return paper_type
     end
   end
+
+  def get_paper_type_with_grade
+    if self.paper_specification.nil?
+      return false
+    else
+      paper_type = self.paper_specification.paper_type_with_grade
+      return paper_type
+    end
+  end
   
   def get_paper_size
     if self.paper_specification.nil?

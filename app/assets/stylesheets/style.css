@@ -1004,33 +1004,53 @@ nav.pagination .disabled {
 /*оформление статей и новостей-----------------------------------------------*/
 .article {
     position: relative;
-    margin: 10px;
-    background-color: orange;
+    margin: 20px 10px;
     height: 150px;
+    width: 690px;
+}
+
+.article_fill {
+	display:block;
+	height:110px;
+	width:500px;
+	position: absolute;
+	margin-left: 10px;
+	margin-top: 10px;
+	background-color:black;
+	opacity:0.6;
+	filter:Alpha(opacity=60);
+
 }
 
 .article_title {
     position: relative;
-    top: 0px;
-    left: 120px;
+    top: 15px;
+    left: 25px;
+    color: white;
     font-size: 1.5em;
-    width: 500px;
+    width: 450px;
 }
 
 .article_synopsis {
     position: relative;
-    left: 120px;
-    width: 500px;
-}
-
-.article_goto {
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
+    left: 25px;
+    width: 450px;
+    color: white;
 }
 
 .article_img {
     position: absolute;
+}
+
+.article_link {
+    position: absolute;
+    display:block;
+    height: 150px;
+    width: 690px;
+    top:0px;
+    left:0px;
+	opacity:0;
+	filter:Alpha(opacity=0);
 }
 
 

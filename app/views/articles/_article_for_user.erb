@@ -2,13 +2,12 @@
   <div class="article_img">
     <%= link_to image_tag(article_for_user.header_image.url, :border => "0"), article_path(article_for_user) %>
   </div>
+  <div class="article_fill"></div>
   <div class="article_title">
     <%= raw(article_for_user.title) %>
   </div>
   <div class="article_synopsis">
     <%= raw(article_for_user.synopsis) %>
   </div>
-  <div class="article_goto">
-      <%= link_to image_tag("icons/goto_link.png", :border => "0"), article_path(article_for_user) %>
-  </div>
+  <%= link_to '#', article_path(article_for_user), :class => "article_link" %>
 </div>

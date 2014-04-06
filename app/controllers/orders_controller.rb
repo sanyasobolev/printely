@@ -297,7 +297,7 @@ class OrdersController < ApplicationController
            @documents_quantity = @documents_quantity + document.page_count.to_i*document.quantity.to_i
          end
          unless @documents_quantity == 0
-           @lines.merge!(pspec.full_paper_format_wo_stock => @documents_quantity)
+           @lines.merge!(pspec.full_paper_format => @documents_quantity)
          end
        end 
      end

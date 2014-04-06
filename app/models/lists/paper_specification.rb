@@ -22,15 +22,6 @@ class Lists::PaperSpecification < ActiveRecord::Base
     scope :pricelist, lambda { |order_type| where("order_type_id=#{order_type.id} OR order_type_id=1").where(:in_stock => true ).joins(:paper_size).order('lists_paper_sizes.size').order('lists_paper_specifications.price') }
 
     def full_paper_format
-      if self.in_stock == true
-        in_stock = 'в наличии'
-      else
-        in_stock = 'нет бумаги'
-      end
-      "#{self.paper_size.size}, #{self.paper_type.paper_type}, #{in_stock}"
-    end
-    
-    def full_paper_format_wo_stock
       "#{self.paper_size.size}, #{self.paper_type.paper_type}"
     end
     
