@@ -1,12 +1,13 @@
 <%= error_messages_for 'right' %>
 <h1>Создание права</h1>
-
-<%= form_for :right, :url => rights_path do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
-  
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-    </div>
-<% end %>
+<div class="form_shape">
+	<%= form_for :right, :url => rights_path, :html => {:id => 'new_right'} do |f| %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+	  
+	    <div class="submit_area">
+	      <%= submit_tag 'Сохранить', :class => 'submit' %>
+	    </div>
+	<% end %>
+</div>
 
  

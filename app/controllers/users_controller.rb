@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   layout 'signin', :only => [:new, :create, :forgot_password, :edit, :edit_profile, :edit_password, :update_password]
   
   skip_before_filter :login_required, :authorized?,
-                     :only => [:new, :create, :forgot_password, :reset_password]
+                     :only => [:new, :create, :forgot_password, :reset_password, :check_email, :check_phone, :check_pass]
+
+
 
   def admin #страница администратора
 
@@ -145,6 +147,34 @@ class UsersController < ApplicationController
     end
   end
   
+  def check_email
+    user = User.find_by_email(params[:user][:email])
+    if user && user != current_user
+      msg = "false"
+    else
+      msg = "true"
+    end
+    render :text => msg
+  end
+
+  def check_phone
+    user = User.find_by_phone(params[:user][:phone])
+    if user && user != current_user
+      msg = "false"
+    else
+      msg = "true"
+    end
+    render :text => msg
+  end
+  
+  def check_pass
+    if current_user && current_user.correct_password?(params)
+      msg = "true"
+    else
+      msg = "false"
+    end
+    render :text => msg
+  end
 
 private
 

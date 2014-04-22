@@ -16,5 +16,9 @@ class Lists::PaperType < ActiveRecord::Base
     :scope => :paper_grade_id,
     :message => "Такое сочетание тип/класс уже есть."
     }
+    
+  def paper_type_with_grade
+    "#{self.paper_type} (#{self.paper_grade.grade})"
+  end
   
 end

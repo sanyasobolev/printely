@@ -1,7 +1,7 @@
 <%= error_messages_for :subservice %>
 <h2>Создание подуслуги</h2>
 <div class="form_shape">
-  <%= form_for :subservice, :url => subservices_path, :html => { :method => :post } do |f| -%>
+  <%= form_for :subservice, :url => subservices_path, :html => { :method => :post, :id => 'new_subservice'} do |f| -%>
 
     <%= render :partial => 'form', :locals => {:f => f} %>
 

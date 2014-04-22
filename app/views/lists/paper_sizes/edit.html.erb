@@ -1,6 +1,6 @@
 <h1>Редактирование</h1>
-<%= error_messages_for :paper_size %>
 <%= form_for :size, :url => lists_paper_size_path(@size), :html => {:method => :put} do |f| %>
+  <%= f.error_messages %>
   <%= render :partial => 'form', :locals => {:f => f} %>
     <div class="submit_area">
       <%= submit_tag 'Сохранить', :class => 'submit' %>

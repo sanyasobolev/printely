@@ -209,7 +209,7 @@ ru:
 
   # In rails 3 errors is top-level namespace
   errors:
-    format: "%{message}"
+    format: "%{attribute}: %{message}"
 
     messages:
       inclusion: "имеет непредусмотренное значение"

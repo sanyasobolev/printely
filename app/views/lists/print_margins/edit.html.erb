@@ -1,7 +1,7 @@
 <h1>Редактирование</h1>
-<%= error_messages_for :print_margin %>
 <%= form_for :margin, :url => lists_print_margin_path(@margin), :html => {:method => :put} do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
+	<%= f.error_messages %>
+  	<%= render :partial => 'form', :locals => {:f => f} %>
     <div class="submit_area">
       <%= submit_tag 'Сохранить', :class => 'submit' %>
       <%= link_to 'Назад', lists_print_margins_path, :class => 'button_style' %>

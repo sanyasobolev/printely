@@ -1,13 +1,14 @@
 <h1>Создание</h1>
-<%= error_messages_for :paper_specification %>
-<%= form_for :pspec, :url => lists_paper_specifications_path do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
-  
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-      <%= link_to 'Назад', admin_lists_paper_specifications_path, :class => 'button_style' %>
-    </div>
-
-<% end %>
-
+<div class="form_shape">
+	<%= form_for :pspec, :url => lists_paper_specifications_path, :html => {:id => 'new_paper_specification'} do |f| %>
+	  <%= f.error_messages %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+	  
+	    <div class="submit_area">
+	      <%= submit_tag 'Сохранить', :class => 'submit' %>
+	      <%= link_to 'Назад', admin_lists_paper_specifications_path, :class => 'button_style' %>
+	    </div>
+	
+	<% end %>
+</div>
  

@@ -14,6 +14,9 @@ Spsite::Application.routes.draw do
       get 'edit_password', :on => :member
       put 'update_profile', :on => :member
       put 'update_password', :on => :member
+      get 'check_email', :on => :collection
+      get 'check_phone', :on => :collection
+      get 'check_pass', :on => :collection
   end
   resources :rights
   resources :roles

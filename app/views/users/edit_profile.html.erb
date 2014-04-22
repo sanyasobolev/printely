@@ -1,7 +1,7 @@
 <%= error_messages_for :user %>
 <h1>Изменение Вашего профиля</h1>
 <div class="form_shape">
-  <%= form_for @user, :validate => true, :url => update_profile_user_path(@user), :html => {:method => :put} do |f| %>
+  <%= form_for @user, :url => update_profile_user_path(@user), :html => {:method => :put, :id => 'edit_profile'} do |f| %>
 
     <%= hidden_field_tag "attribute", "email", :id => nil %>
     <%= render :partial => 'profile', :locals => {:form => f} %>

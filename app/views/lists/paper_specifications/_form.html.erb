@@ -3,7 +3,7 @@
 	<%= f.collection_select(:paper_type_id,
                       Lists::PaperType.find(:all),
                       :id,
-                      :paper_type) %>
+                      :paper_type_with_grade) %>
 </div>
 
 <div class="form_align">
@@ -16,11 +16,11 @@
 
 <div class="form_align">
 	<%= f.label :price %>
-  	<%= f.text_field :price %>
+  	<%= f.text_field :price, :class => 'req_input'  %>
 </div>
 
 <div class="form_align">
-	<%= f.label :in_stock %>
+	<%= f.label :in_stock%>
   	<%= f.check_box :in_stock %>
 </div>
 

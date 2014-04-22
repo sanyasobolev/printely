@@ -1,6 +1,6 @@
 <h1>Редактирование</h1>
-<%= error_messages_for :print_color %>
 <%= form_for :color, :url => lists_print_color_path(@color), :html => {:method => :put} do |f| %>
+  <%= f.error_messages %>
   <%= render :partial => 'form', :locals => {:f => f} %>
     <div class="submit_area">
       <%= submit_tag 'Сохранить', :class => 'submit' %>

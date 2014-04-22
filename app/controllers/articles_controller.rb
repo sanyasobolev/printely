@@ -1,7 +1,7 @@
 # encoding: utf-8
 class ArticlesController < ApplicationController
   layout 'articles', :only => [:index]
-  layout 'wo_categories', :only => [:show]
+  layout 'wo_categories', :only => [:show, :admin, :edit, :new]
   skip_before_filter :login_required, :authorized?,
                      :only => [:index, :show]
 

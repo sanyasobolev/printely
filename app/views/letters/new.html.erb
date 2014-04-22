@@ -1,7 +1,7 @@
 <%= error_messages_for :letter %>
 <p> Если Вы хотите на нас пожаловаться или хотите нас похвалить, пожалуйста, напишите нам письмо. Нам важно Ваше мнение о нас. </p>
 <div class="form_shape">
-  <%= form_for :letter, :url => letters_path, :html => { :method => :post } do |f| -%>
+  <%= form_for :letter, :url => letters_path, :html => { :method => :post, :id => 'new_letter' } do |f| -%>
 
     <div class="form_align">
       <%= f.label(:name) %>
@@ -12,16 +12,8 @@
 
 
     <div class="form_align">
-        <%= f.label(:phone) %>
-        <%= f.text_field :phone,
-                         :maxlength =>Letter::PHONE_MAX_LENGTH,
-                         :class => 'req_input' %>
-    </div>
-
-    <div class="form_align">
       <%= f.label(:email) %>
       <%= f.text_field :email,
-                       :maxlength =>Letter::EMAIL_MAX_LENGTH,
                        :class => 'req_input' %>
     </div>
 

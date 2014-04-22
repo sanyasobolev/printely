@@ -1,13 +1,14 @@
 <h1>Создание</h1>
-<%= error_messages_for :paper_grade %>
-<%= form_for :grade, :url => lists_paper_grades_path do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
-  
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-      <%= link_to 'Назад', lists_paper_grades_path, :class => 'button_style' %>
-    </div>
-
-<% end %>
-
+<div class="form_shape">
+	<%= form_for :grade, :url => lists_paper_grades_path do |f| %>
+	  <%= f.error_messages %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+	  
+	    <div class="submit_area">
+	      <%= submit_tag 'Сохранить', :class => 'submit' %>
+	      <%= link_to 'Назад', lists_paper_grades_path, :class => 'button_style' %>
+	    </div>
+	
+	<% end %>
+</div>
  

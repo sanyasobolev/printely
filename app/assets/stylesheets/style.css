@@ -1227,6 +1227,25 @@ a.site_map_link:hover {
     position: relative;
 }
 
+.agreement {
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+}
+
+.agreement input {
+	width: 20px;
+	float: left;
+	margin-left: 230px;
+}
+
+.agreement label {
+    float: left;
+    display: block;
+    text-align: justify;
+    width: 440px;
+}
+
 .form_align {
     margin-top: 20px;
     position: relative;
@@ -1333,57 +1352,66 @@ a.site_map_link:hover {
 	bottom: 10px;
 }
 
-/*client side validation*/
-.field_with_errors {
-  display: inline;
-}
-
-.field_with_errors .message {
-	position: absolute;
-	display: table-cell;
-	vertical-align: middle;
-	
-  	color: red;
-	
-	right: -330px;
-	bottom: -1px;
-	width: 300px; 
-	height: 30px; 
-	
-	text-align: left;
-}
 
 /*jquery validate*/
+
 label.error {
-	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 1em;
 	position: absolute;
 	display: table-cell;
+	text-align:left;
   	color: red;
-	width: 10px; 
-	height: 20px; 
-	right: 135px;
-	top: -3px;
-
+	width: 210px; 
+	height: 30px; 
+	right: -240px;
+	top: -3px;	
 }
+
 table.order_delivery td.delivery_street label.error {
 	right: 660px;
 	top: 32px;
+	font-size: 1.5em;
+	width: 10px; 
+	height: 20px; 
+	text-align:center;
 }
 
 table.order_delivery td.delivery_address label.error {
 	right: 400px;
 	top: 32px;
+	font-size: 1.5em;
+	width: 10px; 
+	height: 20px; 
+	text-align:center;
 }
 
 label.error[for=quantity_documents_for_validate] {
-	position:absolute;
-	left: 230px;
-	top: 210px;
-	width: 300px;
+	font-size: 1.5em;
+	width: 200px; 
+	height: 40px; 
+    right: 570px;
+    top: 208px;
 }
 
+label.error[for=datepicker] {
+	font-size: 1.5em;
+	left: 755px;
+	top: -3px;
+	height: 20px; 
+	width: 50px;
+}
 
+form#new_user div.agreement label.error {
+	font-size: 1em;
+	position: absolute;
+	display: table-cell;
+	text-align:left;
+  	color: red;
+	width: 210px; 
+	height: 30px; 
+	right: -220px;
+	top: 50px;	
+}
 
 
 /*------------------------------------------------------------------*/

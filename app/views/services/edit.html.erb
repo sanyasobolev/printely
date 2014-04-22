@@ -1,7 +1,7 @@
 <%= error_messages_for :service %>
 <h2>Редактирование услуги</h2>
 <div class="form_shape">
-  <%= form_for :service, :url => service_path(@service), :html => { :method => :put } do |f| -%>
+  <%= form_for :service, :url => service_path(@service), :html => { :method => :put, :id => 'edit_service'} do |f| -%>
 
     <%= render :partial => 'form', :locals => {:f => f} %>
 

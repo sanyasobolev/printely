@@ -1,7 +1,7 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
   
-  attr_accessible :id, :first_name, :second_name, :email, :phone, :password, :password_confirmation, :role_id, :current_password
+  attr_accessible :id, :first_name, :second_name, :email, :phone, :password, :password_confirmation, :role_id, :current_password, :agreement
 
   require 'digest/sha1'
   
@@ -32,8 +32,9 @@ class User < ActiveRecord::Base
   EMAIL_SIZE = 30
   PHONE_SIZE = 30
   PASSWORD_SIZE = 30
-
-# проверка имени и фамилии--------------------------------------------------------------------
+  
+#дублирующая проверка на сервере
+#проверка имени и фамилии--------------------------------------------------------------------
     validates :first_name, :second_name, :presence => {
       :message => "Не должно быть пустым."
     }
@@ -42,12 +43,12 @@ class User < ActiveRecord::Base
       :within => FIRST_AND_SECOND_NAME_RANGE,
       :message => "Слишком короткое имя."
       }
-
+ 
     validates :second_name, :length => {
       :within => FIRST_AND_SECOND_NAME_RANGE,
       :message => "Слишком короткая фамилия."
     }
-
+ 
     validates :first_name, :second_name, :format => {
       :with => /^[#{RUSSIAN_ABC}A-Z\-}]*$/i,
       :message => "Можно только буквы и тире."
@@ -87,7 +88,7 @@ class User < ActiveRecord::Base
     }
     
     validates :password, :format => {
-      :with => /[A-Za-z0-9]/,
+      :with => /^[a-zA-Z0-9]+$/,
       :message => "Можно только цифры и латинские буквы."
     }
     
@@ -99,9 +100,15 @@ class User < ActiveRecord::Base
       :message => "Не должно быть пустым."
     },
     :on => :update
+  
+  #validate accept agreement
+    validates :agreement, :acceptance => {
+      :message => "Примите соглашение о конфидециальности."
+    }
+
 
   #создание виртуальных атрибутов current_password и password
-  attr_accessor :current_password
+  attr_accessor :current_password, :agreement
   #attr_accessor :password_confirmation - не нужен, т.к. validates_confirmation_of автоматически проверяет password_confirmation
 	#эквивалент attr_accessor :password
 	#---------------------------------------------------//

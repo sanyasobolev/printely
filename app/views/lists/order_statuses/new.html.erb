@@ -1,14 +1,14 @@
 <h1>Создание статуса</h1>
-<%= error_messages_for :order_status %>
-
-<%= form_for :status, :url => lists_order_statuses_path do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
-  
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-      <%= link_to 'Назад', lists_order_statuses_path, :class => 'button_style' %>
-    </div>
-
-<% end %>
-
+<div class="form_shape">
+	<%= form_for :status, :url => lists_order_statuses_path, :html => {:id => 'new_order_status'} do |f| %>
+	  <%= f.error_messages %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+	  
+	    <div class="submit_area">
+	      <%= submit_tag 'Сохранить', :class => 'submit' %>
+	      <%= link_to 'Назад', lists_order_statuses_path, :class => 'button_style' %>
+	    </div>
+	
+	<% end %>
+</div>
  

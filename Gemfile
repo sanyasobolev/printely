@@ -9,7 +9,6 @@ gem "ckeditor", "4.0.4" #WYSIWYG редактор
 gem "paperclip", "3.1.4" #загрузка файлов на сервер
 gem "cocaine", "0.3.2" #for piperclip
 gem 'gon', '3.0.5' #for pass variables to JS
-gem 'client_side_validations' #validate inline
 gem "ransack" #search engine
 gem 'delayed_job_active_record' #send mailings in background
 gem "daemons" #daemon for delayed job

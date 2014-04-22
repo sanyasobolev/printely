@@ -1,6 +1,7 @@
 <h1>Создание</h1>
-<%= error_messages_for :paper_size %>
+
 <%= form_for :size, :url => lists_paper_sizes_path do |f| %>
+  <%= f.error_messages %>
   <%= render :partial => 'form', :locals => {:f => f} %>
   
     <div class="submit_area">

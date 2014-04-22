@@ -1,7 +1,7 @@
 <tr>
   <td><%= link_to 'X', lists_paper_specification_path(paper_specification_for_admin), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
   <td><%= h (paper_specification_for_admin.paper_size.size) unless paper_specification_for_admin.paper_size.nil? %></td>
-  <td><%= h (paper_specification_for_admin.paper_type.paper_type) unless paper_specification_for_admin.paper_type.nil? %></td>
+  <td><%= h (paper_specification_for_admin.paper_type.paper_type_with_grade) unless paper_specification_for_admin.paper_type.nil? %></td>
   <td><%= h (paper_specification_for_admin.price) %></td>
   <td><%= boolean_to_ru(paper_specification_for_admin.in_stock) %></td>
   <td><%= h (paper_specification_for_admin.order_type.title) %></td>
