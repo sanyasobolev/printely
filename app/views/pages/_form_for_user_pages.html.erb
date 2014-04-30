@@ -16,6 +16,10 @@
   <%= f.collection_select :section_id, section_for_page, :id, :title, :prompt => 'Нет' %>
   </p>
 
+  <p><%= Page.human_attribute_name("subsection_id") %><br />
+  <%= f.collection_select :subsection_id, subsection_for_page, :id, :title, :prompt => 'Нет' %>
+  </p>
+
   <p><%= Page.human_attribute_name("service_id") %><br />
   <%= f.collection_select :service_id, Service.all, :id, :title, :prompt => 'Нет' %>
   </p>

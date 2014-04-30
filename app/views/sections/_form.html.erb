@@ -1,38 +1,26 @@
-  <p><%= Section.human_attribute_name("title") %><br />
-    <%= f.text_field :title,
-                     :size => Section::TITLE_SIZE,
-                     :maxlength => Section::TITLE_MAX_LENGTH %>
-  </p>
-  <p><%= Section.human_attribute_name("order") %><br />
-    <%= f.select :order,
-                 Section::SECTION_ORDER,
-                 :prompt => 'Выберите порядковый номер раздела' %>
-    <span id="number_busy"></span>
-  </p>
+	<div class="form_align">
+		<%= f.label :title %>
+		<%= f.text_field :title, :maxlength => Section::TITLE_MAX_LENGTH ,:class => 'req_input' %>
+	</div>
 
-  <p>
-    <%= Section.human_attribute_name("controller")  %>
-    <%= f.text_field :controller %>
-  </p>
+	<div class="form_align">
+		<%= f.label :order %>
+		<%= f.select :order, Section::SECTION_ORDER, :prompt => 'Выберите порядковый номер раздела' %>
+	</div>
 
-  <p>
-    <%= Section.human_attribute_name("action")  %>
-    <%= f.text_field :action %>
-  </p>
+	<div class="form_align">
+		<%= f.label :controller %>
+		<%= f.text_field :controller %>
+	</div>
+	
+	<div class="form_align">
+		<%= f.label :action %>
+		<%= f.text_field :action %>
+	</div>
+	
+	<div class="form_align">
+		<%= f.label :published %>
+		<%= f.check_box :published %>
+	</div>
+	
 
-
-  <p><%= Section.human_attribute_name("published") %>
-    <%= f.check_box :published %>
-  </p>
-
-<%
-  #"ajax-наблюдатель" за состоянием поля "section_order"
-  #если выбранный порядковый номер занят, то пишет уведомление пользователю 
-%>
-<%=
-#observe_field 'section_order',
- #                  :update => 'number_busy', #выводим результат в ячейку с id="number_busy"
-  #                 :url    => { :action => 'ajax_control' },
-   #                :with   => 'section_order', #данные, отправляемые на сервер
-    #               :frequency => 0.5 #частота обновления
-                   %>

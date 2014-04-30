@@ -45,9 +45,7 @@ Spsite::Application.routes.draw do
      get 'edit_delivery', :on => :member
      get 'edit_status', :on => :member
   end
-  
   match 'order/ajaxupdate' => 'orders#ajaxupdate'
-
 
   controller :sessions do
     get 'login' => :new
@@ -55,44 +53,34 @@ Spsite::Application.routes.draw do
     get 'logout' => :destroy
   end
 
-  resources :pages do
-    get 'admin', :on => :collection
-    get 'no_page', :on => :collection
-  end
-
-  resources :pricelist_fotoprints do
-    get 'admin', :on => :collection
-  end
-
-  resources :pricelist_deliveries do
-    get 'admin', :on => :collection
-  end
-  
-  resources :pricelist_scans do
-    get 'admin', :on => :collection
-  end
-
-  resources :sections do
-    resources :pages
-    get 'admin', :on => :collection
-  end
-
-  resources :categories do
-    resources :articles
-    get 'admin', :on => :collection
-  end
-
   resources :articles do
-    get 'admin', :on => :collection
-  end
-
-
-  resources :subservices do
     get 'admin', :on => :collection
   end
 
   resources :services do
     resources :subservices
+    get 'admin', :on => :collection
+  end
+  
+  resources :subservices do
+    get 'admin', :on => :collection
+  end
+
+  resources :pages do
+    get 'admin', :on => :collection
+    get 'no_page', :on => :collection
+  end
+
+  resources :sections do
+    get 'admin', :on => :collection
+  end
+
+  resources :subsections do 
+    get 'admin', :on => :collection
+  end
+  
+  resources :categories do
+    resources :articles
     get 'admin', :on => :collection
   end
 
@@ -123,11 +111,38 @@ Spsite::Application.routes.draw do
   end
   
 
-
+  resources :pricelist_deliveries do
+    get 'admin', :on => :collection
+  end
+  
+  resources :pricelist_scans do
+    get 'admin', :on => :collection
+  end
+  
   Ckeditor::Engine.routes.draw do
     resources :pictures, :only => [:index, :create, :destroy]
     resources :attachment_files, :only => [:index, :create, :destroy]
   end
+
+  # setup pages#show to give clean URLS
+  match ':section_id', :as => :section_page,
+                           :via => :get,
+                           :controller => :pages, 
+                           :action => :show
+                           
+  # setup pages#index to give clean URLS
+  match ':section_id/:subsection_id', :as => :section_subsection_pages,
+                                     :via => :get,
+                                     :controller => :pages, 
+                                     :action => :index
+
+                                      
+  # setup pages#show to give clean URLS
+  match ':section_id/:subsection_id/:id', :as => :section_subsection_page,
+                                         :via => :get,
+                                         :controller => :pages, 
+                                         :action => :show
+  
 
   unless Rails.application.config.consider_all_requests_local
     match '*not_found', to: 'errors#error_404'

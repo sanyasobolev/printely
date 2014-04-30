@@ -1,0 +1,34 @@
+	<div class="form_align">
+		<%= f.label :title %>
+		<%= f.text_field :title, :maxlength => Subsection::TITLE_MAX_LENGTH ,:class => 'req_input' %>
+	</div>
+
+	<div class="form_align">
+		<%= f.label :section_id %>
+		<%= f.collection_select(:section_id,
+                      			Section.find(:all),
+                      			:id,
+                      			:title) %>	
+    </div>
+
+	<div class="form_align">
+		<%= f.label :order %>
+		<%= f.select :order, Subsection::SUBSECTION_ORDER, :prompt => 'Выберите порядковый номер' %>
+	</div>
+
+	<div class="form_align">
+		<%= f.label :controller %>
+		<%= f.text_field :controller %>
+	</div>
+	
+	<div class="form_align">
+		<%= f.label :action %>
+		<%= f.text_field :action %>
+	</div>
+	
+	<div class="form_align">
+		<%= f.label :published %>
+		<%= f.check_box :published %>
+	</div>
+	
+

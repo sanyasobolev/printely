@@ -1,29 +1,32 @@
 # encoding: utf-8
 class PagesController < ApplicationController
+  layout 'services', :only => [:show, :index]
   layout 'welcome', :only => [:welcome]
   skip_before_filter :login_required, :authorized?,
                      :only => [:show, :index, :no_page, :welcome]
 
   def index #отображение списка страниц в sidebar
-    if params[:section_id]
-      @current_section = Section.find_by_permalink(params[:section_id])
-      @title =  current_section_title
-      @pages_of_section = Page.find(:all,
-                                    :order => 'published_at',
-                                    :include => :user,
-                                    :conditions => "section_id=#{@current_section.id.to_i} AND published=true" )
-      @count_of_pages = @pages_of_section.count
-      @page = @pages_of_section.first
-    end
+    if params[:subsection_id]
+      @current_subsection = Subsection.find_by_permalink(params[:subsection_id])
+      @title = @current_subsection.title
+      @pages = Page.find(:all,
+                         :order => 'published_at',
+                         :include => :user,
+                         :conditions => "subsection_id=#{@current_subsection.id.to_i} AND published=true" )
 
+    end
+    @count_of_pages = @pages.count
+    @page = @pages.first
     if @count_of_pages > 1
       render :action => 'index', :layout => 'side_pages'
     elsif @count_of_pages < 1
-      redirect_to no_page_pages_path
+     render :action => :no_page
     end
+
   end
 
   def no_page
+    
   end
 
   def welcome
@@ -40,19 +43,28 @@ class PagesController < ApplicationController
     end
   end
 
-  def show #отображение выбранной страницы из sidebar или страницы без раздела
-    if params[:id]
+  def show 
+    if params[:section_id] && !params[:subsection_id] #if click on section
+      @current_section = Section.find_by_permalink(params[:section_id])
+      @page = Page.find_by_section_id(@current_section.id,
+                                        :include => :user,
+                                        :conditions => "published=true" )
+      if @page
+        @count_of_pages = 1
+        @title = "#{@current_section.title}"
+      else
+        render :action => :no_page
+        @title = "#{@current_section.title} - Страница не готова"
+        @count_of_pages = 0
+      end
+    elsif params[:id] #if click on subsection and other
       @page = Page.find_by_permalink(params[:id])
-      if @current_section = Section.find_by_id(@page.section_id)
-         @pages_of_section = Page.find(:all,
-                                       :order => 'published_at',
-                                       :include => :user,
-                                       :conditions => "section_id=#{@current_section.id.to_i} AND published=true" )
-        @title = "#{@current_section.title} - #{@page.title}"
-        @count_of_pages = @pages_of_section.count
+      if @current_subsection = Subsection.find_by_id(@page.subsection_id)
+        @title = "#{@current_subsection.title}"
+        @count_of_pages = @current_subsection.pages.count
       else
         @title = "#{@page.title}"
-        @count_of_pages = 0
+        @count_of_pages = 1
       end
     end
     if @count_of_pages > 1

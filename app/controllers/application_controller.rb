@@ -9,16 +9,6 @@ class ApplicationController < ActionController::Base
   before_filter :login_required
   before_filter :authorized?
 
-  def current_section_title
-    if params[:section_id]
-      @current_section_title = Section.find_by_permalink(params[:section_id]).title
-    else
-      @current_section_title = Section.find_by_controller(controller_name).title
-    end
-    return @current_section_title
-  end
-
- 
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, with: lambda { |exception| render_error 500, exception }
     rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }

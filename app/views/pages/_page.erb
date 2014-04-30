@@ -4,14 +4,16 @@
   <td><%= link_to page.permalink, page_path(page)%></td>
   <td><%= Russian::strftime(page.created_at, "%d %B %Y") %> </td>
 
-  <% if page.published == true %>
-      <td>Да</td>
-      <% else %>
-      <td>Нет</td>
-  <% end %>
+  <td><%= boolean_to_ru(page.published) %></td>
 
   <% if page.section_id %>
     <td><%= page.section.title %></td>
+    <% else %>
+    <td>Нет</td>
+  <% end %>
+
+  <% if page.subsection_id %>
+    <td><%= page.subsection.title %></td>
     <% else %>
     <td>Нет</td>
   <% end %>

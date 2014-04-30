@@ -1,8 +1,13 @@
 <%= error_messages_for :section %>
 <h2>Создание нового раздела</h2>
+<div class="form_shape">
     <%= form_for(:section, :url => sections_path) do |f| -%>
 
       <%= render :partial => 'form', :locals => {:f => f} %>
 
-    <%= submit_tag 'Сохранить' %> или <%= link_to 'Вернуться', admin_sections_path %>
-<% end %>
+	    <div class="submit_area">
+	      <%= submit_tag 'Сохранить', :class => 'submit' %>
+	      <%= link_to 'Назад', admin_sections_path, :class => 'button_style' %>
+	    </div>
+	<% end %>
+</div>

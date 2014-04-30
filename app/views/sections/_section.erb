@@ -12,10 +12,6 @@
   <td><%= section.order %></td>
   <td><%= section.controller %></td>
   <td><%= section.action %></td>
-  <% if section.published == true %>
-      <td>Да</td>
-      <% else %>
-      <td>Нет</td>
-  <% end %>
+  <td><%= boolean_to_ru(section.published) %></td>
   <td><%= link_to 'Редактировать', edit_section_path(section) %></td>
 </tr>

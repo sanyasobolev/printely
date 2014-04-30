@@ -1,13 +1,23 @@
 # encoding: utf-8
 class Page < ActiveRecord::Base
 
-  attr_accessible :id, :title, :permalink, :body, :user_id, :section_id, :published, :service_id, :subservice_id
+  attr_accessible :id, 
+                  :title, 
+                  :permalink, 
+                  :body, 
+                  :user_id, 
+                  :section_id, 
+                  :subsection_id,
+                  :published, 
+                  :service_id, 
+                  :subservice_id
 
   before_create :create_permalink
   before_save :update_permalink
   before_save :update_published_at
 
   belongs_to :section
+  belongs_to :subsection
   belongs_to :user
   belongs_to :service
   belongs_to :subservice

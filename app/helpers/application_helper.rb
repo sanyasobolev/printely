@@ -32,10 +32,12 @@ module ApplicationHelper
         end
         return @str.html_safe
       when 'pages'
-        if params[:section_id]
-          section_title = Section.find_by_permalink(params[:section_id]).title
-          @second = "<div class='boardtext'> #{section_title} </div>"
-          @str = @first + @separator + @second
+        if params[:subsection_id]
+          subsection = Subsection.find_by_permalink(params[:subsection_id])
+          section = subsection.section
+          @second = "<div class='boardlink'> #{link_to section.title, section_page_path(section), :class => 'boardlink' } </div>"
+          @third = "<div class='boardtext'> #{subsection.title} </div>"
+          @str = @first + @separator + @second + @separator + @third
           return @str.html_safe
         end
       when 'sitemap'
@@ -63,13 +65,21 @@ module ApplicationHelper
         @str = @first + @separator + @second + @separator + @third + @separator + @fourth
         return @str.html_safe
     when 'pages'
-        current_page = Page.find_by_permalink(params[:id]).title
-        section = Section.find_by_permalink(params[:section_id])
-        section_title = section.title
-        @second = "<div class='boardtext'> #{link_to section_title, section_pages_path(section), :class => 'boardlink'} </div>"
-        @third = "<div class='boardtext'> #{current_page} </div>"
-        @str = @first + @separator + @second + @separator + @third
-        return @str.html_safe
+        if params[:section_id] && !params[:subsection_id] #if click on section
+          section_title = Section.find_by_permalink(params[:section_id]).title
+          @second = "<div class='boardtext'> #{section_title} </div>"
+          @str = @first + @separator + @second
+          return @str.html_safe
+        elsif params[:id]
+          current_page = Page.find_by_permalink(params[:id])
+          subsection = current_page.subsection
+          section = subsection.section
+          @second = "<div class='boardtext'> #{link_to section.title, section_page_path(section), :class => 'boardlink'} </div>"
+          @third = "<div class='boardtext'> #{link_to subsection.title, section_subsection_pages_path(section, subsection), :class => 'boardlink'} </div>"
+          @fourth = "<div class='boardtext'> #{current_page.title} </div>"
+          @str = @first + @separator + @second + @separator + @third + @separator + @fourth
+          return @str.html_safe
+        end
     when 'articles'
       article_title = Article.find_by_permalink(params[:id]).title
       @second = "<div class='boardlink'> #{link_to "статьи", articles_path, :class => 'boardlink' } </div>"

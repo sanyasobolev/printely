@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
                      :only => [:index, :show]
 
   def index
-    @title = current_section_title
+    @title = Section.find_by_controller(controller_name).title
     if params[:category_id]
       @category = Category.find_by_permalink(params[:category_id])
       @articles = Article.where("category_id=#{@category.id.to_i} AND published=true").order('published_at DESC')
@@ -80,7 +80,7 @@ class ArticlesController < ApplicationController
   end
 
   def admin
-    @title = "Администрирование - #{current_section_title}"
+    @title = "Администрирование - #{Section.find_by_controller(controller_name).title}"
     @articles = Article.find(:all, :order => 'published_at DESC')
   end
 

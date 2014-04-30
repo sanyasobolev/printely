@@ -57,12 +57,4 @@ class SectionsController < ApplicationController
     end
   end
 
-  def ajax_control #действие для оповещения о занятом выбранном номере раздела
-    if Section.find_by_order(params[:section_order])
-      render :text => 'Этот номер занят!'
-    else
-      render :text => ''
-    end
-  end
-
 end

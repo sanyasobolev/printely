@@ -1,13 +1,13 @@
 <%= error_messages_for :section %>
-<h2>Редактирование раздела</h2>
+<h2>Редактирование подраздела</h2>
 <div class="form_shape">
-  <%= form_for(:section, :url => section_path(@section), :html => {:method => :put}) do |f| -%>
+  <%= form_for(:subsection, :url => subsection_path(@subsection), :html => {:method => :put}) do |f| -%>
     
     <%= render :partial => 'form', :locals => {:f => f} %>
 
 	    <div class="submit_area">
 	      <%= submit_tag 'Сохранить', :class => 'submit' %>
-	      <%= link_to 'Назад', admin_sections_path, :class => 'button_style' %>
+	      <%= link_to 'Назад', admin_subsections_path, :class => 'button_style' %>
 	    </div>  
 	<% end %>
 </div>

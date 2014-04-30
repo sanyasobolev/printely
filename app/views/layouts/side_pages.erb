@@ -14,7 +14,7 @@
 
 <% content_for :content_panel do %>
   <div id="sidebar">
-    <%= render :partial => 'page_of_section', :collection => @pages_of_section, :locals => {:current_section => @current_section} %>
+    <%= render :partial => 'page_of_subsection', :collection => @current_subsection.pages, :locals => {:current_section => @current_subsection.section, :current_subsection => @current_subsection} %>
   </div>
   <div id="content">
     <%= yield %>

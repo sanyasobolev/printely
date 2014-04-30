@@ -111,10 +111,19 @@ a.box_user_opt:hover, a.box_user_opt:active {
     background-color: #3b6fb5;
 }
 
+/*CSS меню верхнее-------------------------------------------------*/
+/*section*/
+#top_menu {
+    width: 590px;
+    float:right;
+    margin: 25px 0 0 0;
+    padding: 0;
+    list-style: none;  
+}
+/*
 .top_section_nav {
     display:block;
     text-align: center;
-    float:right;
         padding-bottom: 5px;
         padding-top: 5px;
         padding-left: 10px;
@@ -123,6 +132,146 @@ a.box_user_opt:hover, a.box_user_opt:active {
     color: #378cff;
     margin-top: 18px;
 }
+*/
+#top_menu li {
+    float: right;
+    padding: 0 0 10px 0;
+    position: relative;
+}
+
+#top_menu a {
+    float: right;
+    height: 25px;
+    padding: 0 20px;
+    color: #B5B5B5;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+#top_menu li:hover > a {
+    color: #fafafa;
+}
+
+*html #top_menu li a:hover { /* IE6 */
+    color: #fafafa;
+}
+
+#top_menu li:hover > ul {
+    display: block;
+}
+
+/* Subsections */
+#top_menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;    
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    z-index: 99999;    
+    background-color: #444;   
+   
+}
+
+#top_menu ul li {
+    float: none;
+    margin: 0;
+    padding: 0;
+    display: block;  
+
+}
+
+#top_menu ul li:last-child { 
+    box-shadow: none;    
+}
+
+#top_menu ul a {  
+	width: 148px;
+	padding-top: 5px;
+	margin-left: 1px;
+	margin-right: 1px;
+	margin-bottom: 1px;
+    height: 30px;
+    display: block;
+    white-space: nowrap;
+    float: none;
+    text-transform: none;
+    font-size: 1em;
+}
+
+#top_menu ul a:hover {
+	width: 148px;
+    background-color: #378cff;
+    /*background-image: linear-gradient(#04acec, #0186ba);*/
+}
+
+*html #top_menu ul a { /* IE6 */   
+    height: 10px;
+    width: 150px;
+}
+
+*:first-child+html #top_menu ul a { /* IE7 */    
+    height: 10px;
+    width: 150px;
+}
+
+
+#top_menu ul li:first-child a {
+    border-radius: 0px;
+}
+
+#top_menu ul li:first-child a:after {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: -8px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid #444;
+}
+
+#top_menu ul li:first-child a:hover:after {
+    border-bottom-color: #04acec; 
+}
+
+#top_menu ul li:last-child a {
+    border-radius: 0px;
+}
+
+/* Clear floated elements */
+#top_menu:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+* html #top_menu             { zoom: 1; } /* IE6 */
+*:first-child+html #top_menu { zoom: 1; } /* IE7 */
+
+/*треугольник*/
+.arrow-down {
+	position:absolute;
+	right:5px;
+	top: 12px;
+	float:right;
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid #B5B5B5
+}
+
+
+#top_menu li:hover > span {
+    border-top: 5px solid white
+}
+
 
 a.top_section:link, a.top_section:visited {
     color: white;
@@ -138,6 +287,7 @@ a.top_section:hover {
     text-decoration:none;
     padding: 0px;
 }
+
 /*-----------------------------------------------------------------------------------------*/
 /*контейнеры slide - панели-----------------------------------------------------------------------------*/
 
@@ -263,6 +413,7 @@ a.top_section:hover {
 #sidebar {
     margin-top: 65px;
     margin-bottom: 20px;
+    margin-right: 20px;
     width: 150px;
     min-height: 300px;
     float: left;
@@ -275,7 +426,6 @@ a.top_section:hover {
     padding-top: 0px;
     padding-bottom: 20px;
     padding-left: 20px;
-    padding-right: 20px;
 }
 
 #bottombar {
@@ -886,7 +1036,7 @@ a.boardlink:hover, a.boardlink:active {
 
 #admin_menu {
     position: fixed;
-    top: 15%;
+    top: 35%;
     right: 0px;
     background-color: #ffffff;
     width: 128px;
