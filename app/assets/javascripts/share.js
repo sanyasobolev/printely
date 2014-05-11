@@ -175,7 +175,8 @@ $(document).ready(function(){
 	
 	   //календарь
         $("#datepicker, #datepicker_2, #datepicker_3, #datepicker_4").datepicker({
-			minDate: new Date(2014, 5 - 1, 12),
+			minDate: 0,
+			//minDate: new Date(2014, 5 - 1, 12),
 			firstDay: 1,
 			beforeShowDay: highlightDays
 			}

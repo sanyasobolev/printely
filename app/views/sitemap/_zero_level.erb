@@ -1,7 +1,7 @@
 <div class="zero_level">
   <%= image_tag ("icons/section_sitemap.png") %>
   <% if zero_level.controller == 'no' %>
-    <%= link_to zero_level.title, section_pages_path(zero_level), :class => "site_map_link" %>
+    <%= link_to zero_level.title, section_page_path(zero_level), :class => "site_map_link" %>
   <% else %>
     <%= link_to zero_level.title, {:controller => zero_level.controller, :action => zero_level.action, :category_id => nil} , {:class => "site_map_link"} %>
   <% end %>

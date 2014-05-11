@@ -5,7 +5,7 @@
     <% end %>
   </td>
   <% if section.controller == 'no' %>
-    <td><%= link_to section.title, section_pages_path(section) %></td>
+    <td><%= link_to section.title, section_page_path(section) %></td>
     <% else %>
     <td><%= link_to section.title, {:controller => section.controller, :action => section.action} %></td>
   <% end %>
