@@ -72,13 +72,18 @@ module ApplicationHelper
           return @str.html_safe
         elsif params[:id]
           current_page = Page.find_by_permalink(params[:id])
-          subsection = current_page.subsection
-          section = subsection.section
-          @second = "<div class='boardtext'> #{link_to section.title, section_page_path(section), :class => 'boardlink'} </div>"
-          @third = "<div class='boardtext'> #{link_to subsection.title, section_subsection_pages_path(section, subsection), :class => 'boardlink'} </div>"
-          @fourth = "<div class='boardtext'> #{current_page.title} </div>"
-          @str = @first + @separator + @second + @separator + @third + @separator + @fourth
-          return @str.html_safe
+          if current_page.subsection
+            subsection = current_page.subsection
+            section = subsection.section
+            @second = "<div class='boardtext'> #{link_to section.title, section_page_path(section), :class => 'boardlink'} </div>"
+            @third = "<div class='boardtext'> #{link_to subsection.title, section_subsection_pages_path(section, subsection), :class => 'boardlink'} </div>"
+            @fourth = "<div class='boardtext'> #{current_page.title} </div>"
+            @str = @first + @separator + @second + @separator + @third + @separator + @fourth
+          else
+            @second = "<div class='boardtext'> #{current_page.title} </div>"
+            @str = @first + @separator + @second
+          end
+        return @str.html_safe
         end
     when 'articles'
       article_title = Article.find_by_permalink(params[:id]).title
