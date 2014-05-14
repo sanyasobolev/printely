@@ -1,9 +1,9 @@
 # encoding: utf-8
 class ArticlesController < ApplicationController
   layout 'articles', :only => [:index]
-  layout 'wo_categories', :only => [:show, :admin, :edit, :new, :news]
+  layout 'wo_categories', :only => [:show, :admin, :edit, :new, :item_news]
   skip_before_filter :login_required, :authorized?,
-                     :only => [:index, :news, :show]
+                     :only => [:index, :item_news, :show]
 
   def index
     @title = Section.find_by_controller(controller_name).title
