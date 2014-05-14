@@ -136,13 +136,14 @@ Spsite::Application.routes.draw do
                                      :controller => :pages, 
                                      :action => :index
 
-                                      
+                
   # setup pages#show to give clean URLS
   match ':section_id/:subsection_id/:id', :as => :section_subsection_page,
                                          :via => :get,
                                          :controller => :pages, 
                                          :action => :show
   
+
 
   unless Rails.application.config.consider_all_requests_local
     match '*not_found', to: 'errors#error_404'

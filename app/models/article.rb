@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Article < ActiveRecord::Base
 
-attr_accessible :title, :synopsis, :body, :category_id, :published, :header_image
+attr_accessible :title, :synopsis, :this_news, :body, :category_id, :published, :header_image
 
 #paperclipe
 has_attached_file :header_image,
@@ -55,6 +55,12 @@ BODY_COLS_SIZE = 60
                        :presence => true,
                        :content_type => { :content_type => /image/ },
                        :size => { :in => 0..1.megabytes }
+
+  scope :articles_for_user, where("published=true AND this_news=false").order('published_at DESC') 
+  scope :news_for_user, where("published=true AND this_news=true").order('published_at DESC') 
+  scope :news_for_user_with_limit, where("published=true AND this_news=true").order('published_at DESC').limit(2)
+  scope :articles_for_user_with_category, lambda { |category| where("category_id=#{category.id.to_i} AND published=true AND this_news=false").order('published_at DESC')} 
+
 
   def update_published_at
     self.published_at = Time.now if published == true

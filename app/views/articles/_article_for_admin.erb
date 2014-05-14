@@ -3,11 +3,8 @@
   <td><%= article_for_admin.title %></td>
   <td><%= article_for_admin.category.name %></td>
   <td><%= Russian::strftime(article_for_admin.created_at, "%d %B %Y") %></td>
-  <% if article_for_admin.published == true %>
-          <td>Да</td>
-          <% else %>
-          <td>Нет</td>
-  <% end %>
+  <td><%= boolean_to_ru(article_for_admin.published) %></td>
   <td><%= "#{article_for_admin.user.first_name} #{article_for_admin.user.second_name}" %></td>
+  <td><%= boolean_to_ru(article_for_admin.this_news) %></td>
   <td><%= link_to 'Редактировать', edit_article_path(article_for_admin) %></td>
 </tr>

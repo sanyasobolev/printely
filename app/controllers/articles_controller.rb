@@ -1,26 +1,24 @@
 # encoding: utf-8
 class ArticlesController < ApplicationController
   layout 'articles', :only => [:index]
-  layout 'wo_categories', :only => [:show, :admin, :edit, :new]
+  layout 'wo_categories', :only => [:show, :admin, :edit, :new, :news]
   skip_before_filter :login_required, :authorized?,
-                     :only => [:index, :show]
+                     :only => [:index, :news, :show]
 
   def index
     @title = Section.find_by_controller(controller_name).title
     if params[:category_id]
       @category = Category.find_by_permalink(params[:category_id])
-      @articles = Article.where("category_id=#{@category.id.to_i} AND published=true").order('published_at DESC')
+      @articles = Article.articles_for_user_with_category(@category)
     else
-      @articles = Article.where("published=true").order('published_at DESC')    
+      @articles = Article.articles_for_user 
     end
     respond_to do |wants| #web-сервис
       wants.html
       wants.xml { render :xml => @articles.to_xml }
-      wants.rss { render :action => 'rss.rxml', :layout => false }
-      wants.atom { render :action => 'atom.rxml', :layout => false }
     end
   end
-
+  
   def show
     @article = Article.find_by_permalink_and_published(params[:id], true)
     @title = @article.title

@@ -27,15 +27,7 @@
 		        		<% subsections.each do |subsection| %>
 		        				<% if subsection.order == subsection_order && subsection.published == true %>
 					                  <li>
-						                  <% if subsection.controller == 'no' %>
-								              <%= link_to subsection.title, section_subsection_pages_path(section, subsection) %>
-								          <% else %>
-									          <% if subsection.action == 'index' %>
-									              <%= link_to subsection.title, "/#{subsection.controller}", {:category_id => nil} %>
-											  <% else %>
-									              <%= link_to subsection.title, "/#{subsection.controller}/#{subsection.action}", {:category_id => nil} %>
-									          <% end %>
-								          <% end %>
+								      	<%= link_to subsection.title, section_subsection_pages_path(section, subsection) %>
 							          </li>
 		        				<% end %>
 		        		<% end %>

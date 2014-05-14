@@ -5,8 +5,21 @@ class PagesController < ApplicationController
   skip_before_filter :login_required, :authorized?,
                      :only => [:show, :index, :no_page, :welcome]
 
-  def index #отображение списка страниц в sidebar
-    if params[:subsection_id]
+  def welcome #for welcome page
+    if params[:id] == 'printely'
+      @page = Page.find_by_permalink(params[:id])
+      @title = @page.title
+      #get news list for user
+      @news_for_user = Article.news_for_user_with_limit
+    end
+    respond_to do |format|
+        format.html
+        format.xml { render :xml => @page.to_xml }
+    end
+  end
+
+  def index #отображение страниц подразделов или других действий подразделов
+    if params[:subsection_id] #if click on subsection
       @current_subsection = Subsection.find_by_permalink(params[:subsection_id])
       @title = @current_subsection.title
       @pages = Page.find(:all,
@@ -19,28 +32,12 @@ class PagesController < ApplicationController
     @page = @pages.first
     if @count_of_pages > 1
       render :action => 'index', :layout => 'side_pages'
-    elsif @count_of_pages < 1
+    elsif (@count_of_pages < 1) && @current_subsection.controller != 'no' #if no pages and subsection have controller
+      render_another_actions(@current_subsection.controller, @current_subsection.action, nil)     
+    elsif @count_of_pages < 1 #if no pages and subsection have not controller
      render :action => :no_page
     end
 
-  end
-
-  def no_page
-    
-  end
-
-  def welcome
-    if params[:id] == 'printely'
-      @page = Page.find_by_permalink(params[:id])
-      @title = @page.title
-      #get news list for user
-      category_id_for_user_news = Category.where(:name => "Архив новостей").first.id
-      @news_for_user = Article.where(:category_id => category_id_for_user_news).order("published_at DESC").limit(2)
-    end
-    respond_to do |format|
-        format.html
-        format.xml { render :xml => @page.to_xml }
-    end
   end
 
   def show 
@@ -57,8 +54,7 @@ class PagesController < ApplicationController
         @title = "#{@current_section.title} - Страница не готова"
         @count_of_pages = 0
       end
-    elsif params[:id] #if click on subsection and other
-      @page = Page.find_by_permalink(params[:id])
+    elsif params[:id] && @page = Page.find_by_permalink(params[:id]) #if click on subsection (what have page) and other pages
       if @current_subsection = Subsection.find_by_id(@page.subsection_id)
         @title = "#{@current_subsection.title}"
         @count_of_pages = @current_subsection.pages.count
@@ -66,6 +62,10 @@ class PagesController < ApplicationController
         @title = "#{@page.title}"
         @count_of_pages = 1
       end
+    elsif params[:id] && @page == nil
+      @current_subsection = Subsection.find_by_permalink(params[:subsection_id])
+      render_another_actions(@current_subsection.controller, 'show', params[:id])     
+      @count_of_pages = 0
     end
     if @count_of_pages > 1
       render :action => 'show', :layout => 'side_pages'
@@ -134,6 +134,23 @@ class PagesController < ApplicationController
     @title = 'Администрирование - Страницы'
     @main_page = Page.find_by_id(1)
     @pages = Page.find(:all, :order => 'published_at DESC', :conditions => "id!=1")
+  end
+
+  def no_page
+    
+  end
+
+  def render_another_actions(controller, action, id) #render another actions instead pages
+    if controller == 'articles' && action == 'news' #for articles-news
+      @title = 'Новости'
+      @news = Article.news_for_user 
+      render 'articles/news'
+    end
+    if controller == 'articles' && action == 'show' #for articles-news
+      @article = Article.find_by_permalink(id) #news
+      @title = @article.title
+      render 'articles/show'
+    end
   end
 
 end
