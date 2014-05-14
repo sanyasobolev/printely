@@ -57,6 +57,8 @@ Spsite::Application.routes.draw do
     get 'admin', :on => :collection
     get 'item_news', :on => :collection
   end
+  match 'news/:id' => 'articles#show', :as => :news, 
+                                        defaults: { item: 'news' }
 
   resources :services do
     resources :subservices

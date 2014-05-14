@@ -10,7 +10,7 @@ class PagesController < ApplicationController
       @page = Page.find_by_permalink(params[:id])
       @title = @page.title
       #get news list for user
-      @news_for_user = Article.news_for_user_with_limit
+      @news_for_welcome = Article.news_for_welcome
     end
     respond_to do |format|
         format.html

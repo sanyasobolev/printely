@@ -58,7 +58,7 @@ BODY_COLS_SIZE = 60
 
   scope :articles_for_user, where("published=true AND this_news=false").order('published_at DESC') 
   scope :news_for_user, where("published=true AND this_news=true").order('published_at DESC') 
-  scope :news_for_user_with_limit, where("published=true AND this_news=true").order('published_at DESC').limit(2)
+  scope :news_for_welcome, where("published=true AND this_news=true").order('published_at DESC').limit(2)
   scope :articles_for_user_with_category, lambda { |category| where("category_id=#{category.id.to_i} AND published=true AND this_news=false").order('published_at DESC')} 
 
 

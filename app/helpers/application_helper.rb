@@ -92,10 +92,16 @@ module ApplicationHelper
         return @str.html_safe
         end
     when 'articles'
-      article_title = Article.find_by_permalink(params[:id]).title
-      @second = "<div class='boardlink'> #{link_to "статьи", articles_path, :class => 'boardlink' } </div>"
-      @third = "<div class='boardtext'> #{article_title} </div>"
-      @str = @first + @separator + @second + @separator + @third
+        article_title = Article.find_by_permalink(params[:id]).title
+      unless params[:item] == 'news'
+        @second = "<div class='boardlink'> #{link_to "статьи", articles_path, :class => 'boardlink' } </div>"
+        @third = "<div class='boardtext'> #{article_title} </div>"
+        @str = @first + @separator + @second + @separator + @third
+      else
+        @second = "<div class='boardtext'> #{article_title} </div>"
+        @str = @first + @separator + @second    
+      end
+
       return @str.html_safe
     when 'orders'
       @second = "<div class='boardlink'> #{link_to image_tag("icons/my_office_black.png", :border => 0), myoffice_path}</div>"
