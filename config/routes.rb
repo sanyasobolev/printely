@@ -55,7 +55,7 @@ Spsite::Application.routes.draw do
 
   resources :articles do
     get 'admin', :on => :collection
-    get 'news', :on => :collection
+    get 'item_news', :on => :collection
   end
 
   resources :services do

@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
     end
   end
   
-  def news
+  def item_news
     
   end
   

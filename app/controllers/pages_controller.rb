@@ -141,10 +141,10 @@ class PagesController < ApplicationController
   end
 
   def render_another_actions(controller, action, id) #render another actions instead pages
-    if controller == 'articles' && action == 'news' #for articles-news
+    if controller == 'articles' && action == 'item_news' #for articles-news
       @title = 'Новости'
-      @news = Article.news_for_user 
-      render 'articles/news'
+      @item_news = Article.news_for_user 
+      render 'articles/item_news'
     end
     if controller == 'articles' && action == 'show' #for articles-news
       @article = Article.find_by_permalink(id) #news
