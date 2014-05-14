@@ -19,6 +19,10 @@ class ArticlesController < ApplicationController
     end
   end
   
+  def news
+    
+  end
+  
   def show
     @article = Article.find_by_permalink_and_published(params[:id], true)
     @title = @article.title
