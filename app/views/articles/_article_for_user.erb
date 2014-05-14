@@ -10,7 +10,7 @@
     <%= raw(article_for_user.synopsis) %>
   </div>
   <% if article_for_user.this_news %>
-  	<%= link_to '#', section_subsection_news_path(:subsection_id => @current_subsection, :id => article_for_user), :class => "article_link" %>
+  	<%= link_to '#', section_subsection_pages_path(:subsection_id => @current_subsection, :id => article_for_user), :class => "article_link" %>
   <% else %>
     <%= link_to '#', article_path(article_for_user), :class => "article_link" %>
   <% end %>
