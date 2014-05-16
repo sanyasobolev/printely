@@ -140,7 +140,7 @@ $(document).ready(function(){
 				            // Свойства.
 				            properties: {
 				                // Контент метки.
-				                iconContent: 'Мы тут',
+				                iconContent: 'Мы здесь',
 				                hintContent: 'Это наш юридический адрес. Скоро мы откроем свой офис.'
 				            }
 				        },{
