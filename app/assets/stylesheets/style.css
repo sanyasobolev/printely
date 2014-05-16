@@ -1564,7 +1564,14 @@ form#new_user div.agreement label.error {
 }
 
 
-/*------------------------------------------------------------------*/
+/*contat_map------------------------------------------------------------------*/
 
+div#contact_map {
+	position:relative;
+	height: 300px;
+	border: solid 1px grey;
+}
 
-
+div#contact_map p {
+	position:absolute
+}
