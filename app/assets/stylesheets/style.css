@@ -516,7 +516,7 @@ a.bot_section:hover {
     text-decoration:none;
 }
 
-#about_us {
+#bottom_about_us {
     margin-top: 20px;
 }
 
@@ -873,6 +873,17 @@ a.for_admin:hover,a.for_admin:active{
     background: orange;
 }
 
+.link_container_for_flash_link a {
+    position: absolute;
+    display:block;
+    width: 420px;
+    height: 230px;
+    top:0px;
+    left:0px;
+	opacity:0;
+	filter:Alpha(opacity=0);
+}
+
 .link_container_for_flash_link img {
     margin: 20px 20px 30px 20px;
     float: left;
@@ -1202,7 +1213,6 @@ nav.pagination .disabled {
 	opacity:0;
 	filter:Alpha(opacity=0);
 }
-
 
 .category {
     position: absolute;
@@ -1564,7 +1574,7 @@ form#new_user div.agreement label.error {
 }
 
 
-/*contat_map------------------------------------------------------------------*/
+/*contact_map------------------------------------------------------------------*/
 
 div#contact_map {
 	position:relative;
