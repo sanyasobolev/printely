@@ -24,7 +24,10 @@ $(document).ready(function(){
 				            properties: {
 				                // Контент метки.
 				                iconContent: 'Мы здесь',
-				                hintContent: 'Это наш юридический адрес. Скоро мы откроем свой офис.'
+				            	balloonContentHeader: "Юридический адрес",
+					            balloonContentBody: "Московская область,<br>Наро-Фоминский район,<br>пос. Калининец, 264.<br>Телефон: +7(926)927-65-78",
+				                balloonContentFooter: 'Скоро мы откроем свой офис.',
+				                hintContent: "Кликните для подробностей."
 				            }
 				        },{
 				            // Опции.
