@@ -1585,3 +1585,14 @@ div#contact_map {
 div#contact_map p {
 	position:absolute
 }
+
+div#delivery_map {
+	position:relative;
+	height: 800px;
+	width: 600px;
+	border: solid 1px grey;
+}
+
+div#delivery_map p {
+	position:absolute
+}

@@ -116,47 +116,6 @@ jQuery.fn.extend({
 
 $(document).ready(function(){
 
-	if($("div#contact_map").exists()){
-		var //script = document.createElement( "script" ),
-			myMap;
-
-		function init_contact_map () {
-				    // Создание экземпляра карты и его привязка к контейнеру с
-				    // заданным id ("map").
-				    myMap = new ymaps.Map('contact_map', {
-				        // При инициализации карты обязательно нужно указать
-				        // её центр и коэффициент масштабирования.
-				        center: [55.556196,37.043308], 
-				        zoom: 11,
-				        controls: ['zoomControl', 'fullscreenControl']
-				    });
-				      // Создаем геообъект с типом геометрии "Точка".
-				        myGeoObject = new ymaps.GeoObject({
-				            // Описание геометрии.
-				            geometry: {
-				                type: "Point",
-				                coordinates: [55.551805,36.971436]
-				            },
-				            // Свойства.
-				            properties: {
-				                // Контент метки.
-				                iconContent: 'Мы здесь',
-				                hintContent: 'Это наш юридический адрес. Скоро мы откроем свой офис.'
-				            }
-				        },{
-				            // Опции.
-				            // Иконка метки будет растягиваться под размер ее содержимого.
-				            preset: 'islands#blackStretchyIcon'
-				        });
-									
-				    myMap.geoObjects.add(myGeoObject);
-								    
-				    
-				    
-		}	
-		ymaps.ready(init_contact_map);
-	};
-
 	if($("#slide_orders").exists()){
 			$('#slide_orders').carouFredSel({
 					       prev : "left",
