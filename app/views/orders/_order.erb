@@ -7,7 +7,7 @@
 	  	<%= render :partial => 'orders/share/delivery_period', :locals => {:order => order} %>
 	<% end %>
   </td>	
-  <td><%=h (order.delivery_town.title if order.delivery_town) %></td>
+  <td><%=h (order.delivery_town.title) if order.delivery_town %></td>
   <td><%=h (order.order_status.title) %></td>
   <td><%=h (read_cost(order)) %></td>
   <td><%=h (order.order_type.title) %></td>
