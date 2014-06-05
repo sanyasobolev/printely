@@ -6,7 +6,7 @@
 	        	<b>
 	        		<%= label(:order, :delivery_town_id) %>:
 	        	</b>
-	            <%= order.delivery_town.title %>	
+	            <%= order.delivery_town.title if order.delivery_town %>	
             	<br />
 				
 				<b>
