@@ -2,7 +2,7 @@ $(document).ready(function(){
 	if(($(".edit_doc_print_order").exists()) || ($(".admin_doc_print_order").exists())) {
         
         //clear value 'выберите' in select
-        $("select#order_delivery_street").change(function(event){
+        $("select#order_delivery_town_id").change(function(event){
             $('[value=""]',event.target).remove();
         });
 
@@ -27,13 +27,13 @@ $(document).ready(function(){
         	ignore: "",
     		rules: {
     			'order[delivery_address]': "required",
-    			'order[delivery_street]':"required",
+    			'order[delivery_town_id]':"required",
     			'order[delivery_date]':"required",
     			'quantity_documents_for_validate':"required"
     		},
     		messages: {
     			'order[delivery_address]': "?",
-    			'order[delivery_street]':"?",
+    			'order[delivery_town_id]':"?",
     			'order[delivery_date]':"?",
     			'quantity_documents_for_validate':"Загрузите файлы."
     		}
@@ -55,13 +55,13 @@ $(document).ready(function(){
         	ignore: "",
     		rules: {
     			'order[delivery_address]': "required",
-    			'order[delivery_street]':"required",
+    			'order[delivery_town_id]':"required",
     			'order[delivery_date]':"required",
     			'quantity_documents_for_validate':"required"
     		},
     		messages: {
     			'order[delivery_address]': "?",
-    			'order[delivery_street]':"?",
+    			'order[delivery_town_id]':"?",
     			'order[delivery_date]':"?",
     			'quantity_documents_for_validate':"Загрузите файлы."
     		}

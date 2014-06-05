@@ -1,31 +1,38 @@
   <table class="order_delivery" id="<%= current_order.id %>">
+      <%= render :partial => 'orders/share/header_table_with_delivery', :locals => {:order => order} %>
+
       <tr>
-        <th><%=  order.label(:delivery_street) %></th>
-        <th><%=  order.label(:delivery_address) %></th>
-        <th>
-            <%= label(:order, :delivery_date) %>
-            <%= order.text_field :delivery_date, :id => "datepicker" %>
-        </th>
-        <th><%=  order.label(:delivery_price) %></th>
-      </tr>
-      <tr>
-        <td class="delivery_street">
-            <%= order.select :delivery_street,
-                              Order::DELIVERY_STREET,
-                              { :prompt => true } %>
+        <td class="delivery_location_edit">
+        	<div class="form_align">
+	        	<%= order.label(:delivery_town_id) %>	
+	            <%= order.collection_select(:delivery_town_id,
+						                      Lists::DeliveryTown.find(:all),
+						                      :id,
+						                      :title,
+						                      { :prompt => true }) %>	
+            </div>
+        	<div class="form_align">
+	        	<%= order.label(:delivery_street) %>	
+	            <%= order.text_field :delivery_street, :placeholder => "Укажите, если она есть..." %>		
+            </div>	
+            <div class="form_align">	
+	        	<%= order.label(:delivery_address) %>
+	        	<%= order.text_field :delivery_address %>
+            </div>
         </td>
-        <td class="delivery_address">
-            <%= order.text_field :delivery_address%>
-        </td>
-        <td class="delivery_date">
-          время
-          <%= label(:order, :delivery_start_time) %>
-          <%= order.text_field :delivery_start_time, :id => "timepicker_start" %>
-          <%= label(:order, :delivery_end_time) %>
-          <%= order.text_field :delivery_end_time, :id => "timepicker_end" %>
+        <td class="delivery_date_edit">
+        	<div class="form_align">
+        	   <%= order.text_field :delivery_date, :id => "datepicker", :placeholder => "Выберите дату" %>
+           	</div>
+          	<div class="form_align">
+	          <span class="time">время</span>
+	          <%= order.text_field :delivery_start_time, :id => "timepicker_start", :placeholder => Order.human_attribute_name("delivery_start_time") %>
+	          <span class="dash">-</span>
+	          <%= order.text_field :delivery_end_time, :id => "timepicker_end", :placeholder => Order.human_attribute_name("delivery_end_time") %>
+	        </div>
         </td>
         <td class="delivery_price">
-          <%= h (number_to_currency(current_order.delivery_price, :unit => "коп.", :separator => " руб. ")) %>
+          <%= h (number_to_currency(current_order.delivery_price, :unit => "руб.", :precision => 0)) %>
         </td>
       </tr>
     </table>

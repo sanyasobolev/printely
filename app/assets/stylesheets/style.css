@@ -1319,9 +1319,9 @@ a.site_map_link:hover {
 }
 
 .second_level {
-    font-size: 1em;
+    font-size: 0.75em;
     position: relative;
-    right: -100px;
+    right: -70px;
 }
 
 .zero_level a {
@@ -1527,18 +1527,18 @@ label.error {
 	top: -3px;	
 }
 
-table.order_delivery td.delivery_street label.error {
-	right: 660px;
-	top: 32px;
+table.order_delivery td.delivery_location_edit label.error[for=order_delivery_town_id] {
+	right: 220px;
+	top: -10px;
 	font-size: 1.5em;
 	width: 10px; 
 	height: 20px; 
 	text-align:center;
 }
 
-table.order_delivery td.delivery_address label.error {
-	right: 400px;
-	top: 32px;
+table.order_delivery td.delivery_location_edit label.error[for=order_delivery_address] {
+	right: 330px;
+	top: -10px;
 	font-size: 1.5em;
 	width: 10px; 
 	height: 20px; 
@@ -1555,8 +1555,8 @@ label.error[for=quantity_documents_for_validate] {
 
 label.error[for=datepicker] {
 	font-size: 1.5em;
-	left: 755px;
-	top: -3px;
+	left: 180px;
+	top: -8px;
 	height: 20px; 
 	width: 50px;
 }

@@ -42,7 +42,7 @@
     <th><%= sort_link(@search, :id, Order.human_attribute_name(:id)) %></th>
     <th><%= Order.human_attribute_name(:client) %></th>
     <th><%= sort_link(@search, :delivery_date ,Order.human_attribute_name(:delivery_date)) %></th>
-    <th><%= Order.human_attribute_name(:delivery_street) %></th>
+    <th><%= Order.human_attribute_name(:delivery_town_id) %></th>
     <th><%= Order.human_attribute_name(:order_status_id) %></th>
     <th><%= Order.human_attribute_name(:cost) %></th>
     <th><%= Order.human_attribute_name(:order_type) %></th>

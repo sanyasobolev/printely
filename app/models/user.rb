@@ -172,10 +172,10 @@ class User < ActiveRecord::Base
       errors.add(:current_password, "is incorrect")
   end
   
-  def get_delivery_dates
+  def get_delivery_dates(exclude_order)
     #get delivery dates orders wo keys 10, 40, 50, 51
     delivery_dates = Array.new
-    @orders = Order.where(:user_id => self.id).joins(:order_status).where(["lists_order_statuses.key <> ? AND lists_order_statuses.key <> ? AND lists_order_statuses.key <> ? AND lists_order_statuses.key <> ?", 10, 40, 50, 51])
+    @orders = Order.where(:user_id => self.id).where(["orders.id <> ?", exclude_order.id]).joins(:order_status).where(["lists_order_statuses.key <> ? AND lists_order_statuses.key <> ? AND lists_order_statuses.key <> ? AND lists_order_statuses.key <> ?", 10, 40, 50, 51])
     @orders.each do |order|
       delivery_dates << order.delivery_date
     end

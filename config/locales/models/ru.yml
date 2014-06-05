@@ -120,7 +120,9 @@ ru:
       order:
         id: "№"
         user_id: "ИД пользователя"
-        delivery_street: "Улица, поселок"
+        delivery_location: "Адрес доставки"
+        delivery_town_id: "Город или поселок"
+        delivery_street: "Улица"
         delivery_address: "Дом, квартира"
         delivery_date: "Дата доставки"
         delivery_start_time: "c"
@@ -208,6 +210,13 @@ ru:
       lists/binding:
         binding: "Тип переплета"
         price: "Цена"
+      lists/delivery_zone:
+        title: "Название"
+        streets: "Населенные пункты"
+        price: "Цена"
+      lists/delivery_town:
+        title: "Название"
+        delivery_zone_id: "Зона"
       mailing:
         subject: "Тема"
         body: "Письмо"

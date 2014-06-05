@@ -1,17 +1,33 @@
  <table class="order_delivery">
     <%= render :partial => 'orders/share/header_table_with_delivery', :locals => {:order => order} %>
-    <tr>
-      <td class="delivery_street">
-        <%= order.delivery_street %>
-      </td>
-      <td class="delivery_address">
-        <%= order.delivery_address %>
-      </td>
-      <td class="delivery_date">
-         время <%= render :partial => 'orders/share/delivery_period', :locals => {:order => order} %>
-      </td>
+	  <tr>
+        <td class="delivery_location_show">
+        	
+	        	<b>
+	        		<%= label(:order, :delivery_town_id) %>:
+	        	</b>
+	            <%= order.delivery_town.title %>	
+            	<br />
+				
+				<b>
+	        		<%= label(:order, :delivery_street) %>:
+	        	</b>
+	            <%= order.delivery_street %>		
+				<br />
+	
+				<b>
+	        		<%= label(:order, :delivery_address) %>:
+	        	</b>
+	        	<%= order.delivery_address %>
+				<br />
+        </td>
+        <td class="delivery_date_show">
+        	   <%= h (Russian::strftime(order.delivery_date, "%d %B %Y года")) %> <br />
+	  		   <%= render :partial => 'orders/share/delivery_period', :locals => {:order => order}  %>
+        </td>      
+     
       <td class="delivery_price">
-        <%= h (number_to_currency(order.delivery_price, :unit => "коп.", :separator => " руб. ")) %>
+        <%= h (number_to_currency(order.delivery_price, :unit => "руб.", :precision => 0)) %>
       </td>
     </tr>
   </table>

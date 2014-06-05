@@ -1,0 +1,16 @@
+<div class="form_align">
+	<%= f.label :title %>
+	<%= f.text_field :title, :class => 'req_input'  %>
+</div>
+
+<div class="form_align">
+	<%= f.label :delivery_zone_id %>
+	<%= f.collection_select(:delivery_zone_id,
+                      Lists::DeliveryZone.find(:all),
+                      :id,
+                      :title) %>
+</div>
+
+
+
+

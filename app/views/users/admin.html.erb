@@ -43,13 +43,17 @@
 		<%= link_to 'Допечатные операции',  lists_pre_print_operations_path %><br />
 		<%= link_to 'Переплет',  lists_bindings_path %>
 		<p> Прайсы </p>
+			<div class="second_level">
+				<%= link_to 'Прайс на сканирование',  admin_pricelist_scans_path %> <br />
+				<%= link_to 'Прайс на доставку',  admin_pricelist_deliveries_path %> <br />
+			</div>
+			
+		<p>Управление доставкой</p>
+			<div class="second_level">
+				<%= link_to 'Зоны доставки и цены',  lists_delivery_zones_path%><br/>
+				<%= link_to 'Населенные пункты',  lists_delivery_towns_path%><br/>
+			</div>
 	</div>
-	<div class="second_level">
-		<%= link_to 'Прайс на сканирование',  admin_pricelist_scans_path %> <br />
-		<%= link_to 'Прайс на доставку',  admin_pricelist_deliveries_path %> <br />
-
-	</div>
-
 	
 	<div class="zero_level">
 		<p>Письма</p>
@@ -58,6 +62,8 @@
 		<%= link_to 'Обратная связь от пользователей',  admin_letters_path%><br/>
 		<%= link_to 'Рассылки',  admin_mailings_path%><br/>
 	</div>
+	
+
 
 <br/><br/><br/><br/><br/>
 

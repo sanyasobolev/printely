@@ -21,12 +21,12 @@ $(document).ready(function(){
 	        $("form.edit_scan_order").validate({
 	    		rules: {
 	    			'order[delivery_address]': "required",
-	    			'order[delivery_street]':"required",
+	    			'order[delivery_town_id]':"required",
 	    			'order[delivery_date]':"required"
 	    		},
 	    		messages: {
 	    			'order[delivery_address]': "?",
-	    			'order[delivery_street]':"?",
+	    			'order[delivery_town_id]':"?",
 	    			'order[delivery_date]':"?"
 	    		}
 	    		}
@@ -353,12 +353,12 @@ $(document).ready(function(){
 	        $("form.admin_scan_order").validate({
 	    		rules: {
 	    			'order[delivery_address]': "required",
-	    			'order[delivery_street]':"required",
+	    			'order[delivery_town_id]':"required",
 	    			'order[delivery_date]':"required"
 	    		},
 	    		messages: {
 	    			'order[delivery_address]': "?",
-	    			'order[delivery_street]':"?",
+	    			'order[delivery_town_id]':"?",
 	    			'order[delivery_date]':"?"
 	    		}
 	    		}
@@ -493,7 +493,7 @@ $(document).ready(function(){
         };
 		
         //clear value 'выберите' in select
-        $("select#order_delivery_street").change(function(event){
+        $("select#order_delivery_town_id").change(function(event){
             $('[value=""]',event.target).remove();
         });
 		

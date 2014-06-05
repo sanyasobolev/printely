@@ -245,24 +245,30 @@ $(document).ready(function(){
 
         //при любом изменении в таблице, устанавливаем тип доставки "курьер"
 		if($("table.order_delivery input").exists()) {
-        var url_for_update_order = "/order/ajaxupdate",
-            order_id = $("form").attr("id");
-            
-        $("table.order_delivery select#order_delivery_street").change(function(event){
-            var selected_delivery = 'Курьер';
-            $.post( url_for_update_order, {id: order_id, delivery_type: selected_delivery} );
-        });  
-        
-        $("table.order_delivery input#order_delivery_address").change(function(event){
-            var selected_delivery = 'Курьер';
-            $.post( url_for_update_order, {id: order_id, delivery_type: selected_delivery} );
-        }); 
+	        var url_for_update_order = "/order/ajaxupdate",
+	            order_id = $("form").attr("id");
+	            
+	        $("table.order_delivery select#order_delivery_town_id").change(function(event){
+	            var selected_delivery = 'Курьер',
+	            	selected_town = $(this).val();
+	            	
+	            $.post( url_for_update_order, 
+	            		{
+	            			id: order_id, 
+	            		 	delivery_type: selected_delivery,
+	            		 	delivery_town: selected_town
+	            		 } 
+	            	   );
+	        });  
 
-        $("table.order_delivery input#datepicker").change(function(event){
-            var selected_delivery = 'Курьер',
-                selected_deleivery_date = $(this).val();
-            $.post( url_for_update_order, {id: order_id, delivery_type: selected_delivery, delivery_date: selected_deleivery_date } );
-        }); 
+	        $("table.order_delivery input#datepicker").change(function(event){
+	            var selected_delivery_date = $(this).val();
+	            $.post( url_for_update_order, 
+	            	{
+	            		id: order_id, 
+	            		delivery_date: selected_delivery_date 
+	            	} );
+	        }); 
           
 	};
 	

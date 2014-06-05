@@ -1,4 +1,4 @@
-$("table.order_delivery tr td.delivery_price").html("<%= j number_to_currency(@order.delivery_price, :unit => "коп.", :separator => " руб. ") %>");
+$("table.order_delivery tr td.delivery_price").html("<%= j number_to_currency(@order.delivery_price, :unit => "руб.", :precision => 0) %>");
 $("div.total_cost_order_label").html("Примерная стоимость заказа:");
 $("div.total_cost_order").html("<%= Order.human_attribute_name('cost_min') %> <%= j number_to_currency(@order.cost_min, :unit => "руб.", delimiter: "", precision: 0) %> <%= Order.human_attribute_name('cost_max') %> <%= j number_to_currency(@order.cost_max, :unit => "руб.", delimiter: "", precision: 0) %>");
 

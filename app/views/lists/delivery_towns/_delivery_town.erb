@@ -1,0 +1,6 @@
+<tr>
+  <td><%= link_to 'X', lists_delivery_town_path(delivery_town), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%=h (delivery_town.title) %></td>
+  <td><%= delivery_town.delivery_zone.title unless delivery_town.delivery_zone.nil? %></td>
+  <td><%= link_to 'Редактировать', edit_lists_delivery_town_path(delivery_town) %></td>
+</tr>

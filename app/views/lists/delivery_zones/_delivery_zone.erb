@@ -1,0 +1,11 @@
+<tr>
+  <td><%= link_to 'X', lists_delivery_zone_path(delivery_zone), :confirm => 'Вы действительно хотите удалить? Все населенные пункты этой зоны удалятся тоже.', :method => :delete %></td>
+  <td><%=h (delivery_zone.title) %></td>
+  <td>
+  	<ul>
+  		<%= render :partial => 'town', :collection => delivery_zone.delivery_towns %>
+  	</ul>
+  </td>
+  <td><%=h (delivery_zone.price) %></td>
+  <td><%= link_to 'Редактировать', edit_lists_delivery_zone_path(delivery_zone) %></td>
+</tr>

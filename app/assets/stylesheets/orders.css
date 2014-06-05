@@ -41,9 +41,13 @@
     background-color: #e8e8e8;
 }
 
+
+/*форма ввода информации о доставке*/
+
 .order_delivery {
 	position: relative;
     width: 100%;
+    border-collapse: separate;
 }
 
 .order_delivery tr td {
@@ -52,54 +56,82 @@
     text-align: center
 }
 
-/*форма ввода информации о доставке*/
-.order_delivery tr td.delivery_street select {
-    border: 1px solid #D6D3D1;
-    height: 30px;
-    width: 200px;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-bottom: 4px;
-    font-size: 1em;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
+.order_delivery tr td.delivery_location_edit {
+	height: 170px;
+	width: 560px;
 }
 
-.order_delivery tr td.delivery_address input {
-    border: 1px solid #D6D3D1;
-    height: 25px;
-    width: 200px;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-bottom: 4px;
-    font-size: 1em;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
+.order_delivery tr td.delivery_location_show {
+	text-align: left;
+	padding-left: 100px;
+	height: 80px;
+	width: 460px;
+	vertical-align: middle
 }
 
-.order_delivery input#datepicker {
-    border: 1px solid #D6D3D1;
-    width: 100px;
-    font-size: 1em;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
+.order_delivery tr td.delivery_location_edit select {
+    width: 365px;
+}
+
+.order_delivery tr td.delivery_location_edit label {
+    width: 160px;
+}
+
+.order_delivery tr td.delivery_location_edit input {
+	width: 350px;
+}
+
+.order_delivery tr td.delivery_date_edit {
+	height: 170px;
+	vertical-align: top;
+}
+
+.order_delivery tr td.delivery_date_show {
+	height: 80px;
+	vertical-align: middle;
+}
+
+.order_delivery tr td.delivery_date_edit input#datepicker {
+    width: 150px;
     text-align: center;
 }
 
-.order_delivery tr td.delivery_date input#timepicker_start {
-    border: 1px solid #D6D3D1;
+.order_delivery tr td.delivery_date_edit span.time {
+	font-size: 1.3em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+    text-align: center;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 37px;
+}
+
+.order_delivery tr td.delivery_date_edit span.dash {
+	font-size: 1.3em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+    text-align: center;
+    float: left;
+    display: block;
+    width: 34px;
+    margin-top: 3px;
+}
+
+.order_delivery tr td.delivery_date_edit input#timepicker_start {
+    float: left;
     width: 50px;
-    font-size: 1em;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
     text-align: center;
+    margin-left: 8px;
+
 }
-.order_delivery tr td.delivery_date input#timepicker_end {
-    border: 1px solid #D6D3D1;
+.order_delivery tr td.delivery_date_edit input#timepicker_end {
+    float: left;
     width: 50px;
-    font-size: 1em;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
     text-align: center;
+
 }
 
 .order_delivery tr td.delivery_price {
-    width: 120px
+    width: 120px;
+   	font-size: 1.3em;
 }
 
 /*форма для загружки файлов------------------------------------------------------------*/
@@ -108,7 +140,7 @@ table#fileList {
 	border-collapse:separate;
 }
 
-#fileList th {
+#fileList th, .order_delivery th {
     font-weight: normal;
     text-align: center; 
     height: 30px;   
@@ -129,12 +161,12 @@ table#fileList {
     background-color: #e8e8e8;
 }
 
-#fileList tr#fileList_header{
+#fileList tr#fileList_header, .order_delivery tr#order_delivery_header {
     background-color: #517B93;
     color: white;
 }
 
-#fileList tr#fileList_header:hover{
+#fileList tr#fileList_header:hover, .order_delivery tr#order_delivery_header:hover {
     background-color: #517B93;
 }
 

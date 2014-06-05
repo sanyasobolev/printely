@@ -111,6 +111,8 @@ Spsite::Application.routes.draw do
     resources :print_colors
     resources :pre_print_operations
     resources :bindings
+    resources :delivery_zones
+    resources :delivery_towns
   end
   
 

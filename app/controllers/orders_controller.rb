@@ -52,7 +52,7 @@ class OrdersController < ApplicationController
     #проверка возможности редактировать заказ
     if @order.read_status_key == 10
       user_can_edit = true
-      gon.delivery_dates = current_user.get_delivery_dates
+      gon.delivery_dates = current_user.get_delivery_dates(@order)
     else
       user_can_edit = false
     end
@@ -102,6 +102,7 @@ class OrdersController < ApplicationController
   
   def edit_delivery
     @title = "Обновление заказа №#{@order.id}"
+    gon.delivery_dates = @order.user.get_delivery_dates(@order) #get dates of delivery for user order
     #рендер view в зависимости от типа заказа
     respond_to do |format|
       case @order.order_type.title
@@ -189,12 +190,13 @@ class OrdersController < ApplicationController
       order.scan.update_attributes(params[:order][:scan_attributes])
     end
     
-    if (params[:order][:delivery_street] == "" || params[:order][:delivery_address] == "" || params[:order][:delivery_date] == "")  
+    if (params[:order][:delivery_town_id] == "" || params[:order][:delivery_address] == "" || params[:order][:delivery_date] == "")  
         flash[:error] = 'Для оформления заказа необходимо заполнить информацию о доставке.'
         redirect_to :action => "edit"
         return false
-    elsif params[:order][:delivery_street] && params[:order][:delivery_address] && params[:order][:delivery_date]
+    elsif params[:order][:delivery_town_id] && params[:order][:delivery_address] && params[:order][:delivery_date]
         order.update_attributes(
+            :delivery_town_id => params[:order][:delivery_town_id], 
             :delivery_street => params[:order][:delivery_street], 
             :delivery_address => params[:order][:delivery_address], 
             :delivery_date => params[:order][:delivery_date])
@@ -265,6 +267,9 @@ class OrdersController < ApplicationController
     if params[:delivery_date]
       @order.update_attribute(:delivery_date, params[:delivery_date])
     end
+    if params[:delivery_town]
+      @order.update_attribute(:delivery_town_id, params[:delivery_town].to_i)
+    end
     set_price(@order)
     respond_to do |format|
       if @order.cost_min == @order.cost_max || @order.cost_min == nil
@@ -307,12 +312,12 @@ class OrdersController < ApplicationController
   private
     def set_price(order)
       #cчитаем доставку
-      if order.delivery_type
+      if order.delivery_type == 'Курьер'
         #ищем цену доставки в прайсе и проверяем есть ли уже заказы на дату
-        if current_user.get_delivery_dates.include?(order.delivery_date)
+        if order.user.get_delivery_dates(order).include?(order.delivery_date)
           delivery_price = 0
         else
-          delivery_price = PricelistDelivery.where(:delivery_type => order.delivery_type).first.price
+          delivery_price = order.delivery_town.delivery_zone.price
         end
       else
         delivery_price = 0
