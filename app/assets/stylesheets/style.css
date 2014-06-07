@@ -1591,6 +1591,8 @@ div#delivery_map {
 	height: 800px;
 	width: 600px;
 	border: solid 1px grey;
+	float: left;
+	margin-right: 20px;
 }
 
 div#delivery_map p {
