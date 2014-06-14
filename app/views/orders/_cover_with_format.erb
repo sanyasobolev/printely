@@ -20,8 +20,13 @@
   <% end %>
 
   <h2> Информация о доставке </h2>
-  <p class="cover"> <span class="bold"><%= label(:order, :delivery_street, :class => 'bold')%>:</span>
-  <%= order.delivery_street %></p>
+  <p class="cover"> <span class="bold"><%= label(:order, :delivery_town_id, :class => 'bold')%>:</span>
+  <%= order.delivery_town.title %></p>
+  
+  <% unless order.delivery_street.blank? %>
+	  <p class="cover"> <span class="bold"><%= label(:order, :delivery_street, :class => 'bold')%>:</span>
+	  <%= order.delivery_street %></p>
+  <% end %>
 
   <p class="cover"><span class="bold"><%= label(:order, :delivery_address, :class => 'bold')%>:</span>
   <%= order.delivery_address %></p>
