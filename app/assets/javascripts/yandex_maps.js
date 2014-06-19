@@ -41,16 +41,22 @@ $(document).ready(function(){
 	};
 
 	if($("div#delivery_map").exists()){
-		var	myMap;
+		var	myMap,
+		// Контейнер для меню
+	    menu = $('<table class="default_table" id="delivery_map_menu"/>'),
+	    menu_header = $('<tr class="header"><th>Район</th><th>Стоимость доставки</th></tr>');
 
-						function fillOpasity_enter (e) {
-					            // Ссылку на объект, вызвавший событие,
-					            // можно получить из поля 'target'.
-					            e.get('target').options.set('fillOpacity', '0.4');
-					       };
-						function fillOpasity_leave (e) {
-					            e.get('target').options.set('fillOpacity', '0.2');
-					        };
+		menu_header.appendTo(menu);
+
+		function fillOpasity_enter (e) {
+			// Ссылку на объект, вызвавший событие,
+			// можно получить из поля 'target'.
+			e.get('target').options.set('fillOpacity', '0.4');
+			};
+			
+		function fillOpasity_leave (e) {
+			e.get('target').options.set('fillOpacity', '0.2');
+			};
 
 		function init_delivery_map () {
 				    // Создание экземпляра карты и его привязка к контейнеру с
@@ -63,7 +69,7 @@ $(document).ready(function(){
 				        controls: ['zoomControl', 'fullscreenControl']
 				    });
 				    
-				    //добавляем типы карт
+				    //добавляем слои
 				    myMap.controls.add(new ymaps.control.TypeSelector(['yandex#map', 'yandex#satellite', 'yandex#hybrid']));
 				    
 				    // Создаем геообъект с типом геометрии "Точка".
@@ -127,6 +133,7 @@ $(document).ready(function(){
 					    });
 					    // Добавляем многоугольник на карту.
     					myMap.geoObjects.add(myPolygon_1);
+    					createMenu(myPolygon_1, menu);
     					
     					//добавляем события
     					myPolygon_1.events.add('mouseenter', function (e){ fillOpasity_enter(e); });
@@ -166,6 +173,7 @@ $(document).ready(function(){
 					    });
 					    // Добавляем многоугольник на карту.
     					myMap.geoObjects.add(myPolygon_2);
+    					createMenu(myPolygon_2, menu);
 
     					//добавляем события
     					myPolygon_2.events.add('mouseenter', function (e){ fillOpasity_enter(e); });
@@ -204,6 +212,7 @@ $(document).ready(function(){
 					    });
 					    // Добавляем многоугольник на карту.
     					myMap.geoObjects.add(myPolygon_3);
+    					createMenu(myPolygon_3, menu);
 
     					//добавляем события
     					myPolygon_3.events.add('mouseenter', function (e){ fillOpasity_enter(e); });
@@ -241,6 +250,7 @@ $(document).ready(function(){
 					    });
 					    // Добавляем многоугольник на карту.
     					myMap.geoObjects.add(myPolygon_3_5);
+    					createMenu(myPolygon_3_5, menu);
 
     					//добавляем события
     					myPolygon_3_5.events.add('mouseenter', function (e){ fillOpasity_enter(e); });
@@ -280,6 +290,7 @@ $(document).ready(function(){
 					    });
 					    // Добавляем многоугольник на карту.
     					myMap.geoObjects.add(myPolygon_4);
+    					createMenu(myPolygon_4, menu);
 
     					//добавляем события
     					myPolygon_4.events.add('mouseenter', function (e){ fillOpasity_enter(e); });
@@ -320,6 +331,7 @@ $(document).ready(function(){
 					    });
 					    // Добавляем многоугольник на карту.
     					myMap.geoObjects.add(myPolygon_5);
+    					createMenu(myPolygon_5, menu);
 
     					//добавляем события
     					myPolygon_5.events.add('mouseenter', function (e){ fillOpasity_enter(e); });
@@ -364,6 +376,7 @@ $(document).ready(function(){
 					    });
 					    // Добавляем многоугольник на карту.
     					myMap.geoObjects.add(myPolygon_6);
+    					createMenu(myPolygon_6, menu);
     					
     					//добавляем события
     					myPolygon_6.events.add('mouseenter', function (e){ fillOpasity_enter(e); });
@@ -388,7 +401,7 @@ $(document).ready(function(){
 					    ], {
 					        // Описываем свойства геообъекта.
 					        // Содержимое балуна.
-					        //hintContent: "Зверево, СНТ Весна, доставка 100 руб."
+					        //hintContent: "Зверево, СНТ Весна, доставка 100 руб.",
 					        zone: '4',
 					        description: 'Зверево, СНТ Весна',
 					        price: '100'
@@ -404,10 +417,32 @@ $(document).ready(function(){
 					    });
 					    // Добавляем многоугольник на карту.
     					myMap.geoObjects.add(myPolygon_7);
+    					createMenu(myPolygon_7, menu);
     					
     					//добавляем события
     					myPolygon_7.events.add('mouseenter', function (e){ fillOpasity_enter(e); });
     					myPolygon_7.events.add('mouseleave', function (e){ fillOpasity_leave(e); });
+						
+
+					    function createMenu (item, menu) {
+					        // Пункт меню.
+					        var menuItem = $('<tr class="grey_on_hover"><td>' + item.properties.get("description") + '</td><td class="center">' + item.properties.get("price") + ' руб.</td></tr>');
+
+					        // Добавляем пункт в меню.
+					        menuItem
+					            .appendTo(menu)
+					            // При клике по пункту меню выделяем полигон.
+					            //.find("tr.grey_on_hover")
+					            .hover(function (){ 
+					            	item.options.set('fillOpacity', '0.5'); 
+					            	}, function (){ 
+					            	item.options.set('fillOpacity', '0.2'); 
+					            	});
+					    };
+
+					    // Добавляем меню в тэг BODY.
+    					menu.appendTo($("div#delivery_map"));
+		
 		};
 		
 		ymaps.ready(init_delivery_map);

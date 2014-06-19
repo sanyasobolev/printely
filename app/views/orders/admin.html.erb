@@ -37,8 +37,8 @@
 	<%= paginate @orders %>
 </div>
 
-<table class ="admin">
-  <tr>
+<table class ="default_table">
+  <tr class="header">
     <th><%= sort_link(@search, :id, Order.human_attribute_name(:id)) %></th>
     <th><%= Order.human_attribute_name(:client) %></th>
     <th><%= sort_link(@search, :delivery_date ,Order.human_attribute_name(:delivery_date)) %></th>

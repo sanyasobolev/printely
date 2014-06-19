@@ -1527,7 +1527,7 @@ label.error {
 	top: -3px;	
 }
 
-table.order_delivery td.delivery_location_edit label.error[for=order_delivery_town_id] {
+table td.delivery_location_edit label.error[for=order_delivery_town_id] {
 	right: 220px;
 	top: -10px;
 	font-size: 1.5em;
@@ -1536,7 +1536,7 @@ table.order_delivery td.delivery_location_edit label.error[for=order_delivery_to
 	text-align:center;
 }
 
-table.order_delivery td.delivery_location_edit label.error[for=order_delivery_address] {
+table td.delivery_location_edit label.error[for=order_delivery_address] {
 	right: 330px;
 	top: -10px;
 	font-size: 1.5em;
@@ -1598,3 +1598,47 @@ div#delivery_map {
 div#delivery_map p {
 	position:absolute
 }
+
+table#delivery_map_menu {
+	  position:absolute;
+	  width: 290px;
+  	  right: -300px;
+ 	  top: 0px;
+}
+
+/*типовая таблица на сайте------------------------------------------------------------------*/
+
+table.default_table {
+	border-collapse:separate;
+	width: 100%;
+}
+
+table.default_table tr.header {
+    background-color: #517B93;
+    color: white;
+}
+
+table.default_table tr.grey_on_hover:hover {
+	background-color: #e8e8e8;
+}
+
+table.default_table th {
+    font-weight: normal;
+    text-align: center; 
+    height: 30px; 
+}
+
+
+
+.floatTheadfileListOrder {
+	border-collapse:separate;
+}
+
+.floatTheadfileListOrder th {
+	background-color: #517B93;
+	font-weight: normal;
+	height: 30px;  
+	color: white;
+}
+
+
