@@ -805,6 +805,12 @@ a.for_admin:link,a.for_admin:visited {
 a.for_admin:hover,a.for_admin:active{
     background-color:#c2c1c1;
 }
+
+a.sort_link:link, a.sort_link:visited {
+	color: white;
+	text-decoration: underline;
+}
+
 /*сложные ссылки для стартовой страницы---------------------------------------------------*/
 .link_container {
      width: 420px; /* Ширина слоя */
@@ -1620,6 +1626,10 @@ table.default_table tr.header {
 
 table.default_table tr.grey_on_hover:hover {
 	background-color: #e8e8e8;
+}
+
+table.default_table tr.border_cell td {
+	border-bottom: 10px solid white;
 }
 
 table.default_table th {
