@@ -1,8 +1,8 @@
 <h2><%= @title %></h2>
 <p>Если письма не отправляются - запустить на сервере "RAILS_ENV=production rvm use 1.9.3 do bundle exec script/delayed_job start"</p>
   <p><%= link_to 'Создать рассылку', new_mailing_path, :class => 'button_style_long' %></p>
-<table class ="admin">
-  <tr>
+<table class ="default_table">
+  <tr class="header">
     <th></th>
     <th><%= Mailing.human_attribute_name("created_at") %></th>
     <th><%= Mailing.human_attribute_name("subject") %></th>

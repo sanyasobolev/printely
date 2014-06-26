@@ -2,13 +2,13 @@
 <%= link_to 'Создать страницу', new_page_path, :class => 'button_style_long' %>
 
   <h3>Стартовая страница</h3>
-    <table class ="admin">
-    <tr>
+    <table class ="default_table">
+    <tr class="header">
       <th><%= Page.human_attribute_name("title") %></th>
       <th><%= Page.human_attribute_name("permalink") %></th>
       <th></th>
     </tr>
-    <tr>
+    <tr class="grey_on_hover">
       <td><%= @main_page.title %></td>
       <td><%= link_to @main_page.permalink, :root %></td>
       <td><%= link_to 'Редактировать', edit_page_path(@main_page) %></td>
@@ -16,8 +16,8 @@
     </table>
 
   <h3>Остальные страницы</h3>
-    <table class ="admin">
-      <tr>
+    <table class ="default_table">
+      <tr class="header">
         <th></th>
         <th><%= Page.human_attribute_name("title") %></th>
         <th><%= Page.human_attribute_name("permalink") %></th>

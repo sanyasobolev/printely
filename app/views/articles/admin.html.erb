@@ -1,7 +1,7 @@
 <h2>Редактирование статей</h2>
   <p><%= link_to 'Создать статью', new_article_path, :class => 'button_style_long' %></p>
-<table class ="admin">
-  <tr>
+<table class ="default_table">
+  <tr class="header">
     <th></th>
     <th><%= Article.human_attribute_name("title") %></th>
     <th><%= Article.human_attribute_name("category_id") %></th>

@@ -111,6 +111,22 @@ a.box_user_opt:hover, a.box_user_opt:active {
     background-color: #3b6fb5;
 }
 
+div.box_user_opt {
+    float: right;
+    display:block;
+    color:white;
+    background-color:#378cff;
+    text-align:center;
+    text-decoration:none;
+    max-width: 100px;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+div.box_user_opt:hover {
+    background-color: #3b6fb5;
+}
+
 /*CSS меню верхнее-------------------------------------------------*/
 /*section*/
 #top_menu {
@@ -1638,8 +1654,6 @@ table.default_table th {
     height: 30px; 
 }
 
-
-
 .floatTheadfileListOrder {
 	border-collapse:separate;
 }
@@ -1651,4 +1665,53 @@ table.default_table th {
 	color: white;
 }
 
+/*phone popup--------------------------------------------------------*/
 
+.phone_popup {
+	display: none;
+	border-bottom: 4px solid #378cff;
+	cursor: default;
+	right: 54px;
+	top: 28px;
+	height: 62px;
+	width: 205px;
+	z-index: 1000104;
+	background-color: #4c4c4c;
+	padding: 10px;
+	position: absolute;
+	color: #b5b5b5;
+	/*opacity: 1!important;*/
+  }
+
+.phone_popup .arrow {
+	background-image: url(/assets/icons/popup_phone_arrow_icon.png);
+	height: 9px;
+	background-repeat: no-repeat;
+	position: absolute;
+	width: 10px;
+	right: 0;
+	top: -10px;
+	height: 10px;
+}
+
+.phone_popup .heading {
+	float: left;
+	text-align: left;
+	width: 100px;	
+}
+
+.phone_popup .exit {
+	cursor: pointer;
+	float: right;
+	background-image: url(/assets/icons/popup_phone_exit_icon.png);
+	background-repeat: no-repeat;
+	width: 12px;
+	height: 12px;
+}
+
+.phone_popup .number {
+	font-size: 1.5em;
+	font-weight: lighter;
+	text-align: center;
+	clear: both;
+}

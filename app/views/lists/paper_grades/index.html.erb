@@ -1,7 +1,7 @@
 <h2>Классы бумаги</h2>
 <p><%= link_to 'Создать', new_lists_paper_grade_path, :class => 'button_style_long' %></p>
-<table class="admin">
-  <tr>
+<table class="default_table">
+  <tr class="header">
     <th></th>
     <th><%= Lists::PaperGrade.human_attribute_name("grade") %></th>
     <th></th>

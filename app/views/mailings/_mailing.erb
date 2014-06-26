@@ -1,4 +1,4 @@
-<tr>
+<tr class="grey_on_hover">
   <td><%= link_to 'Х', mailing_path(mailing), :method => :delete, :confirm => 'Действительно хотите удалить запись?' %></td>
   <td><%= Russian::strftime(mailing.created_at, "%d %B %Y") %></td>
   <td><%= h (mailing.subject) %></td>

@@ -1,7 +1,7 @@
 <h2>Спецификация бумаг</h2>
 <p><%= link_to 'Создать', new_lists_paper_specification_path, :class => 'button_style_long' %></p>
-<table class="admin">
-  <tr>
+<table class="default_table">
+  <tr class="header">
     <th></th>
     <th><%= Lists::PaperSpecification.human_attribute_name("paper_size_id") %></th>
     <th><%= Lists::PaperSpecification.human_attribute_name("paper_type_id") %></th>

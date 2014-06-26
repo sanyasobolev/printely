@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131221144729) do
+ActiveRecord::Schema.define(:version => 20140602185927) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20131221144729) do
     t.integer  "header_image_file_size"
     t.datetime "header_image_updated_at"
     t.string   "permalink"
+    t.boolean  "this_news",                 :default => false
   end
 
   create_table "categories", :force => true do |t|
@@ -73,12 +74,22 @@ ActiveRecord::Schema.define(:version => 20131221144729) do
     t.integer  "order_id"
     t.string   "docfile"
     t.text     "user_comment"
-    t.integer  "quantity"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "quantity",               :default => 1
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.float    "price"
     t.string   "user_filename"
-    t.integer  "document_specification_id"
+    t.integer  "page_count",             :default => 1
+    t.integer  "paper_specification_id"
+    t.float    "cost"
+    t.integer  "print_margin_id"
+    t.integer  "print_color_id"
+    t.integer  "binding_id"
+  end
+
+  create_table "documents_pre_print_operations", :id => false, :force => true do |t|
+    t.integer "document_id"
+    t.integer "pre_print_operation_id"
   end
 
   create_table "letters", :force => true do |t|
@@ -90,18 +101,36 @@ ActiveRecord::Schema.define(:version => 20131221144729) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "lists_document_specifications", :force => true do |t|
-    t.integer  "paper_specification_id"
-    t.integer  "print_margin_id"
-    t.boolean  "available",              :default => true
-    t.float    "price"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+  create_table "lists_bindings", :force => true do |t|
+    t.string   "binding"
+    t.float    "price",      :default => 0.0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "lists_delivery_towns", :force => true do |t|
+    t.string   "title"
+    t.integer  "delivery_zone_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "lists_delivery_zones", :force => true do |t|
+    t.string   "title"
+    t.float    "price",      :default => 0.0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "lists_order_statuses", :force => true do |t|
     t.string   "title"
     t.integer  "key"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "lists_order_types", :force => true do |t|
+    t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -123,8 +152,10 @@ ActiveRecord::Schema.define(:version => 20131221144729) do
     t.integer  "paper_type_id"
     t.integer  "paper_size_id"
     t.boolean  "in_stock"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.float    "price"
+    t.integer  "order_type_id", :default => 1
   end
 
   create_table "lists_paper_types", :force => true do |t|
@@ -134,10 +165,28 @@ ActiveRecord::Schema.define(:version => 20131221144729) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "lists_pre_print_operations", :force => true do |t|
+    t.string   "operation"
+    t.float    "price",         :default => 0.0
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "order_type_id", :default => 1
+  end
+
+  create_table "lists_print_colors", :force => true do |t|
+    t.string   "color"
+    t.float    "price",         :default => 0.0
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "order_type_id", :default => 1
+  end
+
   create_table "lists_print_margins", :force => true do |t|
     t.string   "margin"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.float    "price",         :default => 0.0
+    t.integer  "order_type_id", :default => 1
   end
 
   create_table "mailings", :force => true do |t|
@@ -166,8 +215,9 @@ ActiveRecord::Schema.define(:version => 20131221144729) do
     t.string   "delivery_type"
     t.float    "cost_min"
     t.float    "cost_max"
-    t.string   "order_type"
     t.integer  "order_status_id"
+    t.integer  "order_type_id"
+    t.integer  "delivery_town_id"
   end
 
   create_table "pages", :force => true do |t|
@@ -182,6 +232,7 @@ ActiveRecord::Schema.define(:version => 20131221144729) do
     t.datetime "updated_at",                       :null => false
     t.integer  "service_id"
     t.integer  "subservice_id"
+    t.integer  "subsection_id"
   end
 
   create_table "pricelist_deliveries", :force => true do |t|
@@ -249,9 +300,10 @@ ActiveRecord::Schema.define(:version => 20131221144729) do
     t.string   "service_header_icon_content_type"
     t.integer  "service_header_icon_file_size"
     t.datetime "service_header_icon_updated_at"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "pricelist"
+    t.integer  "order_type_id",                    :default => 1
   end
 
   create_table "sessions", :force => true do |t|
@@ -264,6 +316,18 @@ ActiveRecord::Schema.define(:version => 20131221144729) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
+  create_table "subsections", :force => true do |t|
+    t.string   "title"
+    t.integer  "order"
+    t.string   "controller", :default => "no"
+    t.string   "action",     :default => "no"
+    t.boolean  "published",  :default => false
+    t.string   "permalink"
+    t.integer  "section_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
   create_table "subservices", :force => true do |t|
     t.string   "title"
     t.string   "synopsis"
@@ -273,8 +337,9 @@ ActiveRecord::Schema.define(:version => 20131221144729) do
     t.string   "subservice_header_icon_content_type"
     t.integer  "subservice_header_icon_file_size"
     t.datetime "subservice_header_icon_updated_at"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.integer  "order_type_id",                       :default => 1
   end
 
   create_table "users", :force => true do |t|

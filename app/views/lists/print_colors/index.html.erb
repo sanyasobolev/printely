@@ -1,7 +1,7 @@
 <h2><%= @title %></h2>
 <p><%= link_to 'Создать', new_lists_print_color_path, :class => 'button_style_long' %></p>
-<table class="admin">
-  <tr>
+<table class="default_table">
+  <tr class="header">
     <th></th>
     <th><%= Lists::PrintColor.human_attribute_name("color") %></th>
     <th><%= Lists::PrintColor.human_attribute_name("price") %></th>

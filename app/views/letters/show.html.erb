@@ -5,4 +5,5 @@
   <span class="bold"><%= Letter.human_attribute_name("question") %>:</span> <%= @letter.question %><br />
 </p>
 
-<%= link_to 'Назад', :back %>
+<%= link_to 'Назад', admin_letters_path, :class => 'button_style' %>
+

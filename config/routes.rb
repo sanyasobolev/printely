@@ -115,11 +115,6 @@ Spsite::Application.routes.draw do
     resources :delivery_towns
   end
   
-
-  resources :pricelist_deliveries do
-    get 'admin', :on => :collection
-  end
-  
   resources :pricelist_scans do
     get 'admin', :on => :collection
   end

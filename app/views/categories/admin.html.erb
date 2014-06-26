@@ -1,7 +1,7 @@
 <h2>Редактирование категорий статей</h2>
   <p><%= link_to 'Создать категорию', new_category_path, :class => 'button_style_long' %></p>
-  <table class ="admin">
-    <tr>
+  <table class ="default_table">
+    <tr class="header">
       <th></th>
       <th><%= Category.human_attribute_name("name") %></th>
       <th></th>

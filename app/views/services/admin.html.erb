@@ -1,7 +1,7 @@
 <h2>Редактирование услуг</h2>
   <p><%= link_to 'Создать услугу', new_service_path, :class => 'button_style_long' %></p>
-<table class ="admin">
-  <tr>
+<table class ="default_table">
+  <tr class="header">
     <th></th>
     <th><%= Service.human_attribute_name("title") %></th>
     <th><%= Service.human_attribute_name("synopsis") %></th>

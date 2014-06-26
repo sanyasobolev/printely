@@ -156,11 +156,6 @@ ru:
         print_format: "Формат"
         paper_type: "Тип бумаги"
         price: "Цена"
-      pricelist_delivery:
-        delivery_type: "Тип доставки"
-        price: "Цена"
-        territory: "Покрытие"
-        delivery_limit_time: "Время"
       scan:
         scan_documents_quantity: "Количество документов для сканирования"
         base_correction: "Базовая коррекция"

@@ -1,8 +1,10 @@
 # encoding: utf-8
 class LettersController < ApplicationController
+ layout 'letters', :only => [:sent, :new]
+ layout 'application', :only => [:admin, :show]
+
  skip_before_filter :login_required, :authorized?,
                     :only => [:sent, :new, :create]
- layout 'letters'
 
  def sent
     @title = 'Спасибо!'

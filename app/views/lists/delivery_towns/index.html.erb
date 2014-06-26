@@ -1,7 +1,7 @@
 <h2><%= @title %></h2>
 <p><%= link_to 'Создать', new_lists_delivery_town_path, :class => 'button_style_long' %></p>
-<table class="admin">
-  <tr>
+<table class="default_table">
+  <tr class="header">
     <th></th>
     <th><%= Lists::DeliveryTown.human_attribute_name("title") %></th>
 	<th><%= Lists::DeliveryTown.human_attribute_name("delivery_zone_id") %></th>

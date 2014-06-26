@@ -1,8 +1,4 @@
-<tr>
-  <%# unless role.name == 'Administrator' || role.id == 2 %>
-    <%#= link_to '(X)', role_path(role), :confirm => 'Вы действительно хотите удалить роль?', :method => :delete %>
-  <%# end %>
-
+<tr class="grey_on_hover">
   <td><%=h (role.name) %></td>
   <td>
   <% unless role.name == 'Administrator' %>

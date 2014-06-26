@@ -1,7 +1,7 @@
 <h2><%= @title %></h2>
 <p><%= link_to 'Создать', new_lists_binding_path, :class => 'button_style_long' %></p>
-<table class="admin">
-  <tr>
+<table class="default_table">
+  <tr class="header">
     <th></th>
     <th><%= Lists::Binding.human_attribute_name("binding") %></th>
     <th><%= Lists::Binding.human_attribute_name("price") %></th>

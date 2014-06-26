@@ -1,7 +1,7 @@
 <h2>Cтатусы заказов</h2>
 <p><%= link_to 'Создать', new_lists_order_status_path, :class => 'button_style_long' %></p>
-<table class="admin">
-  <tr>
+<table class="default_table">
+  <tr class="header">
     <th></th>
     <th><%= Lists::OrderStatus.human_attribute_name("title") %></th>
     <th><%= Lists::OrderStatus.human_attribute_name("key") %></th>

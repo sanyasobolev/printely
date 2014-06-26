@@ -1,7 +1,7 @@
 <h2>Редактирование подразделов сайта</h2>
   <p><%= link_to 'Создать подраздел', new_subsection_path, :class => 'button_style_long' %></p>
-  <table class ="admin">
-    <tr>
+  <table class ="default_table">
+    <tr class="header">
       <th></th>
       <th><%= Subsection.human_attribute_name("title") %></th>
       <th><%= Subsection.human_attribute_name("order") %></th>

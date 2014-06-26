@@ -1,7 +1,7 @@
 <h2>Редактирование разделов сайта</h2>
   <p><%= link_to 'Создать раздел', new_section_path, :class => 'button_style_long' %></p>
-  <table class ="admin">
-    <tr>
+  <table class ="default_table">
+    <tr class="header">
       <th></th>
       <th><%= Section.human_attribute_name("title") %></th>
       <th><%= Section.human_attribute_name("order") %></th>

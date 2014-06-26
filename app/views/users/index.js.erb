@@ -2,4 +2,4 @@
 <% href = params[:role] ? users_path : users_path(:role => 'Administrator') %>
 $("#toggle").html("<%= link_text %>");
 $("#toggle").attr("href", "<%= href %>");
-$(".admin").html('<%= escape_javascript(render @users) %>');
+$("#admin").html('<%= escape_javascript(render @users) %>');

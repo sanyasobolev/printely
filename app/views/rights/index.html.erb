@@ -1,7 +1,7 @@
 <h2>Права пользователей</h2>
 <p><%= link_to 'Создать право', new_right_path, :class => 'button_style_long' %></p>
-<table class="admin">
-  <tr>
+<table class="default_table">
+  <tr class="header">
     <th></th>
     <th><%= Right.human_attribute_name("name") %></th>
     <th><%= Right.human_attribute_name("controller") %></th>
@@ -13,7 +13,7 @@
   <%= render :partial => 'right' , :collection => @rights %>
 
 </table>
-
+<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>
     
     
     

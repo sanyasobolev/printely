@@ -1,4 +1,4 @@
-<tr>
+<tr class="grey_on_hover">
   <td><%= link_to 'X', lists_paper_specification_path(paper_specification_for_admin), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
   <td><%= h (paper_specification_for_admin.paper_size.size) unless paper_specification_for_admin.paper_size.nil? %></td>
   <td><%= h (paper_specification_for_admin.paper_type.paper_type_with_grade) unless paper_specification_for_admin.paper_type.nil? %></td>
