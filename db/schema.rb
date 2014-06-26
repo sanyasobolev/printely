@@ -235,15 +235,6 @@ ActiveRecord::Schema.define(:version => 20140602185927) do
     t.integer  "subsection_id"
   end
 
-  create_table "pricelist_deliveries", :force => true do |t|
-    t.string   "delivery_type"
-    t.float    "price"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.text     "territory"
-    t.string   "delivery_limit_time"
-  end
-
   create_table "pricelist_scans", :force => true do |t|
     t.string   "work_name"
     t.string   "work_desc"
