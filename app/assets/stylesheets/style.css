@@ -1050,22 +1050,7 @@ a.boardlink:hover, a.boardlink:active {
     background-color: #3b6fb5;
 }
 
-/*стиль для таблиц и меню у администратора*/
-.admin {
-    width: 100%;
-}
-
-.admin th, .admin td {
-    font-size: 1em;
-    border: 1px solid #a1d8ff;
-    padding: 3px 7px 2px 7px;
-}
-
-.admin th {
-    font-size: 1.1em;
-    background-color: #a1d8ff;
-    text-align: center
-}
+/меню у администратора*/
 
 #admin_menu {
     position: fixed;
@@ -1078,8 +1063,6 @@ a.boardlink:hover, a.boardlink:active {
 
 
 /*обработка ошибок и сообщений-------------------------------------------------*/
-
-
 
 /*общее сообщение*/
 #notice {
