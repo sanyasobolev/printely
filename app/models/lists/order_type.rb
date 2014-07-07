@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Lists::OrderType < ActiveRecord::Base
    attr_accessible :title, :id, :service_id, :description
    
