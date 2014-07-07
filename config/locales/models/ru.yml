@@ -109,14 +109,14 @@ ru:
         service_header_icon: "Иконка (80x80px)"
         permalink: "Название в URL"
         pricelist: "Прайс"
-        order_type_id: "Тип заказа"
+        order_type: "Тип заказа"
       subservice:
         title: "Название"
         synopsis: "Краткий обзор"
         subservice_header_icon: "Иконка"
         permalink: "Название в URL"
         service_id: "Услуга"
-        order_type_id: "Тип заказа"
+        order_type: "Тип заказа"
       order:
         id: "№"
         user_id: "ИД пользователя"
@@ -167,11 +167,10 @@ ru:
         cost_min: "от"
         cost_max: "до"
         cost: "Стоимость к оплате"
-      pricelist_scan:
-        work_name: "Работы (системное)"
-        work_desc: "Работы"
-        price_min: "Цена, от"
-        price_max:  "Цена, до"
+      lists/scan_specification:
+        paper_size_id: "Размер скана"
+        price: "Цена"
+        order_type_id: "Тип заказа"
       lists/order_status:
         id: "ИД статуса"
         title: "Название"
@@ -212,6 +211,11 @@ ru:
       lists/delivery_town:
         title: "Название"
         delivery_zone_id: "Зона"
+      lists/order_type:
+        id: "Ид"
+        title: "Название"
+        description: "Описание для прайса"
+        service_id: "Услуга"
       mailing:
         subject: "Тема"
         body: "Письмо"

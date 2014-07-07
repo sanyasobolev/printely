@@ -28,10 +28,6 @@ Spsite::Application.routes.draw do
   match 'document/get_print_margins' => 'documents#get_print_margins'
   match 'document/get_print_colors' => 'documents#get_print_colors'
   
-  resources :scans
-  match 'scan/ajaxupdate' => 'scans#ajaxupdate'
-  match 'scan/create' => 'scans#create'
-
   resources :orders do
     resources :documents
     resources :scans
@@ -98,6 +94,7 @@ Spsite::Application.routes.draw do
 
   namespace :lists do
     resources :order_statuses
+    resources :order_types
     resources :paper_grades
     resources :paper_types
     resources :paper_sizes
@@ -107,16 +104,15 @@ Spsite::Application.routes.draw do
     resources :document_specifications do
       get 'admin', :on => :collection
     end
+    resources :scan_specifications do
+      get 'admin', :on => :collection
+    end
     resources :print_margins
     resources :print_colors
     resources :pre_print_operations
     resources :bindings
     resources :delivery_zones
     resources :delivery_towns
-  end
-  
-  resources :pricelist_scans do
-    get 'admin', :on => :collection
   end
   
   Ckeditor::Engine.routes.draw do

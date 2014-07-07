@@ -1,0 +1,21 @@
+<div class="form_align">
+  <%= f.label(:paper_size_id) %>
+  <%= f.collection_select(:paper_size_id,
+                      Lists::PaperSize.find(:all),
+                      :id,
+                      :size) %>
+</div>
+
+<div class="form_align">
+  <%= f.label :price %>
+  <%= f.text_field :price,
+                   :class => 'req_input'%>
+</div>
+
+<div class="form_align">
+	<%= f.label :order_type_id %>
+	<%= f.collection_select(:order_type_id,
+                      Lists::OrderType.find(:all),
+                      :id,
+                      :title) %>
+</div>

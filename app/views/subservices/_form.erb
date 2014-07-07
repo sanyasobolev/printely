@@ -27,11 +27,3 @@
                           :id,
                           :title) %>
 </div>
-
-<div class="form_align">
-	<%= f.label :order_type_id %>
-	<%= f.collection_select(:order_type_id,
-                      Lists::OrderType.find(:all),
-                      :id,
-                      :title) %>
-</div>

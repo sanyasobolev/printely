@@ -5,30 +5,34 @@
 <% end %>
 
 <% if @pricelist_for_service_model_name != nil %>
-	<% if @pricelist_for_service_model_name =~ /\A(Lists)/ %>
-		<div class="grey_color">
-			<% @lines_of_print_color.each do |print_color| %>
-				<h2 class="dark_grey_color"><%= print_color.color %></h2>
+	  <% @order_types.each do |order_type| %>	
+		 <h2><%= order_type.description %></h2>
+			<div class="grey_color">
+				<% print_colors = Lists::PrintColor.where(:order_type_id => order_type) %>
+				<% if print_colors.count>0 %>
+					<% print_colors.each do |print_color| %>
+						<h2 class="dark_grey_color"><%= print_color.color %></h2>
+							<table class="pricelist_for_user">
+								<%= render :partial => "lists/#{@subdirectory}/pricelist_header" %>
+								<% @pricelist_for_service_model_name.constantize.pricelist(order_type).each do |line_of_pricelist| %>
+								  	<%= render :partial => "lists/#{@subdirectory}/pricelist_line", :locals =>{:pricelist_line => line_of_pricelist, :print_color => print_color}  %>
+								<% end %>
+							</table>
+					<% end %>				
+				<% else %>
 					<table class="pricelist_for_user">
-						<%= render :partial => "lists/#{@subdirectory}/#{@header_name}" %>
-						<% @lines_of_pricelist.each do |line_of_pricelist| %>
-						  	<%= render :partial => "lists/#{@subdirectory}/#{@partial_name}", :locals =>{:paper_specification => line_of_pricelist, :print_color => print_color}  %>
+						<%= render :partial => "lists/#{@subdirectory}/pricelist_header" %>
+						<% @pricelist_for_service_model_name.constantize.pricelist(order_type).each do |line_of_pricelist| %>
+							<%= render :partial => "lists/#{@subdirectory}/pricelist_line", :locals =>{:pricelist_line => line_of_pricelist}  %>
 						<% end %>
 					</table>
-			<% end %>
-		</div>		
-	<% else %>
-		<div class=grey_color>
-			<table class="pricelist_for_user">
-		  		<%= render :partial => "#{@pricelist_for_service_table_name}/header_for_line" %>
-		  		<%= render :partial => "#{@pricelist_for_service_table_name}/line", :collection => @lines_of_pricelist %>
-			</table>
-		</div>
-	<% end %>
+				<% end %>
+			</div>
+	  <% end %>		
 <% else %>
   <p>Прайс-листа на эту услугу нет.</p>
 <% end %>
-
+<br />
 <%= render :partial => 'subservice_for_user', :collection => @subservices, :locals => { :service_id => @service.permalink} %>
 
 <div class="fl_clear">

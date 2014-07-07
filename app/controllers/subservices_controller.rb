@@ -25,29 +25,12 @@ class SubservicesController < ApplicationController
         @pricelist_for_service_table_name = @pricelist_for_service_model_name.constantize.table_name
         @subdirectory = ''
         @subdirectory = @subdirectory + @pricelist_for_service_table_name.to_s
-        @subdirectory.slice!('lists_')
+        @subdirectory.slice!('lists_') #example result - paper_specifications
         
-        #get partial from subdirectory
-        @partial_name = ''
-        @partial_name = @partial_name + @subdirectory
-        @partial_name.slice!(-1,1)
-        
-        #get header from partial
-        @header_name = ''
-        @header_name = @partial_name + '_header'
+        #order_types
+        @order_types = @service.order_types
 
-        #convert string to model and get pricelist lines
-        @lines_of_pricelist = @pricelist_for_service_model_name.constantize.pricelist(@service.order_type)
-        @lines_of_print_color = Lists::PrintColor.where(:order_type_id => @service.order_type)
-      else
-        #get table name
-        @pricelist_for_service_table_name = @pricelist_for_service_model_name.constantize.table_name  
-
-        #convert string to model and get pricelist lines
-        @lines_of_pricelist = @pricelist_for_service_model_name.constantize.all
       end
-      
-
       @subservices = Subservice.where("service_id=#{@service.id.to_i}").order("created_at DESC")
     else
       @subservices = Subservice.all

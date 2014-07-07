@@ -1,0 +1,21 @@
+<div class="form_align">
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+</div>
+
+<div class="form_align">
+	<%= f.label :description %>
+	<%= f.text_field :description %>
+</div>
+
+<div class="form_align">
+  <%= f.label :service_id %>
+  <%= f.collection_select(:service_id,
+                          Service.find(:all),
+                          :id,
+                          :title) %>
+</div>
+
+
+
+

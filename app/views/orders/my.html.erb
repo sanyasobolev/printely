@@ -5,11 +5,11 @@
     </td>
   </tr>
 </table>
-<h2 class="orange">Мои заказы</h2>
+<h2 class="orange">Мои заказы на</h2>
 
-  <div id="slide_img_pag" class="orders_pagination" ></div>
+  <div id="slide_ord_pag" class="orders_type_pagination" ></div>
   
-  <div id="slide_orders">
+  <div id="slide_my_orders">
     <div id="slide_1">
 		<% if @foto_print_orders.count > 0 %>
 		  <table class ="default_table">
@@ -52,27 +52,6 @@
 		<% end %>
     </div>
     
-    <div id="slide_3">
-		<% if @scan_orders.count > 0 %>
-		  <table class ="default_table">
-		    <tr class="header">
-		      <th><%= Order.human_attribute_name(:id) %></th>
-		      <th><%= Order.human_attribute_name(:created_at) %></th>
-		      <th><%= Order.human_attribute_name(:order_status_id) %></th>
-		      <th><%= Order.human_attribute_name(:cost_min_max_name) %></th>
-		      <th><%= Order.human_attribute_name(:cost) %></th>
-		      <th><%= Order.human_attribute_name(:manager_comment) %></th>
-		      <th><%= Order.human_attribute_name(:details) %></th>
-		    </tr>
-		    <%= render :partial => 'orders/scan/order_for_user', :collection => @scan_orders  %>
-		  </table>
-		  <div class="paginator">
-			<%= paginate @scan_orders, :param_name => :scan_orders_page %>
-		  </div>
-		<% else %>
-		  <%= render :partial => 'no_orders', :locals => {:href => '/orders/new?order_type=scan'} %>
-		<% end %>
-    </div>
   </div>
   <div class="fl_clear"></div>
 

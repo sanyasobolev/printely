@@ -24,11 +24,3 @@
   <%= f.label :pricelist %>
   <%= f.select "pricelist", ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}, { :prompt => true }  %>
 </div>
-
-<div class="form_align">
-	<%= f.label :order_type_id %>
-	<%= f.collection_select(:order_type_id,
-                      Lists::OrderType.find(:all),
-                      :id,
-                      :title) %>
-</div>

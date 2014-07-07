@@ -10,7 +10,7 @@ class Service < ActiveRecord::Base
 
   has_many :subservices, :dependent => :destroy
   has_one :page
-  belongs_to :order_type, :class_name => "Lists::OrderType"
+  has_many :order_types, :class_name => "Lists::OrderType"
 
   before_create :create_permalink
   before_save :update_permalink

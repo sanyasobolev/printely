@@ -10,8 +10,8 @@
     Распечатать фото
   </div>
   <div class="flash_link_synopsis">
-    Создайте новый заказ на печать Ваших фотографий.
-    Принимаем файлы: .png, .jpg.
+    Печать фотографий на различных типах итальянских фотобумаг.<br>
+    <span class="bold">Принимаем файлы: .jpg, .png.</span>
   </div> 
 <%= @str_2.html_safe %>
 
@@ -23,23 +23,10 @@
     Распечатать документы
   </div>
   <div class="flash_link_synopsis">
-    Создайте новый заказ на печать Ваших документов. 
-	Принимаем файлы: .doc, .docx, .pdf, .ppt, .pptx.
+    Печать на офисной бумаге плотностью 80г стандартного и премиального качества.<br> 
+	<span class="bold">Принимаем файлы: .doc, .docx, .pdf, .ppt, .pptx.</span>
   </div>
 <%= @str_4.html_safe %>
-
-<% @str_5 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new?order_type=scan';\">" %>
-<% @str_6 = "</div>" %>
-
-<%= @str_5.html_safe %>
-  <%= image_tag("orders/add_scan.png", :border => '0') %>
-  <div class="flash_link_title">
-    Отсканировать
-  </div>
-  <div class="flash_link_synopsis">
-    Создайте новый заказ на сканирование Ваших фотографий или документов
-  </div>
-<%= @str_6.html_safe %>
 
 <% @str_7 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/my';\">" %>
 <% @str_8 = "</div>" %>

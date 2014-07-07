@@ -1,8 +1,0 @@
-<h2>Редактирование прайс-листа</h2>
-  <p><%= link_to 'Создать запись', new_pricelist_scan_path, :class => 'button_style_long' %></p>
-<table class ="default_table">
-	<%= render :partial => 'header_for_line' %>
-    <%= render :partial => 'line', :collection => @lines %>
-</table>
-
-<%= link_to 'Назад', admin_users_path, :class => 'button_style' %>

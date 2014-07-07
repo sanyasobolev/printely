@@ -312,7 +312,13 @@ a.top_section:hover {
     width: 100%;
 }
 
-#slide_orders {
+#slide_my_orders {
+	position:relative;
+	top:-30px;
+    width: 100%;
+}
+
+#slide_scan_orders {
 	position:relative;
 	top:-30px;
     width: 100%;
@@ -325,9 +331,16 @@ a.top_section:hover {
     overflow: hidden;
 }
 
-#slide_orders > div {
+#slide_my_orders > div {
     width: 900px;
     min-height: 200px;
+    float: left;
+    overflow: hidden;
+}
+
+#slide_scan_orders > div {
+    width: 900px;
+    min-height: 100px;
     float: left;
     overflow: hidden;
 }
@@ -360,12 +373,15 @@ a.top_section:hover {
     display: none;
 }
 
-.orders_pagination a:link {
+.orders_type_pagination {
+	width: 750px;
+}
+
+.orders_type_pagination a.my_order:link {
 	position:relative;
 	top:-55px;
 	right: -200px;
-    background: orange;
-    width: 200px;
+    width: 225px;
     height: 30px;
     margin: 0 5px 0 0;
     padding-top:5px;
@@ -373,13 +389,14 @@ a.top_section:hover {
     text-align: center;
     text-decoration: none;
     color: black;
+    border: 0 none;
 }
 
-.orders_pagination a:hover {
+.orders_type_pagination a.my_order:not(.selected):hover{
 	background: #CC8400
 }
 
-.orders_pagination a.selected {
+.orders_type_pagination a.selected {
     background: #B27300;
     cursor: default;
     }
@@ -558,6 +575,12 @@ h2 {
 
 
 .orange {
+    padding: 10px;
+    background-color: orange;
+}
+
+.orange_double {
+	height: 80px;
     padding: 10px;
     background-color: orange;
 }
@@ -767,7 +790,6 @@ a.button_style_long_orange:hover {
     cursor: pointer;
     background-color: orange;
 }
-
 
 
 .container_for_link_box {

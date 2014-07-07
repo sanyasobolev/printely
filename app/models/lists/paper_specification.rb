@@ -1,6 +1,11 @@
 # encoding: utf-8
 class Lists::PaperSpecification < ActiveRecord::Base
-    attr_accessible :paper_type_id, :paper_size_id, :in_stock, :id, :price, :order_type_id
+    attr_accessible :paper_type_id, 
+                    :paper_size_id, 
+                    :in_stock, 
+                    :id, 
+                    :price, 
+                    :order_type_id
     
     has_many :documents
     has_many :print_margins, :through => :documents

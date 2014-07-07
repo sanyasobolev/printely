@@ -124,35 +124,6 @@ $(document).ready(function(){
 		$("div.phone_popup").css("display", "none");
 	});
 
-	if($("#slide_orders").exists()){
-			$('#slide_orders').carouFredSel({
-					       prev : "left",
-					       next : "right",
-					       height: "variable",
-					       auto : false,
-					       swipe: {
-					              onTouch	: true,
-					              onMouse	: true
-					             },
-					       circular: false,
-					       items: 1,
-					       align: "center",
-					       cookie: true,
-					       pagination: {
-					                 container: '#slide_img_pag',
-					                 anchorBuilder: function(nr) { 
-					                 	if (nr == '1'){
-					                 		return '<a href="#"><span>На печать фото</span></a>';
-					                 	} else if (nr == '2'){
-					                 		return '<a href="#"><span>На печать документов</span></a>';	
-					                 	} else if (nr == '3'){
-					                 		return '<a href="#"><span>На сканирование</span></a>';
-					                 	}					                 	
-					                 	}
-					               }
-					     });
-			};
-
 	if($("#slide_image").exists()){
 	 	$(window).bind('resize.x', function() {
 	                    $('#slide_image').carouFredSel({

@@ -1,0 +1,15 @@
+<h1>Редактирование</h1>
+<div class="form_shape">
+	<%= form_for :order_type, :url => lists_order_type_path(@order_type), :html => {:method => :put} do |f| %>
+	  <%= f.error_messages %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+	    <div class="submit_area">
+	      <%= submit_tag 'Сохранить', :class => 'submit' %>
+	      <%= link_to 'Назад', lists_order_types_path, :class => 'button_style' %>
+	   </div>
+	  
+	<% end %>
+</div>
+
+
+

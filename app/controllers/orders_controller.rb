@@ -27,7 +27,6 @@ class OrdersController < ApplicationController
         
     @foto_print_orders = Order.where("user_id=#{current_user.id} AND order_type_id=2", :include => :user).order('created_at DESC').page(params[:foto_print_orders_page])
     @doc_print_orders = Order.where("user_id=#{current_user.id} AND order_type_id=3", :include => :user).order('created_at DESC').page(params[:doc_print_orders_page])
-    @scan_orders = Order.where("user_id=#{current_user.id} AND order_type_id=4", :include => :user).order('created_at DESC').page(params[:scan_orders_page])
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @orders }
@@ -60,28 +59,21 @@ class OrdersController < ApplicationController
     #рендер view в зависимости от типа заказа
     respond_to do |format|
       case @order.order_type.title
-      when 'foto_print'
-        if user_can_edit == true
-          format.html { render 'orders/foto_print/new_foto_print' } 
-        else
-          flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
-          format.html { redirect_to my_orders_path}
-        end
-      when 'doc_print'
-        if user_can_edit == true
-          format.html { render 'orders/doc_print/new_doc_print' } 
-        else
-          flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
-          format.html { redirect_to my_orders_path}
-        end
-      when 'scan'
-        if user_can_edit == true
-          format.html { render 'orders/scan/new_scan'}
-        else
-          flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
-          format.html { redirect_to my_orders_path}      
-        end
-      end 
+        when 'foto_print'
+          if user_can_edit == true
+            format.html { render 'orders/foto_print/new_foto_print' } 
+          else
+            flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
+            format.html { redirect_to my_orders_path}
+          end
+        when 'doc_print'
+          if user_can_edit == true
+            format.html { render 'orders/doc_print/new_doc_print' } 
+          else
+            flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
+            format.html { redirect_to my_orders_path}
+          end
+        end 
     end
   end
   
@@ -90,13 +82,11 @@ class OrdersController < ApplicationController
     #рендер view в зависимости от типа заказа
     respond_to do |format|
       case @order.order_type.title
-      when 'foto_print'
-        format.html { render 'orders/foto_print/admin_edit_files' }
-      when 'doc_print'
-        format.html { render 'orders/doc_print/admin_edit_files' }
-      when 'scan'
-        format.html { render 'orders/scan/admin_edit_files'}
-      end 
+        when 'foto_print'
+          format.html { render 'orders/foto_print/admin_edit_files' }
+        when 'doc_print'
+          format.html { render 'orders/doc_print/admin_edit_files' }
+      end
     end
   end
   
@@ -106,15 +96,13 @@ class OrdersController < ApplicationController
     #рендер view в зависимости от типа заказа
     respond_to do |format|
       case @order.order_type.title
-      when 'foto_print'
-        @order_class = 'admin_foto_print_order'
-        format.html { render 'orders/share/admin_edit_delivery' }
-      when 'doc_print'
-        @order_class = "admin_doc_print_order"
-        format.html { render 'orders/share/admin_edit_delivery' }
-      when 'scan'
-        format.html { render 'orders/scan/admin_edit_delivery'}
-      end 
+        when 'foto_print'
+          @order_class = 'admin_foto_print_order'
+          format.html { render 'orders/share/admin_edit_delivery' }
+        when 'doc_print'
+          @order_class = "admin_doc_print_order"
+          format.html { render 'orders/share/admin_edit_delivery' }
+      end
     end
   end
 
@@ -123,15 +111,13 @@ class OrdersController < ApplicationController
     #рендер view в зависимости от типа заказа
     respond_to do |format|
       case @order.order_type.title
-      when 'foto_print'
-        @order_class = 'admin_foto_print_order'
-        format.html { render 'orders/share/admin_edit_status' }
-      when 'doc_print'
-        @order_class = "admin_doc_print_order"
-        format.html { render 'orders/share/admin_edit_status' }
-      when 'scan'
-        format.html { render 'orders/scan/admin_edit_status'}
-      end 
+        when 'foto_print'
+          @order_class = 'admin_foto_print_order'
+          format.html { render 'orders/share/admin_edit_status' }
+        when 'doc_print'
+          @order_class = "admin_doc_print_order"
+          format.html { render 'orders/share/admin_edit_status' }
+       end
     end
   end
 
@@ -172,22 +158,20 @@ class OrdersController < ApplicationController
 
   def attr_update(order, status_key) #update main user attributes of order
     case order.order_type.title
-    when 'foto_print', 'doc_print'
-      if (order.documents.length == 0)
-        flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл.'
-        redirect_to :action => "edit"
-        return false
-      else
-        order.documents.each do |document|
-          unless params[:order][:documents_attributes].nil?
-            document.update_attribute(
-                    :user_comment, params[:order][:documents_attributes][document.id.to_s][:user_comment],
-                    )
+      when 'foto_print', 'doc_print'
+        if (order.documents.length == 0)
+          flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл.'
+          redirect_to :action => "edit"
+          return false
+        else
+          order.documents.each do |document|
+            unless params[:order][:documents_attributes].nil?
+              document.update_attribute(
+                      :user_comment, params[:order][:documents_attributes][document.id.to_s][:user_comment],
+                      )
+            end
           end
         end
-      end
-    when 'scan'
-      order.scan.update_attributes(params[:order][:scan_attributes])
     end
     
     if (params[:order][:delivery_town_id] == "" || params[:order][:delivery_address] == "" || params[:order][:delivery_date] == "")  
@@ -227,12 +211,10 @@ class OrdersController < ApplicationController
     @title = "Заказ № #{@order.id}"
     respond_to do |format|
       case @order.order_type.title
-      when 'foto_print'
-         format.html { render 'orders/foto_print/show_foto_print_order' }
-      when 'doc_print'
-         format.html { render 'orders/doc_print/show_doc_print_order' }
-      when 'scan'
-         format.html { render 'orders/scan/show_scan_order' } 
+        when 'foto_print'
+           format.html { render 'orders/foto_print/show_foto_print_order' }
+        when 'doc_print'
+           format.html { render 'orders/doc_print/show_doc_print_order' }
       end
     end
   end
@@ -272,11 +254,7 @@ class OrdersController < ApplicationController
     end
     set_price(@order)
     respond_to do |format|
-      if @order.cost_min == @order.cost_max || @order.cost_min == nil
-         format.js { render :single_cost }
-      else
-         format.js { render :min_max_cost } 
-      end
+        format.js { render :single_cost }
     end
   end
 
@@ -330,23 +308,15 @@ class OrdersController < ApplicationController
       order_cost = 0
       
       case order.order_type.title
-      when 'foto_print', 'doc_print'  #считаем документы, если они есть
-        if order.documents.size > 0
-          order.documents.each do |document|
-            (documents_cost = documents_cost + document.cost) unless document.cost.nil?
+        when 'foto_print', 'doc_print'  #считаем документы, если они есть
+          if order.documents.size > 0
+            order.documents.each do |document|
+              (documents_cost = documents_cost + document.cost) unless document.cost.nil?
+            end
           end
-        end
-        order_cost = order.delivery_price + documents_cost
-        order_cost_min = order_cost
-        order_cost_max = order_cost
-      when 'scan' #считаем сканы, если они есть
-        if order.scan
-          order_cost_min = order.scan.cost_min + order.delivery_price
-          order_cost_max = order.scan.cost_max + order.delivery_price
-          if order_cost_min == order_cost_max && order_cost_min != 0
-            order_cost = order_cost_min
-          end
-        end
+          order_cost = order.delivery_price + documents_cost
+          order_cost_min = order_cost
+          order_cost_max = order_cost
       end
      order.update_attribute(:cost, order_cost) 
      order.update_attribute(:cost_min, order_cost_min) 

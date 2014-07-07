@@ -5,6 +5,7 @@ class Lists::PaperSize < ActiveRecord::Base
   has_many :paper_specifications
   has_many :paper_types, :through => :paper_specifications
   has_many :documents, :through => :paper_specifications
+  has_many :pricelist_scans
   
     validates :size, :presence => {
       :message => "Не должно быть пустым."

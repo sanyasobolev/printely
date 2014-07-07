@@ -1,1 +1,0 @@
-$('#scan_documents_cost').html("<%= Scan.human_attribute_name('cost_min') %> <%= j number_to_currency(@scan.cost_min, :unit => "руб.", delimiter: "", precision: 0) %> <%= Scan.human_attribute_name('cost_max') %> <%= j number_to_currency(@scan.cost_max, :unit => "руб.", delimiter: "", precision: 0) %>");

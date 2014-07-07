@@ -10,7 +10,7 @@ class Subservice < ActiveRecord::Base
 
   belongs_to :service
   has_one :page
-  belongs_to :order_type, :class_name => "Lists::OrderType"
+  has_one :order_type, :class_name => "Lists::OrderType"
 
   before_create :create_permalink
   before_save :update_permalink
