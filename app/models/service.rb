@@ -45,7 +45,6 @@ class Service < ActiveRecord::Base
 
   #проверка приложенного файла
   validates_attachment :service_header_icon,
-                       :presence => true,
                        :content_type => { :content_type => /image/ },
                        :size => { :in => 0..1.megabytes }
 

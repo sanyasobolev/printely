@@ -18,9 +18,6 @@ $(document).ready(function(){
     			},
     			'service[synopsis]': {
     				required: true
-   				},
-   				'service[service_header_icon]': {
-   					required: true
    				}
     		},
     		messages: {
@@ -28,9 +25,6 @@ $(document).ready(function(){
     				required: "Не должно быть пустым."
     			},
     			'service[synopsis]': {
-    				required: "Не должно быть пустым."
-    			},
-    			'service[service_header_icon]': {
     				required: "Не должно быть пустым."
     			}
     		}

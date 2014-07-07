@@ -11,4 +11,12 @@ class Lists::OrderType < ActiveRecord::Base
    belongs_to :service
    belongs_to :subservice
    
+    validates :title, :presence => {
+      :message => "Не должно быть пустым."
+    }
+
+    validates :title, :uniqueness => {
+      :message => 'Такое значение уже есть.'
+    }
+   
 end
