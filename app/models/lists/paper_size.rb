@@ -17,4 +17,12 @@ class Lists::PaperSize < ActiveRecord::Base
   
   default_scope order('size asc')
   
+    def paper_size_with_iso
+      if self.size_iso_216.blank?
+        "#{self.size}" 
+      else
+        "#{self.size} | #{self.size_iso_216}"
+      end
+    end
+  
 end

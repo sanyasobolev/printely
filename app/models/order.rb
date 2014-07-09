@@ -11,9 +11,6 @@ class Order < ActiveRecord::Base
   has_many :documents, :dependent => :destroy
   accepts_nested_attributes_for :documents, :allow_destroy => true
   
-  has_one :scan, :dependent => :destroy
-  accepts_nested_attributes_for :scan, :allow_destroy => true
-  
   DELIVERY_TYPE= ['Курьер']
 
   #размер боксов полей в формах

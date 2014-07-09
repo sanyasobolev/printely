@@ -168,7 +168,7 @@ ru:
         cost_max: "до"
         cost: "Стоимость к оплате"
       lists/scan_specification:
-        paper_size_id: "Размер скана"
+        paper_size_id: "Формат скана, см"
         price: "Цена"
         order_type_id: "Тип заказа"
       lists/order_status:

@@ -43,7 +43,7 @@ class Document < ActiveRecord::Base
     if self.paper_specification.nil?
       return false
     else
-      paper_size = self.paper_specification.paper_size_with_iso
+      paper_size = self.paper_specification.paper_size.paper_size_with_iso
       return paper_size      
     end
   end

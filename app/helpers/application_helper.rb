@@ -190,5 +190,6 @@ module ApplicationHelper
       "Нет"
     end
   end
+  
 
 end

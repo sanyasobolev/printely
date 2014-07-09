@@ -6,7 +6,7 @@
 
 <% if @pricelist_for_service_model_name != nil %>
 	  <% @order_types.each do |order_type| %>	
-		 <h2><%= order_type.description %></h2>
+		 <h2><%= order_type.description if @order_types.count > 1 %></h2>
 			<div class="grey_color">
 				<% print_colors = Lists::PrintColor.where(:order_type_id => order_type) %>
 				<% if print_colors.count>0 %>

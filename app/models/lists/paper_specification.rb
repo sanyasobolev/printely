@@ -30,14 +30,6 @@ class Lists::PaperSpecification < ActiveRecord::Base
       "#{self.paper_size.size}, #{self.paper_type.paper_type}"
     end
     
-    def paper_size_with_iso
-      if self.paper_size.size_iso_216.blank?
-        "#{self.paper_size.size}" 
-      else
-        "#{self.paper_size.size} | #{self.paper_size.size_iso_216}"
-      end
-    end
-
     def paper_type_with_grade
       "#{self.paper_type.paper_type} (#{self.paper_type.paper_grade.grade})"
     end 
