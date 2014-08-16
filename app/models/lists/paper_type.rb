@@ -23,11 +23,19 @@ class Lists::PaperType < ActiveRecord::Base
   end
 
   def paper_type_with_density
-    "#{self.paper_type} (#{self.paper_density.density})"
+    if self.paper_density
+      "#{self.paper_type} (#{self.paper_density.density})"
+    else
+      "#{self.paper_type}"
+    end
   end
   
   def paper_type_with_grade_and_density
-    "#{self.paper_type} (#{self.paper_grade.grade}), #{self.paper_density.density}"
+    if self.paper_density
+      "#{self.paper_type} (#{self.paper_grade.grade}), #{self.paper_density.density}"
+    else
+      "#{self.paper_type} (#{self.paper_grade.grade})"
+    end
   end
   
 end
