@@ -39,6 +39,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   #  version :thumb do
   #    process :scale => [50, 50]
   #  end
+  
   process :set_content_type
   
 #  version :pdf, :if => :pdf? do

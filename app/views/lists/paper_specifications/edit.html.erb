@@ -1,8 +1,8 @@
 <h1>Редактирование</h1>
 <div class="form_shape">
-	<%= form_for :pspec, :url => lists_paper_specification_path(@pspec), :html => {:method => :put, :id => 'edit_paper_specification'} do |f| %>
+	<%= form_for :pspec, :url => lists_paper_specification_path(@pspec), :html => {:method => :put, :id => 'edit_paper_specification', :multipart => true} do |f| %>
 	  <%= f.error_messages %>
-	  <%= render :partial => 'form', :locals => {:f => f} %>
+	  <%= render :partial => 'form', :locals => {:f => f, :pspec => @pspec} %>
 	    <div class="submit_area">
 	      <%= submit_tag 'Сохранить', :class => 'submit' %>
 	      <%= link_to 'Назад', admin_lists_paper_specifications_path, :class => 'button_style' %>

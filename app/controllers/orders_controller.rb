@@ -73,6 +73,14 @@ class OrdersController < ApplicationController
             flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
             format.html { redirect_to my_orders_path}
           end
+        when 'letter_print'
+          if user_can_edit == true
+            @document = @order.documents.create(:quantity => 1)
+            format.html { render 'orders/letter_print/new_letter_print' } 
+          else
+            flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
+            format.html { redirect_to my_orders_path}
+          end
         end 
     end
   end

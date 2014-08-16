@@ -228,6 +228,18 @@ table td.delivery_price {
     text-align: center;
 }
 
+.form_align input.quantity_large {
+    display: block;
+    float: left;
+    width: 41px;
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #D6D3D1;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+    text-align: center;
+}
+
 #fileList td.paper div.quantity button.decrease_quantity {
     margin-top: 10px;
 }
@@ -362,6 +374,24 @@ button.increase_quantity {
     height: 23px;
     border: 0px;
     background-image: url(/assets/icons/plus.png);
+}
+
+button.decrease_quantity_large {
+    cursor: pointer;
+    float: left;
+    width: 41px;
+    height: 44px;
+    border: 0px;
+    background-image: url(/assets/icons/minus_large.png);
+}
+
+button.increase_quantity_large {
+    cursor: pointer;
+    float: left;
+    width: 41px;
+    height: 44px;
+    border: 0px;
+    background-image: url(/assets/icons/plus_large.png);
 }
 
 button.decrease_page_count {
@@ -570,4 +600,86 @@ button.increase_page_count {
     position: relative;
     right: -261mm;
     top: 110mm;
+}
+
+/*fabric canvas----------------------------*/
+
+.editor {
+	position:relative;
+	width: 900px;
+	height:700px;
+	
+	margin-top:30px;
+	margin-bottom: 30px;
+	border: 0px;
+}
+
+.editor_container {
+	position:absolute;
+	width:620px;
+	float: left;	
+}
+
+.canvas_panel {
+	display: block;
+	position: relative;
+	width:618px;
+	height:580px;
+	border: 1px solid #ddd
+}
+
+#canvas_bg {
+	position: absolute;
+}
+
+#canvas {
+	margin-top: 165px;
+	margin-left: 30px;
+}
+
+.sidebar_container {
+	position:absolute;
+	width: 300px;
+	height:580px;
+	margin-left: 630px;
+	border: 0px;
+	float:left;
+}
+
+a.add_element:link {
+	position:relative;
+    width: 270px;
+    height: 30px;
+    margin-top: 10px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    border: 0 none;
+    background: lightgrey;
+    
+}
+
+a.add_element:hover{
+	background:#B5B5B5;
+}
+
+a.add_element span{
+	color: black;
+}
+
+#text_inputs_wrapper {
+	position:relative;
+}
+
+#text_inputs_wrapper a {
+	position:absolute;
+}
+
+#text_inputs_wrapper div {
+	margin-top: 10px;
+}
+
+#text_inputs_wrapper input {
+	width: 240px;
 }

@@ -191,5 +191,11 @@ module ApplicationHelper
     end
   end
   
+  def density_to_ru(density)
+    if density
+      "#{density} г/м<sup>2</sup>".html_safe
+    end
+  end
+  
 
 end

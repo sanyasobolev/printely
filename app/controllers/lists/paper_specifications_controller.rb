@@ -9,6 +9,9 @@ class Lists::PaperSpecificationsController < ApplicationController
   def update
     @pspec = Lists::PaperSpecification.find(params[:id])
     if @pspec.update_attributes(params[:pspec])
+      if params[:pspec][:remove_layout] == '1' #delete folder
+        FileUtils.remove_dir("#{Rails.root}/public/layouts/#{@pspec.paper_size.size.parameterize}_#{@pspec.paper_type.paper_type.parameterize}", :force => true)
+      end
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'admin'
     else

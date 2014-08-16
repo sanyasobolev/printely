@@ -11,7 +11,7 @@
 	<%= f.collection_select(:paper_size_id,
                       Lists::PaperSize.find(:all),
                       :id,
-                      :size) %>
+                      :paper_size_with_iso) %>
 </div>
 
 <div class="form_align">
@@ -30,6 +30,18 @@
                       Lists::OrderType.find(:all),
                       :id,
                       :title) %>
+</div>
+
+<div class="form_align">
+	<%= f.label :layout %>
+    <%= image_tag(pspec.layout.admin_thumb.url) if pspec.layout? %>
+    <%= f.file_field :layout %>
+    <%= f.hidden_field :layout_cache %>
+</div>
+
+<div class="form_align">
+	<%= f.label :remove_layout %>
+	<%= f.check_box :remove_layout%>
 </div>
 
 

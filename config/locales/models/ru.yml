@@ -142,7 +142,7 @@ ru:
         paper: "Бумага"
         print_settings: "Настройки печати"
         order_id: "Номер заказа"
-        paper_size: "Формат"
+        paper_size: "Размер"
         user_comment: "Комментарии"
         paper_type: "Тип"
         docfile: "Файл"
@@ -177,18 +177,25 @@ ru:
         key: "Ключ"
       lists/paper_grade:
         grade: "Класс бумаги"
+      lists/paper_density:
+        density: "Плотность бумаги"
       lists/paper_type:
         paper_type: "Тип бумаги"
         paper_grade_id: "Класс бумаги"
+        paper_density_id: "Плотность бумаги"
       lists/paper_size:
-        size: "Размер бумаги, см"
+        size: "Размер, см"
         size_iso_216: "Размер по ISO 216"
+        width: "Ширина, мм"
+        length: "Длина, мм"
       lists/paper_specification:
         paper_type_id: "Тип бумаги"
         paper_size_id: "Размер бумаги"
         in_stock: "В наличии"
         price: "Цена"
         order_type_id: "Тип заказа"
+        layout: "Макет"
+        remove_layout: "Удалить макет"
       lists/print_margin:
         margin: "Поля"
         price: "Цена"

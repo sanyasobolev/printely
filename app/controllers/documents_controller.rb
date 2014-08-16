@@ -2,7 +2,7 @@
 class DocumentsController < ApplicationController
 
   skip_before_filter :authorized?,
-                     :only => [:create, :destroy, :price_update, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors]
+                     :only => [:create, :destroy, :price_update, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors, :get_layout]
 
   skip_before_filter :verify_authenticity_token,
                      :only => [:create]
@@ -138,7 +138,11 @@ class DocumentsController < ApplicationController
             else
               selected = ""
             end
-            select = "#{available_paper_type.paper_type}"
+            if params[:with_density]
+              select = "#{available_paper_type.paper_type}, #{available_paper_type.paper_density.density} г/м2"
+            else
+              select = "#{available_paper_type.paper_type}"
+            end
             option_end = "</option>"
             
             @select_list = @select_list + "<option value='#{value}' "+"#{selected}"+">"+"#{select}"+"#{option_end}"
@@ -173,6 +177,24 @@ class DocumentsController < ApplicationController
     respond_to do |format|
         format.html do
           render :partial => 'select_list' 
+        end
+    end
+  end
+    
+  
+  def get_layout
+    @pspec = Lists::PaperSpecification.where(["paper_type_id = ? and paper_size_id = ?", params[:selected_paper_type].to_i, params[:selected_paper_size].to_i]).first
+    @item = ''
+
+    if !@pspec.layout?
+      @item = "Нет изображения макета."
+    else
+      @item = "<img src='"+"#{@pspec.layout_url}"+"'>"
+    end
+    
+    respond_to do |format|
+        format.html do
+          render :partial => 'item' 
         end
     end
   end

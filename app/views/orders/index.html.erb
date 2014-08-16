@@ -28,6 +28,23 @@
   </div>
 <%= @str_4.html_safe %>
 
+<% @str_5 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new?order_type=letter_print';\">" %>
+<% @str_6 = "</div>" %>
+<%= @str_5.html_safe %>
+  <%= image_tag("orders/add_letter_print.png", :border => '0') %>
+  <div class="flash_link_title">
+    Распечатать конверты
+  </div>
+  <div class="flash_link_synopsis">
+    Печать на конвертах различных размеров.<br> 
+	<span class="bold">Разработайте свой макет или выберите существующий.</span>
+  </div>
+<%= @str_6.html_safe %>
+
+<div class="fl_clear"></div>
+<hr>
+<br />
+
 <% @str_7 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/my';\">" %>
 <% @str_8 = "</div>" %>
 
@@ -40,3 +57,5 @@
     Посмотрите текущий статус Ваших заказов
   </div>
 <%= @str_8.html_safe %>
+
+<div class="fl_clear"></div>

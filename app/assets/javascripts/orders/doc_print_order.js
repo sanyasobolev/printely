@@ -90,7 +90,7 @@ $(document).ready(function(){
         	show_loader_for_price(document_id);
         	$("select[name*='["+document_id+"][paper_type]']").load(
         		url_for_load_paper_types, 
-        		{selected_paper_size: selected_paper_size, order_id: order_id, id: document_id, order_type: 'doc_print'},
+        		{selected_paper_size: selected_paper_size, order_id: order_id, id: document_id, order_type: 'doc_print', with_density: 1 },
         		function(){
         			$(this).attr("disabled",false);
         			$("select[name*='["+document_id+"][print_color]']").attr("disabled",false);

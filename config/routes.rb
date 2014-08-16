@@ -27,15 +27,14 @@ Spsite::Application.routes.draw do
   match 'document/get_paper_types' => 'documents#get_paper_types'
   match 'document/get_print_margins' => 'documents#get_print_margins'
   match 'document/get_print_colors' => 'documents#get_print_colors'
+  match 'document/get_layout' => 'documents#get_layout'
   
   resources :orders do
     resources :documents
-    resources :scans
      get 'my', :on => :collection
      get 'admin', :on => :collection
      get 'cover', :on => :member
      get 'new_print', :on => :collection
-     get 'new_scan', :on => :collection
      get 'get_materials', :on => :member
      get 'edit_files', :on => :member
      get 'edit_delivery', :on => :member
@@ -96,6 +95,7 @@ Spsite::Application.routes.draw do
     resources :order_statuses
     resources :order_types
     resources :paper_grades
+    resources :paper_densities
     resources :paper_types
     resources :paper_sizes
     resources :paper_specifications do

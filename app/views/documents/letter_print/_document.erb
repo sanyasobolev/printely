@@ -1,0 +1,66 @@
+<table id="fileList" class="default_table">
+	<thead>
+		<tr class="document" id="<%= document.id %>" name="document" >
+		  <%= fields_for "order[documents_attributes][]", document do |i| %>
+			<td>
+				<div class="form_align">
+					<%= select_tag("order[documents_attributes][#{document.id}][paper_size]") %>
+					<%= i.label :paper_size %>
+				</div>					
+				
+				<div class="form_align">
+					<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true}) %>
+					<%= i.label :paper_type %>
+				</div>	
+				
+				<div class="editor">
+					<div class="editor_container">
+						
+						<div class="toolbar_top">
+							
+						</div>
+						
+						<div id="canvas-wrapper"  class="canvas_panel">
+							
+							<div id="canvas_bg"></div>
+							
+							<canvas id="canvas"></canvas>
+						
+						</div>
+	
+						<div class="toolbar_bottom">
+						
+						</div>
+	
+					</div>
+					<div class="sidebar_container">
+						<div id="tabs">
+						  <ul class="tabs">
+						    <li><a class="no_confirm" href="#tabs-1">Изображения</a></li>
+						    <li><a class="no_confirm" href="#tabs-2">Текст</a></li>
+						  </ul>
+						  <div id="tabs-1" class="box">
+						    первая вкладка
+						  </div>
+						  <div id="tabs-2" class="box">
+						    <a href="#" class="add_element" id="add_text"><span>добавить текст</span></a>
+  							<div id="text_inputs_wrapper"> </div>					  
+						  </div>
+						</div>
+
+					</div>
+					
+					<div class="fl_clear"></div>
+				</div>
+				
+			    <div class="form_align">	 
+			      <%= i.label :quantity %>     
+			      <%=  button_tag ' ', :type => 'button', :class => 'decrease_quantity_large' %>
+			      <%= i.text_field :quantity, :class => 'quantity_large' %>
+			      <%=  button_tag ' ', :type => 'button', :class => 'increase_quantity_large' %>
+			    </div>			
+			</td>
+		  <% end %>	
+		</tr>
+	</thead>
+</table>
