@@ -1726,13 +1726,13 @@ table.default_table th {
 
 /*tabs ---------------------------*/
 
-#tabs {
+#tab-container {
 	width: 100%;
 	height: 100%;
 	background: #EFEFEF;
 	margin: 0 0 30px;
 }
-ul.tabs {
+ul.etabs {
 	height: 28px;
 	line-height: 25px;
 	list-style: none;
@@ -1741,7 +1741,7 @@ ul.tabs {
 	margin: 0;
 	padding: 0;
 }
-.tabs li {
+ul.etabs li {
 	float: left;
 	display: inline;
 	margin: 0 1px -1px 0;
@@ -1754,13 +1754,13 @@ ul.tabs {
 	position: relative;
 }
 
-.tabs li:hover {
+ul.etabs li:hover {
 	color: #F70;
 	padding: 0 13px;
 	background: #FFFFDF;
 	border: 1px solid #FFCA95;
 }
-.tabs li.active {
+ul.etabs li.active {
 	color: #444;
 	background: #EFEFEF;
 	padding: 0 13px 2px;
@@ -1777,14 +1777,14 @@ ul.tabs {
 }
 
 
-.tabs li a {
+ul.etabs li a {
 	text-decoration: none;
 }
 
-.tabs li a:not(.active) {
+ul.etabs li a:not(.active) {
 	color: grey;
 }
 
-.tabs li.active a {
+ul.etabs li.active a {
 	color: black;
 }

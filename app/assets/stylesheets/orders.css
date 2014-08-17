@@ -646,7 +646,7 @@ button.increase_page_count {
 	float:left;
 }
 
-a.add_element:link {
+button.add_element {
 	position:relative;
     width: 270px;
     height: 30px;
@@ -657,15 +657,11 @@ a.add_element:link {
     color: black;
     border: 0 none;
     background: lightgrey;
-    
+    cursor:pointer;
 }
 
-a.add_element:hover{
+button.add_element:hover{
 	background:#B5B5B5;
-}
-
-a.add_element span{
-	color: black;
 }
 
 #text_inputs_wrapper {
@@ -682,4 +678,8 @@ a.add_element span{
 
 #text_inputs_wrapper input {
 	width: 240px;
+}
+
+button.remove_element {
+	position:relative;
 }

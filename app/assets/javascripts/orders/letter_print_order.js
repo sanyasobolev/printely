@@ -131,7 +131,9 @@ $(document).ready(function(){
         };
         
         //create tabs
-        $("#tabs").tabslet();
+        $('#tab-container').easytabs({
+			  updateHash: false
+        });
 		//----------------------------------------------------------------------------------------------------
 
 		//canvas-------------------------------------------------------------------------------------------------
@@ -156,7 +158,7 @@ $(document).ready(function(){
 		        {
 		            FieldCount++; //text box added increment
 		            //add input box
-		            $(TextInputsWrapper).append('<div><input type="text" name="text_'+ FieldCount +'" class="text_field" id="text_'+ FieldCount +'" value="Текст '+ FieldCount +'"/><a href="#" class="removeclass"><img src="/assets/icons/del-3.png" alt="Del-3"></a></div>');
+		            $(TextInputsWrapper).append('<div><input type="text" name="text_'+ FieldCount +'" class="text_field" id="text_'+ FieldCount +'" value="Текст '+ FieldCount +'"/><button class="remove_element" name="button" type="button"><img src="/assets/icons/del-3.png" alt="Del-3"></button></div>');
 		           	//add text to canvas
 		           	canvas_text=new fabric.Text('Текст '+FieldCount, {
 			           top:Math.floor(Math.random()*350+1),
@@ -170,7 +172,7 @@ $(document).ready(function(){
 				return false;
 		});
 		
-		$("body").on("click",".removeclass", function(e){ //user click on remove text
+		$("body").on("click", ".remove_element", function(e){ //user click on remove text
 		        if( x > 0 ) {
 		        	var sidebar_textId = $(this).siblings("input[id*='text']").attr('id');
 		                $(this).parent('div').remove(); //remove text box		   

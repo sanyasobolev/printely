@@ -34,16 +34,16 @@
 	
 					</div>
 					<div class="sidebar_container">
-						<div id="tabs">
-						  <ul class="tabs">
-						    <li><a class="no_confirm" href="#tabs-1">Изображения</a></li>
-						    <li><a class="no_confirm" href="#tabs-2">Текст</a></li>
+						<div id="tab-container" class="tab-container">
+						  <ul class="etabs">
+						    <li><a class="no_confirm tab" href="#tabs-1">Изображения</a></li>
+						    <li><a class="no_confirm tab" href="#tabs-2">Текст</a></li>
 						  </ul>
 						  <div id="tabs-1" class="box">
 						    первая вкладка
 						  </div>
 						  <div id="tabs-2" class="box">
-						    <a href="#" class="add_element" id="add_text"><span>добавить текст</span></a>
+						  	<%=  button_tag 'добавить текст', :type => 'button', :id => 'add_text', :class => "add_element" %>
   							<div id="text_inputs_wrapper"> </div>					  
 						  </div>
 						</div>
