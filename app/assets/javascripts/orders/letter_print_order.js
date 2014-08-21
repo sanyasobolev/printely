@@ -130,10 +130,6 @@ $(document).ready(function(){
           return value;
         };
         
-        //create tabs
-        $('#tab-container').easytabs({
-			  updateHash: false
-        });
 		//----------------------------------------------------------------------------------------------------
 
 		//canvas-------------------------------------------------------------------------------------------------
@@ -144,35 +140,19 @@ $(document).ready(function(){
 
         
         //sidebar---------------------------------------------------------------------------
-		//text
-		var MaxTextInputs       = 5; //maximum input boxes allowed
-		var TextInputsWrapper   = $("#text_inputs_wrapper"); //Input boxes wrapper ID
-		var AddButton           = $("#add_text"); //Add button ID
+		//text 
+		var MaxTextInputs       = 5, //maximum input boxes allowed
+		    TextInputsWrapper   = $("div#text_inputs_wrapper"), //Input boxes wrapper ID		  
+			x = TextInputsWrapper.length, //initial text box count
+			FieldCount=0; //to keep track of text box added
+
 		
-		var x = TextInputsWrapper.length; //initial text box count
-		var FieldCount=0; //to keep track of text box added
-		
-		$(AddButton).click(function (e)  //on add input button click
+		$("div#add_text").click(function ()  //on add input button click
 		{
-		        if(x <= MaxTextInputs) //max input box allowed
-		        {
-		            FieldCount++; //text box added increment
-		            //add input box
-		            $(TextInputsWrapper).append('<div><input type="text" name="text_'+ FieldCount +'" class="text_field" id="text_'+ FieldCount +'" value="Текст '+ FieldCount +'"/><button class="remove_element" name="button" type="button"><img src="/assets/icons/del-3.png" alt="Del-3"></button></div>');
-		           	//add text to canvas
-		           	canvas_text=new fabric.Text('Текст '+FieldCount, {
-			           top:Math.floor(Math.random()*350+1),
-			           left:Math.floor(Math.random()*250+1),
-			           fill:'red'
-			        });
-			        canvas_text.set('itemId', 'text_' +FieldCount);
-			        canvas.add(canvas_text);	            		            
-		            x++; //text box increment
-		        }
-				return false;
+		       alert( "Handler for .click() called." ); 
 		});
 		
-		$("body").on("click", ".remove_element", function(e){ //user click on remove text
+		$("body").on("click", ".remove_element", function(){ //user click on remove text
 		        if( x > 0 ) {
 		        	var sidebar_textId = $(this).siblings("input[id*='text']").attr('id');
 		                $(this).parent('div').remove(); //remove text box		   
@@ -181,16 +161,16 @@ $(document).ready(function(){
      					canvas.renderAll();
 		                x--; //decrement textbox
 		        }
-		return false;
+		//return false;
 		});
 		
-		$("body").on("keyup",".text_field", function(e){ //user change text
+		$("body").on("keyup",".text_field", function(){ //user change text
 			var sidebar_text = $(this).val(),
 				sidebar_textId = $(this).attr('id');
 			canvas_item = canvas.getItemById(sidebar_textId);
 			canvas_item.set({ text: sidebar_text }); 
 			canvas.renderAll();
-		return false;
+		//return false;
 		});
 
         

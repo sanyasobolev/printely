@@ -646,12 +646,11 @@ button.increase_page_count {
 	float:left;
 }
 
-button.add_element {
-	position:relative;
+div.add_element {
     width: 270px;
     height: 30px;
     margin-top: 10px;
-    display: inline-block;
+    display: block;
     text-align: center;
     text-decoration: none;
     color: black;
@@ -660,12 +659,12 @@ button.add_element {
     cursor:pointer;
 }
 
-button.add_element:hover{
-	background:#B5B5B5;
+div.add_element:hover {
+    background:#B5B5B5;
 }
 
 #text_inputs_wrapper {
-	position:relative;
+	/*position:relative;*/
 }
 
 #text_inputs_wrapper a {

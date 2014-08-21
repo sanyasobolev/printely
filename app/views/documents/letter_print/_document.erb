@@ -34,20 +34,24 @@
 	
 					</div>
 					<div class="sidebar_container">
-						<div id="tab-container" class="tab-container">
-						  <ul class="etabs">
-						    <li><a class="no_confirm tab" href="#tabs-1">Изображения</a></li>
-						    <li><a class="no_confirm tab" href="#tabs-2">Текст</a></li>
-						  </ul>
-						  <div id="tabs-1" class="box">
-						    первая вкладка
-						  </div>
-						  <div id="tabs-2" class="box">
-						  	<%=  button_tag 'добавить текст', :type => 'button', :id => 'add_text', :class => "add_element" %>
-  							<div id="text_inputs_wrapper"> </div>					  
-						  </div>
-						</div>
-
+						
+						<section class="tabs">
+							<input id="tab_1" type="radio" name="tab" checked="checked" />
+							<input id="tab_2" type="radio" name="tab" />
+							
+							<label for="tab_1" id="tab_l1">Изображения</label>
+							<label for="tab_2" id="tab_l2">Текст</label>
+							<div style="clear:both"></div>
+						
+							<div class="tabs_cont">
+								<div id="tab_c1"> </div>
+								<div id="tab_c2">
+								  	<div class="add_element" id="add_text">добавить текст </div>  
+		  							<div id="text_inputs_wrapper"> </div>		
+								</div>
+							</div>
+						</section>
+						
 					</div>
 					
 					<div class="fl_clear"></div>
