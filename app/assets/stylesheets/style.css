@@ -388,8 +388,11 @@ a.top_section:hover {
     display: inline-block;
     text-align: center;
     text-decoration: none;
-    color: black;
     border: 0 none;
+}
+
+.orders_type_pagination a.my_order span {
+	    color: black;
 }
 
 .orders_type_pagination a.my_order:not(.selected):hover{
