@@ -101,9 +101,6 @@ Spsite::Application.routes.draw do
     resources :paper_specifications do
       get 'admin', :on => :collection
     end
-    resources :document_specifications do
-      get 'admin', :on => :collection
-    end
     resources :scan_specifications do
       get 'admin', :on => :collection
     end

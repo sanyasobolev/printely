@@ -1,3 +1,6 @@
+<% content_for :head do %>
+	<%= javascript_include_tag "/ckeditor", :recursive => true %>
+<% end %>
 <%= error_messages_for :page %>
 <h2>Создание новой страницы</h2>
 <%= form_for :page, :url => pages_path, :html => { :method => :post } do |f| -%>

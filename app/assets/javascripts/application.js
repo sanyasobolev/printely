@@ -10,7 +10,7 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 
-//= require jquery
-//= require jquery-ui
-//= require jquery.validate
-//= require_tree
+//= require ../../../app/assets/javascripts/extend/vendor/jquery
+//= require ../../../app/assets/javascripts/extend/vendor/jquery.validate
+//= require rails
+//= require_tree ../../../app/assets/javascripts/extend

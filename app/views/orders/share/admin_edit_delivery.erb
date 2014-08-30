@@ -5,17 +5,9 @@
   
   <%= render :partial => 'orders/share/delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
   
-  <div class="total_cost_order">
-    <%= h (number_to_currency(@order.cost, :unit => "руб.", :precision => 0)) %>  
-  </div>
-  <div class="total_cost_order_label">
-    Итого:
-  </div>
-  <div class="fl_clear"></div>
+  <%= render :partial => 'orders/share/total_and_submit', :locals => {:order => order, :current_order => @order}  %>	
 
-	<div class="submit_area">
-	 <%= submit_tag 'Сохранить изменения', :class => 'submit'  %>
-	 <%= link_to 'Отмена', admin_orders_path, :class => 'button_style' %>
-	</div>
 <% end -%>
+  <%= render :partial => 'orders/share/cancel', :locals => {:current_order => @order}  %>	
+
  

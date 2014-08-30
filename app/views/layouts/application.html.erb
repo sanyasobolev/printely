@@ -18,6 +18,14 @@
 
 
 <!-- /Yandex.Metrika counter -->
+<script type="text/javascript">
+	//set authencity token for all requests
+        $.ajaxSetup({
+        	headers: {
+        		'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        	}
+        });
+</script>
   <div id="header" >
     <div id="top_nav">
         <div id="user_options">

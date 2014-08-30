@@ -733,7 +733,7 @@ a.grey:hover {
     text-decoration:none;
 }
 
-a.button_style:link, a.button_style:visited {
+a.button_style:link, a.button_style:visited, input.button_style {
     background-color: #1BA1E2;
     border: 0 none;
     color: white;
@@ -750,7 +750,29 @@ a.button_style:link, a.button_style:visited {
 /*    height: 27px;*/
 }
 
-a.button_style:hover {
+a.button_style:hover, input.button_style:hover {
+    cursor: pointer;
+    background-color: #3b6fb5;
+}
+
+input.button_style {
+    background-color: #1BA1E2;
+    border: 0 none;
+    color: white;
+    padding: 9px 20px 10px 20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-right: 0px;
+    display:block;
+
+    text-align:center;
+    text-decoration:none;
+    max-width: 100px;
+    height: 39px;
+}
+
+input.button_style:hover {
     cursor: pointer;
     background-color: #3b6fb5;
 }
@@ -1050,9 +1072,12 @@ a.boardlink:hover, a.boardlink:active {
 .submit_area {
     margin-top: 20px;
     height: 50px;
+    float: right;
 }
 
-.submit_area a {
+.cancel_area {
+    margin-top: 20px;
+    height: 50px;
     float: right;
 }
 
@@ -1477,7 +1502,7 @@ a.site_map_link:hover {
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
-.form_align button.button_style_long_orange, button.button_style_long_orange_pressed, button.button_style_long_orange_inactive {
+button.button_style_long_orange, button.button_style_long_orange_pressed, button.button_style_long_orange_inactive {
 	float: left;
 	margin-right: 10px;
 }

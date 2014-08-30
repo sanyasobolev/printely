@@ -63,6 +63,7 @@ module Spsite
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     #config.assets.paths << Rails.root.join("app", "assets", "javascripts", "validation")
-
+    #config.assets.paths << Rails.root.join("app", "assets", "extend")
+    Rails.application.config.assets.compress = true
   end
 end

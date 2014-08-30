@@ -1,49 +1,75 @@
-<h2><%= @title %></h2>
+$(document).ready(function(){
+	if(($(".edit_doc_print_order").exists()) || ($(".admin_doc_print_order").exists())) {
+        
+        //clear value 'выберите' in select
+        $("select#order_delivery_town_id").change(function(event){
+            $('[value=""]',event.target).remove();
+        });
 
-<% key = Rails.application.config.session_options[:key] %>
-
-<%= content_for :scripts do %>
-  <script type="text/javascript">
-    var upload_params = {
-      '<%= key %>' : '<%= cookies[key] %>',
-      '<%= request_forgery_protection_token %>' : '<%= form_authenticity_token %>',
-      '_http_accept': 'application/javascript'
-    };
-
-    var url = $('input#document_docfile').attr('rel');
-
-    $('input#document_docfile').uploadify({
-      uploader : '/assets/uploadify/uploadify.swf',
-      buttonImg : '/assets/uploadify/upload_button.png',
-      script : url,
-      fileDataName : 'document[docfile]',
-      fileDesc : 'Documents (.pdf, .doc, .docx, .ppt, .pptx)',
-      fileExt : '*.doc;*.docx;*.pdf;*.ppt;*.pptx',
-      sizeLimit : 10240000, //10MB
-      cancelImg : '/assets/uploadify/cancel.png',
-      multi : true,
-      scriptData : upload_params,
-      auto : true,
-      onComplete : function(e, id, obj, response, data) {
-        $(response).hide().appendTo('#fileList').prop("style", null).fadeIn("slow");
-       },
-      onAllComplete : function(){
-        var status_fileList_header = $("#fileList_header").attr("style"),
-            order_id = $("form.admin_doc_print_order").attr("id"),
-			url_for_update_document = "/document/price_update";
-			url_for_load_paper_sizes = "/document/get_paper_sizes",
+        var url_for_update_order = "/order/ajaxupdate",
+            url_for_update_document = "/document/price_update",
+            url_for_load_paper_sizes = "/document/get_paper_sizes",
             url_for_load_paper_types = "/document/get_paper_types",
-            url_for_load_print_colors = "/document/get_print_colors",
-            url_for_update_order = "/order/ajaxupdate";
+            url_for_load_print_colors = "/document/get_print_colors";
+    
+    if($(".edit_doc_print_order").exists()) {
+    	
+    	var order_id = $("form.edit_doc_print_order").attr("id");
+    	
+        //контроль ухода пользователя со страницы
+        $(".edit_doc_print_order").FormNavigate({
+          message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
+          aOutConfirm: "input.button_style, a.link_delete_docfile"
+        });
+        
+        //client validator
+        $("form.edit_doc_print_order").validate({
+        	ignore: "",
+    		rules: {
+    			'order[delivery_address]': "required",
+    			'order[delivery_town_id]':"required",
+    			'order[delivery_date]':"required",
+    			'quantity_documents_for_validate':"required"
+    		},
+    		messages: {
+    			'order[delivery_address]': "?",
+    			'order[delivery_town_id]':"?",
+    			'order[delivery_date]':"?",
+    			'quantity_documents_for_validate':"Загрузите файлы."
+    		}
+    		});
+    }//end edit_doc_print_order
+	
+    if($(".admin_doc_print_order").exists()) {
+    	
+    	var order_id = $("form.admin_doc_print_order").attr("id");
+    	
+        //контроль ухода пользователя со страницы
+        $(".admin_doc_print_order").FormNavigate({
+          message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
+          aOutConfirm: "input.button_style, a.link_delete_docfile"
+        });
+        
+        //client validator
+        $("form.admin_doc_print_order").validate({
+        	ignore: "",
+    		rules: {
+    			'order[delivery_address]': "required",
+    			'order[delivery_town_id]':"required",
+    			'order[delivery_date]':"required",
+    			'quantity_documents_for_validate':"required"
+    		},
+    		messages: {
+    			'order[delivery_address]': "?",
+    			'order[delivery_town_id]':"?",
+    			'order[delivery_date]':"?",
+    			'quantity_documents_for_validate':"Загрузите файлы."
+    		}
+    		});
+        };//end admin_foto_print_order
 
-        if (status_fileList_header == 'display: none;') {
-          $("#fileList_header").fadeIn("slow", function(){
-          	$('table#fileList').floatThead({
-				floatTableClass: 'floatTheadfileListOrder',
-				debounceResizeMs: 100
-			});
-          });
-        }
+                  
+        //подключение хендлеров по управлению ценой (при уже загруженных документах - в случае рефреша страницы)
         
    		//load paper_sizes------------------------------------------------------------------------------------
         $("select[name*='paper_size']").on("load_sizes", function(event) {
@@ -64,7 +90,7 @@
         	show_loader_for_price(document_id);
         	$("select[name*='["+document_id+"][paper_type]']").load(
         		url_for_load_paper_types, 
-        		{selected_paper_size: selected_paper_size, order_id: order_id, id: document_id, order_type: 'doc_print'},
+        		{selected_paper_size: selected_paper_size, order_id: order_id, id: document_id, order_type: 'doc_print', with_density: 1 },
         		function(){
         			$(this).attr("disabled",false);
         			$("select[name*='["+document_id+"][print_color]']").attr("disabled",false);
@@ -74,7 +100,7 @@
         	
         });
 
-       
+
         //change handler for load print colors
         $("select[name*='paper_type']:not([class*='with_loaded_paper_types'])").addClass("with_loaded_paper_types").change(function(event){
         	var document_id = this.parentNode.parentNode.parentNode.id; 
@@ -155,11 +181,11 @@
         }));
 
 
+   
         //обновление цены после удаления одного документа
         $("a.link_delete_docfile:not([handler-status='with_priceEventHandler'])").attr('handler-status', 'with_priceEventHandler').bind('click', function(event){
-          setTimeout(function(){$.post( url_for_update_order, {id: order_id} )}, 1000);
+          setTimeout(function(){$.post(url_for_update_order, {id: order_id} );}, 1000);
           setTimeout(function(){validate_documents()}, 1000);
-          
         });
 
         //работа переключателя количества копий
@@ -193,23 +219,22 @@
           selected_input_page_count.val(new_value);
           selected_input_page_count.change();
         });
-        
-        //delete error messages
-        if ($("label[for='quantity_documents_for_validate']")) {
-        	$("label[for='quantity_documents_for_validate']").fadeOut("fast");
-        };
-        
 
-        //проверка значения количества
+        //проверка значения количества файлов для печати
         function validate(value){
           if (value < 1 || isNaN(value) == true) {
             value = 1;
           } else if (value > 999) {
             value = 999;
           }
-          return value
+          return value;
         };
         
+
+		//time
+        $('#timepicker_start').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:00', 'maxTime': '23:30' });
+        $('#timepicker_end').timepicker({ 'timeFormat': 'H:i', 'scrollDefaultNow': true , 'minTime': '07:30', 'maxTime': '00:00' });
+    
         //cчитаем кол-во документов в форме
         function validate_documents(){
         	var quantity_documents = $("tr.document").length;
@@ -219,7 +244,7 @@
         		$("input#quantity_documents_for_validate").val(quantity_documents);
         	}
         };
-        
+
         //устанавливаем css аниматор загрузки цены
         function show_loader_for_price(document_id){
         	$("table#fileList tr#"+document_id+" td.document_cost .document_cost_value").hide();
@@ -231,20 +256,10 @@
         		price = $("table#fileList tr#"+document_id+" td.document_cost .document_cost_value");
 
 	        	price.show();
-	        	loader.hide();       		
+	        	loader.hide(); 
         };
+        
+    }
 
-      }
-    });
-  </script>
-<% end %>
+  });
 
-<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id, :class => "admin_doc_print_order"} do |order| -%>
-
-  <h2 class="orange">Загрузите Ваши файлы</h2>
-
-  <%= render :partial => 'orders/doc_print/filelist', :locals => {:order => @order} %>	
-  <%= render :partial => 'orders/share/total_and_submit', :locals => {:order => order, :current_order => @order}  %>	
-
-<% end -%>
-  <%= render :partial => 'orders/share/cancel', :locals => {:current_order => @order}  %>	

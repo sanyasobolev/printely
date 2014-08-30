@@ -19,10 +19,9 @@
 
   	<%= render :partial => 'documents/letter_print/document', :locals => {:order => @order, :document => @document} %>	
 
-	<div class="submit_area">
-	 <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
-	 <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
-	</div>
+    <%= render :partial => 'orders/share/total_and_submit', :locals => {:order => order, :current_order => @order}  %>	
+
 <% end -%>
+  <%= render :partial => 'orders/share/cancel', :locals => {:current_order => @order}  %>	
 
  

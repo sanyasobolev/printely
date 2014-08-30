@@ -249,17 +249,8 @@
   
   <%= render :partial => 'orders/share/delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
   
-  <div class="total_cost_order">
-    <%= h (number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ")) %>
-  </div>
-  <div class="total_cost_order_label">
-    Итого:
-  </div>
-  <div class="fl_clear"></div>
+  <%= render :partial => 'orders/share/total_and_submit', :locals => {:order => order, :current_order => @order}  %>	
 
-	<div class="submit_area">
-	 <%= submit_tag 'Оформить заказ', :class => 'submit'  %>
-	 <%= link_to 'Отмена', order_path(@order), :method => :delete, :class =>"button_style", :confirm => 'Действительно хотите отменить заказ?'%>
-	</div>
 <% end -%>
- 
+  <%= render :partial => 'orders/share/cancel', :locals => {:current_order => @order}  %>	
+
