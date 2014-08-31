@@ -1,3 +1,6 @@
+<% content_for :head do %>
+	<%= javascript_include_tag "ckeditor/init" %>
+<% end %>
 <%= error_messages_for :article %>
 <h2>Создание статьи</h2>
 <%= form_for :article, :url => articles_path, :html => { :method => :post } do |f| -%>

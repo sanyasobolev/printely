@@ -664,21 +664,22 @@ div.add_element:hover {
 }
 
 #text_inputs_wrapper {
-	/*position:relative;*/
-}
-
-#text_inputs_wrapper a {
-	position:absolute;
-}
-
-#text_inputs_wrapper div {
-	margin-top: 10px;
-}
-
-#text_inputs_wrapper input {
-	width: 240px;
-}
-
-button.remove_element {
 	position:relative;
+}
+
+
+#text_inputs_wrapper div.text_container {
+	margin-top: 10px;
+	position: relative;
+}
+
+#text_inputs_wrapper input.text_field {
+	width: 240px;
+	position: static;
+}
+
+div.remove_element {
+	position:absolute;
+	top: 0px;
+	right: 0px;
 }
