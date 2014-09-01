@@ -46,9 +46,24 @@ Spsite::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-   config.assets.precompile += ['extend/vendor*']
+   config.assets.precompile += ['extend/vendor/*']
    config.assets.precompile += %w( rails.js )
 
+config.assets.precompile << Proc.new { |path|
+  if path =~ /\.(css|js)\z/
+    full_path = Rails.application.assets.resolve(path).to_path
+    app_assets_path = Rails.root.join('app', 'assets', 'javascripts', 'extend', 'vendor').to_path
+    if full_path.starts_with? app_assets_path
+      puts "including asset: " + full_path
+      true
+    else
+      puts "excluding asset: " + full_path
+      false
+    end
+  else
+    false
+  end
+}
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
