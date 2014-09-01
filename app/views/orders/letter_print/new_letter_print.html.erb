@@ -1,3 +1,6 @@
+<% content_for :head do %>
+	<%= javascript_include_tag "orders/letter_print_order" %>
+<% end %>
 <h2><%= @title %></h2>
 
 <% key = Rails.application.config.session_options[:key] %>
@@ -23,5 +26,4 @@
 
 <% end -%>
   <%= render :partial => 'orders/share/cancel', :locals => {:current_order => @order}  %>	
-
  

@@ -1,3 +1,6 @@
+<% content_for :head do %>
+	<%= javascript_include_tag "orders/foto_print_order" %>
+<% end %>
 <h2><%= @title %></h2>
 
 <% key = Rails.application.config.session_options[:key] %>
