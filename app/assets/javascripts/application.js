@@ -11,5 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 
 //= require ../../../app/assets/javascripts/extend/vendor/jquery
+//= require ../../../app/assets/javascripts/extend/vendor/jquery.validate
 //= require rails
 //= require_tree ../../../app/assets/javascripts/extend
