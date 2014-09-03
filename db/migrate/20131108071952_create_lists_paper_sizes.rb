@@ -3,6 +3,8 @@ class CreateListsPaperSizes < ActiveRecord::Migration
     create_table :lists_paper_sizes do |t|
       t.string :size
       t.string :size_iso_216
+      t.integer :width
+      t.integer :length
       t.timestamps
     end
     Lists::PaperSize.create(:size => '10x15', :size_iso_216 => 'A6')
