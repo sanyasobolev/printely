@@ -140,48 +140,38 @@ $(document).ready(function() {
 		{
 			if (x <= MaxTextInputs)//max input box allowed
 			{
-				FieldCount++;
-				//text box added increment
+				FieldCount++;//text box added increment
 				//add input box
-				$(TextInputsWrapper).append('<div class="text_container"><input type="text" name="text_' + FieldCount + '" class="text_field" id="text_' + FieldCount + '" value="Текст ' + FieldCount + '"/><div class="remove_element"><img src="/assets/icons/del-3.png" alt="Del-3"></div></div>');
+				sidebar_text_name = 'text_' +FieldCount;
+				sidebar_text_id = sidebar_text_name;
+				sidebar_text_value = 'Текст ' +FieldCount;
+				$(TextInputsWrapper).append('<div class="text_container"><input type="text" name="'+sidebar_text_name+'" class="text_field" id="'+sidebar_text_id+'" value="'+sidebar_text_value+'"/><div class="remove_element"><img src="/assets/icons/del-3.png" alt="Del-3"></div></div>');
 				//add text to canvas
-				//canvas_text=new fabric.Text('Текст '+FieldCount, {
-				//   top:Math.floor(Math.random()*350+1),
-				//   left:Math.floor(Math.random()*250+1),
-				//   fill:'red'
-				//});
-				//canvas_text.set('itemId', 'text_' +FieldCount);
-				//canvas.add(canvas_text);
-				x++;
-				//text box increment
+				addTextToCanvas(sidebar_text_value, sidebar_text_id, canvas);
+				x++;//text box increment
 			}
 			return false;
-
 		});
+
 
 		$("body").on("click", ".remove_element", function() {//user click on remove text
 			if (x > 0) {
-				var sidebar_textId = $(this).siblings("input[id*='text']").attr('id');
-				$(this).parent('div').remove();
-				//remove text box
-				//canvas_text = canvas.getItemById(sidebar_textId);
-				//canvas.remove(canvas_text);
-				//canvas.renderAll();S
-				x--;
-				//decrement textbox
+				var sidebar_text_id = $(this).siblings("input[id*='text']").attr('id');
+				$(this).parent('div').remove();//remove text box
+				RemoveObjectFromCanvas(sidebar_text_id, canvas);
+				x--;//decrement textbox
 			}
-			//return false;
+			return false;
 		});
 
 		$("body").on("keyup", ".text_field", function() {//user change text
-			var sidebar_text = $(this).val(), sidebar_textId = $(this).attr('id');
-			//canvas_item = canvas.getItemById(sidebar_textId);
-			//canvas_item.set({ text: sidebar_text });
-			//canvas.renderAll();
-			//return false;
+			var sidebar_text_value = $(this).val(), 
+			sidebar_text_id = $(this).attr('id');
+			UpdateTextOnCanvas(sidebar_text_id, sidebar_text_value);
+			return false;
 		});
 
-
+	//load fabric-------------------------------------------------------------------------------------
     (function(){
 	  var newscript = document.createElement("script");
 	     newscript.type = "text/javascript";
@@ -193,20 +183,65 @@ $(document).ready(function() {
 	
 	//----------------------------------------------------------------------------------------------------
 
-  	//canvas-------------------------------------------------------------------------------------------------
-	//fabric.Object.prototype.originX = "left";
-	//fabric.Object.prototype.originY = "top";
+  	//create canvas-------------------------------------------------------------------------------------------------
 	var canvas = new fabric.Canvas("canvas");
-	
 	canvas.setWidth(545);
 	canvas.setHeight(385);
 	//--------------------------------------------------------------------------------------------------------
+	
+	//controls
+	var text_size_slider = $("input#text_size_slider");
+
+	//functions
+	function onObjectSelected(options){
+		allControlsUnBind();
+	    console.log('selected ' +options.target.get('type'));
+  		text_size_slider.bind("change", function() {
+    		options.target.set({fontSize: parseInt(this.value, 10)});
+    		canvas.renderAll();
+    	});
+	};
+
+	function allControlsUnBind(){
+		var text_size_slider = $("input#text_size_slider");
+    		text_size_slider.unbind();
+    	};
+	
+	function addTextToCanvas(canvas_text_value, canvas_text_id, canvas) {
+		canvas_text=new fabric.Text(canvas_text_value, {
+			top:Math.floor(Math.random()*350+1),
+			left:Math.floor(Math.random()*250+1),
+			fill:'red',
+			lockUniScaling: true,
+			});
+		canvas_text.set('ObjectId', canvas_text_id);
+		canvas.add(canvas_text);
+	};
+
+	function RemoveObjectFromCanvas(canvas_text_id, canvas) {
+		canvas_text = canvas.getObjectById(canvas_text_id);
+		canvas.remove(canvas_text);
+		canvas.renderAll();
+	};
+
+	function UpdateTextOnCanvas(canvas_text_id, canvas_text_value) {
+		canvas_item = canvas.getObjectById(canvas_text_id);
+		canvas_item.set({ text: canvas_text_value });
+		canvas.renderAll();
+	};
+
+	//canvas events
+	canvas.on('object:selected', onObjectSelected);
+	canvas.on('before:selection:cleared', allControlsUnBind);
 
 
 
+	
+	function TextColorHandler(TextObject){
 
 
-
+    	canvas.renderAll();
+  		};
 
 
 

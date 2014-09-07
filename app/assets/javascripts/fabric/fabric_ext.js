@@ -1,16 +1,17 @@
-//find item by itemId
+//find Object by Id
 $(function() {
-	fabric.Canvas.prototype.getItemById = function(itemId) {
+	fabric.Canvas.prototype.getObjectById = function(ObjectId) {
 	  var object = null,
 	      objects = this.getObjects();
 
 	  for (var i = 0, len = this.size(); i < len; i++) {
-	    if (objects[i].itemId && objects[i].itemId === itemId) {
+	    if (objects[i].ObjectId && objects[i].ObjectId === ObjectId) {
 	      object = objects[i];
 	      break;
 	    }
 	  }
-
 	  return object;
 	};
 });
+
+
