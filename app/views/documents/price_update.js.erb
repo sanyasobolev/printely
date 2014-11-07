@@ -1,1 +1,12 @@
 $('table#fileList tr#<%= @document.id %> td.document_cost .document_cost_value').html("<%= j number_to_currency(@document.cost, :unit => "коп.", :separator => " руб. ") %>");
+$('table#fileList tr#<%= @document.id %>').addClass('calculated');
+uploadfn.hide_loader_for_price(<%= @document.id %>);
+
+	var progress = {
+		panel: $('.progress-panel'),
+		bar: $('#progressbar'),
+		value: $('.progress-value'),
+		label: $('.progress-label'),
+	};		
+
+uploadfn.progress_observer(progress, 50/<%=params[:queue_files_count]%>, 'Считаем стоимость...');

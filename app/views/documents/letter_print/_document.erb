@@ -16,8 +16,24 @@
 				<div class="editor">
 					<div class="editor_container">
 						
-						<div class="toolbar_top">
-							<%= range_field_tag 'Размер', value=0, {:id => 'text_size_slider'} %>
+						<div class="top_toolbar">
+							<div class="font_family_tool">
+								<span class="label">Шрифт</span>
+								<select id="font_family_picker">
+									<option value="times_new_roman" class="times_new_roman">Times New Roman</option>
+									<option value="arial" class="arial">Arial</option>
+									<option value="verdana" class="verdana">Verdana</option>
+									<option value="andale_mono" class="andale_mono">Andale Mono</option>
+									<option value="courier_new" class="courier_new">Courier New</option>
+									<option value="impact" class="impact">Impact</option>
+								</select>
+							</div>
+							<div class="color_tool"></div>
+							<div class="font_style_tool">
+								<%=  button_tag 'Ж', :type => 'button', :id => "font_weight", :class => "font_style_button" %>	
+								<%=  button_tag 'К', :type => 'button', :id => "font_style", :class => "font_style_button" %>	
+								<%=  button_tag 'Ч', :type => 'button', :id => "text_decoration", :class => "font_style_button" %>	
+							</div>
 						</div>
 						
 						<div id="canvas-wrapper"  class="canvas_panel">
@@ -44,9 +60,12 @@
 							<div style="clear:both"></div>
 						
 							<div class="tabs_cont">
-								<div id="tab_c1"> </div>
+								<div id="tab_c1">
+									<%=  button_tag 'добавить изображение', :type => 'button', :id => 'add_image', :class => "add_canvas_element" %>
+									<div id="image_inputs_wrapper"> </div>	
+								</div>
 								<div id="tab_c2">
-								  	<div class="add_element" id="add_text">добавить текст</div>  
+									<%=  button_tag 'добавить текст', :type => 'button', :id => 'add_text', :class => "add_canvas_element" %>
 		  							<div id="text_inputs_wrapper"> </div>		
 								</div>
 							</div>

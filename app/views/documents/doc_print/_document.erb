@@ -2,7 +2,7 @@
   <%= fields_for "order[documents_attributes][]", document do |i| %>
     <td class="upload">
       <div class="container_for_link_delete_docfile">
-        <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :class => 'link_delete_docfile', :title => 'Удалить файл' %>
+        <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :class => 'link_delete docfile_delete', :title => 'Удалить файл' %>
       </div>
       <%= thumb_for_doc(document) %>
     </td>

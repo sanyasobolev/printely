@@ -136,19 +136,7 @@ div.box_user_opt:hover {
     padding: 0;
     list-style: none;  
 }
-/*
-.top_section_nav {
-    display:block;
-    text-align: center;
-        padding-bottom: 5px;
-        padding-top: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
-    font-size: 1.2em;
-    color: #378cff;
-    margin-top: 18px;
-}
-*/
+
 #top_menu li {
     float: right;
     padding: 0 0 10px 0;
@@ -1502,6 +1490,18 @@ a.site_map_link:hover {
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
+.form_align input.quantity_large {
+    display: block;
+    float: left;
+    width: 41px;
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #D6D3D1;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+    text-align: center;
+}
+
 button.button_style_long_orange, button.button_style_long_orange_pressed, button.button_style_long_orange_inactive {
 	float: left;
 	margin-right: 10px;
@@ -1605,10 +1605,10 @@ table td.delivery_location_edit label.error[for=order_delivery_address] {
 
 label.error[for=quantity_documents_for_validate] {
 	font-size: 1.5em;
-	width: 200px; 
-	height: 40px; 
-    right: 1020px;
-    top: 208px;
+	width: 200px;
+	height: 40px;
+	left: 240px;
+	top: 208px;
 }
 
 label.error[for=datepicker] {

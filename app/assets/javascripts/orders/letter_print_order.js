@@ -127,16 +127,115 @@ $(document).ready(function() {
 			}
 			return value;
 		};
+		
+		//top toolbar-------------------------------------------------------------------
+			//controls
+			var top_toolbar = $("div.top_toolbar"),
+			color_tool_container = $(".color_tool"),
+			color_tool = '<span class="label">Цвет</span><div class="colorpicker-wrapper"><input id="colorpicker" name="#" type="hidden" /></div>';
+			
+			//add font_family_tool
+			function addFontFamilyPicker(options, canvas){
+				$("#font_family_picker").selectmenu({
+					width: 210,
+					change: function( event, ui ) {
+						console.log('selected font ' +ui.item.label);
+			    		if (options && canvas) {//if selected object and canvas
+			    			options.target.set({fontFamily: ui.item.label});
+			    			canvas.renderAll();
+			    		}
+					}
+				});
+				if (options && canvas) {//if selected object and canvas set default text
+					console.log('set selected font-family ' +options.target.get('fontFamily'));
+					$("#font_family_picker-button span").text((options.target.get('fontFamily')));
+					};
+			};
+	
+			addFontFamilyPicker(); //добавление select menu, т.к. если его создавать после загрузки fabric - оно не работает
+			
+			//add color_tool
+			$(color_tool_container).append(color_tool);
+			$('#colorpicker').minicolors({
+		    	textfield: false
+			});
+			
+			//add fontstyle tool
+			var font_weight_button = $("#font_weight"),
+				font_style_button = $("#font_style"),
+				text_decoration_button = $("#text_decoration");
+				
+			function addFontStylePicker(options, canvas){
+				$(".font_style_button").click(function () {
+					if ($(this).hasClass("pressed")){
+						$(this).removeClass("pressed");
+						if (options && canvas) {//if selected object and canvas
+							if ($(this).attr('id') == 'font_weight'){
+								options.target.set({fontWeight: 'normal'});
+							}
+							if ($(this).attr('id') == 'font_style'){
+								options.target.set({fontStyle: 'normal'});
+							};
+							if ($(this).attr('id') == 'text_decoration'){
+								options.target.set({textDecoration: 'none'});
+							};
+			    			canvas.renderAll();
+			    		}
+					} else {
+						$(this).addClass("pressed");
+						if (options && canvas) {//if selected object and canvas
+							if ($(this).attr('id') == 'font_weight'){
+								options.target.set({fontWeight: 'bold'});
+							};
+							if ($(this).attr('id') == 'font_style'){
+								options.target.set({fontStyle: 'italic'});
+							};
+							if ($(this).attr('id') == 'text_decoration'){
+								options.target.set({textDecoration: 'underline'});
+							};
+			    			canvas.renderAll();
+			    		}
+					}
+		    	});
+		    	if (options && canvas) {//if selected object and canvas set default style 
+					//console.log('set selected option ' +options.target.get('fontFamily'));
+					if (options.target.get('fontWeight')=='bold'){
+						font_weight_button.addClass("pressed");
+					} else {
+						font_weight_button.removeClass("pressed");
+					};
+					if (options.target.get('fontStyle')=='italic'){
+						font_style_button.addClass("pressed");
+					} else {
+						font_style_button.removeClass("pressed");
+					};
+					if (options.target.get('textDecoration')=='underline'){
+						text_decoration_button.addClass("pressed");
+					} else {
+						text_decoration_button.removeClass("pressed");
+					};
+				};
+		    	
+			};
+			
+			addFontStylePicker();
 
+				
+
+						
+	
+			//$(top_toolbar).hide();
+	
+	    		
 		//sidebar---------------------------------------------------------------------------
 		//text
-		var MaxTextInputs = 5, //maximum input boxes allowed
+		var MaxTextInputs = 10, //maximum input boxes allowed
 		TextInputsWrapper = $("div#text_inputs_wrapper"), //Input boxes wrapper ID
 		x = TextInputsWrapper.length, //initial text box count
 		FieldCount = 0;
 		//to keep track of text box added
 
-		$("div#add_text").click(function()//on add input button click
+		$("#add_text").click(function()//on add input button click
 		{
 			if (x <= MaxTextInputs)//max input box allowed
 			{
@@ -154,7 +253,7 @@ $(document).ready(function() {
 		});
 
 
-		$("body").on("click", ".remove_element", function() {//user click on remove text
+		$("body").on("click", ".remove_element", function() {//user click on remove element
 			if (x > 0) {
 				var sidebar_text_id = $(this).siblings("input[id*='text']").attr('id');
 				$(this).parent('div').remove();//remove text box
@@ -170,6 +269,8 @@ $(document).ready(function() {
 			UpdateTextOnCanvas(sidebar_text_id, sidebar_text_value);
 			return false;
 		});
+
+
 
 	//load fabric-------------------------------------------------------------------------------------
     (function(){
@@ -189,39 +290,62 @@ $(document).ready(function() {
 	canvas.setHeight(385);
 	//--------------------------------------------------------------------------------------------------------
 	
-	//controls
-	var text_size_slider = $("input#text_size_slider");
-
+	
 	//functions
-	function onObjectSelected(options){
-		allControlsUnBind();
+	function onObjectSelected(options){ //options - selected object
+		allControlsUnBind(); //unbind all controls from other elements
 	    console.log('selected ' +options.target.get('type'));
-  		text_size_slider.bind("change", function() {
-    		options.target.set({fontSize: parseInt(this.value, 10)});
-    		canvas.renderAll();
-    	});
+	    //$(top_toolbar).show();
+	    //configure colorpicker
+	    $('.color_tool').show();
+	    $.minicolors.defaults.defaultValue = options.target.get('fill');
+	    $('#colorpicker').minicolors({
+		    change: function(){
+		    	console.log('selected color ' +this.value);
+		    	options.target.set({fill: this.value});
+    			canvas.renderAll();
+		    }
+		});
+		//configure font family picker
+		$('.font_family_tool').show();
+		addFontFamilyPicker(options, canvas);
+		
+		//configure font style picker
+		$('.font_style_tool').show();
+		addFontStylePicker(options, canvas);
+		
 	};
-
+	
 	function allControlsUnBind(){
-		var text_size_slider = $("input#text_size_slider");
-    		text_size_slider.unbind();
+		//$(top_toolbar).hide();
+		//destroy colorpicker, unbind not work
+    		$('#colorpicker').minicolors('destroy');
+    		color_tool_container.html('');
+    		color_tool_container.append(color_tool);
+    		color_tool_container.hide();
+
+    	//unbind font_family picker
+    		$('#font_family_picker').unbind();
+    		$('.font_family_tool').hide();
+
+    	//unbind font_style picker
+			font_weight_button.unbind();
+			font_style_button.unbind();
+			text_decoration_button.unbind();
+    		$('.font_style_tool').hide();	   	
+    	
     	};
 	
+	//add and update text on canvas
 	function addTextToCanvas(canvas_text_value, canvas_text_id, canvas) {
 		canvas_text=new fabric.Text(canvas_text_value, {
 			top:Math.floor(Math.random()*350+1),
 			left:Math.floor(Math.random()*250+1),
-			fill:'red',
+			fill:'#ff0000',
 			lockUniScaling: true,
 			});
 		canvas_text.set('ObjectId', canvas_text_id);
 		canvas.add(canvas_text);
-	};
-
-	function RemoveObjectFromCanvas(canvas_text_id, canvas) {
-		canvas_text = canvas.getObjectById(canvas_text_id);
-		canvas.remove(canvas_text);
-		canvas.renderAll();
 	};
 
 	function UpdateTextOnCanvas(canvas_text_id, canvas_text_value) {
@@ -229,22 +353,17 @@ $(document).ready(function() {
 		canvas_item.set({ text: canvas_text_value });
 		canvas.renderAll();
 	};
+	
+	//remove object fron canvas
+	function RemoveObjectFromCanvas(canvas_object_id, canvas) {
+		canvas_object = canvas.getObjectById(canvas_object_id);
+		canvas.remove(canvas_object);
+		canvas.renderAll();
+	};
 
 	//canvas events
 	canvas.on('object:selected', onObjectSelected);
 	canvas.on('before:selection:cleared', allControlsUnBind);
-
-
-
-	
-	function TextColorHandler(TextObject){
-
-
-    	canvas.renderAll();
-  		};
-
-
-
 
 
 

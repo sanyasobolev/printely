@@ -1,0 +1,25 @@
+/*font family select list jQuery UI-----------------------------------*/
+
+#font_family_picker-menu li:nth-child(1){
+    font-family: Times New Roman, serif;
+}
+
+#font_family_picker-menu li:nth-child(2){
+    font-family: Arial,sans-serif;
+}
+
+#font_family_picker-menu li:nth-child(3){
+    font-family: Verdana, sans-serif;
+}
+
+#font_family_picker-menu li:nth-child(4){
+    font-family: Andale Mono, monospace;
+}
+
+#font_family_picker-menu li:nth-child(5){
+    font-family: Courier New, monospace;
+}
+
+#font_family_picker-menu li:nth-child(6){
+    font-family: Impact, fantasy;
+}

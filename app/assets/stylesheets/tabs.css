@@ -20,10 +20,10 @@
 }
 
 .tabs label:hover {
-	color: #F70;
 	padding: 0 13px;
+	color: black;
 	background: #FFFFDF;
-	border: 1px solid #FFCA95;
+	border: 1px solid #CC8400;
 }
 
 .tabs input {

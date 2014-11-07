@@ -10,17 +10,6 @@
    TODO customize this sample style
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
-/*стиль конпки*/
-
-#document_docfileUploader {
-    cursor: pointer;
-    width: 200px;
-    height: 50px;
-}
-
-.edit_print_order{
-	position: relative;
-}
 
 table td.delivery_location_edit {
 	height: 170px;
@@ -111,7 +100,7 @@ table td.delivery_price {
     text-align: center
 }
 
-/*форма для загружки файлов------------------------------------------------------------*/
+/*форма для загрузки файлов------------------------------------------------------------*/
 
 #fileList td.upload {
     width: 161px;
@@ -124,10 +113,7 @@ table td.delivery_price {
     position: relative
 }
 
-#fileList td.upload .link_delete_docfile {
-    position: absolute;
-    right: 0px;
-}
+
 
 #fileList td.upload img.thumb {
     margin-top: 13px;
@@ -224,18 +210,6 @@ table td.delivery_price {
 	float: right;
     border: 1px solid #D6D3D1;
     margin-top: 10px;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
-    text-align: center;
-}
-
-.form_align input.quantity_large {
-    display: block;
-    float: left;
-    width: 41px;
-    height: 35px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 2px solid #D6D3D1;
     font-family: "Segoe UI",helvetica,arial,sans-serif;
     text-align: center;
 }
@@ -356,62 +330,6 @@ table td.delivery_price {
    	margin-right: 9px;
 	margin-left: 9px;
 }
-
-button.decrease_quantity {
-    cursor: pointer;
-    float: right;
-    width: 21px;
-    height: 23px;
-    border: 0px;
-    margin-left: 10px;
-    background-image: url(/assets/icons/minus.png);
-}
-
-button.increase_quantity {
-    cursor: pointer;
-    float: right;
-    width: 21px;
-    height: 23px;
-    border: 0px;
-    background-image: url(/assets/icons/plus.png);
-}
-
-button.decrease_quantity_large {
-    cursor: pointer;
-    float: left;
-    width: 41px;
-    height: 44px;
-    border: 0px;
-    background-image: url(/assets/icons/minus_large.png);
-}
-
-button.increase_quantity_large {
-    cursor: pointer;
-    float: left;
-    width: 41px;
-    height: 44px;
-    border: 0px;
-    background-image: url(/assets/icons/plus_large.png);
-}
-
-button.decrease_page_count {
-    cursor: pointer;
-    float: right;
-    width: 21px;
-    height: 23px;
-    border: 0px;
-    background-image: url(/assets/icons/minus.png);
-}
-
-button.increase_page_count {
-    cursor: pointer;
-    float: right;
-    width: 21px;
-    height: 23px;
-    border: 0px;
-    background-image: url(/assets/icons/plus.png);
-}
-
 
 
 #fileList td.user_comment textarea {
@@ -647,22 +565,6 @@ button.increase_page_count {
 	float:left;
 }
 
-div.add_element {
-    width: 270px;
-    height: 30px;
-    margin-top: 10px;
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    border: 0 none;
-    background: lightgrey;
-    cursor:pointer;
-}
-
-div.add_element:hover {
-    background:#B5B5B5;
-}
 
 #text_inputs_wrapper {
 	position:relative;
@@ -685,10 +587,65 @@ div.remove_element {
 	right: 0px;
 }
 
-.toolbar_top {
-	position:absolute;
+.top_toolbar {
+	position: absolute;
+	z-index:+1;
+	display:block;
 	height: 50px;
-	width: 100%;
-	background:#EFEFEF;
-	z-index: +1;
+	width: 618px;
+	background: #F9F9F9;
+	border: 1px solid #E4E4E4;
 }
+
+.color_tool {
+	float: left;
+	display: block;
+	height: 45px;
+	width: 100px;
+	margin-left:20px;
+}
+
+.color_tool span.label {
+	display:block;
+	margin-top: 13px;
+	margin-right: 10px;
+	float: left;
+}
+
+.minicolors input[type=hidden] + .minicolors-swatch {
+	margin-top:7px;
+}
+
+.minicolors-swatch-color {
+	width: 35px;
+	height: 35px;
+	margin-top:7px;
+}
+
+.minicolors-theme-default .minicolors-swatch {
+	height: 33px;
+}
+
+.font_family_tool {
+	float: left;
+	display: block;
+	height: 45px;
+	width: 280px;
+	margin-left:20px;
+}
+
+.font_family_tool span.label {
+	display:block;
+	margin-top: 13px;
+	margin-right: 10px;
+	float: left;
+}
+
+.font_style_tool {
+	float: left;
+	display: block;
+	height: 45px;
+	width: 120px;
+	margin-left:20px;
+}
+

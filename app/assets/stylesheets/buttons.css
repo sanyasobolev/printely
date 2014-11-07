@@ -1,0 +1,133 @@
+/*link for delete*/
+.link_delete.docfile_delete {
+    position: absolute;
+    right: 0px;
+}
+
+.link_delete#clear_queue {
+    position: absolute;
+	right: -18px;
+	top: -14px;
+    border: 0 none;
+    background: none;
+    cursor:pointer;
+}
+
+/*buttons for change quntity*/
+button.decrease_quantity {
+    cursor: pointer;
+    float: right;
+    width: 21px;
+    height: 23px;
+    border: 0px;
+    margin-left: 10px;
+    background-image: url(/assets/icons/minus.png);
+}
+
+button.increase_quantity {
+    cursor: pointer;
+    float: right;
+    width: 21px;
+    height: 23px;
+    border: 0px;
+    background-image: url(/assets/icons/plus.png);
+}
+
+button.decrease_quantity_large {
+    cursor: pointer;
+    float: left;
+    width: 41px;
+    height: 44px;
+    border: 0px;
+    background-image: url(/assets/icons/minus_large.png);
+}
+
+button.increase_quantity_large {
+    cursor: pointer;
+    float: left;
+    width: 41px;
+    height: 44px;
+    border: 0px;
+    background-image: url(/assets/icons/plus_large.png);
+}
+
+button.decrease_page_count {
+    cursor: pointer;
+    float: right;
+    width: 21px;
+    height: 23px;
+    border: 0px;
+    background-image: url(/assets/icons/minus.png);
+}
+
+button.increase_page_count {
+    cursor: pointer;
+    float: right;
+    width: 21px;
+    height: 23px;
+    border: 0px;
+    background-image: url(/assets/icons/plus.png);
+}
+
+/*uploadify button for select files*/
+#document_docfileUploader {
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+}
+
+
+/*canvas buttons*/
+button.add_canvas_element {
+    width: 270px;
+    height: 30px;
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    border: 0 none;
+    background: lightgrey;
+    cursor:pointer;
+}
+
+button.add_canvas_element:hover {
+    background:#B5B5B5;
+}
+
+button.font_style_button {
+    width: 35px;
+    height: 35px;
+    margin-top: 7px;
+    text-align: center;
+    text-decoration: none;
+    color: #777;
+    cursor:pointer;
+    font-size: 15px;
+	background: #F9F9F9;
+	border: 1px solid #E4E4E4;
+}
+
+button.font_style_button:hover {
+	color: black;
+	background: #FFFFDF;
+	border: 1px solid #CC8400;
+}
+
+button.font_style_button.pressed {
+	color: black;
+	background: lightgrey;
+	border: 1px solid black
+}
+
+button.font_style_button#font_weight {
+	font-weight: bold;
+}
+
+button.font_style_button#font_style {
+	font-style:italic;
+}
+
+button.font_style_button#text_decoration {
+	text-decoration:underline;
+}

@@ -33,11 +33,11 @@ class DocumentsController < ApplicationController
 
   def price_update
     @document = Document.find_by_id(params[:id])
-    if params[:order_type] == 'foto_print' #for foto_print_order
+    if params[:order_type] == 'foto_print' && params[:margins] #for foto_print_order
       @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
       @document.print_margin = Lists::PrintMargin.find_by_id(params[:margins])
       @document.save
-    elsif params[:order_type] == 'doc_print' #for doc_print_order
+    elsif params[:order_type] == 'doc_print' && params[:print_color]#for doc_print_order
       @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
       @document.print_color = Lists::PrintColor.find_by_id(params[:print_color])
       @document.binding = Lists::Binding.find_by_id(params[:binding])

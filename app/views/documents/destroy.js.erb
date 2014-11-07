@@ -1,5 +1,11 @@
 <%- if flash[:error].blank? -%>
-  $('tr#<%= @document.id %>').fadeOut('fast', function() { $(this).remove(); });
+ 
+  $('tr#<%= @document.id %>').fadeOut('fast', function() { 
+	  	$(this).remove(); 
+	  	uploadfn.calculate_documents();
+  	});
+  $.post("/order/ajaxupdate", {id: <%= @order.id %>} );
+    
   <% if @order.documents.count == 0 %>
     $('#fileList_header').fadeOut('slow');
   <% end %>
