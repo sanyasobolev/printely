@@ -63,8 +63,8 @@ Spsite::Application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.locum.ru",
     :port                 => 25,
-    :user_name            => 'noreply@printely.ru',
-    :password             => 'y0bx17hb',
+    :user_name            => 'info@printely.ru',
+    :password             => 'GdM.:_672f$%a13qwo3',
     :authentication       => 'plain',
     :enable_starttls_auto => false  }
 
