@@ -11,6 +11,7 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
+
 table td.delivery_location_edit {
 	height: 170px;
 	width: 560px;
@@ -360,7 +361,7 @@ table td.delivery_price {
     position: absolute;
     top: -25px;
     right: 30px;
-    color: grey;
+    color: gray;
 }
 
 .container_for_created_at_order{
@@ -387,7 +388,7 @@ table td.delivery_price {
     position: absolute;
     top: -25px;
     right: 63px;
-    color: grey;
+    color: gray;
 }
 
 .container_for_status_order{
@@ -414,7 +415,7 @@ table td.delivery_price {
     position: absolute;
     top: -25px;
     right: 13px;
-    color: grey;
+    color: gray;
 }
 .container_for_cost_order{
     width: 150px;
@@ -440,7 +441,7 @@ table td.delivery_price {
     position: absolute;
     top: -40px;
     right: 3px;
-    color: grey;
+    color: gray;
 }
 
 .container_for_pre_cost_order{
@@ -520,132 +521,4 @@ table td.delivery_price {
     top: 110mm;
 }
 
-/*fabric canvas----------------------------*/
-
-.editor {
-	position:relative;
-	width: 900px;
-	height:700px;
-	
-	margin-top:30px;
-	margin-bottom: 30px;
-	border: 0px;
-}
-
-.editor_container {
-	position:absolute;
-	width:620px;
-	float: left;	
-}
-
-.canvas_panel {
-	display: block;
-	position: relative;
-	width:618px;
-	height:580px;
-	border: 1px solid #ddd
-}
-
-#canvas_bg {
-	position: absolute;
-}
-
-.canvas-container {
-	margin-top: 165px;
-	margin-left: 30px;
-	border: 1px dotted red;
-}
-
-.sidebar_container {
-	position:absolute;
-	width: 300px;
-	height:580px;
-	margin-left: 630px;
-	border: 0px;
-	float:left;
-}
-
-
-#text_inputs_wrapper {
-	position:relative;
-}
-
-
-#text_inputs_wrapper div.text_container {
-	margin-top: 10px;
-	position: relative;
-}
-
-#text_inputs_wrapper input.text_field {
-	width: 240px;
-	position: static;
-}
-
-div.remove_element {
-	position:absolute;
-	top: 0px;
-	right: 0px;
-}
-
-.top_toolbar {
-	position: absolute;
-	z-index:+1;
-	display:block;
-	height: 50px;
-	width: 618px;
-	background: #F9F9F9;
-	border: 1px solid #E4E4E4;
-}
-
-.color_tool {
-	float: left;
-	display: block;
-	height: 45px;
-	width: 100px;
-	margin-left:20px;
-}
-
-.color_tool span.label {
-	display:block;
-	margin-top: 13px;
-	margin-right: 10px;
-	float: left;
-}
-
-.minicolors input[type=hidden] + .minicolors-swatch {
-	margin-top:7px;
-}
-
-.minicolors-swatch-color {
-	width: 35px;
-	height: 35px;
-	margin-top:7px;
-}
-
-.minicolors-theme-default .minicolors-swatch {
-	height: 33px;
-}
-
-.font_family_tool {
-	float: left;
-	display: block;
-	height: 45px;
-	width: 280px;
-	margin-left:20px;
-}
-
-.font_family_tool span.label {
-	display:block;
-	margin-top: 13px;
-	margin-right: 10px;
-	float: left;
-}
-
-.font_style_tool {
-	float: left;
-	display: block;
-	height: 45px;
-	width: 120px;
-	margin-left:20px;
-}
 

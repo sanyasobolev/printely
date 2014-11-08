@@ -2,12 +2,13 @@
 <%= form_for :size, :url => lists_paper_size_path(@size), :html => {:method => :put} do |f| %>
   <%= f.error_messages %>
   <%= render :partial => 'form', :locals => {:f => f} %>
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-      <%= link_to 'Назад', lists_paper_sizes_path, :class => 'button_style' %>
-   </div>
   
-<% end %>
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => lists_paper_sizes_path}  %>
+
 
 
 

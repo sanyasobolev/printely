@@ -2,12 +2,13 @@
 <%= form_for :color, :url => lists_print_color_path(@color), :html => {:method => :put} do |f| %>
   <%= f.error_messages %>
   <%= render :partial => 'form', :locals => {:f => f} %>
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-      <%= link_to 'Назад', lists_print_colors_path, :class => 'button_style' %>
-   </div>
-  
-<% end %>
+
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => lists_print_colors_path}  %>
+
 
 
 

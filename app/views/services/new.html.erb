@@ -5,8 +5,10 @@
 
     <%= render :partial => 'form', :locals => {:f => f} %>
 
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-    </div>
-  <% end -%>
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => services_path}  %>
+
 </div>

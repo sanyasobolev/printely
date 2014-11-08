@@ -2,12 +2,13 @@
 <%= form_for :binding, :url => lists_binding_path(@binding), :html => {:method => :put} do |f| %>
   <%= f.error_messages %>
   <%= render :partial => 'form', :locals => {:f => f} %>
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-      <%= link_to 'Назад', lists_bindings_path, :class => 'button_style' %>
-   </div>
+	<div class="submit_area">
+		<%= submit_tag 'Сохранить', :class => 'submit' %>
+	</div> 
+<% end -%>
+<%= render :partial => 'share/cancel', :locals => {:path => lists_bindings_path}  %>
+
   
-<% end %>
 
 
 

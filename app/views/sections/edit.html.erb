@@ -7,7 +7,7 @@
 
 	    <div class="submit_area">
 	      <%= submit_tag 'Сохранить', :class => 'submit' %>
-	      <%= link_to 'Назад', admin_sections_path, :class => 'button_style' %>
 	    </div>  
 	<% end %>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_sections_path}  %>	
 </div>

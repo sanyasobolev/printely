@@ -3,13 +3,13 @@
 	<%= form_for :delivery_zone, :url => lists_delivery_zone_path(@delivery_zone), :html => {:method => :put} do |f| %>
 	  <%= f.error_messages %>
 	  <%= render :partial => 'form', :locals => {:f => f} %>
-	    <div class="submit_area">
-	      <%= submit_tag 'Сохранить', :class => 'submit' %>
-	      <%= link_to 'Назад', lists_delivery_zones_path, :class => 'button_style' %>
-	   </div>
-	  
-	<% end %>
+	<div class="submit_area">
+		<%= submit_tag 'Сохранить', :class => 'submit' %>
+	</div> 
+<% end -%>
+<%= render :partial => 'share/cancel', :locals => {:path => lists_delivery_zones_path}  %>
 </div>
+
 
 
 

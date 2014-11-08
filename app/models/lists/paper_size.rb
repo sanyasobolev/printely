@@ -34,11 +34,34 @@ class Lists::PaperSize < ActiveRecord::Base
     end
     
   def create_size
-    @attributes['size'] = "#{width/10.0}" + "×" + "#{length/10.0}"
+    if ( width.to_s =~ /0\Z/ ) #есть на конце ноль
+      width_cm = width/10
+    else
+      width_cm = width/10.0
+    end
+
+    if ( length.to_s =~ /0\Z/ ) #есть на конце ноль
+      length_cm = length/10
+    else
+      length_cm = length/10.0
+    end
+      
+    @attributes['size'] = "#{width_cm}" + "×" + "#{length_cm}"
   end
 
   def update_size
-    self.size = "#{width/10.0}" + "×" + "#{length/10.0}"
+    if ( width.to_s =~ /0\Z/ ) #есть на конце ноль
+      width_cm = width/10
+    else
+      width_cm = width/10.0
+    end
+
+    if ( length.to_s =~ /0\Z/ ) #есть на конце ноль
+      length_cm = length/10
+    else
+      length_cm = length/10.0
+    end
+    self.size = "#{width_cm}" + "×" + "#{length_cm}"
   end
   
 end

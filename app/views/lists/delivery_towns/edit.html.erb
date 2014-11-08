@@ -2,12 +2,12 @@
 <%= error_messages_for :delivery_town %>
 <%= form_for :delivery_town, :url => lists_delivery_town_path(@delivery_town), :html => {:method => :put} do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-      <%= link_to 'Назад', lists_delivery_towns_path, :class => 'button_style' %>
-   </div>
-  
-<% end %>
+	<div class="submit_area">
+		<%= submit_tag 'Сохранить', :class => 'submit' %>
+	</div> 
+<% end -%>
+<%= render :partial => 'share/cancel', :locals => {:path => lists_delivery_towns_path}  %>
+
 
 
 

@@ -3,8 +3,9 @@
 
 	<%= render :partial => 'form', :locals => {:f => f} %>
 
-	<div class="submit_area">
-	 <%= submit_tag 'Подтвердить', :class => 'submit'  %>
-	 <%= link_to 'Вернуться', admin_mailings_path, :class => 'button_style' %>
-	</div>
-  <% end -%>
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_mailings_path}  %>
+

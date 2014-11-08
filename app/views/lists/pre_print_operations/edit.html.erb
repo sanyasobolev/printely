@@ -2,12 +2,12 @@
 <%= form_for :operation, :url => lists_pre_print_operation_path(@operation), :html => {:method => :put} do |f| %>
   <%= f.error_messages %>
   <%= render :partial => 'form', :locals => {:f => f} %>
-    <div class="submit_area">
-      <%= submit_tag 'Сохранить', :class => 'submit' %>
-      <%= link_to 'Назад', lists_pre_print_operations_path, :class => 'button_style' %>
-   </div>
-  
-<% end %>
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => lists_pre_print_operations_path}  %>
+
 
 
 

@@ -3,12 +3,12 @@
 	<%= form_for :pspec, :url => lists_paper_specifications_path, :html => {:id => 'new_paper_specification', :multipart => true} do |f| %>
 	  <%= f.error_messages %>
 	  <%= render :partial => 'form', :locals => {:f => f, :pspec => @pspec} %>
-	  
-	    <div class="submit_area">
-	      <%= submit_tag 'Сохранить', :class => 'submit' %>
-	      <%= link_to 'Назад', admin_lists_paper_specifications_path, :class => 'button_style' %>
-	    </div>
-	
-	<% end %>
+
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_lists_paper_specifications_path}  %>
+
 </div>
  

@@ -1,19 +1,63 @@
-/*link for delete*/
-.link_delete.docfile_delete {
-    position: absolute;
-    right: 0px;
-}
-
-.link_delete#clear_queue {
-    position: absolute;
-	right: -18px;
-	top: -14px;
+/*buttons for submit/cancel*/
+input.button_style {
+    background-color: #1BA1E2;
     border: 0 none;
-    background: none;
-    cursor:pointer;
+    color: white;
+    padding: 9px 20px 10px 20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-right: 0px;
+    display:block;
+
+    text-align:center;
+    text-decoration:none;
+    max-width: 100px;
+    height: 39px;
 }
 
-/*buttons for change quntity*/
+input.button_style:hover {
+    cursor: pointer;
+    background-color: #3b6fb5;
+}
+
+.submit_area {
+    margin-top: 20px;
+    height: 50px;
+    float: right;
+}
+
+.cancel_area {
+    margin-top: 20px;
+    height: 50px;
+    float: right;
+}
+
+.submit {
+    float: right;
+    background-color: #1BA1E2;
+    border: 0 none;
+    color: white;
+    cursor: pointer;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 0px;
+    display: block;
+    font-weight: bold;
+}
+
+.submit:hover {
+    background-color: #3b6fb5;
+}
+
+button.button_style_long_orange, button.button_style_long_orange_pressed, button.button_style_long_orange_inactive {
+	float: left;
+	margin-right: 10px;
+}
+
+/*buttons for change quantity*/
 button.decrease_quantity {
     cursor: pointer;
     float: right;

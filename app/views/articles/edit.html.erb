@@ -7,5 +7,9 @@
 
   <%= render :partial => 'form', :locals => {:f => f} %>
 
-  <%= submit_tag 'Сохранить' %> или <%= link_to 'Вернуться', admin_articles_path %>
-  <% end -%>
+	<div class="submit_area">
+		<%= submit_tag 'Сохранить', :class => 'submit' %>
+	</div> 
+<% end -%>
+<%= render :partial => 'share/cancel', :locals => {:path => admin_articles_path}  %>
+
