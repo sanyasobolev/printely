@@ -65,8 +65,8 @@ Spsite::Application.configure do
     :port                 => 25,
     :user_name            => 'noreply@printely.ru',
     :password             => 'y0bx17hb',
-    :authentication       => 'plain',
-    :enable_starttls_auto => false  }
+    :authentication       => 'plain'
+    }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
