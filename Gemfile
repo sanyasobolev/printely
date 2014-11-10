@@ -37,6 +37,7 @@ gem "therubyracer"
 group :production do
   gem 'execjs'
   gem 'unicorn'
+  gem 'unicorn-worker-killer'
   gem 'roadie' #make sending HTML emails by inlining stylesheets
   gem 'roadie-rails', '~> 1.0.3' #hook foe roadie
 end
