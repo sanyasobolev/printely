@@ -12,6 +12,7 @@ gem 'gon', '3.0.5' #for pass variables to JS
 gem "ransack", '1.1.0'  #search engine
 gem 'delayed_job_active_record' #send mailings in background
 gem "daemons" #daemon for delayed job
+gem 'workless' #for delayed job
 gem 'pdf-reader', "~> 1.3.3" #for get count pages in pdf
 gem 'ruby-ole' #for information from office document
 gem 'kaminari' #pagination
