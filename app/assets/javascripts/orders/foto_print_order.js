@@ -16,6 +16,7 @@ $(document).ready(function(){
 		bar: $('#progressbar'),
 		value: $('.progress-value'),
 		label: $('.progress-label'),
+		state: false,
 	};	
 	
 	var order = {
@@ -32,10 +33,7 @@ $(document).ready(function(){
         url_for_load_paper_sizes: "/document/get_paper_sizes",
         url_for_load_paper_types: "/document/get_paper_types",
         url_for_load_print_margins: "/document/get_print_margins",
-        //queue_files_count присваиваем значение загруженных на данный момент документов
-        //в случае рефреша страницы
-        //при загрузке ему присваивается колво выбранных файлов
-        queue_files_count: $("table#fileList tr.document").length
+        queue_files_count: 0
 	};
 	
     $('input#document_docfile').uploadify({
@@ -55,10 +53,13 @@ $(document).ready(function(){
       },
       onSelectOnce : function(queue) { //определяем колво выбранных файлов и обнуляем progressbar
       	document.queue_files_count = parseInt($('input#document_docfile').uploadifySettings('queueSize'));	
-       	uploadfn.clear_error_message();//стираем сообщение об ошибке незагруженных файлов
-       	progress.bar.val(0);
-       	uploadfn.progress_observer(progress, 0, 'Подготовка...');
-       },
+       	if(document.queue_files_count>0){
+	       	uploadfn.clear_error_message();//стираем сообщение об ошибке незагруженных файлов
+	       	progress.state = true;
+	       	progress.bar.val(0);
+	       	uploadfn.progress_observer(progress, 0, 'Анализ выбранных файлов...'); 		
+       	}
+	  },
 
       onComplete : function(e, id, obj, response, data) {
       	//add and hide documents

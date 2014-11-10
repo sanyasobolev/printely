@@ -7,6 +7,11 @@ uploadfn.hide_loader_for_price(<%= @document.id %>);
 		bar: $('#progressbar'),
 		value: $('.progress-value'),
 		label: $('.progress-label'),
-	};		
-
-uploadfn.progress_observer(progress, 50/<%=params[:queue_files_count]%>, 'Считаем стоимость...');
+		state: true,
+	};	
+		
+if(<%=params[:queue_files_count]%> == 0){
+	progress.state = false;
+} else {
+	uploadfn.progress_observer(progress, 50/<%=params[:queue_files_count]%>, 'Считаем стоимость...');
+};

@@ -41,20 +41,30 @@
     uploadfn.progress_observer = function(progress, step, label){
        	next_value = progress.bar.val() + step;
        	progress.bar.val(next_value);
-       	progress.value.html(Math.round(next_value) + '%');	
-       	
-       	if($("table#fileList tr.document").exists() && $("table#fileList tr.document:not(.calculated)").length == 0) { //если все загрузилось
-       		progress.panel.css("display", "none");
-       		progress.label.html('success');
-       		uploadfn.show_fileListHeader();
-       		uploadfn.show_all_documents();
-       	} else if(!$("table#fileList tr.document").exists() && $("div.uploadifyError").exists() ) { //если все выбранные файлы загружены с ошибкой
-       		progress.panel.css("display", "none");
-       		progress.label.html('error');
-       	}
-       	else{
-       		progress.panel.css("display", "block");
-       		progress.label.html(label);
+       	progress.value.html(Math.round(next_value) + '%');
+   
+       	if(progress.state==false){
+       		progress.panel.css("display", "none");		
+       	}else{
+	       	if($("table#fileList tr.document").exists() && $("table#fileList tr.document:not(.calculated)").length == 0) { //если все загрузилось
+	       		progress.panel.css("display", "none");
+	       		progress.label.html('success');
+	       		uploadfn.show_fileListHeader();
+	       		uploadfn.show_all_documents();
+	       	}
+	       	else{
+		       	//label color	
+			    switch(progress.bar.val()) {
+			         case 0:
+						progress.label.css('color', 'black');
+						break;
+			         default:
+						progress.label.css('color', 'white');
+						break;
+			    };
+	       		progress.panel.css("display", "block");
+	       		progress.label.html(label);
+	       	} 
        	}
     };
     
