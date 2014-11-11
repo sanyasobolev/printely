@@ -9,7 +9,7 @@ Spsite::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = true
+  config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -65,8 +65,8 @@ Spsite::Application.configure do
     :port                 => 25,
     :user_name            => 'noreply@printely.ru',
     :password             => 'y0bx17hb',
-    :authentication       => 'plain'
-    }
+    :authentication       => 'plain',
+    :enable_starttls_auto => false  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
