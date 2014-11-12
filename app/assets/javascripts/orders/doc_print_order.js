@@ -37,14 +37,14 @@ $(document).ready(function(){
 	};
 
     $('input#document_docfile').uploadify({
-      uploader : '/assets/uploadify/uploadify.swf',
-      buttonImg : '/assets/uploadify/upload_button.png',
+      uploader : uploader,
+      buttonImg : buttonImg,
       script : url,
       fileDataName : 'document[docfile]',
       fileDesc : 'Documents (.pdf, .doc, .docx, .ppt, .pptx)',
       fileExt : '*.doc;*.docx;*.pdf;*.ppt;*.pptx',
-      sizeLimit : 10240000, //10MB
-      cancelImg : '/assets/uploadify/cancel.png',
+      sizeLimit : 20480000, //20MB
+      cancelImg : cancelImg,
       multi : true,
       scriptData : upload_params,
       auto : true,
