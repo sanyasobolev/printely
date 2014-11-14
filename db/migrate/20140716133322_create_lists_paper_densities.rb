@@ -4,5 +4,5 @@ class CreateListsPaperDensities < ActiveRecord::Migration
       t.integer :density
       t.timestamps
     end
-      end
+  end
 end

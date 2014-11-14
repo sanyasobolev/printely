@@ -5,8 +5,8 @@ attr_accessible :title, :synopsis, :this_news, :body, :category_id, :published, 
 
 #paperclipe
 has_attached_file :header_image,
-                  :url => "/assets/articles/:basename.:extension",
-                  :path => ":rails_root/app/assets/images/articles/:filename"
+                  :url => "/articles/:basename.:extension",
+                  :path => ":rails_root/public/articles/:filename"
 
 belongs_to :user
 belongs_to :category
@@ -56,10 +56,10 @@ BODY_COLS_SIZE = 60
                        :content_type => { :content_type => /image/ },
                        :size => { :in => 0..1.megabytes }
 
-  scope :articles_for_user, where("published=true AND this_news=false").order('published_at DESC') 
-  scope :news_for_user, where("published=true AND this_news=true").order('published_at DESC') 
-  scope :news_for_welcome, where("published=true AND this_news=true").order('published_at DESC').limit(2)
-  scope :articles_for_user_with_category, lambda { |category| where("category_id=#{category.id.to_i} AND published=true AND this_news=false").order('published_at DESC')} 
+  scope :articles_for_user, where("published=true AND this_news=false").order('created_at DESC') 
+  scope :news_for_user, where("published=true AND this_news=true").order('created_at DESC') 
+  scope :news_for_welcome, where("published=true AND this_news=true").order('created_at DESC').limit(2)
+  scope :articles_for_user_with_category, lambda { |category| where("category_id=#{category.id.to_i} AND published=true AND this_news=false").order('created_at DESC')} 
 
 
   def update_published_at

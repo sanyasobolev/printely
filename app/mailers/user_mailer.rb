@@ -79,7 +79,9 @@ class UserMailer < ActionMailer::Base
    end
 
   def email_about_new_letter(recipient, new_letter)
-    mail(:to => recipient.email, :subject => "Новое письмо от пользователя - #{new_letter.name}")
+    @author = new_letter.name
+    @body = new_letter.question
+    mail(:from => new_letter.email, :to => recipient.email, :subject => "Новое письмо от пользователя. Автор - #{new_letter.name}")
   end
   
    #рассылка всем юзерам системы
