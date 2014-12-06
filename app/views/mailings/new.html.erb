@@ -1,3 +1,6 @@
+<% content_for :head do %>
+	<%= javascript_include_tag "ckeditor/init" %>
+<% end %>
 <h2><%= @title %></h2>
   <%= form_for :mailing, :url => mailings_path, :html => { :method => :post } do |f| -%>
 
