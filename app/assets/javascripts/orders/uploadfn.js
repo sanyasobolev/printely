@@ -5,7 +5,7 @@
     // Add function  to the namespace
     
     //error notification function for uploadify
-    uploadfn.error_notification = function(ID, errorObj){
+    uploadfn.error_notification = function(errorObj, queue_error_container, file_queue_id){
 	    //определяем тип ошибки
 	    switch(errorObj.type) {
 	         case "File Size":
@@ -19,52 +19,55 @@
 	    };
 	    
 	    //добавляем описание ошибки
-	    $("div#document_docfile"+ID+"").append("<span class='uploadify_error_ru'> - "+error_type+" "+error_desc+"</span>");
-
+	    file_queue_id.append("<span class='uploadify_error_ru'> - "+error_type+" "+error_desc+"</span>");
+		
 		//добавляем кнопку очистки и header, если их нет
 		if(!$("button#clear_queue").exists()) {
-      	var queue_error_container = $("#document_docfileQueue"),
-      		clear_errors_button = '<button class="link_delete" id="clear_queue" name="button" type="button"><img alt="Del-3" src="/assets/icons/del-3.png"></button>',
+      	var	clear_errors_button = '<button class="link_delete" id="clear_queue" name="button" type="button"><img alt="Del-3" src="/assets/icons/del-3.png"></button>',
       		queue_error_header = '<div class="uploadifyQueueHeader">Следующие файлы не были загружены:</div>';
-
 	      	queue_error_container.prepend(queue_error_header);
 	      	queue_error_container.prepend(clear_errors_button);
-	      	$("button#clear_queue").click(function(){
+	      	$("body").on("click", "button#clear_queue",  function(){
+	      		queue_error_container.css("display", "none");
 	      		queue_error_container.empty();
 	      		}
 	      	);	
 	      	
       	};
+      	queue_error_container.css("display", "block");//делаем видимым сообщение об ошибке
     };
     
     //progress observer
     uploadfn.progress_observer = function(progress, step, label){
-       	next_value = progress.bar.val() + step;
-       	progress.bar.val(next_value);
-       	progress.value.html(Math.round(next_value) + '%');
-   
-       	if(progress.state==false){
-       		progress.panel.css("display", "none");		
-       	}else{
-	       	if($("table#fileList tr.document").exists() && $("table#fileList tr.document:not(.calculated)").length == 0) { //если все загрузилось
-	       		progress.panel.css("display", "none");
-	       		progress.label.html('success');
-	       		uploadfn.show_fileListHeader();
-	       		uploadfn.show_all_documents();
-	       	}
-	       	else{
-		       	//label color	
-			    switch(progress.bar.val()) {
-			         case 0:
-						progress.label.css('color', 'black');
-						break;
-			         default:
-						progress.label.css('color', 'white');
-						break;
-			    };
-	       		progress.panel.css("display", "block");
-	       		progress.label.html(label);
-	       	} 
+       	switch(progress.panel){
+       		case false: //случай, когда отображаем только label
+       			if(progress.state==false){
+       				progress.label.css("display", "none");
+       			} else {
+       				progress.label.html(label);
+       				progress.label.css("display", "block");
+       			}
+       		break;
+       		default:
+		       	next_value = progress.bar.val() + step;
+		       	progress.bar.val(next_value);
+		       	progress.value.html(Math.round(next_value) + '%');       		
+		       	
+		       	if(progress.state==false){
+		       		progress.panel.css("display", "none");		
+		       	} else {
+			       	if($("table#fileList tr.document").exists() && $("table#fileList tr.document:not(.calculated)").length == 0) { //если все загрузилось
+			       		progress.panel.css("display", "none");
+			       		progress.label.html('success');
+			       		uploadfn.show_fileListHeader();
+			       		uploadfn.show_all_documents();
+			       	}
+			       	else{
+			       		progress.panel.css("display", "block");
+			       		progress.label.html(label);
+			       	} 
+		       	}
+       		break;
        	}
     };
     
@@ -127,7 +130,7 @@
         		},
         		function(){
         			$(this).attr("disabled",false);
-        			$("select[name*='["+document.document_id+"][margins]']").attr("disabled",false);
+        			//$("select[name*='["+document.document_id+"][margins]']").attr("disabled",false);
         			$(this).change();
         		}
         		);
@@ -167,6 +170,22 @@
         			uploadfn.calculate_documents();
         		}
         		);
+    };
+    
+    //load canvas layout
+    uploadfn.loadLayout = function (document, order){
+		$("div#canvas_bg").load(
+			document.url_for_load_layout, 
+			{
+				order_id : order.order_id,
+				id : document.document_id,
+				selected_paper_type : document.selected_paper_type,
+				selected_paper_size : document.selected_paper_size
+				}, 
+			function() {
+				$(this).change();
+				//for update document price
+				});   	
     };
     
     //calculate document and order price

@@ -1,28 +1,36 @@
 <% content_for :head do %>
-	<%= javascript_include_tag "orders/letter_print_order" %>
+	<%= javascript_include_tag "orders/deliveryfn" %>
+	<%= javascript_include_tag "orders/uploadfn" %>
+	<%= javascript_include_tag "orders/editorfn" %>
+	<%= javascript_include_tag "orders/envelope_print_order" %>
+	<%= javascript_include_tag "fabric/canvasfn" %>
 	<%= javascript_include_tag "fabric/fabric_ext" %>
-	
 <% end %>
+
 <h2><%= @title %></h2>
 
 <% key = Rails.application.config.session_options[:key] %>
 
 <%= content_for :scripts do %>
   <script type="text/javascript">
+    //uploader for embedded images for envelope(document)
     var upload_params = {
       '<%= key %>' : '<%= cookies[key] %>',
       '<%= request_forgery_protection_token %>' : '<%= form_authenticity_token %>',
       '_http_accept': 'application/javascript'
-    };
+    },
+    uploader = '<%= asset_path('uploadify/uploadify.swf') %>',
+    buttonImg = '<%= asset_path('icons/plus_grey.png') %>',
+    cancelImg = '<%= asset_path('uploadify/cancel.png') %>';
 	
   </script>
 <% end %>
 
-<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id, :class => "edit_letter_print_order"} do |order| -%>
+<%= form_for @order, :url => order_path(@order), :html => { :method => :put, :id => @order.id, :class => "new_envelope_print_order"} do |order| -%>
 
   <h2 class="orange">Выберите размер конверта и тип бумаги</h2>
 
-  	<%= render :partial => 'documents/letter_print/document', :locals => {:order => @order, :document => @document} %>	
+  	<%= render :partial => 'documents/envelope_print/document', :locals => {:order => @order, :document => @document} %>	
 
     <%= render :partial => 'orders/share/total_and_submit', :locals => {:order => order, :current_order => @order}  %>	
 

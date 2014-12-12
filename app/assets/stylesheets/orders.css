@@ -11,24 +11,6 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
-
-table td.delivery_location_edit {
-	height: 170px;
-	width: 560px;
-    padding: 5px;
-    vertical-align: middle;
-    text-align: center
-}
-
-table td.delivery_location_show {
-	text-align: left;
-	padding: 5px;
-	padding-left: 100px;
-	height: 80px;
-	width: 460px;
-	vertical-align: middle;
-}
-
 table td.delivery_location_edit select {
     width: 365px;
 }
@@ -39,20 +21,6 @@ table td.delivery_location_edit label {
 
 table td.delivery_location_edit input {
 	width: 350px;
-}
-
-table td.delivery_date_edit {
-	height: 170px;
-	vertical-align: top;
-    padding: 5px;
-    text-align: center
-}
-
-table td.delivery_date_show {
-	height: 80px;
-	vertical-align: middle;
-    padding: 5px;
-    text-align: center
 }
 
 table td.delivery_date_edit input#datepicker {
@@ -103,16 +71,7 @@ table td.delivery_price {
 
 /*форма для загрузки файлов------------------------------------------------------------*/
 
-#fileList td.upload {
-    width: 161px;
-    height: 152px;
-    border-bottom: 20px solid white;
-    padding: 0px;
-}
 
-#fileList td.upload .container_for_link_delete_docfile {
-    position: relative
-}
 
 
 
@@ -120,13 +79,6 @@ table td.delivery_price {
     margin-top: 13px;
     margin-right: 11px;
     float: right;
-}
-
-#fileList td.page_count {
-    width: 190px;
-	border-bottom: 20px solid white;
-	padding: 0px;
-	text-align: center;
 }
 
 #fileList td.page_count input {
@@ -147,19 +99,6 @@ table td.delivery_price {
     margin-right: 40px;
 }
 
-#fileList td.paper {
-	width: 210px;
-	border-bottom: 20px solid white;
-	padding: 0px;
-}
-
-#fileList td.paper div.paper_size {
-	width: 190px;
-	height: 43px;
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
 #fileList td.paper div.paper_size label {
 	float: right;
 	margin-top: 10px;
@@ -174,13 +113,6 @@ table td.delivery_price {
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
-#fileList td.paper div.paper_type {
-	width: 190px;
-	height: 43px;
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
 #fileList td.paper div.paper_type label {
 	float: right;
 	margin-top: 10px;
@@ -193,13 +125,6 @@ table td.delivery_price {
     margin-left: 10px;
     margin-top: 10px;
     font-family: "Segoe UI",helvetica,arial,sans-serif;
-}
-
-#fileList td.paper div.quantity {
-	width: 190px;
-	height: 43px;
-	margin-right: 10px;
-	margin-left: 10px;
 }
 
 #fileList td.paper div.quantity label {
@@ -223,19 +148,6 @@ table td.delivery_price {
     margin-top: 10px;
 }
 
-#fileList td.print_settings {
-	width: 200px;
-	border-bottom: 20px solid white;
-    padding: 0px;
-}
-
-#fileList td.print_settings div.margins {
-	width: 190px;
-	height: 43px;
-	margin-right: 5px;
-	margin-left: 5px;
-}
-
 #fileList td.print_settings div.margins select{
     display: block;
     float: right;
@@ -249,13 +161,6 @@ table td.delivery_price {
 #fileList td.print_settings div.margins label {
     float: right;
     margin-top: 10px;
-}
-
-#fileList td.print_settings div.print_color {
-	width: 190px;
-	height: 86px;
-	margin-right: 5px;
-	margin-left: 5px;
 }
 
 #fileList td.print_settings div.print_color label {
@@ -278,13 +183,6 @@ table td.delivery_price {
 	display: block;
 }
 
-#fileList td.print_settings div.user_comment {
-	width: 190px;
-	height: 43px;
-	margin-right: 5px;
-	margin-left: 5px;
-}
-
 #fileList td.print_settings div.user_comment textarea {
     width: 180px;
     height: 42px;
@@ -299,39 +197,6 @@ table td.delivery_price {
 	font-style: italic;
 	display: block;
 }
-
-#fileList td.print_settings div.print_setting_1 {
-	width: 190px;
-	height: 43px;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-#fileList td.image_process {
-	width: 190px;
-	border-bottom: 20px solid white;
-    padding: 0px;
-}
-
-#fileList td.image_process div.pre_print_operation {
-	width: 180px;
-	height: 43px;
-	margin-right: 5px;
-	margin-left: 5px;
-}
-
-#fileList td.document_cost {
-    width: 128px;
-    border-bottom: 20px solid white;
-    padding: 0px;
-}
-
-#fileList td.document_cost div.document_cost_value {
-	width: 110px;
-   	margin-right: 9px;
-	margin-left: 9px;
-}
-
 
 #fileList td.user_comment textarea {
     width: 140px;

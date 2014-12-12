@@ -43,13 +43,15 @@ $(document).ready(function(){
       fileDataName : 'document[docfile]',
       fileDesc : 'Images (.jpg, .png)',
       fileExt : '*.png;*.jpg;*.JPG;',
-      sizeLimit : 10240000, //10MB
+      sizeLimit : 102400, //10MB
       cancelImg : cancelImg,
       multi : true,
       scriptData : upload_params,
       auto : true,
       onError: function(event, ID, fileObj, errorObj){
-	    uploadfn.error_notification(ID, errorObj);
+	    var queue_error_container = $("#document_docfileQueue"),
+	    	file_queue_id = $("div#document_docfile"+ID+"");
+	    uploadfn.error_notification(errorObj, queue_error_container, file_queue_id);
       },
       onSelectOnce : function(queue) { //определяем колво выбранных файлов и обнуляем progressbar
       	document.queue_files_count = parseInt($('input#document_docfile').uploadifySettings('queueSize'));	

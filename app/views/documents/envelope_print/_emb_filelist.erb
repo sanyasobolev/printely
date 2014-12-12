@@ -1,0 +1,13 @@
+	<% unless document.new_record? %>
+		<%= fields_for EmbeddedImage.new do |f| %>
+			<%= f.file_field :imgfile, :rel => document_embedded_images_path(document) %>
+		<% end %>
+	<% end %>
+	
+	<%= render :partial => 'orders/share/progress_label', :locals => {:text_align => 'text-left'} %>
+	
+		
+	<table id="embedded_fileList">
+		<%= render :partial => 'embedded_images/embedded_image', :collection => document.embedded_images %>
+	</table>
+

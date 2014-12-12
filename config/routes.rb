@@ -21,13 +21,18 @@ Spsite::Application.routes.draw do
   resources :rights
   resources :roles
 
-  resources :documents
+  resources :embedded_images
+
+  resources :documents do
+    resources :embedded_images
+  end
   match 'document/price_update' => 'documents#price_update'
   match 'document/get_paper_sizes' => 'documents#get_paper_sizes'
   match 'document/get_paper_types' => 'documents#get_paper_types'
   match 'document/get_print_margins' => 'documents#get_print_margins'
   match 'document/get_print_colors' => 'documents#get_print_colors'
   match 'document/get_layout' => 'documents#get_layout'
+  match 'document/process_svg' => 'documents#process_svg'
   
   resources :orders do
     resources :documents

@@ -31,6 +31,7 @@
 
 .minicolors input[type=hidden] + .minicolors-swatch {
 	width: 28px;
+	height: 33px;
 	position: static;
 	cursor: pointer;
 }

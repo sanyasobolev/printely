@@ -120,23 +120,33 @@ button.increase_page_count {
     height: 50px;
 }
 
+#embedded_image_imgfileUploader {
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+}
+
 
 /*canvas buttons*/
 button.add_canvas_element {
-    width: 270px;
-    height: 30px;
-    margin-top: 10px;
+    width: 48px;
+    height: 48px;
+    padding: 0px;
     display: block;
-    text-align: center;
-    text-decoration: none;
-    color: black;
     border: 0 none;
-    background: lightgrey;
     cursor:pointer;
+    background-color: #efefef;
 }
 
-button.add_canvas_element:hover {
-    background:#B5B5B5;
+button.remove_element {
+    width: 25px;
+    height: 25px;
+    padding: 0px;
+    display: block;
+    border: 0 none;
+    cursor:pointer;
+    background-color: transparent;
 }
 
 button.font_style_button {

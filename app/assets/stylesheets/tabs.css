@@ -43,7 +43,7 @@
 
 .tabs_cont {
 	position: relative;
-	height: 552px;
+	min-height: 552px;
 	border: 1px solid #DDD;
     border-width: 1px;
 	background: #EFEFEF;
@@ -53,12 +53,13 @@
 
 .tabs_cont > div {
 	position: absolute;
-	left: -9999px;
+	/*left: -9999px;*/
 	top: 0;
 	opacity: 0;
-	-moz-transition: opacity .2s ease-in-out;
-	-webkit-transition: opacity .2s ease-in-out;
-	transition: opacity .2s ease-in-out;
+	z-index: -1;
+	-moz-transition: opacity 0s ease-in-out;
+	-webkit-transition: opacity 0s ease-in-out;
+	transition: opacity 0s ease-in-out;
 }
 #tab_1:checked ~ .tabs_cont #tab_c1,
 #tab_2:checked ~ .tabs_cont #tab_c2 {

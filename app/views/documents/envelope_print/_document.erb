@@ -20,12 +20,22 @@
 							<div class="font_family_tool">
 								<span class="label">Шрифт</span>
 								<select id="font_family_picker">
-									<option value="times_new_roman" class="times_new_roman">Times New Roman</option>
-									<option value="arial" class="arial">Arial</option>
-									<option value="verdana" class="verdana">Verdana</option>
 									<option value="andale_mono" class="andale_mono">Andale Mono</option>
+									<option value="arial" class="arial">Arial</option>
+									<option value="asylbek" class="asylbek">Asylbek</option>
 									<option value="courier_new" class="courier_new">Courier New</option>
 									<option value="impact" class="impact">Impact</option>
+									<option value="katherine" class="katherine">Katherine</option>
+									<option value="majestic" class="majestic">Majestic</option>
+									<option value="monotype_corsiva" class="monotype_corsiva">Monotype Corsiva</option>
+									<option value="romashulka" class="romashulka">Romashulka</option>
+									<option value="rosa_marena" class="rosa_marena">Rosa Marena</option>
+									<option value="segoe_print" class="segoe_print">Segoe Print</option>
+									<option value="times_new_roman" class="times_new_roman">Times New Roman</option>
+									<option value="trafaret" class="trafaret">Trafaret</option>
+									<option value="verdana" class="verdana">Verdana</option>
+									<option value="vivaldi" class="vivaldi">Vivaldi</option>
+									<option value="xiomara" class="xiomara">Xiomara</option>
 								</select>
 							</div>
 							<div class="color_tool"></div>
@@ -61,19 +71,25 @@
 						
 							<div class="tabs_cont">
 								<div id="tab_c1">
-									<%=  button_tag 'добавить изображение', :type => 'button', :id => 'add_image', :class => "add_canvas_element" %>
-									<div id="image_inputs_wrapper"> </div>	
+									<%= render :partial => 'documents/envelope_print/emb_filelist', :locals => {:document => document} %>
 								</div>
 								<div id="tab_c2">
-									<%=  button_tag 'добавить текст', :type => 'button', :id => 'add_text', :class => "add_canvas_element" %>
-		  							<div id="text_inputs_wrapper"> </div>		
+									<%=  button_tag image_tag('icons/plus_grey.png'), :type => 'button', :id => 'add_text', :class => "add_canvas_element", :title => 'Добавить текст' %>
+		  							<table id="text_inputs_wrapper"> 
+		  								
+		  							</table>		
 								</div>
 							</div>
 						</section>
 						
 					</div>
-					
+	
 					<div class="fl_clear"></div>
+				</div>
+				
+				<%=  button_tag 'Save', :type => 'button', :id => 'canvas_to_png' %>
+				<div id="canvas_image">
+					
 				</div>
 				
 			    <div class="form_align">	 

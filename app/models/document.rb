@@ -7,6 +7,7 @@ class Document < ActiveRecord::Base
   belongs_to :print_color, :class_name => "Lists::PrintColor"
   belongs_to :binding, :class_name => "Lists::Binding"
   has_and_belongs_to_many :pre_print_operations, :class_name => "Lists::PrePrintOperation"
+  has_many :embedded_images, :dependent => :destroy
 
   mount_uploader :docfile, DocumentUploader
 

@@ -554,11 +554,15 @@ p.cover{
     font-style: italic
 }
 
-.center {
+.text-center {
     text-align: center;
 }
-.right {
+.text-right {
     text-align: right;
+}
+
+.text-left {
+    text-align: left;
 }
 
 .float_right {
@@ -574,6 +578,18 @@ p.cover{
     clear: both;
 }
 
+.hidden {
+	display:none;
+}
+
+.selected {
+	background-color: #FFFC9E;
+}
+	
+.pointer {
+	cursor:pointer;
+}
+
 .header_for_news {
 	position:absolute;
 	top:80px;
@@ -587,32 +603,7 @@ p.cover{
     float: left;
 }
 
-table {
-    border-collapse: collapse;
-}
 
-table#contact_info td {
-	width: 400px;
-	font-size: 1.5em;
-	padding: 10px;
-}
-
-table.pricelist_for_user {
-	font-size: 1.5em;
-	margin-bottom: 20px;
-}
-
-table.pricelist_for_user td {
-	text-align: left;
-	width: 400px;
-	padding: 10px;
-}
-
-table.pricelist_for_user th {
-	text-align: left;
-	width: 400px;
-	padding: 10px;
-}
 
 .center_container {
     margin-left: auto;
@@ -940,30 +931,6 @@ a.site_map_link:hover {
 	margin: 0px;
 }
 
-/*фотогалерея-------------------------------------*/
-.thumb {
-    margin: 5px;
-    height: auto;
-    width: auto;
-    float: left;
-    text-align: center;
-}
-
-.thumb img {
-/*    display: inline;*/
-    margin: 3px;
-    border: 1px solid #E5EECC;
-}
-
-.thumb a:hover img {border: 1px solid #0000ff;}
-
-.delete_thumb {
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom: 3px;
-    text-align: center;
-}
-
 
 /*оформление форм ввода данных-------------------------------------*/
 
@@ -1180,7 +1147,7 @@ form#new_user div.agreement label.error {
 div#contact_map {
 	position:relative;
 	height: 300px;
-	border: solid 1px grey;
+	border: solid 1px gray;
 }
 
 div#contact_map p {
@@ -1191,7 +1158,7 @@ div#delivery_map {
 	position:relative;
 	height: 800px;
 	width: 600px;
-	border: solid 1px grey;
+	border: solid 1px gray;
 	float: left;
 	margin-right: 20px;
 }
@@ -1200,49 +1167,6 @@ div#delivery_map p {
 	position:absolute
 }
 
-table#delivery_map_menu {
-	  position:absolute;
-	  width: 290px;
-  	  right: -300px;
- 	  top: 0px;
-}
-
-/*типовая таблица на сайте------------------------------------------------------------------*/
-
-table.default_table {
-	border-collapse:separate;
-	width: 100%;
-}
-
-table.default_table tr.header {
-    background-color: #517B93;
-    color: white;
-}
-
-table.default_table tr.grey_on_hover:hover {
-	background-color: #e8e8e8;
-}
-
-table.default_table tr.border_cell td {
-	border-bottom: 10px solid white;
-}
-
-table.default_table th {
-    font-weight: normal;
-    text-align: center; 
-    height: 30px; 
-}
-
-.floatTheadfileListOrder {
-	border-collapse:separate;
-}
-
-.floatTheadfileListOrder th {
-	background-color: #517B93;
-	font-weight: normal;
-	height: 30px;  
-	color: white;
-}
 
 /*phone popup--------------------------------------------------------*/
 
@@ -1263,7 +1187,7 @@ table.default_table th {
   }
 
 .phone_popup .arrow {
-	background-image: url(/assets/icons/popup_phone_arrow_icon.png);
+	background-image: url('<%= asset_path('icons/popup_phone_arrow_icon.png') %>');
 	height: 9px;
 	background-repeat: no-repeat;
 	position: absolute;
@@ -1282,7 +1206,7 @@ table.default_table th {
 .phone_popup .exit {
 	cursor: pointer;
 	float: right;
-	background-image: url(/assets/icons/popup_phone_exit_icon.png);
+	background-image: url('<%= asset_path('icons/popup_phone_exit_icon.png') %>');
 	background-repeat: no-repeat;
 	width: 12px;
 	height: 12px;

@@ -2,15 +2,18 @@
 class DocumentsController < ApplicationController
 
   skip_before_filter :authorized?,
-                     :only => [:create, :destroy, :price_update, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors, :get_layout]
+                     :only => [:create, :destroy, :price_update, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors, :get_layout, :process_svg]
 
   skip_before_filter :verify_authenticity_token,
                      :only => [:create]
 
   before_filter :find_order,
-                :only => [:create, :destroy, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors]
+                :only => [:create, :destroy, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors, :process_svg]
+  
   before_filter :find_or_build_document,
-                :only => [:create, :destroy, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors]
+                :only => [:create, :destroy, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors, :process_svg]
+
+  #require "rmagick"
 
   def create
     #set_defaults_params
@@ -196,6 +199,22 @@ class DocumentsController < ApplicationController
         format.html do
           render :partial => 'item' 
         end
+    end
+  end
+
+  def process_svg
+    @svg_data = params[:svg]
+    directory_for_save_svg = "#{Rails.root.to_s}/public/uploads/order_#{@order.id}/original/"
+    Dir.mkdir(directory_for_save_svg) unless File.exists?(directory_for_save_svg)
+    File.open("#{directory_for_save_svg}#{@document.id}.svg", "w+") do |f|
+      f.write(@svg_data)
+    end
+    
+    image_from_svg = Magick::ImageList.new("#{directory_for_save_svg}#{@document.id}.svg")
+    image_from_svg.write("#{directory_for_save_svg}#{@document.id}.png")
+    
+    respond_to do |format|
+      format.js
     end
   end
 

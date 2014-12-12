@@ -1,11 +1,10 @@
 /*fabric canvas----------------------------*/
 
 .editor {
-	position:relative;
+	position: relative;
 	width: 900px;
-	height:700px;
-	
-	margin-top:30px;
+	min-height: 700px;
+	margin-top: 30px;
 	margin-bottom: 30px;
 	border: 0px;
 }
@@ -35,34 +34,23 @@
 }
 
 .sidebar_container {
-	position:absolute;
+/* position: absolute; */
 	width: 300px;
-	height:580px;
+	min-height: 580px;
 	margin-left: 630px;
 	border: 0px;
-	float:left;
+	float: left;
 }
 
 
-#text_inputs_wrapper {
-	position:relative;
-}
-
-
-#text_inputs_wrapper div.text_container {
-	margin-top: 10px;
-	position: relative;
+#text_inputs_wrapper td.text_container {
+	padding: 10px 10px 10px 10px;
 }
 
 #text_inputs_wrapper input.text_field {
-	width: 240px;
+	width: 225px;
+	height: 20px;
 	position: static;
-}
-
-div.remove_element {
-	position:absolute;
-	top: 0px;
-	right: 0px;
 }
 
 .top_toolbar {

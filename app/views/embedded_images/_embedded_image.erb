@@ -1,0 +1,16 @@
+<tr id="<%= embedded_image.id %>" class="embedded_image">
+  <%= fields_for "document[embedded_images_attributes][]", embedded_image do |i| %>
+    <td class="embedded_thumb pointer">
+      	<%= content_tag(:span, embedded_image.imgfile, :class => 'hidden', :id => "image_#{embedded_image.imgfile.model.id}") %>
+	    <%= image_tag embedded_image.imgfile.editor_thumb.url, :id => "thumb_#{embedded_image.imgfile.model.id}", :class => 'thumb' %>
+    </td>
+    
+    <td class="embedded_filename">
+	    <%= embedded_image.imgfile.filename %>
+    </td>
+    
+    <td>
+        <%= link_to image_tag("icons/del-3.png"), document_embedded_image_path(@document, embedded_image), :method => :delete, :remote => :true, :class => 'link_delete emb_image_delete', :title => 'Удалить файл' %>
+    </td>
+  <% end %>
+</tr>
