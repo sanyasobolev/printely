@@ -8,8 +8,6 @@ $(document).ready(function(){
 		var  form = $("form.admin_foto_print_order");
     };
 
-    var url = $('input#document_docfile').attr('rel');
-
 	//определяем объекты
 	var progress = {
 		panel: $('.progress-panel'),
@@ -29,6 +27,7 @@ $(document).ready(function(){
 	};
 		
 	var document = {
+		url_for_create_document: $('input#document_docfile').attr('rel'),
 		url_for_update_document: "/document/price_update",
         url_for_load_paper_sizes: "/document/get_paper_sizes",
         url_for_load_paper_types: "/document/get_paper_types",
@@ -39,11 +38,11 @@ $(document).ready(function(){
     $('input#document_docfile').uploadify({
       uploader : uploader,
       buttonImg : buttonImg,
-      script : url,
+      script : document.url_for_create_document,
       fileDataName : 'document[docfile]',
       fileDesc : 'Images (.jpg, .png)',
       fileExt : '*.png;*.jpg;*.JPG;',
-      sizeLimit : 102400, //10MB
+      sizeLimit : 10240000, //10MB
       cancelImg : cancelImg,
       multi : true,
       scriptData : upload_params,
@@ -142,6 +141,9 @@ $(document).ready(function(){
 	
 	//timepicker
 	deliveryfn.delivery_timepicker();
+
+	//update order when update delivery	
+	deliveryfn.update_order(order);
 
     //контроль ухода пользователя со страницы
     form.FormNavigate({

@@ -101,7 +101,7 @@
     //load paper sizes
     uploadfn.loadPaperSizes = function (document, order) {
     	$("select[name*='paper_size']").on("load_sizes", function(event) {
-        	document_id = this.parentNode.parentNode.parentNode.id; 
+        	document_id = this.parentNode.parentNode.parentNode.id ? this.parentNode.parentNode.parentNode.id : document.document_id; 
         	$(this).load(
 	     		document.url_for_load_paper_sizes, 
 	        	{

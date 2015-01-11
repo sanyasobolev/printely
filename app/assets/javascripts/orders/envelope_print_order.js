@@ -19,11 +19,13 @@ $(document).ready(function() {
 	};
 		
 	var envdocument = {
+		document_id: $('table#fileList tr.document').attr("id"),
+		url_for_create_document: url_for_create_document,
+		url_for_create_emb_images: $('input#embedded_image_imgfile').attr('rel'),
 		url_for_update_document: "/document/price_update",
         url_for_load_paper_sizes: "/document/get_paper_sizes",
         url_for_load_paper_types: "/document/get_paper_types",
 		url_for_load_layout: "/document/get_layout", 
-		url_for_process_svg: "/document/process_svg",     
 	};
 
 	var progress = {
@@ -32,6 +34,15 @@ $(document).ready(function() {
 		state: false,
 	};	
 	
+    //clear value 'выберите' in select
+	deliveryfn.clear_select();
+	
+	//timepicker
+	deliveryfn.delivery_timepicker();
+	
+	//update order when update delivery	
+	deliveryfn.update_order(order);
+
     //контроль ухода пользователя со страницы
     form.FormNavigate({
        message: "Все внесенные данные будут потеряны!\nВы действительно хотите прервать создание заказа?",
@@ -55,41 +66,40 @@ $(document).ready(function() {
     	}
     });
 
-		//подключение хендлеров
-
-        //load paper_sizes------------------------------------------------------------------------------------
-		uploadfn.loadPaperSizes(envdocument, order);
-
         //load paper_types for event change paper_size
+        //paper sizes load after load fabric
         $("select[name*='paper_size']:not([class*='with_bind_change_event'])").addClass("with_bind_change_event").on("change", function(event){
-          	envdocument.document_id = this.parentNode.parentNode.parentNode.id;
+          	envdocument.document_id = $('table#fileList tr.document').attr("id");
         	envdocument.selected_paper_size = $(this).val();
         	uploadfn.loadPaperTypes(envdocument, order);
         });
 
-		//load layout for event change paper size
+		//load layout and calculate price for document for event change paper type
 		$("select[name*='paper_type']:not([class*='with_loaded_paper_types'])").addClass("with_loaded_paper_types").on("change", function(event) {
-			envdocument.document_id = this.parentNode.parentNode.parentNode.id, 
+			envdocument.document_id = $('table#fileList tr.document').attr("id"), 
 			envdocument.selected_paper_type = $(this).val(), 
 			envdocument.selected_paper_size = $("select[name*='["+envdocument.document_id+"][paper_size]']").val();
+  			envdocument.selected_quantity = $("input[name*='["+envdocument.document_id+"][quantity]']").val();
+
 			uploadfn.loadLayout(envdocument, order);
-		});
+            uploadfn.calculateDocumentAndOrderPrice(envdocument, order);
+		});		
 
 		//change handler for quantity with debounce (if user click many times)       
         $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
-        	envdocument.document_id = this.parentNode.parentNode.parentNode.id;
+        	envdocument.document_id = $('table#fileList tr.document').attr("id");
 			envdocument.selected_quantity = $(this).val(uploadfn.validate_quantity(parseInt($(this).val()), parseInt(order.quantity_min_value), parseInt(order.quantity_max_value))).val(); //проверка введенного числа и запись его в document object
 				
        		uploadfn.calculateDocumentAndOrderPrice(envdocument, order);
         }));
 
         //работа переключателя количества копий
-        $("button.increase_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("button.increase_quantity_large:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
         	var selected_input_quantity = $(this).siblings("input[id*='quantity']");
         	uploadfn.button_increase(selected_input_quantity, order.quantity_step, order.quantity_max_value);
         });
 
-        $("button.decrease_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("button.decrease_quantity_large:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
         	var selected_input_quantity = $(this).siblings("input[id*='quantity']");
         	uploadfn.button_decrease(selected_input_quantity, order.quantity_step, order.quantity_min_value);
         });
@@ -110,20 +120,20 @@ $(document).ready(function() {
 			font_style_tool = {
 				container: $('.font_style_tool'),
 				font_weight_button: $("#font_weight"),
-				font_style_button: $("#font_style"),
-				text_decoration_button: $("#text_decoration"),			
+				font_style_button: $("#font_style"),	
 			};
 
-			//add font_family_tool
-			//первичная инициализация select menu
+			//первичная инициализация
 			//т.к. если его создавать после загрузки fabric - оно не работает
-			editorfn.addFontFamilyPicker(null, null, font_family_tool); 
+			
+			//add font_family_tool
+			editorfn.addFontFamilyPicker(null, null, font_family_tool, font_style_tool); 
 			
 			//add color_tool
 			editorfn.addColorPicker(color_tool);
 			
-			//add fontstyle tool
-			editorfn.addFontStylePicker(null, null, font_style_tool);
+			//add events fontstyle tool
+			editorfn.addEventHandlersToButtons(null, null);
 	
 			//$(top_toolbar).hide();
 	
@@ -186,12 +196,11 @@ $(document).ready(function() {
 
 	
 		//add and remove image
-		var url = $('input#embedded_image_imgfile').attr('rel');
-	    
+    
 	    $('input#embedded_image_imgfile').uploadify({
 	      uploader : uploader,
 	      buttonImg : buttonImg,
-	      script : url,
+	      script : envdocument.url_for_create_emb_images,
 	      fileDataName : 'embedded_image[imgfile]',
 	      fileDesc : 'Images (.jpg, .png)',
 	      fileExt : '*.png;*.jpg;*.JPG;',
@@ -246,26 +255,7 @@ $(document).ready(function() {
 		});	
 
 	//---------------------------------------------------------------------
-	//save canvas to image-------------------------------------------------
-	$("#canvas_to_png").click(function()
-		{
-			var svg_img = canvas.toSVG();
-			$.post( envdocument.url_for_process_svg, 
-	          	{
-					svg: svg_img,
-        			order_id: order.order_id, 
-        			id: envdocument.document_id, 
-        			order_type: order.order_type
-	          	},
-	          	function(){
-					//   	
-	          	}			
-          	 );
-			//return false;
-		});
-	
 
-	//------------------------------------------------------------------------
 	//load fabric-------------------------------------------------------------------------------------
     (function(){
 		var load_fabric_script = document.createElement("script");
@@ -284,6 +274,22 @@ $(document).ready(function() {
 	canvas.setHeight(385);
 	//--------------------------------------------------------------------------------------------------------
 
+
+	//create svg draft file and initialize load paper size-------------------------------------------
+	var svg_data = canvas.toSVG();
+	$.post( envdocument.url_for_create_document, 
+	     {
+			svg: svg_data,
+        	order_id: order.order_id, 
+        	id: envdocument.document_id
+	     },
+	     function(){
+			//load paper_sizes
+			uploadfn.loadPaperSizes(envdocument, order);	
+	     }
+    );
+    //-------------------------------------------------------------------
+    
 	//canvas events
 	canvas.on('object:selected', onObjectSelected);
 	canvas.on('before:selection:cleared', allControlsUnBind);
@@ -312,10 +318,9 @@ $(document).ready(function() {
 				});
 				//configure font family picker
 				font_family_tool.container.show();
-				editorfn.addFontFamilyPicker(options, canvas, font_family_tool);
+				editorfn.addFontFamilyPicker(options, canvas, font_family_tool, font_style_tool);
 				
 				//configure font style picker
-				font_style_tool.container.show();
 				editorfn.addFontStylePicker(options, canvas, font_style_tool);
 	    	break;
 	    	case 'image':

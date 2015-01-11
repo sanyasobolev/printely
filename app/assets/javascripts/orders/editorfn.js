@@ -3,13 +3,15 @@
     window.editorfn = window.editorfn || {};
 
     // Add function  to the namespace
-	editorfn.addFontFamilyPicker = function(options, canvas, font_family_tool){
+    
+	editorfn.addFontFamilyPicker = function(options, canvas, font_family_tool, font_style_tool){
 		font_family_tool.picker.selectmenu({
 			width: 210,
 			change: function( event, ui ) {
 				console.log('selected font ' +ui.item.label);
 	    		if (options && canvas) {//if selected object and canvas
 	    			options.target.set({fontFamily: ui.item.label});
+	    			editorfn.addFontStylePicker(options, canvas, font_style_tool);
 	    			canvas.renderAll();
 	    		}
 			}
@@ -20,6 +22,7 @@
 			};
 	};
 	
+
     editorfn.destroyFontFamilyPicker = function(font_family_tool){
     	font_family_tool.picker.unbind();
     	font_family_tool.container.hide();    	
@@ -49,6 +52,50 @@
 	
 	
 	editorfn.addFontStylePicker = function(options, canvas, font_style_tool){
+				//console.log('set selected option ' +options.target.get('fontFamily'));
+				var canvas_font_family = options.target.get('fontFamily'),
+					pdf_bold, pdf_italic = false;
+					
+				if ($("option[id='"+canvas_font_family+"']").hasClass('pdf_bold')){
+					pdf_bold = true;
+				}
+				if ($("option[id='"+canvas_font_family+"']").hasClass('pdf_italic')){
+					pdf_italic = true;
+				}
+				if (pdf_bold || pdf_italic == true){//отключаем обе кнопки, даже если одна из них неактивна
+					//console.log('активируем кнопки');
+					editorfn.addEventHandlersToButtons(options, canvas);
+					editorfn.updateFontButtonsByCanvas(options, font_style_tool);
+					font_style_tool.container.show();	
+				} else if (pdf_bold || pdf_italic == false) {
+					editorfn.resetFontStyle(options);
+					editorfn.destroyFontStylePicker(font_style_tool);
+				}
+	    	
+		};
+		
+		editorfn.updateFontButtonsByCanvas = function(options, font_style_tool){
+				if (options.target.get('fontWeight')=='bold'){
+					font_style_tool.font_weight_button.addClass("pressed");
+				} else {
+					font_style_tool.font_weight_button.removeClass("pressed");
+				};
+				if (options.target.get('fontStyle')=='italic'){
+					font_style_tool.font_style_button.addClass("pressed");
+				} else {
+					font_style_tool.font_style_button.removeClass("pressed");
+				};
+				
+		};
+
+		editorfn.resetFontStyle = function(options){
+			options.target.set({
+				fontWeight: 'normal',
+				fontStyle: 'normal',
+			});
+		};
+
+		editorfn.addEventHandlersToButtons = function(options, canvas){
 			$(".font_style_button").click(function () {
 				if ($(this).hasClass("pressed")){
 					$(this).removeClass("pressed");
@@ -58,9 +105,6 @@
 						}
 						if ($(this).attr('id') == 'font_style'){
 							options.target.set({fontStyle: 'normal'});
-						};
-						if ($(this).attr('id') == 'text_decoration'){
-							options.target.set({textDecoration: 'none'});
 						};
 		    			canvas.renderAll();
 		    		}
@@ -73,38 +117,15 @@
 						if ($(this).attr('id') == 'font_style'){
 							options.target.set({fontStyle: 'italic'});
 						};
-						if ($(this).attr('id') == 'text_decoration'){
-							options.target.set({textDecoration: 'underline'});
-						};
 		    			canvas.renderAll();
 		    		}
 				}
 	    	});
-	    	if (options && canvas) {//if selected object and canvas set default style 
-				//console.log('set selected option ' +options.target.get('fontFamily'));
-				if (options.target.get('fontWeight')=='bold'){
-					font_style_tool.font_weight_button.addClass("pressed");
-				} else {
-					font_style_tool.font_weight_button.removeClass("pressed");
-				};
-				if (options.target.get('fontStyle')=='italic'){
-					font_style_tool.font_style_button.addClass("pressed");
-				} else {
-					font_style_tool.font_style_button.removeClass("pressed");
-				};
-				if (options.target.get('textDecoration')=='underline'){
-					font_style_tool.text_decoration_button.addClass("pressed");
-				} else {
-					font_style_tool.text_decoration_button.removeClass("pressed");
-				};
-			};
-	    	
 		};
 		
     	editorfn.destroyFontStylePicker = function(font_style_tool){
 			font_style_tool.font_weight_button.unbind();
 			font_style_tool.font_style_button.unbind();
-			font_style_tool.text_decoration_button.unbind();
     		font_style_tool.container.hide();	    		
     	};
 
@@ -129,5 +150,6 @@
 		editorfn.unHighlightAll = function(){
 			$("div.tabs_cont").find(".selected").removeClass('selected');
 		};
+		
 		
 })();
