@@ -3,7 +3,7 @@
 .editor {
 	position: relative;
 	width: 900px;
-	min-height: 700px;
+	min-height: 590px;
 	margin-top: 30px;
 	margin-bottom: 30px;
 	border: 0px;
@@ -18,8 +18,8 @@
 .canvas_panel {
 	display: block;
 	position: relative;
-	width:618px;
-	height:580px;
+	width:618px; /*определяет размер canvas_bg*/
+	height:580px; /*определяет размер canvas_bg*/
 	border: 1px solid #ddd
 }
 
@@ -28,14 +28,22 @@
 }
 
 .canvas-container {
-	margin-top: 165px;
-	margin-left: 30px;
+	/*margin-top: 165px; определяет положение canvas*/
+	/*margin-left: 30px; определяет положение canvas*/
 	border: 1px dotted red;
 }
 
+.canvas-container-show {
+	/*margin-top: 165px; определяет положение canvas - переменная*/ 
+	/*margin-left: 30px; определяет положение canvas - переменная*/
+	border: 1px dotted red;
+	position: relative;
+	/*width: 545px;	определяет размер canvas - переменная*/
+	/*height: 385px; определяет размер canvas - переменная*/
+}
+
 .sidebar_container {
-/* position: absolute; */
-	width: 300px;
+	width: 270px;
 	min-height: 580px;
 	margin-left: 630px;
 	border: 0px;
@@ -48,7 +56,7 @@
 }
 
 #text_inputs_wrapper input.text_field {
-	width: 225px;
+	width: 190px;
 	height: 20px;
 	position: static;
 }
@@ -56,7 +64,7 @@
 .top_toolbar {
 	position: absolute;
 	z-index:+1;
-	display:block;
+	display:none;
 	height: 50px;
 	width: 618px;
 	background: #F9F9F9;
@@ -65,7 +73,7 @@
 
 .color_tool {
 	float: left;
-	display: block;
+	display: none;
 	height: 45px;
 	width: 100px;
 	margin-left:20px;
@@ -94,7 +102,7 @@
 
 .font_family_tool {
 	float: left;
-	display: block;
+	display: none;
 	height: 45px;
 	width: 280px;
 	margin-left:20px;
@@ -109,7 +117,7 @@
 
 .font_style_tool {
 	float: left;
-	display: block;
+	display: none;
 	height: 45px;
 	width: 120px;
 	margin-left:20px;

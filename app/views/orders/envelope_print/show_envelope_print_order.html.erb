@@ -1,0 +1,76 @@
+<h2><%= @title %></h2>
+
+<h2 class="orange"> Файлы </h2>
+<table id="fileList" class="default_table">
+			<tr>
+				<td>
+					<div class="editor">
+						<div class="editor_container">
+							
+							<div id="canvas-wrapper"  class="canvas_panel">
+								
+								<div id="canvas_bg">
+									<%= read_document_layout(@document) %>
+								</div>
+								
+								<div class="canvas-container-show" >
+									<%= image_tag @document.docfile.url %>
+								</div>
+							
+							</div>
+
+						</div>
+						<div class="sidebar_container">
+						    <div class="paper_size">  
+								<%= Document.human_attribute_name(:paper_size) %> -
+								<%= @document.get_paper_size_with_iso %>	    	
+						    </div>
+						    <div class="fl_clear"></div>
+						    <div class="paper_type">
+								<%= Document.human_attribute_name(:paper_type) %> - 
+								<%= @document.get_paper_type.paper_type %>			
+						    </div>
+						    <div class="fl_clear"></div>
+						    <div class="quantity">	      
+								<%= Document.human_attribute_name(:quantity) %> - 
+								<%= @document.quantity %>	      
+						    </div>
+						    <div class="fl_clear"></div>
+						</div>
+		
+						<div class="fl_clear"></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				    <div class="user_comment">
+				    	<span><%= "#{Document.human_attribute_name(:user_comment)}:" unless @document.user_comment.blank? %>
+						<%= @document.user_comment %></span>	    
+					</div>
+				</td>
+			</tr>
+			<tr class="document" name="document">
+			    <td class="document_cost">
+					<div class="document_cost_style">
+						<div class='document_cost_value'>
+				      		<%= h (number_to_currency(@document.cost, :unit => "коп.", :separator => " руб. ")) %>
+				    	</div>
+				    </div>
+					<%= label_tag 'document_cost', 'Цена:' %>
+			    </td>
+			</tr>
+</table>
+
+<h2 class="orange"> Доставка </h2>
+<%= render :partial => 'orders/share/delivery_order_show', :locals => {:order => @order} %>
+
+<%= render :partial => 'orders/share/show_order_attributes' %>
+
+<%= render :partial => 'orders/share/show_order_navigations' %>
+
+<% if current_user.has_role?('Administrator') %>
+	<%= render :partial => 'orders/share/show_order_actions' %>
+<% end %>
+
+

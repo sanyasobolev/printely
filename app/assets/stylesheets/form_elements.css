@@ -1,0 +1,418 @@
+/*оформление форм ввода данных-------------------------------------*/
+
+form {
+	position:relative;
+}
+
+/*дефолтовая форма ввода данны на сайте*/
+.form_shape {
+    padding:10px;
+    width: 700px;
+    position: relative;
+}
+
+.agreement {
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+}
+
+.agreement input {
+	width: 20px;
+	float: left;
+	margin-left: 230px;
+}
+
+.agreement label {
+    float: left;
+    display: block;
+    text-align: justify;
+    width: 440px;
+}
+
+.form_align {
+    margin-top: 20px;
+    position: relative;
+}
+
+
+
+.form_align label {
+    float: left;
+    display: block;
+    text-align: right;
+    width: 212px;
+    margin-right: 20px;
+    margin-top: 9px;
+}
+
+.form_align p {
+    float: left;
+    display: block;
+    text-align: right;
+    width: 212px;
+    margin-right: 20px;
+    margin-top: 9px;
+}
+
+.form_align img {
+    display: block;
+    position: absolute;
+    left: 750px;
+    top: -100px;
+}
+
+.form_align input {
+    border: 1px solid #D6D3D1;
+    height: 30px;
+    width: 450px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    font-size: 1.3em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_align input.quantity_large {
+    display: block;
+    float: left;
+    width: 41px;
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #D6D3D1;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+    text-align: center;
+}
+
+
+.form_align select {
+    border: 1px solid #D6D3D1;
+    height: 35px;
+    width: 465px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    font-size: 1.3em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_align textarea {
+    border: 1px solid #D6D3D1;
+    padding: 7px;
+    resize: none;
+    font-size: 1.3em;
+    width: 450px;
+    height: 200px;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_align .req_input {
+    border-bottom: 1px solid #D6D3D1;
+    border-left: 1px solid red;
+    border-top: 1px solid #D6D3D1;
+    border-right: 1px solid #D6D3D1;
+    height: 30px;
+    width: 450px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    font-size: 1.3em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_align .req_textarea {
+    border: 1px solid #D6D3D1;
+    border-left-color: red;
+    padding: 7px;
+    resize: none;
+    font-size: 1.3em;
+    width: 450px;
+    height: 200px;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+.form_shape div#forgot_password {
+	width: 160px;
+	position: absolute;
+	left: 740px;
+	top: 75px;
+}
+
+.keyboardLayout { 
+	position: absolute; 
+	width: 150px; 
+	height: 20px; 
+	color: #999; 
+	text-align: right; 
+	right: 30px;
+	bottom: 10px;
+}
+
+/**/
+
+/*labels*/
+
+label.wide{
+	line-height: 35px;
+	margin-right: 15px;
+}
+
+label.envelope_size, .envelope_type {
+	display: inline-block;
+	width: 80px;
+	text-align:right;
+}
+
+label.envelope_quantity {
+	float: left;
+	display: inline-block;
+	font-size: 1.3em;
+	width: 320px;
+	text-align: right;
+}
+
+label[for=document_cost], label[for=order_cost],
+div.order_total_cost_style, div.document_cost_style {
+	height: 30px;
+	display: block;
+	color: white;
+    margin-top: 20px;
+    padding: 8px;
+    font-size: 1.5em;
+    text-align: right;
+    float: right
+}
+
+label[for=order_cost] {
+    min-width: 50px;
+    background-color: #8B1A1A;
+}
+
+
+label[for=document_cost] {
+    background-color: #009E49;
+}
+
+
+
+/*img*/
+
+img.document_uploaded_thumb {
+    margin-top: 13px;
+    margin-right: 11px;
+    float: right;
+}
+
+/*divs---------------------*/
+
+div.paper_size, .paper_type, .quantity {
+	height: 33px;
+	margin: 10px 20px 0px 20px;
+}
+
+div.margins {
+	height: 23px;
+	margin: 30px 5px 0px 5px;
+}
+
+div.print_color {
+	height: 43px;
+	margin: 10px 5px 0px 5px;
+}
+
+div.print_setting_1 {
+	height: 10px;
+}
+
+div.pre_print_operation {
+	height: 43px;
+	margin: 0px 5px 0px 5px;
+}
+
+div.delivery_town, .delivery_street, .delivery_address {
+	margin: 20px 15px 0px 15px;
+	height: 45px;
+	position:relative;
+}
+
+/*textarea, span-----------*/
+
+div.user_comment span {
+	font-style: italic;
+	display: block;
+	margin: 0 5px 0 5px;
+}
+
+div.print_color span {
+	display: block;
+}
+
+span.document_uploaded_user_filename {
+	display: block;
+	width: 100%;
+	float: right;
+	text-align: right;
+	font-style:italic;
+}
+
+td.delivery_date_edit span.dash {
+	font-size: 1.3em;
+	font-family: "Segoe UI",helvetica,arial,sans-serif;
+	text-align: center;
+	display: block;
+	width: 20px;
+	margin-top: 3px;
+	margin-left: 15px;
+}
+
+
+td.delivery_date_edit span.time {
+	font-size: 1.3em;
+	font-family: "Segoe UI",helvetica,arial,sans-serif;
+	text-align: center;
+	display: block;
+	margin-bottom: 15px;
+	margin-top: 100px;
+}
+
+textarea.document_uploaded_user_comment, .document_editor_user_comment   {
+	height: 90px;
+	width: 184px;
+	margin: 10px 5px 0px 5px;
+	resize: vertical;
+	border: 1px solid #D6D3D1;
+	font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+textarea.document_editor_user_comment  {
+	width: 880px;
+	font-size: 1.3em;
+	margin-top: 30px;
+}
+
+
+/*цветовые блоки с параметрами заказа------------------------------*/
+
+.container_for_label_created_at_order{
+    position: relative;
+    width: 166px;
+    height: 70px;
+    display: block;
+    text-align: center;
+    float: right;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.container_for_label_created_at_order label{
+    position: absolute;
+    top: -25px;
+    right: 30px;
+    color: gray;
+}
+
+.container_for_created_at_order{
+    width: 150px;
+    height: 50px;
+    display: block;
+    background-color: #8A2BE2;
+    color: white;
+    padding: 8px;
+}
+
+.container_for_label_status_order{
+    position: relative;
+    width: 166px;
+    height: 70px;
+    display: block;
+    text-align: center;
+    float: right;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.container_for_label_status_order label{
+    position: absolute;
+    top: -25px;
+    right: 63px;
+    color: gray;
+}
+
+.container_for_status_order{
+    width: 150px;
+    height: 50px;
+    display: block;
+    background-color: #008B00;
+    color: white;
+    padding: 8px;
+}
+
+.container_for_label_cost_order{
+    position: relative;
+    width: 166px;
+    height: 70px;
+    display: block;
+    text-align: center;
+    float: right;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.container_for_label_cost_order label{
+    position: absolute;
+    top: -25px;
+    right: 13px;
+    color: gray;
+}
+.container_for_cost_order{
+    width: 150px;
+    height: 50px;
+    display: block;
+    background-color: #8B1A1A;
+    color: white;
+    padding: 8px;
+}
+
+.container_for_label_pre_cost_order{
+    position: relative;
+    width: 166px;
+    height: 70px;
+    display: block;
+    text-align: center;
+    float: right;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.container_for_label_pre_cost_order p {
+    position: absolute;
+    top: -40px;
+    right: 3px;
+    color: gray;
+}
+
+.container_for_pre_cost_order{
+    width: 150px;
+    height: 50px;
+    display: block;
+    background-color: #0000CD;
+    color: white;
+    padding: 8px;
+}
+
+
+
+/*------------------------------*/
+
+div.order_total_cost_style{
+    min-width: 210px;
+    background-color: #8B1A1A;
+}
+
+div.document_cost_style {
+    min-width: 210px;
+    background-color: #009E49;
+    margin-left: 0px;
+}
+

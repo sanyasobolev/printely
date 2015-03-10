@@ -11,45 +11,9 @@
 </table>
 
 <h2 class="orange"> Доставка </h2>
-    <%= render :partial => 'orders/share/delivery_order_show', :locals => {:order => @order} %>
+<%= render :partial => 'orders/share/delivery_order_show', :locals => {:order => @order} %>
 
-<br />
-<br />
-<br />
+<%= render :partial => 'orders/share/show_order_attributes' %>
 
-<div class="container_for_label_cost_order">
-  <%= label(:order, :cost) %>
-    <div class="container_for_cost_order">
-		<%= read_cost(@order) %>
-    </div>
-</div>
-<div class="container_for_label_status_order">
-    <%= label(:order, :order_status_id) %>
-  <div class="container_for_status_order">
-    <%=h @order.order_status.title %>
-  </div>
-</div>
-<div class="container_for_label_created_at_order">
-  <%= label(:order, :created_at) %>
-    <div class="container_for_created_at_order">
-      <%= Russian::strftime(@order.created_at, "%R, %d %B %Y года") %>
-    </div>
-</div>
-
-<div class="fl_clear"></div>
-<br />
-<table>
-  <tr>
-    <% if current_user.has_role?('Administrator') %>
-      <td>
-        <%= link_to 'К списку заказов', admin_orders_path, :class => "button_style_long" %>
-      </td>
-    <% else %>
-      <td>
-        <%= link_to 'К моим заказам', my_orders_path, :class => "button_style_long" %>
-      </td>
-    <% end %>
-  </tr>
-</table>
-
+<%= render :partial => 'orders/share/show_order_navigations' %>
 

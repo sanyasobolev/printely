@@ -44,5 +44,17 @@
 	<%= f.check_box :remove_layout%>
 </div>
 
-
+<div class="form_align">
+	<%= f.label :canvas_setting_ids %>
+	<%= collection_select :pspec,
+						  :canvas_setting_ids, 
+						  Lists::CanvasSetting.find(:all), 
+						  :id, 
+						  :canvas_setting_description, 						  
+						  { :selected => pspec.canvas_setting_ids, :prompt => 'нет canvas' }, 
+						  { 
+						  	:multiple => false, 
+						  	:name => 'pspec[canvas_setting_ids][]'					
+						  } -%>
+</div>
 

@@ -1,0 +1,8 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'X', lists_canvas_setting_path(canvas_setting), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%=h (canvas_setting.margin_top) %></td>
+  <td><%=h (canvas_setting.margin_left) %></td>
+  <td><%=h (canvas_setting.width) %></td>
+  <td><%=h (canvas_setting.height) %></td>
+  <td><%= link_to 'Редактировать', edit_lists_canvas_setting_path(canvas_setting) %></td>
+</tr>

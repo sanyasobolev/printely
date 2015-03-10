@@ -70,49 +70,28 @@ table.pricelist_for_user th {
 /*перечень загруженных документов*/
 
 #fileList td.upload {
-    width: 161px;
+    width: 160px;
     height: 152px;
     border-bottom: 20px solid white;
-    padding: 0px;
+    word-break: break-all;
 }
 
 #fileList td.page_count {
-    width: 190px;
 	border-bottom: 20px solid white;
-	padding: 0px;
 	text-align: center;
+}
+
+#fileList td.image_process {
+	border-bottom: 20px solid white;
+    padding: 0px;
 }
 
 
 #fileList td.paper {
-	width: 210px;
+	width: 230px;
 	border-bottom: 20px solid white;
 	padding: 0px;
 }
-
-#fileList td.paper div.paper_size {
-	width: 190px;
-	height: 43px;
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
-
-#fileList td.paper div.paper_type {
-	width: 190px;
-	height: 43px;
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
-
-#fileList td.paper div.quantity {
-	width: 190px;
-	height: 43px;
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
 
 #fileList td.print_settings {
 	width: 200px;
@@ -120,72 +99,31 @@ table.pricelist_for_user th {
     padding: 0px;
 }
 
-#fileList td.print_settings div.margins {
-	width: 190px;
-	height: 43px;
-	margin-right: 5px;
-	margin-left: 5px;
-}
-
-
-#fileList td.print_settings div.print_color {
-	width: 190px;
-	height: 86px;
-	margin-right: 5px;
-	margin-left: 5px;
-}
-
-
-#fileList td.print_settings div.user_comment {
-	width: 190px;
-	height: 43px;
-	margin-right: 5px;
-	margin-left: 5px;
-}
-
-
-#fileList td.print_settings div.print_setting_1 {
-	width: 190px;
-	height: 43px;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-#fileList td.image_process {
-	width: 190px;
-	border-bottom: 20px solid white;
-    padding: 0px;
-}
-
-#fileList td.image_process div.pre_print_operation {
-	width: 180px;
-	height: 43px;
-	margin-right: 5px;
-	margin-left: 5px;
-}
 
 #fileList td.document_cost {
-    width: 128px;
-    border-bottom: 20px solid white;
-    padding: 0px;
+	width: 108px;
+	border-bottom: 20px solid white;
+	padding: 0px 10px 0px 10px;
 }
 
-#fileList td.document_cost div.document_cost_value {
-	width: 110px;
-   	margin-right: 9px;
-	margin-left: 9px;
+
+/*таблица заказа конвертов*/
+table.envelope tr.paper_size, tr.paper_type {
+	height: 60px;
 }
 
 /*таблица данных доставки*/
-table td.delivery_location_edit {
+td.delivery_location_edit {
 	height: 170px;
 	width: 560px;
-    padding: 5px;
-    vertical-align: middle;
-    text-align: center
 }
 
-table td.delivery_location_show {
+td.delivery_date_edit {
+	height: 180px;
+	position: relative;
+}
+
+td.delivery_location_show {
 	text-align: left;
 	padding: 5px;
 	padding-left: 100px;
@@ -194,18 +132,16 @@ table td.delivery_location_show {
 	vertical-align: middle;
 }
 
-
-table td.delivery_date_edit {
-	height: 170px;
-	vertical-align: top;
+td.delivery_date_show {
+	height: 80px;
+	vertical-align: middle;
     padding: 5px;
     text-align: center
 }
 
-table td.delivery_date_show {
-	height: 80px;
-	vertical-align: middle;
-    padding: 5px;
+td.delivery_price {
+    width: 120px;
+   	font-size: 1.3em;
     text-align: center
 }
 
@@ -231,7 +167,7 @@ table td.delivery_date_show {
 #embedded_fileList td.embedded_filename {
     width: 170px;
     padding: 0px;
-    word-wrap:break-word;
+    word-break: break-all;
 }
 
 

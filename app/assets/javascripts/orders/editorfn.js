@@ -3,6 +3,88 @@
     window.editorfn = window.editorfn || {};
 
     // Add function  to the namespace
+
+    //load canvas layout
+    editorfn.loadCanvasLayout = function (document, order){
+		$("div#canvas_bg").load(
+			document.url_for_load_layout, 
+			{
+				selected_paper_type : document.selected_paper_type,
+				selected_paper_size : document.selected_paper_size
+				}, 
+			function() {
+				$(this).change();
+				//for update document price
+				});   	
+    };
+
+    //get canvas settings
+    editorfn.getCanvasSettings = function (document, canvas){
+    	$.get(
+    		document.url_for_load_canvas_settings,
+    		{
+				selected_paper_type : document.selected_paper_type,
+				selected_paper_size : document.selected_paper_size	
+    		},
+			function(data) {
+				canvas.setWidth(data.width);
+				canvas.setHeight(data.height);
+				$('div.canvas-container').css('margin-top', data.margin_top);
+				$('div.canvas-container').css('margin-left', data.margin_left);
+				canvas.calcOffset();
+				}
+    	);
+    };
+    
+	// Convert dataURL to Blob object
+	editorfn.dataURLtoBlob = function(dataURL) {
+	    // Decode the dataURL    
+	    var binary = atob(dataURL.split(',')[1]);
+	    // Create 8-bit unsigned array
+	    var array = [];
+	    for(var i = 0; i < binary.length; i++) {
+	        array.push(binary.charCodeAt(i));
+	    }
+	    // Return our Blob object
+	    return new Blob([new Uint8Array(array)], {type: 'image/png'});
+	 };
+	 
+	editorfn.sendCanvasImageToServer = function(canvas, document){
+				canvas.deactivateAll().renderAll(); //deselect all objects on canvas
+
+			var image_dataURL = canvas.toDataURL('image/png'),
+				image_file= editorfn.dataURLtoBlob(image_dataURL),
+				
+				svg_data = canvas.toSVG(),
+				svg_file = new Blob([svg_data], {type: 'image/svg+xml'}),
+				
+				form_data_svg = new FormData();//create form data
+				form_data_image = new FormData();//create form data
+
+				form_data_svg.append('id', document.document_id);// append document id
+				form_data_svg.append('svg_file', svg_file);
+				
+				form_data_image.append("image", image_file, 'canvas_created_image');// append our canvas image file to the form data
+				form_data_image.append('id', document.document_id);// append document id
+				
+				//send svg file to server
+				$.ajax({
+				     url: document.url_for_create_document,
+				     type: "POST",
+				     data: form_data_svg,
+				     processData: false,
+				     contentType: false
+			 		});	
+			 		
+				//send image file to server
+				$.ajax({
+				     url: document.url_for_create_document,
+				     type: "POST",
+				     data: form_data_image,
+				     processData: false,
+				     contentType: false
+			 		});		
+	};
     
 	editorfn.addFontFamilyPicker = function(options, canvas, font_family_tool, font_style_tool){
 		font_family_tool.picker.selectmenu({

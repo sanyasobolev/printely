@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
     	//float header for show order view
-		if ($("div.container_for_label_cost_order").exists()) {
+		if ($("table#fileList tr.document").length > 1) {
 		$('table#fileList').floatThead({
 			floatTableClass: 'floatTheadfileListOrder',
 			debounceResizeMs: 100

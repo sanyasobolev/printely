@@ -1,0 +1,15 @@
+<h1><%= @title %></h1>
+<div class="form_shape">
+	<%= form_for :canvas_setting, :url => lists_canvas_setting_path(@canvas_setting), :html => {:method => :put} do |f| %>
+	  <%= f.error_messages %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => lists_canvas_settings_path}  %>
+
+</div>
+
+
+

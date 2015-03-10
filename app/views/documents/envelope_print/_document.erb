@@ -1,105 +1,127 @@
 <table id="fileList" class="default_table">
-	<thead>
-		<tr class="document" id="<%= document.id %>" name="document" >
-		  <%= fields_for "order[documents_attributes][]", document do |i| %>
-			<td>
-				<div class="form_align">
-					<%= select_tag("order[documents_attributes][#{document.id}][paper_size]") %>
-					<%= i.label :paper_size %>
-				</div>					
-				
-				<div class="form_align">
-					<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true}) %>
-					<%= i.label :paper_type %>
-				</div>	
-				
-				<div class="editor">
-					<div class="editor_container">
-						
-						<div class="top_toolbar">
-							<div class="font_family_tool">
-								<span class="label">Шрифт</span>
-								<select id="font_family_picker">
-									<option value="andale_mono" class="andale_mono">Andale Mono</option>
-									<option value="arial" class="arial">Arial</option>
-									<option value="asylbek" class="asylbek">Asylbek</option>
-									<option value="courier_new" class="courier_new">Courier New</option>
-									<option value="impact" class="impact">Impact</option>
-									<option value="katherine" class="katherine">Katherine</option>
-									<option value="majestic" class="majestic">Majestic</option>
-									<option value="monotype_corsiva" class="monotype_corsiva">Monotype Corsiva</option>
-									<option value="romashulka" class="romashulka">Romashulka</option>
-									<option value="rosa_marena" class="rosa_marena">Rosa Marena</option>
-									<option value="segoe_print" class="segoe_print">Segoe Print</option>
-									<option value="times_new_roman" class="times_new_roman">Times New Roman</option>
-									<option value="trafaret" class="trafaret">Trafaret</option>
-									<option value="verdana" class="verdana">Verdana</option>
-									<option value="vivaldi" class="vivaldi">Vivaldi</option>
-									<option value="xiomara" class="xiomara">Xiomara</option>
-								</select>
-							</div>
-							<div class="color_tool"></div>
-							<div class="font_style_tool">
-								<%=  button_tag 'Ж', :type => 'button', :id => "font_weight", :class => "font_style_button" %>	
-								<%=  button_tag 'К', :type => 'button', :id => "font_style", :class => "font_style_button" %>	
-								<%=  button_tag 'Ч', :type => 'button', :id => "text_decoration", :class => "font_style_button" %>	
-							</div>
-						</div>
-						
-						<div id="canvas-wrapper"  class="canvas_panel">
+		<%= fields_for "order[documents_attributes][]", document do |i| %>
+			<tr class="paper_size">
+				<td class="text-center">
+					<%= i.label :paper_size, :class => 'wide envelope_size' %>
+					<%= select_tag("order[documents_attributes][#{document.id}][paper_size]", {}, {:class => 'wide envelope_size_selector'}) %>
+				</td>
+			</tr>
+			<tr class="paper_type">
+				<td class="text-center">
+					<%= i.label :paper_type, :class => 'wide envelope_type' %>
+					<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true, :class => 'wide envelope_type_selector'}) %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="editor">
+						<div class="editor_container">
 							
-							<div id="canvas_bg"></div>
-							
-							<canvas id="canvas"></canvas>
-						
-						</div>
-	
-						<div class="toolbar_bottom">
-						
-						</div>
-	
-					</div>
-					<div class="sidebar_container">
-						
-						<section class="tabs">
-							<input id="tab_1" type="radio" name="tab" checked="checked" />
-							<input id="tab_2" type="radio" name="tab" />
-							
-							<label for="tab_1" id="tab_l1">Изображения</label>
-							<label for="tab_2" id="tab_l2">Текст</label>
-							<div style="clear:both"></div>
-						
-							<div class="tabs_cont">
-								<div id="tab_c1">
-									<%= render :partial => 'documents/envelope_print/emb_filelist', :locals => {:document => document} %>
+							<div class="top_toolbar">
+								<div class="font_family_tool">
+									<span class="label">Шрифт</span>
+									<select id="font_family_picker">
+										<option value="Andale Mono" id="Andale Mono">Andale Mono</option>
+										<option value="Arial" id="Arial" class="pdf_bold pdf_italic">Arial</option>
+										<option value="Asylbek" id="Asylbek">Asylbek</option>
+										<option value="Courier_New" id="Courier_New" class="pdf_bold pdf_italic">Courier New</option>
+										<option value="Impact" id="Impact">Impact</option>
+										<option value="Majestic" id="Majestic">Majestic</option>
+										<option value="Monotype Corsiva" id="Monotype Corsiva">Monotype Corsiva</option>
+										<option value="Romashulka" id="Romashulka">Romashulka</option>
+										<option value="Rosa Marena" id="Rosa Marena">Rosa Marena</option>
+										<option value="Segoe Print" id="Segoe Print">Segoe Print</option>
+										<option value="Times New Roman" id="Times New Roman" class="pdf_bold pdf_italic">Times New Roman</option>
+										<option value="Trafaret" id="Trafaret">Trafaret</option>
+										<option value="Verdana" id="Verdana" class="pdf_bold pdf_italic">Verdana</option>
+										<option value="Vivaldi" id="Vivaldi">Vivaldi</option>
+										<option value="Xiomara" id="Xiomara">Xiomara</option>
+									</select>
 								</div>
-								<div id="tab_c2">
-									<%=  button_tag image_tag('icons/plus_grey.png'), :type => 'button', :id => 'add_text', :class => "add_canvas_element", :title => 'Добавить текст' %>
-		  							<table id="text_inputs_wrapper"> 
-		  								
-		  							</table>		
+								<div class="color_tool"></div>
+								<div class="font_style_tool">
+									<%=  button_tag 'Ж', :type => 'button', :id => "font_weight", :class => "font_style_button" %>	
+									<%=  button_tag 'К', :type => 'button', :id => "font_style", :class => "font_style_button" %>	
 								</div>
 							</div>
-						</section>
-						
+							
+							<div class="canvas_panel" rel="<%= order_documents_path(order) %>">
+								
+								<div id="canvas_bg"></div>
+								
+								<canvas id="canvas" ></canvas>
+							
+							</div>
+		
+							<div class="toolbar_bottom">
+							
+							</div>
+		
+						</div>
+						<div class="sidebar_container">
+							
+							<section class="tabs">
+								<input id="tab_1" type="radio" name="tab" checked="checked" />
+								<input id="tab_2" type="radio" name="tab" />
+								
+								<label for="tab_1" id="tab_l1">Изображения</label>
+								<label for="tab_2" id="tab_l2">Текст</label>
+								<div style="clear:both"></div>
+							
+								<div class="tabs_cont">
+									<div id="tab_c1">
+										<%= render :partial => 'documents/envelope_print/emb_filelist', :locals => {:document => document} %>
+									</div>
+									<div id="tab_c2">
+										<%=  button_tag image_tag('icons/plus_grey.png'), :type => 'button', :id => 'add_text', :class => "add_canvas_element", :title => 'Добавить текст' %>
+			  							<table id="text_inputs_wrapper"> 
+			  								
+			  							</table>		
+									</div>
+								</div>
+							</section>
+							
+						</div>
+		
+						<div class="fl_clear"></div>
 					</div>
-	
-					<div class="fl_clear"></div>
-				</div>
-				
-				<%=  button_tag 'Save', :type => 'button', :id => 'canvas_to_png' %>
-				<div id="canvas_image">
-					
-				</div>
-				
-			    <div class="form_align">	 
-			      <%= i.label :quantity %>     
-			      <%=  button_tag ' ', :type => 'button', :class => 'decrease_quantity_large' %>
-			      <%= i.text_field :quantity, :class => 'quantity_large' %>
-			      <%=  button_tag ' ', :type => 'button', :class => 'increase_quantity_large' %>
-			    </div>			
-			</td>
-		  <% end %>	
-		</tr>
-	</thead>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				    <%= i.label :quantity, :class => 'wide envelope_quantity' %> 
+				    <div class="quantity_selector_wide">
+					     <%= button_tag(' ', :type => 'button', :class => 'decrease_quantity') %>
+					     <%= i.text_field(:quantity) %>
+					     <%= button_tag(' ', :type => 'button', :class => 'increase_quantity') %>
+				 	</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+		  	      <%= i.text_area :user_comment, :placeholder => Document.human_attribute_name("user_comment"), :class => 'document_editor_user_comment'  %>
+				</td>
+			</tr>
+			<tr class="document" id="<%= document.id %>" name="document">
+			    <td class="document_cost">
+					<div class="document_cost_style">
+						<div class='floatingBarsG'>
+							<div class='blockG' id='rotateG_01'></div>
+							<div class='blockG' id='rotateG_02'></div>
+							<div class='blockG' id='rotateG_03'></div>
+							<div class='blockG' id='rotateG_04'></div>
+							<div class='blockG' id='rotateG_05'></div>
+							<div class='blockG' id='rotateG_06'></div>
+							<div class='blockG' id='rotateG_07'></div>
+							<div class='blockG' id='rotateG_08'></div>
+						</div>
+						<div class='document_cost_value'>
+				      		<%= h (number_to_currency(document.cost, :unit => "коп.", :separator => " руб. ")) %>
+				    	</div>
+				    </div>
+					<%= label_tag 'document_cost', 'Цена:' %>
+
+			    </td>
+			</tr>
+		<% end %>	
 </table>

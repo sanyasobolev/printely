@@ -172,22 +172,6 @@
         		);
     };
     
-    //load canvas layout
-    uploadfn.loadLayout = function (document, order){
-		$("div#canvas_bg").load(
-			document.url_for_load_layout, 
-			{
-				order_id : order.order_id,
-				id : document.document_id,
-				selected_paper_type : document.selected_paper_type,
-				selected_paper_size : document.selected_paper_size
-				}, 
-			function() {
-				$(this).change();
-				//for update document price
-				});   	
-    };
-    
     //calculate document and order price
     uploadfn.calculateDocumentAndOrderPrice = function (document, order)
     	{

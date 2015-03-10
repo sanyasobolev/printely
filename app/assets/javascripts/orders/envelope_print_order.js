@@ -25,7 +25,8 @@ $(document).ready(function() {
 		url_for_update_document: "/document/price_update",
         url_for_load_paper_sizes: "/document/get_paper_sizes",
         url_for_load_paper_types: "/document/get_paper_types",
-		url_for_load_layout: "/document/get_layout", 
+		url_for_load_layout: "/paper_specification/get_layout", 
+		url_for_load_canvas_settings: "/paper_specification/get_canvas_settings",
 	};
 
 	var progress = {
@@ -37,8 +38,12 @@ $(document).ready(function() {
     //clear value 'выберите' in select
 	deliveryfn.clear_select();
 	
-	//timepicker
-	deliveryfn.delivery_timepicker();
+	//delivery datepicker
+	calendarfn.set_datepicker('#datepicker', 0, false);
+	
+	//delivery timepicker
+	calendarfn.set_timepicker('#timepicker_start', '07:00', '23:30');
+	calendarfn.set_timepicker('#timepicker_end', '07:30', '00:00');
 	
 	//update order when update delivery	
 	deliveryfn.update_order(order);
@@ -74,15 +79,17 @@ $(document).ready(function() {
         	uploadfn.loadPaperTypes(envdocument, order);
         });
 
-		//load layout and calculate price for document for event change paper type
+		//load layout, canvas and calculate price for document for event change paper type
 		$("select[name*='paper_type']:not([class*='with_loaded_paper_types'])").addClass("with_loaded_paper_types").on("change", function(event) {
 			envdocument.document_id = $('table#fileList tr.document').attr("id"), 
 			envdocument.selected_paper_type = $(this).val(), 
 			envdocument.selected_paper_size = $("select[name*='["+envdocument.document_id+"][paper_size]']").val();
   			envdocument.selected_quantity = $("input[name*='["+envdocument.document_id+"][quantity]']").val();
 
-			uploadfn.loadLayout(envdocument, order);
+			editorfn.loadCanvasLayout(envdocument, order);
+			editorfn.getCanvasSettings(envdocument, canvas);
             uploadfn.calculateDocumentAndOrderPrice(envdocument, order);
+            
 		});		
 
 		//change handler for quantity with debounce (if user click many times)       
@@ -94,12 +101,12 @@ $(document).ready(function() {
         }));
 
         //работа переключателя количества копий
-        $("button.increase_quantity_large:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("button.increase_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
         	var selected_input_quantity = $(this).siblings("input[id*='quantity']");
         	uploadfn.button_increase(selected_input_quantity, order.quantity_step, order.quantity_max_value);
         });
 
-        $("button.decrease_quantity_large:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("button.decrease_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
         	var selected_input_quantity = $(this).siblings("input[id*='quantity']");
         	uploadfn.button_decrease(selected_input_quantity, order.quantity_step, order.quantity_min_value);
         });
@@ -256,6 +263,17 @@ $(document).ready(function() {
 
 	//---------------------------------------------------------------------
 
+	//create png file for button-------------------------------------------
+	$("#next_step").click(function()
+		{
+			envdocument.document_id = $('table#fileList tr.document').attr("id");
+			
+			editorfn.sendCanvasImageToServer(canvas, envdocument);
+		});	
+
+    //-------------------------------------------------------------------
+
+
 	//load fabric-------------------------------------------------------------------------------------
     (function(){
 		var load_fabric_script = document.createElement("script");
@@ -270,24 +288,12 @@ $(document).ready(function() {
 
   	//create canvas-------------------------------------------------------------------------------------------------
 	var canvas = new fabric.Canvas("canvas");
-	canvas.setWidth(545);
-	canvas.setHeight(385);
+	
 	//--------------------------------------------------------------------------------------------------------
 
 
-	//create svg draft file and initialize load paper size-------------------------------------------
-	var svg_data = canvas.toSVG();
-	$.post( envdocument.url_for_create_document, 
-	     {
-			svg: svg_data,
-        	order_id: order.order_id, 
-        	id: envdocument.document_id
-	     },
-	     function(){
-			//load paper_sizes
-			uploadfn.loadPaperSizes(envdocument, order);	
-	     }
-    );
+	//initialize load paper size-------------------------------------------
+	uploadfn.loadPaperSizes(envdocument, order);
     //-------------------------------------------------------------------
     
 	//canvas events
@@ -296,10 +302,10 @@ $(document).ready(function() {
 
 	function onObjectSelected(options){ //options - selected object
 		allControlsUnBind(options); //unbind all controls from other elements
-	   	//$(top_toolbar).show();
 	   	   	    
 	    switch(options.target.get('type')){
 	    	case 'text':
+	   			$(top_toolbar).show();
 	    		console.log('selected ' +options.target.get('type'));
 	    		console.log('selected ' +options.target.get('ObjectId'));
 	    		
@@ -331,7 +337,7 @@ $(document).ready(function() {
 	};
 	
 	function allControlsUnBind(){
-		//$(top_toolbar).hide();
+		$(top_toolbar).hide();
 		
 		//unhighlight all elements in sidebar
 	    editorfn.unHighlightAll();

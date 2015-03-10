@@ -103,7 +103,7 @@ $(document).ready(function(){
         
 		//change handler for quantity with debounce (if user click many times)       
         $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
-        	document.document_id = this.parentNode.parentNode.parentNode.id;
+        	document.document_id = this.parentNode.parentNode.parentNode.parentNode.id;
 			document.selected_quantity = $(this).val(uploadfn.validate_quantity(parseInt($(this).val()), parseInt(order.quantity_min_value), parseInt(order.quantity_max_value))).val(); //проверка введенного числа и запись его в document object
 				
        		uploadfn.calculateDocumentAndOrderPrice(document, order);
@@ -139,8 +139,12 @@ $(document).ready(function(){
     //clear value 'выберите' in select
 	deliveryfn.clear_select();
 	
-	//timepicker
-	deliveryfn.delivery_timepicker();
+	//delivery datepicker
+	calendarfn.set_datepicker('#datepicker', 0, false);
+	
+	//delivery timepicker
+	calendarfn.set_timepicker('#timepicker_start', '07:00', '23:30');
+	calendarfn.set_timepicker('#timepicker_end', '07:30', '00:00');
 
 	//update order when update delivery	
 	deliveryfn.update_order(order);
@@ -202,7 +206,7 @@ $(document).ready(function(){
         
 		//change handler for quantity with debounce (if user click many times)       
         $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
-        	document.document_id = this.parentNode.parentNode.parentNode.id;
+        	document.document_id = this.parentNode.parentNode.parentNode.parentNode.id;
 			document.selected_quantity = $(this).val(uploadfn.validate_quantity(parseInt($(this).val()), parseInt(order.quantity_min_value), parseInt(order.quantity_max_value))).val(); //проверка введенного числа и запись его в document object
 				
        		uploadfn.calculateDocumentAndOrderPrice(document, order);

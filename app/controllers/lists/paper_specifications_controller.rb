@@ -1,6 +1,10 @@
 # encoding: utf-8
 class Lists::PaperSpecificationsController < ApplicationController
 
+  skip_before_filter :authorized?,
+                     :only => [:get_layout, :get_canvas_settings]
+
+
   def edit
     @pspec = Lists::PaperSpecification.find(params[:id])
     @title = "Редактирование"
@@ -43,5 +47,38 @@ class Lists::PaperSpecificationsController < ApplicationController
     @title = 'Спецификации бумаги'
     @pspecs = Lists::PaperSpecification.all
   end
+  
+  def get_layout
+    @pspec = Lists::PaperSpecification.where(["paper_type_id = ? and paper_size_id = ?", params[:selected_paper_type].to_i, params[:selected_paper_size].to_i]).first
+    @item = ''
+
+    if !@pspec.layout?
+      @item = "Нет изображения макета."
+    else
+      @item = "<img src='"+"#{@pspec.layout_url}"+"'>"
+    end
+    
+    respond_to do |format|
+        format.html do
+          render :partial => 'item' 
+        end
+    end
+  end
+  
+  def get_canvas_settings
+    @pspec = Lists::PaperSpecification.where(["paper_type_id = ? and paper_size_id = ?", params[:selected_paper_type].to_i, params[:selected_paper_size].to_i]).first
+    
+    if @pspec.canvas_settings.empty?
+      @canvas_settings = ''
+    else
+      @canvas_settings = @pspec.canvas_settings.first
+    end
+
+    respond_to do |format|
+       format.json { render json: @canvas_settings }
+    end
+  end
+
+
   
 end

@@ -10,8 +10,8 @@ uploadfn.hide_loader_for_price(<%= @document.id %>);
 		state: true,
 	};	
 		
-if(<%=params[:queue_files_count]%> == 0){
+if(<%= @queue_files_count %> == 0){
 	progress.state = false;
 } else {
-	uploadfn.progress_observer(progress, 50/<%=params[:queue_files_count]%>, 'Считаем стоимость...');
+	uploadfn.progress_observer(progress, 50/<%=@queue_files_count%>, 'Считаем стоимость...');
 };

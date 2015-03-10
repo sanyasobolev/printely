@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Document < ActiveRecord::Base
 
+  require 'base64' #for convert image_data to file
+
   belongs_to :order
   belongs_to :paper_specification, :class_name => "Lists::PaperSpecification"
   belongs_to :print_margin, :class_name => "Lists::PrintMargin"
@@ -11,7 +13,16 @@ class Document < ActiveRecord::Base
 
   mount_uploader :docfile, DocumentUploader
 
-  attr_accessible :docfile, :user_comment, :quantity, :price, :cost, :original_filename, :paper_specification_id, :page_count, :print_margin_id, :print_color_id, :binding_id
+  attr_accessible :docfile, 
+                  :user_comment, 
+                  :quantity, 
+                  :price, 
+                  :cost, 
+                  :paper_specification_id, 
+                  :page_count, 
+                  :print_margin_id, 
+                  :print_color_id, 
+                  :binding_id
 
   def get_paper_type
     if self.paper_specification.nil?
@@ -46,6 +57,15 @@ class Document < ActiveRecord::Base
     else
       paper_size = self.paper_specification.paper_size.paper_size_with_iso
       return paper_size      
+    end
+  end
+  
+  def get_canvas_setting
+    if self.paper_specification.nil?
+      return false
+    else
+      canvas_setting = self.paper_specification.canvas_settings.first
+      return canvas_setting      
     end
   end
 

@@ -33,8 +33,8 @@
     	</div> 
     	<div class="fl_clear"></div> 
 	    <div class="user_comment">
-	    	<%= Document.human_attribute_name(:user_comment) unless show_doc.user_comment.blank? %>
-			<span><%= show_doc.user_comment %></span>	    
+	    	<span><%= "#{Document.human_attribute_name(:user_comment)}:" unless show_doc.user_comment.blank? %>
+			<%= show_doc.user_comment %></span>	    
 		</div>
 	    <div class="fl_clear"></div> 
 	    <div class="print_setting_1">

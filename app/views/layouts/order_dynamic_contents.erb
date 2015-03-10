@@ -1,0 +1,16 @@
+<% case action_name %>
+<% when 'show' %>
+	<% case @order.order_type.title %>
+		<% when 'envelope_print' %>
+			<% content_for :stylesheets do %>
+				div.canvas-container-show {
+					margin-left: <%= @document.get_canvas_setting.margin_left %>px; 
+					margin-top: <%= @document.get_canvas_setting.margin_top %>px;
+					width: <%= @document.get_canvas_setting.width %>px;
+					height: <%= @document.get_canvas_setting.height %>px;
+					}
+			<% end %>
+	<% end %>
+<% end %>
+
+<%= render :template => 'layouts/order_boardlinks' %>

@@ -25,25 +25,24 @@ Spsite::Application.routes.draw do
 
   resources :documents do
     resources :embedded_images
+    get 'download_pdf', :on => :member
   end
   match 'document/price_update' => 'documents#price_update'
   match 'document/get_paper_sizes' => 'documents#get_paper_sizes'
   match 'document/get_paper_types' => 'documents#get_paper_types'
   match 'document/get_print_margins' => 'documents#get_print_margins'
   match 'document/get_print_colors' => 'documents#get_print_colors'
-  match 'document/get_layout' => 'documents#get_layout'
-  match 'document/process_svg' => 'documents#process_svg'
+  
   
   resources :orders do
     resources :documents
-     get 'my', :on => :collection
-     get 'admin', :on => :collection
-     get 'cover', :on => :member
-     get 'new_print', :on => :collection
-     get 'get_materials', :on => :member
-     get 'edit_files', :on => :member
-     get 'edit_delivery', :on => :member
-     get 'edit_status', :on => :member
+    get 'my', :on => :collection
+    get 'admin', :on => :collection
+    get 'cover', :on => :member
+    get 'get_materials', :on => :member
+    get 'edit_files', :on => :member
+    get 'edit_delivery', :on => :member
+    get 'edit_status', :on => :member
   end
   match 'order/ajaxupdate' => 'orders#ajaxupdate'
 
@@ -101,6 +100,7 @@ Spsite::Application.routes.draw do
     resources :order_types
     resources :paper_grades
     resources :paper_densities
+    resources :canvas_settings
     resources :paper_types
     resources :paper_sizes
     resources :paper_specifications do
@@ -116,6 +116,8 @@ Spsite::Application.routes.draw do
     resources :delivery_zones
     resources :delivery_towns
   end
+  match 'paper_specification/get_layout' => 'lists/paper_specifications#get_layout'
+  match 'paper_specification/get_canvas_settings' => 'lists/paper_specifications#get_canvas_settings'
   
   Ckeditor::Engine.routes.draw do
     resources :pictures, :only => [:index, :create, :destroy]

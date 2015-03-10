@@ -3,7 +3,9 @@ display:none;
 position:relative;
 left:30px;
 width:31px;
-height:39px}
+height:39px;
+top:-5px;
+}
 
 .blockG{
 position:absolute;

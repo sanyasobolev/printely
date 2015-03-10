@@ -17,9 +17,9 @@ ru:
       order: "Заказ"
       document: "Документ"
       mailing: "Рассылка"
-      pricelist_fotoprint: "Прайс на печать фото"
       pricelist_delivery: "Прайс на доставку"
       lists/order_status: "Статус заказа"
+      lists/canvas: "Зона рисования"
       lists/paper_grade: "Класс бумаги"
       lists/paper_type: "Тип бумаги"
       lists/paper_size: "Размер бумаги"
@@ -150,7 +150,7 @@ ru:
         margins: "Поля"
         document_cost: "Цена"
         pages_count: "Количество страниц"
-        image_process: "Обработка изображения"
+        image_process: "Обработка фото"
         print_color: "Цветность" 
       pricelist_fotoprint:
         print_format: "Формат"
@@ -175,6 +175,11 @@ ru:
         id: "ИД статуса"
         title: "Название"
         key: "Ключ"
+      lists/canvas_setting:
+        margin_top: "Отступ сверху, пикс"
+        margin_left: "Отступ слева, пикс"
+        width: "Ширина, пикс"
+        height: "Высота, пикс"
       lists/paper_grade:
         grade: "Класс бумаги"
       lists/paper_density:
@@ -196,6 +201,7 @@ ru:
         order_type_id: "Тип заказа"
         layout: "Макет"
         remove_layout: "Удалить макет"
+        canvas_setting_ids: "Настройки canvas"
       lists/print_margin:
         margin: "Поля"
         price: "Цена"

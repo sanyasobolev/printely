@@ -1,9 +1,5 @@
 $("table tr td.delivery_price").html("<%= j number_to_currency(@order.delivery_price, :unit => "руб.", :precision => 0) %>");
-$("div.total_cost_order_label").html("Итого:");
-$("div.total_cost_order").html("<%= j number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ") %>");
-
-$("div#why_pre_cost_link").css( "display", "none" );
-$("div#why_pre_cost_text").css( "display", "none" );
+$("div.order_total_cost_style").html("<%= j number_to_currency(@order.cost, :unit => "коп.", :separator => " руб. ") %>");
 
 $("input#order_cost").val("<%= @order.cost %>");
 

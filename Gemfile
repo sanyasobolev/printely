@@ -15,6 +15,9 @@ gem "daemons" #daemon for delayed job
 gem 'pdf-reader', "~> 1.3.3" #for get count pages in pdf
 gem 'ruby-ole' #for information from office document
 gem 'kaminari' #pagination
+gem 'prawn' #pdf generator
+gem 'prawn-svg' #svg to pdf
+gem 'wicked' # wizard
 
 #for multiple upload files
 gem 'carrierwave'

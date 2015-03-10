@@ -14,22 +14,12 @@ module OrdersHelper
     return cost
   end
   
-  def read_cost_min_max(object) #order or order.scan
-    if object.cost_min == nil && object.cost_max == nil
-      cost_min = ''
-      cost_max = 'Не установлена'
-    else
-      if object.cost_min != object.cost_max
-        cost_min = "#{Order.human_attribute_name('cost_min')} " +
-        number_to_currency(object.cost_min, :unit => "руб.", delimiter: "", precision: 0) +
-        "<br />" + " #{Order.human_attribute_name('cost_max')} "
-      else
-        cost_min = ''
-      end
-      cost_max = number_to_currency(object.cost_max, :unit => "руб.", delimiter: "", precision: 0)
+  def read_document_layout(document)
+    if document.paper_specification.layout.url
+      return (image_tag document.paper_specification.layout.url)
+    else 
+      return 'Нет изображения макета'
     end
-    cost_min_max = cost_min + cost_max
-    return cost_min_max.html_safe
   end
   
 end

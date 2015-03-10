@@ -5,12 +5,17 @@
         <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :class => 'link_delete docfile_delete', :title => 'Удалить файл' %>
       </div>
       <%= thumb_for_doc(document) %>
+      <span class="document_uploaded_user_filename">
+      	<%= document.user_filename %>
+      </span>
     </td>
     <td class="page_count">
     	<% unless page_count_for_doc(document) %>
-	        <%= button_tag(' ', :type => 'button', :class => 'increase_page_count') %>
-	        <%= i.text_field(:page_count) %>
-	        <%= button_tag(' ', :type => 'button', :class => 'decrease_page_count') %>
+	    	<div class="quantity_selector">
+		        <%= button_tag(' ', :type => 'button', :class => 'decrease_quantity') %>
+		        <%= i.text_field(:page_count) %>
+		        <%= button_tag(' ', :type => 'button', :class => 'increase_quantity') %>
+	 		</div>
  		<% else %>
  		    <%= page_count_for_doc(document) %>
  		<% end %>
@@ -18,35 +23,37 @@
     
     <td class="paper">
 	    <div class="paper_size">  
-	      	<%= select_tag("order[documents_attributes][#{document.id}][paper_size]") %>
-	    	<%= i.label :paper_size %>
+	      	<%= select_tag("order[documents_attributes][#{document.id}][paper_size]", {}, {:class => 'paper_size_selector'}) %>
+	    	<%= i.label :paper_size, :class => 'float_left'  %>
 	    </div>
 	    <div class="fl_clear"></div>
 	    <div class="paper_type">
-	    	<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true}) %>
-			<%= i.label :paper_type %>
+	    	<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true, :class => 'paper_type_selector'}) %>
+			<%= i.label :paper_type, :class => 'float_left'  %>
 	    </div>
 	    <div class="fl_clear"></div>
 	    <div class="quantity">	      
-	      <%=  button_tag ' ', :type => 'button', :class => 'increase_quantity' %>
-	      <%= i.text_field (:quantity)%>
-	      <%=  button_tag ' ', :type => 'button', :class => 'decrease_quantity' %>
-	      <%= i.label :quantity %>
+	    	<div class="quantity_selector float_right">
+		        <%= button_tag(' ', :type => 'button', :class => 'decrease_quantity') %>
+		        <%= i.text_field(:quantity) %>
+		        <%= button_tag(' ', :type => 'button', :class => 'increase_quantity') %>
+	 		</div>
+	 		<%= i.label :quantity, :class => 'float_left' %>
 	    </div>
 	    <div class="fl_clear"></div>
     </td>
 
     <td class="print_settings">
     	<div class="print_color">
-    		<%= i.label :print_color %>
-      		<%= select_tag("order[documents_attributes][#{document.id}][print_color]", {}, {:disabled => true}) %>
+    		<%= i.label :print_color, :class => 'float_left' %>
+      		<%= select_tag("order[documents_attributes][#{document.id}][print_color]", {}, {:disabled => true, :class => 'print_color_selector'}) %>
     	</div> 
     	<div class="fl_clear"></div> 
-	    <div class="user_comment">
-	      <%= i.text_area :user_comment, :placeholder => Document.human_attribute_name("user_comment") %>
-	    </div>
+	      <%= i.text_area :user_comment, :placeholder => Document.human_attribute_name("user_comment"), :class => 'document_uploaded_user_comment' %>
 	    <div class="fl_clear"></div> 
- 	
+	    <div class="print_setting_1">
+
+	    </div>   
     </td>
 
     <td class="document_cost">

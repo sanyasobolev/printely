@@ -57,61 +57,6 @@ button.button_style_long_orange, button.button_style_long_orange_pressed, button
 	margin-right: 10px;
 }
 
-/*buttons for change quantity*/
-button.decrease_quantity {
-    cursor: pointer;
-    float: right;
-    width: 21px;
-    height: 23px;
-    border: 0px;
-    margin-left: 10px;
-    background-image: url(/assets/icons/minus.png);
-}
-
-button.increase_quantity {
-    cursor: pointer;
-    float: right;
-    width: 21px;
-    height: 23px;
-    border: 0px;
-    background-image: url(/assets/icons/plus.png);
-}
-
-button.decrease_quantity_large {
-    cursor: pointer;
-    float: left;
-    width: 41px;
-    height: 44px;
-    border: 0px;
-    background-image: url(/assets/icons/minus_large.png);
-}
-
-button.increase_quantity_large {
-    cursor: pointer;
-    float: left;
-    width: 41px;
-    height: 44px;
-    border: 0px;
-    background-image: url(/assets/icons/plus_large.png);
-}
-
-button.decrease_page_count {
-    cursor: pointer;
-    float: right;
-    width: 21px;
-    height: 23px;
-    border: 0px;
-    background-image: url(/assets/icons/minus.png);
-}
-
-button.increase_page_count {
-    cursor: pointer;
-    float: right;
-    width: 21px;
-    height: 23px;
-    border: 0px;
-    background-image: url(/assets/icons/plus.png);
-}
 
 /*uploadify button for select files*/
 #document_docfileUploader {

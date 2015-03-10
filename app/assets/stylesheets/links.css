@@ -39,6 +39,23 @@ a.sort_link:link, a.sort_link:visited {
 	text-decoration: underline;
 }
 
+/*top sections*/
+
+a.top_section:link, a.top_section:visited {
+    color: white;
+    text-align:center;
+    text-decoration:none;
+    padding: 0px;
+    font-size: inherit;
+}
+
+a.top_section:hover {
+    color: #378cff;
+    text-align:center;
+    text-decoration:none;
+    padding: 0px;
+}
+
 /*links as buttons (get)*/
 a.button_style:link, a.button_style:visited, input.button_style {
     background-color: #1BA1E2;
@@ -200,34 +217,6 @@ a.bot_section:hover {
     text-decoration:none;
 }
 
-/*my order types links*/
-.orders_type_pagination a.my_order:link {
-	position:relative;
-	top:-55px;
-	right: -200px;
-    width: 225px;
-    height: 30px;
-    margin: 0 5px 0 0;
-    padding-top:5px;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    border: 0 none;
-}
-
-.orders_type_pagination a.my_order span {
-	    color: black;
-}
-
-.orders_type_pagination a.my_order:not(.selected):hover{
-	background: #CC8400
-}
-
-.orders_type_pagination a.selected {
-    background: #B27300;
-    cursor: default;
-    }
-    
 
 /*сложные ссылки для стартовой страницы---------------------------------------------------*/
 .link_container {

@@ -11,7 +11,8 @@ class Lists::PaperSpecification < ActiveRecord::Base
                     :order_type_id,
                     :layout,
                     :layout_cache,
-                    :remove_layout
+                    :remove_layout,
+                    :canvas_setting_ids
     
     has_many :documents
     has_many :print_margins, :through => :documents
@@ -19,6 +20,8 @@ class Lists::PaperSpecification < ActiveRecord::Base
     belongs_to :paper_type
     belongs_to :paper_size
     belongs_to :order_type
+
+    has_and_belongs_to_many :canvas_settings
 
     validates :paper_type_id, :uniqueness => { 
     :scope => :paper_size_id,

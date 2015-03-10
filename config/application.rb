@@ -18,7 +18,8 @@ module Spsite
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/libs)
      config.autoload_paths << "#{Rails.root}/lib" # загрузка модуля авторизации
-     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)#загрузка едитора
+     config.autoload_paths << "#{Rails.root}/app/pdf"#загрузка pdf-генераторов
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

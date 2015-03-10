@@ -1,0 +1,40 @@
+/*печать конвертов- settings for brother mfc7360n----------------------------*/
+
+#cover_c6 {
+    width: 154mm;
+    height: 101mm;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+#cover_c5 {
+    width: 221mm;
+    height: 149mm;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+#cover_c4 {
+    width: 316mm;
+    height: 216mm;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+
+#cover_c6 img {
+    position: relative;
+    right: -100mm;
+    top: 8mm;
+}
+
+
+#cover_c5 img {
+    position: relative;
+    right: -165mm;
+    top: 40mm;
+}
+
+
+#cover_c4 img {
+    position: relative;
+    right: -261mm;
+    top: 110mm;
+}

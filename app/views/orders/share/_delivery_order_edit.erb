@@ -3,33 +3,32 @@
 
       <tr>
         <td class="delivery_location_edit">
-        	<div class="form_align">
-	        	<%= order.label(:delivery_town_id) %>	
+        	<div class="delivery_town">
 	            <%= order.collection_select(:delivery_town_id,
 						                      Lists::DeliveryTown.find(:all),
 						                      :id,
 						                      :title,
-						                      { :prompt => true }) %>	
+						                      { :prompt => true},
+						                      :class=> 'wide delivery_town' 
+						                   	) %>	
+	        	<%= order.label(:delivery_town_id, :class => 'float_right wide') %>	
             </div>
-        	<div class="form_align">
-	        	<%= order.label(:delivery_street) %>	
-	            <%= order.text_field :delivery_street, :placeholder => "Укажите, если она есть..." %>		
+            <div class="fl_clear"></div>
+        	<div class="delivery_street">
+	            <%= order.text_field :delivery_street, :placeholder => "Укажите, если она есть...", :class => 'delivery_street_edit wide float_right' %>		
+	        	<%= order.label(:delivery_street, :class => 'float_right wide') %>	
             </div>	
-            <div class="form_align">	
-	        	<%= order.label(:delivery_address) %>
-	        	<%= order.text_field :delivery_address %>
+            <div class="delivery_address">	
+	        	<%= order.text_field :delivery_address, :class => 'delivery_address_edit wide float_right' %>
+	        	<%= order.label(:delivery_address, :class => 'float_right wide') %>
             </div>
         </td>
         <td class="delivery_date_edit">
-        	<div class="form_align">
-        	   <%= order.text_field :delivery_date, :id => "datepicker", :placeholder => "Выберите дату" %>
-           	</div>
-          	<div class="form_align">
-	          <span class="time">время</span>
-	          <%= order.text_field :delivery_start_time, :id => "timepicker_start", :placeholder => Order.human_attribute_name("delivery_start_time") %>
-	          <span class="dash">-</span>
-	          <%= order.text_field :delivery_end_time, :id => "timepicker_end", :placeholder => Order.human_attribute_name("delivery_end_time") %>
-	        </div>
+       	  <%= order.text_field :delivery_date, :id => "datepicker", :placeholder => "Выберите дату", :class => 'wide' %>
+          <span class="time">время</span>
+          <%= order.text_field :delivery_start_time, :id => "timepicker_start", :placeholder => Order.human_attribute_name("delivery_start_time"), :class => 'wide float_left' %>
+          <span class="dash float_left">-</span>
+          <%= order.text_field :delivery_end_time, :id => "timepicker_end", :placeholder => Order.human_attribute_name("delivery_end_time"), :class => 'wide float_left' %>
         </td>
         <td class="delivery_price">
           <%= h (number_to_currency(current_order.delivery_price, :unit => "руб.", :precision => 0)) %>

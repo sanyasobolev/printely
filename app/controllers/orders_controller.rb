@@ -1,7 +1,7 @@
 # encoding: utf-8
 class OrdersController < ApplicationController
-  layout 'orders_boardlinks', :only => [:index, :my, :show]
-
+  layout 'order_dynamic_contents', :only => [:index, :my, :show]
+  
   skip_before_filter :authorized?,
                      :only => [:index, :my, :new, :show, :edit, :update, :destroy, :ajaxupdate]
 
@@ -25,8 +25,7 @@ class OrdersController < ApplicationController
     end
     @draft_orders.destroy_all
         
-    @foto_print_orders = Order.where("user_id=#{current_user.id} AND order_type_id=2", :include => :user).order('created_at DESC').page(params[:foto_print_orders_page])
-    @doc_print_orders = Order.where("user_id=#{current_user.id} AND order_type_id=3", :include => :user).order('created_at DESC').page(params[:doc_print_orders_page])
+    @my_orders = Order.where("user_id=#{current_user.id}", :include => :user).order('created_at DESC').page(params[:my_orders_page])
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @orders }
@@ -75,7 +74,9 @@ class OrdersController < ApplicationController
           end
         when 'envelope_print'
           if user_can_edit == true
-            @document = @order.documents.create(:quantity => 1)
+            @document = @order.documents.empty? ? @order.documents.create : @order.documents.first
+            @document.docfile = Rails.root.join("public/fallback/default.png").open
+            @document.save!
             format.html { render 'orders/envelope_print/new_envelope_print' } 
           else
             flash[:error] = 'Вы не можете редактировать созданный ранее заказ.'
@@ -166,7 +167,7 @@ class OrdersController < ApplicationController
 
   def attr_update(order, status_key) #update main user attributes of order
     case order.order_type.title
-      when 'foto_print', 'doc_print'
+    when 'foto_print', 'doc_print', 'envelope_print'
         if (order.documents.length == 0)
           flash[:error] = 'Для оформления заказа необходимо загрузить хотя бы один файл.'
           redirect_to :action => "edit"
@@ -223,6 +224,9 @@ class OrdersController < ApplicationController
            format.html { render 'orders/foto_print/show_foto_print_order' }
         when 'doc_print'
            format.html { render 'orders/doc_print/show_doc_print_order' }
+        when 'envelope_print'
+           @document = @order.documents.first 
+           format.html { render 'orders/envelope_print/show_envelope_print_order' }
       end
     end
   end
@@ -316,7 +320,7 @@ class OrdersController < ApplicationController
       order_cost = 0
       
       case order.order_type.title
-        when 'foto_print', 'doc_print'  #считаем документы, если они есть
+        when 'foto_print', 'doc_print', 'envelope_print'  #считаем документы, если они есть
           if order.documents.size > 0
             order.documents.each do |document|
               (documents_cost = documents_cost + document.cost) unless document.cost.nil?

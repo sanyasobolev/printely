@@ -89,7 +89,7 @@ $(document).ready(function(){
         	uploadfn.loadPrintColors(document, order);     	
         });
 
-        //calculate price for document for event change print margin
+        //calculate price for document for event change print color
         $("select[name*='print_color']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', function(event){
           document.document_id = this.parentNode.parentNode.parentNode.id;
 		  document.selected_paper_size = $("select[name*='["+document.document_id+"][paper_size]']").val();
@@ -109,7 +109,7 @@ $(document).ready(function(){
 
 		//change handler for quantity with debounce (if user click many times)
         $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
-        	document.document_id = this.parentNode.parentNode.parentNode.id;
+        	document.document_id = this.parentNode.parentNode.parentNode.parentNode.id;
 			document.selected_quantity = $(this).val(uploadfn.validate_quantity(parseInt($(this).val()), parseInt(order.quantity_min_value), parseInt(order.quantity_max_value))).val(); //проверка введенного числа и запись его в document object
 				
        		uploadfn.calculateDocumentAndOrderPrice(document, order);
@@ -117,29 +117,29 @@ $(document).ready(function(){
         
 		//change handler for page_count with debounce (if user click many times)
         $("input[name*='page_count']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
-        	document.document_id = this.parentNode.parentNode.id;
+        	document.document_id = this.parentNode.parentNode.parentNode.id;
 			document.selected_page_count = $(this).val(uploadfn.validate_quantity(parseInt($(this).val()), parseInt(order.quantity_min_value), parseInt(order.quantity_max_value))).val(); 				
        		
 			uploadfn.calculateDocumentAndOrderPrice(document, order);
         }));
 
         //работа переключателя количества копий
-        $("button.increase_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("div.quantity button.increase_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
             var selected_input_quantity = $(this).siblings("input[id*='quantity']");
         	uploadfn.button_increase(selected_input_quantity, order.quantity_step, order.quantity_max_value);
         });
 
-        $("button.decrease_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("div.quantity button.decrease_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
         	var selected_input_quantity = $(this).siblings("input[id*='quantity']");
         	uploadfn.button_decrease(selected_input_quantity, order.quantity_step, order.quantity_min_value);
         });
         
         //работа переключателя количества страниц в документе
-        $("button.increase_page_count:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("td.page_count button.increase_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
         	var selected_input_page_count = $(this).siblings("input[id*='page_count']");
         	uploadfn.button_increase(selected_input_page_count, order.quantity_step, order.quantity_max_value);
         });
-        $("button.decrease_page_count:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("td.page_count button.decrease_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
         	var selected_input_page_count = $(this).siblings("input[id*='page_count']");
         	uploadfn.button_decrease(selected_input_page_count, order.quantity_step, order.quantity_min_value);
         });
@@ -150,8 +150,12 @@ $(document).ready(function(){
     //clear value 'выберите' in select
 	deliveryfn.clear_select();
 	
-	//timepicker
-	deliveryfn.delivery_timepicker();
+	//delivery datepicker
+	calendarfn.set_datepicker('#datepicker', 0, false);
+	
+	//delivery timepicker
+	calendarfn.set_timepicker('#timepicker_start', '07:00', '23:30');
+	calendarfn.set_timepicker('#timepicker_end', '07:30', '00:00');
 
 	//update order when update delivery	
 	deliveryfn.update_order(order);
@@ -218,7 +222,7 @@ $(document).ready(function(){
 
 		//change handler for quantity with debounce (if user click many times)
         $("input[name*='quantity']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
-        	document.document_id = this.parentNode.parentNode.parentNode.id;
+        	document.document_id = this.parentNode.parentNode.parentNode.parentNode.id;
 			document.selected_quantity = $(this).val(uploadfn.validate_quantity(parseInt($(this).val()), parseInt(order.quantity_min_value), parseInt(order.quantity_max_value))).val(); //проверка введенного числа и запись его в document object
 				
        		uploadfn.calculateDocumentAndOrderPrice(document, order);
@@ -226,29 +230,29 @@ $(document).ready(function(){
         
 		//change handler for page_count with debounce (if user click many times)
         $("input[name*='page_count']:not([class='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('change', jQuery.debounce( 750, function(event){
-        	document.document_id = this.parentNode.parentNode.id;
+        	document.document_id = this.parentNode.parentNode.parentNode.id;
 			document.selected_page_count = $(this).val(uploadfn.validate_quantity(parseInt($(this).val()), parseInt(order.quantity_min_value), parseInt(order.quantity_max_value))).val(); 				
        		
 			uploadfn.calculateDocumentAndOrderPrice(document, order);
         }));
         
         //работа переключателя количества копий
-        $("button.increase_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("div.quantity button.increase_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
             var selected_input_quantity = $(this).siblings("input[id*='quantity']");
         	uploadfn.button_increase(selected_input_quantity, order.quantity_step, order.quantity_max_value);
         });
 
-        $("button.decrease_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("div.quantity button.decrease_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
         	var selected_input_quantity = $(this).siblings("input[id*='quantity']");
         	uploadfn.button_decrease(selected_input_quantity, order.quantity_step, order.quantity_min_value);
         });
         
         //работа переключателя количества страниц в документе
-        $("button.increase_page_count:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("td.page_count button.increase_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
         	var selected_input_page_count = $(this).siblings("input[id*='page_count']");
         	uploadfn.button_increase(selected_input_page_count, order.quantity_step, order.quantity_max_value);
         });
-        $("button.decrease_page_count:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
+        $("td.page_count button.decrease_quantity:not([class*='with_priceEventHandler'])").addClass("with_priceEventHandler").bind('click', function(event){
         	var selected_input_page_count = $(this).siblings("input[id*='page_count']");
         	uploadfn.button_decrease(selected_input_page_count, order.quantity_step, order.quantity_min_value);
         });

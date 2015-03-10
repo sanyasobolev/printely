@@ -8,54 +8,27 @@
     </td>
   </tr>
 </table>
-<h2 class="orange">Мои заказы на</h2>
+<h2 class="orange">Мои заказы</h2>
+	<% if @my_orders.count > 0 %>
+	  <table class ="default_table">
+	    <tr class="header">
+	      <th><%= Order.human_attribute_name(:id) %></th>
+	      <th><%= Order.human_attribute_name(:created_at) %></th>
+	      <th><%= Order.human_attribute_name(:order_status_id) %></th>
+	      <th><%= Order.human_attribute_name(:cost) %></th>
+	      <th><%= Order.human_attribute_name(:manager_comment) %></th>
+	      <th><%= Order.human_attribute_name(:order_type) %></th>
+	      <th><%= Order.human_attribute_name(:details) %></th>
+	    </tr>
+	    <%= render :partial => 'order_for_user', :collection => @my_orders  %>
+	  </table>
+		<div class="paginator">
+			<%= paginate @my_orders, :param_name => :my_orders_page %>
+		</div>
+	<% else %>
+	  <%= render :partial => 'no_orders' %>
+	<% end %>
 
-  <div id="slide_ord_pag" class="orders_type_pagination" ></div>
-  
-  <div id="slide_my_orders">
-    <div id="slide_1">
-		<% if @foto_print_orders.count > 0 %>
-		  <table class ="default_table">
-		    <tr class="header">
-		      <th><%= Order.human_attribute_name(:id) %></th>
-		      <th><%= Order.human_attribute_name(:created_at) %></th>
-		      <th><%= Order.human_attribute_name(:order_status_id) %></th>
-		      <th><%= Order.human_attribute_name(:cost) %></th>
-		      <th><%= Order.human_attribute_name(:manager_comment) %></th>
-		      <th><%= Order.human_attribute_name(:details) %></th>
-		    </tr>
-		    <%= render :partial => 'orders/foto_print/order_for_user', :collection => @foto_print_orders  %>
-		  </table>
-		  <div class="paginator">
-			<%= paginate @foto_print_orders, :param_name => :foto_print_orders_page %>
-		  </div>
-		<% else %>
-		  <%= render :partial => 'no_orders', :locals => {:href => '/orders/new?order_type=foto_print'}  %>
-		<% end %>
-    </div>
-
-    <div id="slide_2">
-		<% if @doc_print_orders.count > 0 %>
-		  <table class ="default_table">
-		    <tr class="header">
-		      <th><%= Order.human_attribute_name(:id) %></th>
-		      <th><%= Order.human_attribute_name(:created_at) %></th>
-		      <th><%= Order.human_attribute_name(:order_status_id) %></th>
-		      <th><%= Order.human_attribute_name(:cost) %></th>
-		      <th><%= Order.human_attribute_name(:manager_comment) %></th>
-		      <th><%= Order.human_attribute_name(:details) %></th>
-		    </tr>
-		    <%= render :partial => 'orders/doc_print/order_for_user', :collection => @doc_print_orders  %>
-		  </table>
-		  <div class="paginator">
-			<%= paginate @doc_print_orders, :param_name => :doc_print_orders_page  %>
-		  </div>
-		<% else %>
-		  <%= render :partial => 'no_orders', :locals => {:href => '/orders/new?order_type=doc_print'}  %>
-		<% end %>
-    </div>
-    
-  </div>
   <div class="fl_clear"></div>
 
 <table>

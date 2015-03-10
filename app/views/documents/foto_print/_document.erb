@@ -4,7 +4,7 @@
       <div class="container_for_link_delete_docfile">
         <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :class => 'link_delete docfile_delete', :title => 'Удалить файл' %>
       </div>
-    <%= image_tag document.docfile.thumb.url, :class => 'thumb' %>
+    <%= image_tag document.docfile.thumb.url, :class => 'document_uploaded_thumb' %>
     </td>
 
     <td class="image_process">
@@ -18,32 +18,32 @@
 
     <td class="paper">
 	    <div class="paper_size">  
-	      	<%= select_tag("order[documents_attributes][#{document.id}][paper_size]") %>
-	    	<%= i.label :paper_size %>
+	      	<%= select_tag("order[documents_attributes][#{document.id}][paper_size]", {}, {:class => 'paper_size_selector'}) %>
+	    	<%= i.label :paper_size, :class => 'float_left'  %>
 	    </div>
 	    <div class="fl_clear"></div>
 	    <div class="paper_type">
-	    	<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true}) %>
-			<%= i.label :paper_type %>
+	    	<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true, :class => 'paper_type_selector'}) %>
+			<%= i.label :paper_type, :class => 'float_left'  %>
 	    </div>
 	    <div class="fl_clear"></div>
 	    <div class="quantity">	      
-	      <%=  button_tag ' ', :type => 'button', :class => 'increase_quantity' %>
-	      <%= i.text_field (:quantity)%>
-	      <%=  button_tag ' ', :type => 'button', :class => 'decrease_quantity' %>
-	      <%= i.label :quantity %>
+	    	<div class="quantity_selector float_right">
+		        <%= button_tag(' ', :type => 'button', :class => 'decrease_quantity') %>
+		        <%= i.text_field(:quantity) %>
+		        <%= button_tag(' ', :type => 'button', :class => 'increase_quantity') %>
+	 		</div>
+	 		<%= i.label :quantity, :class => 'float_left' %>
 	    </div>
 	    <div class="fl_clear"></div>
     </td>
     <td class="print_settings">
     	<div class="margins">
-      		<%= select_tag("order[documents_attributes][#{document.id}][margins]", {}, {:disabled => true}) %>
-    		<%= i.label :margins %>
+      		<%= select_tag("order[documents_attributes][#{document.id}][margins]", {}, {:disabled => true, :class => 'margins_selector'}) %>
+    		<%= i.label :margins, :class => 'float_left' %>
     	</div> 
     	<div class="fl_clear"></div> 
-	    <div class="user_comment">
-	      <%= i.text_area :user_comment, :placeholder => Document.human_attribute_name("user_comment") %>
-	    </div>
+	      <%= i.text_area :user_comment, :placeholder => Document.human_attribute_name("user_comment"), :class => 'document_uploaded_user_comment'  %>
 	    <div class="fl_clear"></div> 
 	    <div class="print_setting_1">
 

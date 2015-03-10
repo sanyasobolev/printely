@@ -2,6 +2,7 @@
 	<%= javascript_include_tag "orders/deliveryfn" %>
 	<%= javascript_include_tag "orders/uploadfn" %>
 	<%= javascript_include_tag "orders/editorfn" %>
+	<%= javascript_include_tag "orders/calendarfn" %>
 	<%= javascript_include_tag "orders/envelope_print_order" %>
 	<%= javascript_include_tag "fabric/canvasfn" %>
 	<%= javascript_include_tag "fabric/fabric_ext" %>
@@ -19,9 +20,12 @@
       '<%= request_forgery_protection_token %>' : '<%= form_authenticity_token %>',
       '_http_accept': 'application/javascript'
     },
+    //uploader buttons
     uploader = '<%= asset_path('uploadify/uploadify.swf') %>',
     buttonImg = '<%= asset_path('icons/plus_grey.png') %>',
-    cancelImg = '<%= asset_path('uploadify/cancel.png') %>';
+    cancelImg = '<%= asset_path('uploadify/cancel.png') %>',
+	//url for create document
+	url_for_create_document = '<%= order_documents_path(@order) %>';
 	
   </script>
 <% end %>
@@ -32,8 +36,16 @@
 
   	<%= render :partial => 'documents/envelope_print/document', :locals => {:order => @order, :document => @document} %>	
 
-    <%= render :partial => 'orders/share/total_and_submit', :locals => {:order => order, :current_order => @order}  %>	
+	<%= button_tag('', :type => 'button', :class => 'decrease_quantity', :id => 'next_step') do %>
+		<%= content_tag(:strong, 'Далее') %>
+	<% end %>
+	
+  <h2 class="orange">Укажите адрес и время доставки</h2>
+  
+  <%= render :partial => 'orders/share/delivery_order_edit', :locals => {:order => order, :current_order => @order} %>
+  
+  <%= render :partial => 'orders/share/total_and_submit', :locals => {:order => order, :current_order => @order}  %>	
 
 <% end -%>
-  <%= render :partial => 'orders/share/cancel', :locals => {:current_order => @order}  %>	
- 
+  <%= render :partial => 'orders/share/cancel', :locals => {:current_order => @order}  %>
+

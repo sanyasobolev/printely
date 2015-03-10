@@ -245,21 +245,6 @@ body {
 }
 
 
-a.top_section:link, a.top_section:visited {
-    color: white;
-    text-align:center;
-    text-decoration:none;
-    padding: 0px;
-    font-size: inherit;
-}
-
-a.top_section:hover {
-    color: #378cff;
-    text-align:center;
-    text-decoration:none;
-    padding: 0px;
-}
-
 /*-----------------------------------------------------------------------------------------*/
 /*контейнеры slide - панели-----------------------------------------------------------------------------*/
 
@@ -327,10 +312,6 @@ a.top_section:hover {
 }
 .slide_pagination a span {
     display: none;
-}
-
-.orders_type_pagination {
-	width: 750px;
 }
 
 .image_title_letters {
@@ -488,44 +469,6 @@ h2 {
     font-weight: normal;
 }
 
-.red_line {
-    text-indent: 35px;
-}
-
-
-.orange {
-    padding: 10px;
-    background-color: orange;
-}
-
-.orange_double {
-	height: 80px;
-    padding: 10px;
-    background-color: orange;
-}
-
-.grey_color {
-    padding: 10px;
-    background-color: #EAEAEA;
-    color: #666666;
-}
-
-.dark_grey_color {
-    padding: 10px;
-    background-color: #C7C7C7;
-    color: #666666;
-}
-
-.grey_text {
-    color: #666666;
-}
-
-
-.blue {
-    padding: 10px;
-    background-color: #a8edfe
-}
-
 h2 span {
     text-decoration: none;
     font-size: 1em;
@@ -542,69 +485,12 @@ p.cover{
     margin-left: 10px;
 }
 
-.big_text {
-    font-size: 3em;
-}
-
-.bold {
-    font-weight: bold;
-}
-
-.italic {
-    font-style: italic
-}
-
-.text-center {
-    text-align: center;
-}
-.text-right {
-    text-align: right;
-}
-
-.text-left {
-    text-align: left;
-}
-
-.float_right {
-    float: right
-}
-
-.float_left {
-    float: left
-}
-
-.fl_clear {
-    float: none;
-    clear: both;
-}
-
-.hidden {
-	display:none;
-}
-
-.selected {
-	background-color: #FFFC9E;
-}
-	
-.pointer {
-	cursor:pointer;
-}
-
 .header_for_news {
 	position:absolute;
 	top:80px;
 	left:20px;
 
 }
-
-.multi_form {
-    width: 50%;
-    height: 300px;
-    float: left;
-}
-
-
-
 .center_container {
     margin-left: auto;
     margin-right: auto;
@@ -651,7 +537,7 @@ ul.square {
 }
 
 
-/*обработка ошибок и сообщений-------------------------------------------------*/
+/*обработка сообщений-------------------------------------------------*/
 
 /*общее сообщение*/
 #notice {
@@ -659,61 +545,6 @@ ul.square {
     margin-top: 2em;
     background-color: #7eb200;
     font-weight: bold;
-}
-
-/*сообщение об ошибке*/
-#error {
-    margin-top: 2em;
-    padding: 20px;
-    background-color: red;
-}
-
-div.page_not_found {
-	display:block;
-	width: 300px;
-	position:relative;
-	top: 100px;
-	left:550px;
-}
-
-img.error_image {
-	position:absolute;
-	z-index:-1;	
-	width: 900px;
-}
-
-/*сообщение о неправильно выбранном порядковом номере раздела*/
-#number_busy {
-    font-style: italic;
-    font-weight: bold;
-    color: #ff0000;
-}
-
-/*обработка ошибок модели и выделение поля при введении неверных данных-------*/
-.fieldWithErrors {
-    padding: 1em;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    background-color: red;
-}
-
-#errorExplanation {
-    padding: 1em;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    background-color: red;
-}
-
-#errorExplanation h3 {
-
-}
-
-#errorExplanation p {
-
-}
-
-#errorExplanation ul li {
-
 }
 
 /*стиль пагинации страниц-----------------------------------------------*/
@@ -930,217 +761,6 @@ a.site_map_link:hover {
 .first_level p {
 	margin: 0px;
 }
-
-
-/*оформление форм ввода данных-------------------------------------*/
-
-form {
-	position:relative;
-}
-
-.form_shape {
-    padding:10px;
-    width: 700px;
-    position: relative;
-}
-
-.agreement {
-    margin-top: 20px;
-    position: relative;
-    height: 50px;
-}
-
-.agreement input {
-	width: 20px;
-	float: left;
-	margin-left: 230px;
-}
-
-.agreement label {
-    float: left;
-    display: block;
-    text-align: justify;
-    width: 440px;
-}
-
-.form_align {
-    margin-top: 20px;
-    position: relative;
-}
-
-.form_align label {
-    float: left;
-    display: block;
-    text-align: right;
-    width: 212px;
-    margin-right: 20px;
-    margin-top: 9px;
-}
-
-.form_align p {
-    float: left;
-    display: block;
-    text-align: right;
-    width: 212px;
-    margin-right: 20px;
-    margin-top: 9px;
-}
-
-.form_align img {
-    display: block;
-    position: absolute;
-    left: 750px;
-    top: -100px;
-}
-
-.form_align input {
-    border: 1px solid #D6D3D1;
-    height: 30px;
-    width: 450px;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-bottom: 4px;
-    font-size: 1.3em;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
-}
-
-.form_align input.quantity_large {
-    display: block;
-    float: left;
-    width: 41px;
-    height: 35px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 2px solid #D6D3D1;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
-    text-align: center;
-}
-
-
-.form_align select {
-    border: 1px solid #D6D3D1;
-    height: 35px;
-    width: 465px;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-bottom: 4px;
-    font-size: 1.3em;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
-}
-
-.form_align textarea {
-    border: 1px solid #D6D3D1;
-    padding: 7px;
-    resize: none;
-    font-size: 1.3em;
-    width: 450px;
-    height: 200px;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
-}
-
-.form_align .req_input {
-    border-bottom: 1px solid #D6D3D1;
-    border-left: 1px solid red;
-    border-top: 1px solid #D6D3D1;
-    border-right: 1px solid #D6D3D1;
-    height: 30px;
-    width: 450px;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-bottom: 4px;
-    font-size: 1.3em;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
-}
-
-.form_align .req_textarea {
-    border: 1px solid #D6D3D1;
-    border-left-color: red;
-    padding: 7px;
-    resize: none;
-    font-size: 1.3em;
-    width: 450px;
-    height: 200px;
-    font-family: "Segoe UI",helvetica,arial,sans-serif;
-}
-
-.form_shape div#forgot_password {
-	width: 160px;
-	position: absolute;
-	left: 740px;
-	top: 75px;
-}
-
-.keyboardLayout { 
-	position: absolute; 
-	width: 150px; 
-	height: 20px; 
-	color: #999; 
-	text-align: right; 
-	right: 30px;
-	bottom: 10px;
-}
-
-
-/*jquery validate*/
-
-label.error {
-	font-size: 1em;
-	position: absolute;
-	display: table-cell;
-	text-align:left;
-  	color: red;
-	width: 210px; 
-	height: 30px; 
-	right: -240px;
-	top: -3px;	
-}
-
-table td.delivery_location_edit label.error[for=order_delivery_town_id] {
-	right: 220px;
-	top: -10px;
-	font-size: 1.5em;
-	width: 10px; 
-	height: 20px; 
-	text-align:center;
-}
-
-table td.delivery_location_edit label.error[for=order_delivery_address] {
-	right: 330px;
-	top: -10px;
-	font-size: 1.5em;
-	width: 10px; 
-	height: 20px; 
-	text-align:center;
-}
-
-label.error[for=quantity_documents_for_validate] {
-	font-size: 1.5em;
-	width: 200px;
-	height: 40px;
-	left: 180px;
-	top: 70px;
-}
-
-label.error[for=datepicker] {
-	font-size: 1.5em;
-	left: 180px;
-	top: -8px;
-	height: 20px; 
-	width: 50px;
-}
-
-form#new_user div.agreement label.error {
-	font-size: 1em;
-	position: absolute;
-	display: table-cell;
-	text-align:left;
-  	color: red;
-	width: 210px; 
-	height: 30px; 
-	right: -220px;
-	top: 50px;	
-}
-
 
 /*contact_map------------------------------------------------------------------*/
 

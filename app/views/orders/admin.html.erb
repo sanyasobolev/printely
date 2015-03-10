@@ -1,3 +1,7 @@
+<% content_for :head do %>
+	<%= javascript_include_tag "orders/calendarfn" %>
+	<%= javascript_include_tag "orders/admin" %>
+<% end %>
 <h2>Управление заказами</h2>
 <h3>Быстрый поиск</h3>
 <%= search_form_for @search, :url => admin_orders_path, :class => 'grey_color' do |f| %>
