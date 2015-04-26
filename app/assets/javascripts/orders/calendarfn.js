@@ -9,9 +9,10 @@
         $(selector).timepicker(
         	{ 
         		'timeFormat': 'H:i', 
-        		'scrollDefaultNow': true, 
+        		'scrollDefault': 'now', 
         		'minTime': minTime, 
-        		'maxTime': maxTime
+        		'maxTime': maxTime,
+        		'step': 60,
         		}
         );
      };	
@@ -22,8 +23,10 @@
 				minDate: minDate, //первая дата, которую можно выбрать, minDate: new Date(2014, 7 - 1, 15),
 				firstDay: 1, //Set the first day of the week: Sunday is 0, Monday is 1, etc.
 				beforeShowDay: calendarfn.highlightDays, //A function that takes a date
-				}
-			);
+				onClose: function(){
+					$(this).valid(); //проверка введенного значения после закрытия datepicker
+				}				
+			});
 	   };
 
 		

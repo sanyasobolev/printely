@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
   before_filter :login_from_cookie #проверяем наличие куки и аутентифицируем пользователя
   before_filter :login_required
   before_filter :authorized?
+  before_filter :set_locale
+  
+  #set locale from domain
+  def set_locale 
+    I18n.locale = extract_locale_from_tld || I18n.default_locale
+  end
 
   unless Rails.application.config.consider_all_requests_local
     #rescue_from Exception, with: lambda { |exception| render_error 500, exception }
@@ -20,6 +26,11 @@ class ApplicationController < ActionController::Base
       format.html { render template: "errors/error_#{status}", layout: 'layouts/application', status: status }
       format.all { render nothing: true, status: status }
     end
+  end
+  
+  def extract_locale_from_tld
+    parsed_locale = request.host.split('.').last
+    I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
 
 end

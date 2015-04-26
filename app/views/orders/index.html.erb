@@ -1,5 +1,5 @@
-<h2 class="orange">Здравствуйте, <%= current_user.first_name %> <%= current_user.second_name %>!</h2>
-<p>Вы находитесь в личном кабинете. Здесь Вы можете создавать новые заказы и просматривать информацию о ранее созданных заказах. </p>
+<h2 class="orange">Личный кабинет</h2>
+<p><%= current_user.first_name %>, здесь Вы можете создавать новые заказы на печать и просматривать информацию о ранее созданных заказах. </p>
 
 <% @str_1 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new?order_type=foto_print';\">" %>
 <% @str_2 = "</div>" %>

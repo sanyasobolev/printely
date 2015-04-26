@@ -1,0 +1,17 @@
+<h2><%= @title %></h2>
+
+<h2 class='light_blue'>Ваши файлы</h2>
+	<%= render :partial => @partial, :locals => {:order => @order} %>
+	<%= render :partial => 'orders/share/documents_price', :locals => {:order => @order} %>	
+
+<h2 class='light_green'>Доставка</h2>
+	<%= render :partial => 'orders/delivery/show', :locals => {:order => @order, :show_header => true } %>
+  	<%= render :partial => 'orders/share/delivery_price', :locals => {:order => @order} %>	
+
+<%= render :partial => 'orders/share/order_cost', :locals => {:order => @order} %>	
+
+<%= render :partial => 'orders/share/show_order_attributes' %>
+<%= render :partial => 'orders/share/show_order_navigations' %>
+<% if current_user.has_role?('Administrator') %>
+	<%= render :partial => 'orders/share/show_order_actions' %>
+<% end %>

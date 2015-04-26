@@ -1,0 +1,65 @@
+/*панель навигации-------------------------*/
+#boardlinks_nav {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 33px;
+    line-height: 33px;
+}
+.boardseparator {
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.boardlink {
+    float: left;
+}
+
+.boardtext {
+    float: left;
+}
+
+
+/*order steps wizard*/
+
+div.wizard_navigator {
+    color: #E2E2E2;
+    display: block;
+    font-size: 1.5em;
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+div.wizard_step {
+    display: block;
+    float: left;
+    height: 70px;
+    width: 33%;
+    text-align: center;
+}
+
+div.wizard_step span.number {
+    font-size: 2em;
+    margin-right: 10px;S
+}
+
+div.wizard_step.current.documents {
+	color: #01bcf3
+}
+
+div.wizard_step.current.delivery {
+	color: #7fba00
+}
+
+div.wizard_step.current.confirm {
+	color: #dc5900
+}
+
+
+div.wizard_step.finished {
+	color: gray
+}
+
+

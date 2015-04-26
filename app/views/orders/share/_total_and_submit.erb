@@ -1,9 +1,0 @@
-  <div class="order_total_cost_style">
-    <%= h (number_to_currency(current_order.cost, :unit => "коп.", :separator => " руб. ")) %>
-  </div>
-  <%= label_tag 'order_cost', 'Итого:' %>
-  <div class="fl_clear"></div>
-
-	<div class="submit_area">
-		<%= order.submit 'Оформить заказ', :class => 'submit'  %>
-	</div>

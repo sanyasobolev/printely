@@ -1,0 +1,6 @@
+<div class="order_cost_wrapper">
+	<div id='order_cost_value'>
+		<%= h (number_to_currency(order.cost, :unit => "коп.", :separator => " руб. ")) %>
+	</div>
+	<%= label_tag 'order_cost', 'Итого стоимость заказа:' %>
+</div>

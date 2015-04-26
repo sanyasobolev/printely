@@ -10,15 +10,12 @@ class Order < ActiveRecord::Base
                   :delivery_price, 
                   :delivery_type, 
                   :documents_attributes, 
-                  :scan_attributes, 
-                  :scan, 
                   :order_status_id, 
                   :cost, 
                   :manager_comment, 
                   :created_at, 
-                  :cost_min, 
-                  :cost_max, 
-                  :order_type_id
+                  :order_type_id,
+                  :documents_price
 
   belongs_to :user
   belongs_to :order_status, :class_name => "Lists::OrderStatus"
@@ -37,17 +34,33 @@ class Order < ActiveRecord::Base
   DEFAULT_START_TIME = '07:00'
   DEFAULT_END_TIME = '00:00'
   
-  validates :delivery_street, :presence => {
-    :message => "Заполните, пожалуйста, регион доставки."
-  }
+#  validates :delivery_street, :presence => {
+#    :message => "Заполните, пожалуйста, регион доставки."
+#  }
   
-  validates :delivery_address, :presence => {
-    :message => "Заполните, пожалуйста, адрес доставки."
-  }
+#  validates :delivery_address, :presence => {
+#    :message => "Заполните, пожалуйста, адрес доставки."
+#  }
   
-  validates :delivery_date, :presence => {
-    :message => "Заполните, пожалуйста, дату доставки."
-  }
+#  validates :delivery_date, :presence => {
+#    :message => "Заполните, пожалуйста, дату доставки."
+#  }
+  
+  def get_document_specification
+     @lines = Hash.new
+     Lists::PaperSpecification.all.each do |pspec|
+       @documents_quantity = 0
+       self.documents.each do |document|
+         if pspec == document.paper_specification
+           @documents_quantity += document.page_count.to_i*document.quantity.to_i
+         end
+         unless @documents_quantity == 0
+           @lines.merge!(pspec.full_paper_format => @documents_quantity)
+         end
+       end 
+     end
+     return @lines
+  end
   
   def read_status_key #get status key for current order
     Lists::OrderStatus.where(:id => self.order_status_id).first.key

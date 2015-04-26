@@ -3,6 +3,7 @@
     margin-top: 2em;
     padding: 20px;
     background-color: red;
+    color: white;
 }
 
 div.page_not_found {
@@ -66,17 +67,17 @@ label.error {
   	color: red;
 	width: 210px; 
 	height: 30px; 
-	right: -240px;
+	right: -220px;
 	top: -3px;	
 }
 
 label.error[for=order_delivery_town_id] {
-	right: 220px;
-	top: -2px;
-	font-size: 1.5em;
-	width: 10px;
-	height: 20px;
-	text-align: center;
+    font-size: 1.5em;
+    height: 20px;
+    right: 230px;
+    text-align: center;
+    top: 0;
+    width: 10px;
 }
 
 label.error[for=order_delivery_address] {
@@ -89,19 +90,19 @@ label.error[for=order_delivery_address] {
 }
 
 label.error[for=quantity_documents_for_validate] {
-	font-size: 1.5em;
-	width: 200px;
-	height: 40px;
-	left: 180px;
-	top: 70px;
+    font-size: 1.5em;
+    height: 40px;
+    left: 100px;
+    top: 15px;
+    width: 200px;
 }
 
 label.error[for=datepicker] {
-	font-size: 1.5em;
-	left: 210px;
-	top: 20px;
-	height: 20px;
-	width: 50px;
+    font-size: 1.5em;
+    height: 20px;
+    left: 260px;
+    top: 20px;
+    width: 50px;
 }
 
 form#new_user div.agreement label.error {
@@ -112,7 +113,7 @@ form#new_user div.agreement label.error {
   	color: red;
 	width: 210px; 
 	height: 30px; 
-	right: -220px;
+	right: -230px;
 	top: 50px;	
 }
 

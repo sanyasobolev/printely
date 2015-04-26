@@ -8,10 +8,21 @@ table.default_table {
 	width: 100%;
 }
 
-table.default_table tr.header {
+tr.header {
     background-color: #517B93;
     color: white;
 }
+
+tr.header.delivery {
+    background-color: #007234;
+    color: white;
+}
+
+tr.header.documents {
+    background-color: #0072C5;
+    color: white;
+}
+
 
 table.default_table tr.grey_on_hover:hover {
 	background-color: #e8e8e8;
@@ -32,7 +43,7 @@ table.default_table th {
 }
 
 .floatTheadfileListOrder th {
-	background-color: #517B93;
+	background-color: #0072C5;
 	font-weight: normal;
 	height: 30px;  
 	color: white;

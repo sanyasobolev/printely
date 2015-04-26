@@ -1,0 +1,3 @@
+$("div#order_delivery_price_value").html("<%= j number_to_currency(@order.delivery_price, :unit => "коп.", :separator => " руб. ") %>");
+uploadfn.hide_loader_for_div("order_delivery_price_value");
+

@@ -1,10 +1,6 @@
 <h2><%= @title %></h2>
 <h3>Бумага</h3>
-<ul>
-<% @lines.each do |key,value| %>
-   <li><%= key %> - <%= value %> шт. <br />
-<% end %> 
-</ul>
+	<%= render :partial=> 'orders/share/documents_specification', :locals => {:lines => @lines} %>
 
 <h3>Упаковка</h3>
 будет отображаться, когда сделаю справочник упаковок.

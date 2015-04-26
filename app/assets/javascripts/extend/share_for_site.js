@@ -30,6 +30,7 @@ jQuery( document ).ready(
 	$(function(){
 		$(':password').keyboardLayout();
 	});
+	
 		
 });
 	  

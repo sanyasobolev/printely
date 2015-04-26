@@ -1,0 +1,8 @@
+<table id="fileList" class="default_table">
+	<thead>
+  		<tr id="fileList_header" class="header">
+    		<%= render :partial=>'orders/foto_print/header_table_with_documents' %>
+  		</tr>
+  	</thead>
+  	<%= render :partial=>'documents/foto_print/show_foto', :collection => order.documents %>
+</table>

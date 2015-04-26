@@ -21,13 +21,13 @@ td.delivery_date_edit input#datepicker {
 	text-align: center;
 	top: 0px;
 	margin-top: 20px;
-    margin-left: 15px;
+    margin-left: 75px;
 }
 
 input#timepicker_start {
 	width: 50px;
 	text-align: center;
-    margin-left: 15px;
+    margin-left: 75px;
 }
 
 input#timepicker_end {

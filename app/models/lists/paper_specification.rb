@@ -40,7 +40,12 @@ class Lists::PaperSpecification < ActiveRecord::Base
     end
 
     def full_paper_format
-      "#{self.paper_size.size}, #{self.paper_type.paper_type}"
+      if self.paper_size_with_iso
+        "#{self.paper_size_with_iso} , #{self.paper_type.paper_type}"
+      else
+        "#{self.paper_size.size} , #{self.paper_type.paper_type}"
+      end
+      
     end
     
     def paper_type_with_grade

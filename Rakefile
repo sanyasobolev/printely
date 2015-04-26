@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Spsite::Application.load_tasks
+Printely::Application.load_tasks

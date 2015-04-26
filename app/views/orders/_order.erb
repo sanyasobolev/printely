@@ -4,7 +4,7 @@
   <td>
   	<% if order.delivery_date != nil %>
 	  	<span class="bold"><%=h (Russian::strftime(order.delivery_date, "%d %B")) %></span> <br />
-	  	<%= render :partial => 'orders/share/delivery_period', :locals => {:order => order} %>
+	  	<%= render :partial => 'orders/delivery/delivery_period', :locals => {:order => order} %>
 	<% end %>
   </td>	
   <td><%=h (order.delivery_town.title) if order.delivery_town %></td>
@@ -13,7 +13,7 @@
   <td><%=h (order.order_type.title) %></td>
   <td><%= link_to image_tag("orders/materials.png", :border => "0"), get_materials_order_path(order), target: "_blank", :title => 'Материалы в заказе' %></td>
   <td><%= link_to image_tag("orders/view_details.png", :border => "0"), order_path(order), :title => 'Детали' %></td>
-  <td><%= link_to image_tag("orders/edit_files.png", :border => "0"), edit_files_order_path(order), :title => 'Редактировать файлы' %></td>
+  <td><%= link_to image_tag("orders/edit_documents.png", :border => "0"), edit_documents_order_path(order), :title => 'Редактировать документы' %></td>
   <td><%= link_to image_tag("orders/edit_delivery.png", :border => "0"), edit_delivery_order_path(order), :title => 'Редактировать доставку' %></td>
   <td><%= link_to image_tag("orders/edit_status.png", :border => "0"), edit_status_order_path(order), :title => 'Редактировать статус' %></td>
   <td>

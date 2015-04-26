@@ -5,8 +5,22 @@
 
 
 .orange {
+	color: white;
     padding: 10px;
     background-color: orange;
+}
+
+
+.light_blue {
+	color: white;
+    padding: 10px;
+    background-color: #01bcf3;
+}
+
+.light_green {
+	color: white;
+    padding: 10px;
+    background-color: #7FBA00;
 }
 
 .orange_double {
@@ -85,4 +99,11 @@
 .pointer {
 	cursor:pointer;
 }
+
+.center_container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+}
+
 

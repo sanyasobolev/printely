@@ -1,0 +1,36 @@
+  <table class="default_table" id="<%= @order.id %>">
+      <%= render :partial => 'orders/delivery/header_table', :locals => {:order => order} %>
+
+      <tr>
+        <td class="delivery_location_edit">
+        	<div class="delivery_town">
+	            <%= order.collection_select(:delivery_town_id,
+						                      Lists::DeliveryTown.find(:all),
+						                      :id,
+						                      :title,
+						                      { :prompt => true},
+						                      :class=> 'wide delivery_town' 
+						                   	) %>	
+	        	<%= order.label(:delivery_town_id, :class => 'float_right wide') %>	
+            </div>
+            <div class="fl_clear"></div>
+        	<div class="delivery_street">
+	            <%= order.text_field :delivery_street, :placeholder => "Укажите, если она есть...", :class => 'delivery_street_edit wide float_right' %>		
+	        	<%= order.label(:delivery_street, :class => 'float_right wide') %>	
+            </div>	
+            <div class="delivery_address">	
+	        	<%= order.text_field :delivery_address, :class => 'delivery_address_edit wide float_right' %>
+	        	<%= order.label(:delivery_address, :class => 'float_right wide') %>
+            </div>
+        </td>
+        <td class="delivery_date_edit">
+	       	  <%= order.text_field :delivery_date, :value => (order.object.delivery_date.strftime('%d.%m.%Y') if order.object.delivery_date), :id => "datepicker", :placeholder => "Выберите дату", :class => 'wide' %>
+	          <span class="time">время</span>
+	       <div id='timepair'>
+	          <%= order.text_field :delivery_start_time, :value => (order.object.delivery_start_time.strftime('%H:%M') if order.object.delivery_start_time), :id => "timepicker_start", :placeholder => Order.human_attribute_name("delivery_start_time"), :class => 'wide float_left time start' %>
+	          <span class="dash float_left">-</span>
+	          <%= order.text_field :delivery_end_time, :value => (order.object.delivery_end_time.strftime('%H:%M') if order.object.delivery_end_time), :id => "timepicker_end", :placeholder => Order.human_attribute_name("delivery_end_time"), :class => 'wide float_left time end' %>
+           </div>
+        </td>
+      </tr>
+    </table>

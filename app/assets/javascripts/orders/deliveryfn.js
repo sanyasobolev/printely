@@ -15,8 +15,8 @@
      	$("select#order_delivery_town_id").change(function(event){
 	            var selected_delivery = 'Курьер',
 	            	selected_town = $(this).val();
-	            	
-	            $.post( order.url_for_update_order, 
+	            uploadfn.show_loader_for_div("order_delivery_price_value");	
+	            $.post( order.url_for_update_delivery_price, 
 	            		{
 	            			id: order.order_id, 
 	            		 	delivery_type: selected_delivery,
@@ -26,10 +26,13 @@
 	        });  
 
 	        $("table td.delivery_date_edit input#datepicker").change(function(event){
-	            var selected_delivery_date = $(this).val();
-	            $.post( order.url_for_update_order, 
+	            var selected_delivery_date = $(this).val(),
+	                selected_delivery = 'Курьер';
+	            uploadfn.show_loader_for_div("order_delivery_price_value");	
+	            $.post( order.url_for_update_delivery_price, 
 	            	{
 	            		id: order.order_id, 
+	            		delivery_type: selected_delivery,
 	            		delivery_date: selected_delivery_date 
 	            	} );
 	        });  	

@@ -1,0 +1,8 @@
+<%= render :partial => 'orders/share/title', :locals => {:title => @title } %>
+
+<%= form_for @order, :url => update_delivery_order_path(@order), :html => { :method => :put, :id => @order.id} do |order| -%>
+  
+  <%= render :partial => 'orders/delivery/edit', :locals => {:order => order, :show_header => true} %>
+  <%= render :partial => 'orders/share/delivery_price', :locals => {:order => @order} %>	
+  <%= render :partial => 'orders/share/submit', :locals => {:order => order, :title => 'Сохранить'}  %>	
+<% end -%>

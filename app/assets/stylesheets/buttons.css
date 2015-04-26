@@ -21,36 +21,48 @@ input.button_style:hover {
     background-color: #3b6fb5;
 }
 
-.submit_area {
-    margin-top: 20px;
-    height: 50px;
-    float: right;
-}
-
-.cancel_area {
-    margin-top: 20px;
-    height: 50px;
-    float: right;
-}
-
 .submit {
     float: right;
-    background-color: #1BA1E2;
+    background-color: #0072c5;
     border: 0 none;
     color: white;
     cursor: pointer;
+    margin: 10px 0 10px 10px;
     padding: 12px 20px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-right: 0px;
     display: block;
     font-weight: bold;
 }
 
 .submit:hover {
-    background-color: #3b6fb5;
+    color: yellow;
+    background-color: #00188F;
 }
+
+.submit:disabled {
+    background-color: #CCCCCC;
+}
+
+.submit:disabled:hover {
+    color: white;;
+    background-color: #CCCCCC;
+    cursor: default;
+}
+
+input.cancel {
+    background-color: white;
+    border: 0 none;
+    color: #0072c5;
+    display: block;
+    float: right;
+    font-size: 1em;
+    margin: 20px 20px 0 0;
+}
+
+input.cancel:hover {
+    cursor: pointer;
+    color: black;
+}
+
 
 button.button_style_long_orange, button.button_style_long_orange_pressed, button.button_style_long_orange_inactive {
 	float: left;
@@ -62,7 +74,7 @@ button.button_style_long_orange, button.button_style_long_orange_pressed, button
 #document_docfileUploader {
     cursor: pointer;
     width: 200px;
-    height: 50px;
+    height: 70px;
 }
 
 #embedded_image_imgfileUploader {

@@ -10,7 +10,7 @@
   <p class="cover"> <span class="bold"><%= Document.human_attribute_name("quantity") %>:</span>
   <%= documents_quantity %> </p>
 
-  <p class="cover"> <span class="bold"><%= label(:order, :cost)%>:</span>
+  <p class="cover"> <span class="bold"><%= Order.human_attribute_name("cost")%>:</span>
   <%=h (number_to_currency(order.cost, :unit => "коп.", :separator => " руб. ")) %></p>
   <br/>
   <% if format == 'c5' || format == 'c4'  %>

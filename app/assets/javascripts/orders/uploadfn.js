@@ -82,14 +82,25 @@
         	}
         };
     
-    //устанавливаем css аниматор загрузки цены
-    uploadfn.show_loader_for_price = function (document_id){
+    //запуск css аниматора загрузки
+    uploadfn.show_loader_for_div = function (hide_block_id, hide_block_class){
+    	//console.log('do show loader for '+document_id);
+      	$("div."+hide_block_class+"#"+hide_block_id+"").hide();
+       	$("div.floatingBarsG").show();
+    };
+    
+    uploadfn.show_loader_for_table = function (document_id){
     	//console.log('do show loader for '+document_id);
       	$("table#fileList tr#"+document_id+" td.document_cost .document_cost_value").hide();
        	$("table#fileList tr#"+document_id+" td.document_cost .floatingBarsG").show();
     };
-        
-    uploadfn.hide_loader_for_price = function (document_id){
+
+    uploadfn.hide_loader_for_div = function (hide_block_id, hide_block_class){
+      	$("div."+hide_block_class+"#"+hide_block_id+"").show();
+       	$("div.floatingBarsG").hide();    		
+     };
+       
+    uploadfn.hide_loader_for_table = function (document_id){
        	var loader = $("table#fileList tr#"+document_id+" td.document_cost .floatingBarsG"),
        		cost = $("table#fileList tr#"+document_id+" td.document_cost .document_cost_value");
 			
@@ -119,7 +130,6 @@
     //load paper types
     uploadfn.loadPaperTypes = function (document, order){
         	//console.log('loadpapertypes' +document.document_id);
-        	uploadfn.show_loader_for_price(document.document_id);
         	$("select[name*='["+document.document_id+"][paper_type]']").load(
         		document.url_for_load_paper_types, 
         		{
@@ -138,7 +148,6 @@
     
     //load print margins
     uploadfn.loadPrintMargins = function (document, order){
-        	uploadfn.show_loader_for_price(document.document_id);
         	$("select[name*='["+document.document_id+"][margins]']").load(
         		document.url_for_load_print_margins, 
         		{
@@ -156,7 +165,6 @@
     
     //load print colors
     uploadfn.loadPrintColors = function (document, order){
-        	uploadfn.show_loader_for_price(document.document_id);
         	$("select[name*='["+document.document_id+"][print_color]']").load(
         		document.url_for_load_print_colors, 
         		{
@@ -175,7 +183,6 @@
     //calculate document and order price
     uploadfn.calculateDocumentAndOrderPrice = function (document, order)
     	{
-          uploadfn.show_loader_for_price(document.document_id);
           $.post( document.url_for_update_document, 
 	          	{
 	          		id: document.document_id, 
@@ -191,7 +198,7 @@
 	          		queue_files_count: document.queue_files_count
 	          	},
 	          	function(){
-					$.post( order.url_for_update_order, {id: order.order_id} );   	
+					$.post( order.url_for_update_documents_price, {id: order.order_id} );   	
 	          	}			
           	 );
           	 delete document.document_id;

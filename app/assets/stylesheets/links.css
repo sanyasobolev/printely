@@ -202,6 +202,22 @@ div.box_user_opt:hover {
     background: none;
     cursor:pointer;
 }
+/*for order wizard*/
+.previous_step {
+    background-color: white;
+    border: 0 none;
+    color: #0072c5;
+    display: block;
+    float: left;
+    font-size: 1em;
+    margin: 20px 20px 0 0;
+}
+
+.previous_step:hover {
+    cursor: pointer;
+    color: black;
+    text-decoration:none;
+}
 
 /*bot section sections*/
 a.bot_section:link, a.bot_section:visited {
@@ -388,4 +404,34 @@ a.boardlink:link, a.boardlink:visited {
 a.boardlink:hover, a.boardlink:active {
     color: #F7941D;
     text-decoration:none;
+}
+a#forgot_password{
+  width: 160px;
+  position: absolute;
+  left: 720px;
+  top: -10px;
+}
+
+a#sign_in {
+    background-color: white;
+    border: 0 none;
+    color: #0072c5;
+    font-size: 1em;
+    margin: 20px 20px 0 0;
+}
+
+a.cancel, a#forgot_password{
+    background-color: white;
+    border: 0 none;
+    color: #0072c5;
+    display: block;
+    float: right;
+    font-size: 1em;
+    margin: 20px 20px 0 0;
+}
+
+a.cancel:hover, a#forgot_password:hover , a#sign_in:hover{
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
 }

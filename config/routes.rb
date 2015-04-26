@@ -1,4 +1,4 @@
-Spsite::Application.routes.draw do
+Printely::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
 
@@ -33,18 +33,24 @@ Spsite::Application.routes.draw do
   match 'document/get_print_margins' => 'documents#get_print_margins'
   match 'document/get_print_colors' => 'documents#get_print_colors'
   
-  
   resources :orders do
     resources :documents
     get 'my', :on => :collection
     get 'admin', :on => :collection
     get 'cover', :on => :member
     get 'get_materials', :on => :member
-    get 'edit_files', :on => :member
+    get 'edit_documents', :on => :member
     get 'edit_delivery', :on => :member
     get 'edit_status', :on => :member
+    put 'update_documents', :on => :member
+    put 'update_delivery', :on => :member
+    put 'update_status', :on => :member
   end
-  match 'order/ajaxupdate' => 'orders#ajaxupdate'
+  match '/order/set_documents_price' => 'orders#set_documents_price'
+  match '/order/set_delivery_price' => 'orders#set_delivery_price'
+
+
+  resources :order_steps
 
   controller :sessions do
     get 'login' => :new

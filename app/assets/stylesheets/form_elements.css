@@ -132,13 +132,6 @@ form {
     font-family: "Segoe UI",helvetica,arial,sans-serif;
 }
 
-.form_shape div#forgot_password {
-	width: 160px;
-	position: absolute;
-	left: 740px;
-	top: 75px;
-}
-
 .keyboardLayout { 
 	position: absolute; 
 	width: 150px; 
@@ -172,29 +165,16 @@ label.envelope_quantity {
 	text-align: right;
 }
 
-label[for=document_cost], label[for=order_cost],
-div.order_total_cost_style, div.document_cost_style {
+label[for=order_documents_price], label[for=order_delivery_price], label[for=order_cost],
+div.order_documents_price, div.order_delivery_price, div#order_cost_value {
 	height: 30px;
 	display: block;
 	color: white;
-    margin-top: 20px;
     padding: 8px;
     font-size: 1.5em;
     text-align: right;
     float: right
 }
-
-label[for=order_cost] {
-    min-width: 50px;
-    background-color: #8B1A1A;
-}
-
-
-label[for=document_cost] {
-    background-color: #009E49;
-}
-
-
 
 /*img*/
 
@@ -236,12 +216,56 @@ div.delivery_town, .delivery_street, .delivery_address {
 	position:relative;
 }
 
+div.delivery_address {
+	margin: 20px 15px 15px;
+}
+
+div.document_cost_style {
+    min-width: 210px;
+    background-color: #009E49;
+    margin-left: 0px;
+}
+
+div.order_description_confirm_wrapper {
+	background-color: #D2F5FF;
+	padding: 10px;
+}
+
+div.order_documents_price_wrapper{
+	float:right;
+	display: block;
+	width: 100%;
+	background-color: #01BCF3;
+	margin-bottom: 20px;
+}
+
+div.order_delivery_confirm_wrapper {
+	background-color: #D0FF6A;
+	padding: 10px;
+}
+
+div.order_delivery_price_wrapper{
+	float:right;
+	display: block;
+	width: 100%;
+	background-color: #7FBA00;
+	margin-bottom: 20px;
+}
+
+div.order_cost_wrapper{
+	float:right;
+	display: block;
+	width: 100%;
+	background-color: #DC5900;
+	margin-bottom: 20px;
+}
+
 /*textarea, span-----------*/
 
 div.user_comment span {
 	font-style: italic;
 	display: block;
-	margin: 0 5px 0 5px;
+	margin: 10px 5px 10px 5px;
 }
 
 div.print_color span {
@@ -273,7 +297,7 @@ td.delivery_date_edit span.time {
 	text-align: center;
 	display: block;
 	margin-bottom: 15px;
-	margin-top: 100px;
+	margin-top: 80px;
 }
 
 textarea.document_uploaded_user_comment, .document_editor_user_comment   {
@@ -286,9 +310,9 @@ textarea.document_uploaded_user_comment, .document_editor_user_comment   {
 }
 
 textarea.document_editor_user_comment  {
-	width: 880px;
+	width: 890px;
 	font-size: 1.3em;
-	margin-top: 30px;
+	margin: 30px 0px;
 }
 
 
@@ -301,8 +325,7 @@ textarea.document_editor_user_comment  {
     display: block;
     text-align: center;
     float: right;
-    margin-bottom: 20px;
-    margin-left: 10px;
+  	margin: 50px 0 20px 10px;
 }
 
 .container_for_label_created_at_order label{
@@ -328,8 +351,7 @@ textarea.document_editor_user_comment  {
     display: block;
     text-align: center;
     float: right;
-    margin-bottom: 20px;
-    margin-left: 10px;
+    margin: 50px 0 20px 10px;
 }
 
 .container_for_label_status_order label{
@@ -348,71 +370,7 @@ textarea.document_editor_user_comment  {
     padding: 8px;
 }
 
-.container_for_label_cost_order{
-    position: relative;
-    width: 166px;
-    height: 70px;
-    display: block;
-    text-align: center;
-    float: right;
-    margin-bottom: 20px;
-    margin-left: 10px;
-}
-
-.container_for_label_cost_order label{
-    position: absolute;
-    top: -25px;
-    right: 13px;
-    color: gray;
-}
-.container_for_cost_order{
-    width: 150px;
-    height: 50px;
-    display: block;
-    background-color: #8B1A1A;
-    color: white;
-    padding: 8px;
-}
-
-.container_for_label_pre_cost_order{
-    position: relative;
-    width: 166px;
-    height: 70px;
-    display: block;
-    text-align: center;
-    float: right;
-    margin-bottom: 20px;
-    margin-left: 10px;
-}
-
-.container_for_label_pre_cost_order p {
-    position: absolute;
-    top: -40px;
-    right: 3px;
-    color: gray;
-}
-
-.container_for_pre_cost_order{
-    width: 150px;
-    height: 50px;
-    display: block;
-    background-color: #0000CD;
-    color: white;
-    padding: 8px;
-}
-
-
-
 /*------------------------------*/
 
-div.order_total_cost_style{
-    min-width: 210px;
-    background-color: #8B1A1A;
-}
 
-div.document_cost_style {
-    min-width: 210px;
-    background-color: #009E49;
-    margin-left: 0px;
-}
 

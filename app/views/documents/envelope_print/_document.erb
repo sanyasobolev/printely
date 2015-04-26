@@ -1,18 +1,18 @@
 <table id="fileList" class="default_table">
-		<%= fields_for "order[documents_attributes][]", document do |i| %>
+		<%= fields_for "order[documents_attributes][]", order.documents.first do |i| %>
 			<tr class="paper_size">
 				<td class="text-center">
 					<%= i.label :paper_size, :class => 'wide envelope_size' %>
-					<%= select_tag("order[documents_attributes][#{document.id}][paper_size]", {}, {:class => 'wide envelope_size_selector'}) %>
+					<%= select_tag("order[documents_attributes][#{order.documents.first.id}][paper_size]", {}, {:class => 'wide envelope_size_selector'}) %>
 				</td>
 			</tr>
 			<tr class="paper_type">
 				<td class="text-center">
 					<%= i.label :paper_type, :class => 'wide envelope_type' %>
-					<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true, :class => 'wide envelope_type_selector'}) %>
+					<%= select_tag("order[documents_attributes][#{order.documents.first.id}][paper_type]", {}, {:disabled => true, :class => 'wide envelope_type_selector'}) %>
 				</td>
 			</tr>
-			<tr>
+			<tr class="document" id="<%= order.documents.first.id %>" name="document">
 				<td>
 					<div class="editor">
 						<div class="editor_container">
@@ -70,7 +70,7 @@
 							
 								<div class="tabs_cont">
 									<div id="tab_c1">
-										<%= render :partial => 'documents/envelope_print/emb_filelist', :locals => {:document => document} %>
+										<%= render :partial => 'documents/envelope_print/emb_filelist', :locals => {:document => order.documents.first} %>
 									</div>
 									<div id="tab_c2">
 										<%=  button_tag image_tag('icons/plus_grey.png'), :type => 'button', :id => 'add_text', :class => "add_canvas_element", :title => 'Добавить текст' %>
@@ -101,27 +101,6 @@
 				<td>
 		  	      <%= i.text_area :user_comment, :placeholder => Document.human_attribute_name("user_comment"), :class => 'document_editor_user_comment'  %>
 				</td>
-			</tr>
-			<tr class="document" id="<%= document.id %>" name="document">
-			    <td class="document_cost">
-					<div class="document_cost_style">
-						<div class='floatingBarsG'>
-							<div class='blockG' id='rotateG_01'></div>
-							<div class='blockG' id='rotateG_02'></div>
-							<div class='blockG' id='rotateG_03'></div>
-							<div class='blockG' id='rotateG_04'></div>
-							<div class='blockG' id='rotateG_05'></div>
-							<div class='blockG' id='rotateG_06'></div>
-							<div class='blockG' id='rotateG_07'></div>
-							<div class='blockG' id='rotateG_08'></div>
-						</div>
-						<div class='document_cost_value'>
-				      		<%= h (number_to_currency(document.cost, :unit => "коп.", :separator => " руб. ")) %>
-				    	</div>
-				    </div>
-					<%= label_tag 'document_cost', 'Цена:' %>
-
-			    </td>
 			</tr>
 		<% end %>	
 </table>

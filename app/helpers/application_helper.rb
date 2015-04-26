@@ -197,5 +197,11 @@ module ApplicationHelper
     end
   end
   
+  def admin_menu
+    if logged_in? && current_user.has_role?('Administrator')
+      render :partial => 'share/admin_menu'
+    end    
+  end
+  
 
 end

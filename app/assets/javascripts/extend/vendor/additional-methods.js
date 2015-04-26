@@ -1,5 +1,5 @@
 /*!
- * jQuery Validation Plugin v1.13.0
+ * jQuery Validation Plugin v1.13.1
  *
  * http://jqueryvalidation.org/
  *
@@ -300,8 +300,9 @@ $.validator.addMethod("currency", function(value, element, param) {
 
 }, "Please specify a valid currency");
 
-$.validator.addMethod("dateFA", function(value, element) {
-	return this.optional(element) || /^[1-4]\d{3}\/((0?[1-6]\/((3[0-1])|([1-2][0-9])|(0?[1-9])))|((1[0-2]|(0?[7-9]))\/(30|([1-2][0-9])|(0?[1-9]))))$/.test(value);
+$.validator.addMethod("dateRU", function(value, element) {
+	//return this.optional(element) || /^[1-4]\d{3}\/((0?[1-6]\/((3[0-1])|([1-2][0-9])|(0?[1-9])))|((1[0-2]|(0?[7-9]))\/(30|([1-2][0-9])|(0?[1-9]))))$/.test(value);
+	return this.optional(element) || /([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})/.test(value);
 }, "Please enter a correct date");
 
 /**
@@ -609,7 +610,7 @@ $.validator.addMethod("pattern", function(value, element, param) {
 		return true;
 	}
 	if (typeof param === "string") {
-		param = new RegExp(param);
+		param = new RegExp("^(?:" + param + ")$");
 	}
 	return param.test(value);
 }, "Invalid format.");
@@ -688,6 +689,18 @@ $.validator.addMethod("phonesUK", function(phone_number, element) {
 $.validator.addMethod( "postalCodeCA", function( value, element ) {
 	return this.optional( element ) || /^[ABCEGHJKLMNPRSTVXY]\d[A-Z] \d[A-Z]\d$/.test( value );
 }, "Please specify a valid postal code" );
+
+/*
+* Valida CEPs do brasileiros:
+*
+* Formatos aceitos:
+* 99999-999
+* 99.999-999
+* 99999999
+*/
+$.validator.addMethod("postalcodeBR", function(cep_value, element) {
+	return this.optional(element) || /^\d{2}.\d{3}-\d{3}?$|^\d{5}-?\d{3}?$/.test( cep_value );
+}, "Informe um CEP válido.");
 
 /* Matches Italian postcode (CAP) */
 $.validator.addMethod("postalcodeIT", function(value, element) {

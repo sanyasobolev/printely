@@ -1,0 +1,15 @@
+<%= render :partial => 'orders/share/title', :locals => {:title => @title } %>
+
+<%= tutorial_progress_bar %>
+<div class="fl_clear"></div>
+
+<%= render :partial => 'orders/share/form_header', :locals => {:form_header_class => @form_header_class, :form_header => @form_header } %>
+
+<%= form_for @order, url: wizard_path, :html => { :method => :put, :id => @order.id} do |order| -%>
+  <%= render :partial => 'orders/delivery/edit', :locals => {:order => order, :show_header => true} %>
+  <%= render :partial => 'orders/share/delivery_price', :locals => {:order => @order} %>	
+  <%= render :partial => 'orders/share/submit', :locals => {:order => order, :title => 'Перейти к подтверждению'}  %>	
+<% end -%>
+  <%= render :partial => 'orders/share/previous_step', :locals => {:order => @order, :title => 'Назад к редактированию'}  %>
+
+<div class="fl_clear"></div>

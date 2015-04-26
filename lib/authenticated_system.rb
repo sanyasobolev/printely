@@ -43,7 +43,7 @@ module AuthenticatedSystem
                    right.action == action_name && right.controller == controller_name} #self.class.controller_path
             return true
           else
-            flash[:notice] = "У Вас нет прав выполнить это действие. Обратитесь к администратору."
+            flash[:error] = "У Вас нет прав выполнить это действие. Если Вы считаете, что это ошибка, пожалуйста, позвоните нам."
             request.env["HTTP_REFERER"] ? (redirect_to :back) : (redirect_to :root)
             return false
           end
@@ -68,7 +68,7 @@ module AuthenticatedSystem
     #
     def login_required
       unless logged_in?
-        flash[:notice] = "Для входа в систему нам нужно знать Ваш логин(email) и пароль. Введите их ниже, пожалуйста."
+        flash[:notice] = "Для входа в Личный кабинет введите пожалуйста Ваш email и пароль."
         store_location
         redirect_to :controller => :sessions, :action => :new
         return false
@@ -95,21 +95,34 @@ module AuthenticatedSystem
       end
     end
 
-#   для проверки, что пользователь осуществляет доступ к своему профилю
-    def your_profile?(user)
-     current_user.has_role?("Administrator") || user == current_user
-    end
+# для проверки, что пользователь осуществляет доступ к своему профилю
+  def your_profile?(user)
+   current_user.has_role?("Administrator") || user == current_user
+  end
 
-  #для проверки, что пользователь осуществляет доступ к своему заказу
-    def your_order?
-      @order = Order.find_by_id(params[:id])
-      if current_user.has_role?("Administrator") || current_user == @order.user
-        return true
-      else
-        flash[:error] = 'Заказ принадлежит не Вам. Нет доступа.'
-        redirect_to my_orders_path
-      end
+  #для проверки, что пользователь может редактировать свой заказ
+  def can_you_edit_order?
+    if session[:order_id] && Order.find(session[:order_id]).read_status_key == 10
+      @order = Order.find(session[:order_id])
+      return true
+    else
+      flash[:error] = 'По запрашиваемому адресу уже ничего нет. Попробуйте начать с нового заказа.'
+      redirect_to myoffice_path
     end
+  end
+
+  #проверяем, имеет ли юзер доступ к заказу
+  def your_order?
+    @order = Order.find_by_id(params[:id])
+    if @order && current_user == @order.user
+      return true
+    elsif current_user.has_role?("Administrator")
+      return true    
+    else
+      flash[:error] = 'К сожалению, у Вас нет доступа.'
+      redirect_to my_orders_path
+    end
+  end
 
     # Store the URI of the current request in the session.
     #
