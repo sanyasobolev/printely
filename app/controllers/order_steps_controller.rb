@@ -44,7 +44,7 @@ class OrderStepsController < ApplicationController
               "fabric/fabric_ext"
               ]
         @upload_button = 'icons/plus_grey.png'
-        @form_header = 'Разработайте макет'
+        @form_header = 'Разработайте дизайн Вашего конверта'
         @partial = 'documents/envelope_print/document'
             
         @document = @order.documents.empty? ? @order.documents.create : @order.documents.first
@@ -103,10 +103,6 @@ class OrderStepsController < ApplicationController
       end
       @order.update_attribute(:cost, @order.documents_price+@order.delivery_price)
     when :confirm
-      @order.update_attribute(:order_status_id, get_status_id_from_key(20))
-      #рассылаем письма
-      UserMailer.email_all_admins_about_new_order(@order)
-      UserMailer.email_user_about_new_order(@order).deliver
       #обновляем дату создания
       @order.update_attribute(:created_at, Time.now)
     end 
@@ -120,6 +116,11 @@ class OrderStepsController < ApplicationController
     end
 
     def finish_wizard_path
+      #меняем статус заказа
+      @order.update_attribute(:order_status_id, get_status_id_from_key(20))
+      #рассылаем письма
+      UserMailer.email_all_admins_about_new_order(@order)
+      UserMailer.email_user_about_new_order(@order).deliver
       flash[:notice] = 'Отлично! Ваш заказ создан. Ожидайте подтверждение по телефону или SMS.' 
       session[:order_id] = nil      
       my_orders_path
