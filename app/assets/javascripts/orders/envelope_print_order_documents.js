@@ -179,7 +179,7 @@ $(document).ready(function() {
 	      fileDataName : 'embedded_image[imgfile]',
 	      fileDesc : 'Images (.jpg, .png)',
 	      fileExt : '*.png;*.jpg;*.JPG;',
-	      sizeLimit : 102400, //100kb
+	      sizeLimit : 10240000, //10mb
 	      cancelImg : cancelImg,
 	      multi : true,
 	      scriptData : upload_params,

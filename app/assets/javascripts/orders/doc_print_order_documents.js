@@ -36,7 +36,7 @@ $(document).ready(function(){
       fileDataName : 'document[docfile]',
       fileDesc : 'Documents (.pdf, .doc, .docx, .ppt, .pptx)',
       fileExt : '*.doc;*.docx;*.pdf;*.ppt;*.pptx',
-      sizeLimit : 20480000, //20MB
+      sizeLimit : 10240000, //10MB
       cancelImg : cancelImg,
       multi : true,
       scriptData : upload_params,

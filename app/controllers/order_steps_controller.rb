@@ -103,9 +103,11 @@ class OrderStepsController < ApplicationController
       end
       @order.update_attribute(:cost, @order.documents_price+@order.delivery_price)
     when :confirm
+      @order.update_attribute(:order_status_id, get_status_id_from_key(20))
       #рассылаем письма
       UserMailer.email_all_admins_about_new_order(@order)
       UserMailer.email_user_about_new_order(@order).deliver
+      #обновляем дату создания
       @order.update_attribute(:created_at, Time.now)
     end 
     render_wizard @order #save order attributes
@@ -119,7 +121,6 @@ class OrderStepsController < ApplicationController
 
     def finish_wizard_path
       flash[:notice] = 'Отлично! Ваш заказ создан. Ожидайте подтверждение по телефону или SMS.' 
-      @order.update_attribute(:order_status_id, get_status_id_from_key(20))
       session[:order_id] = nil      
       my_orders_path
     end
