@@ -79,19 +79,22 @@
 		
     
 	editorfn.addFontFamilyPicker = function(options, canvas, font_family_tool, font_style_tool){
+		//console.log('вызов addFontFamilyPicker ' +options + canvas + font_family_tool + font_style_tool);
+		//console.log('инициализируем selectmenu ');
 		font_family_tool.picker.selectmenu({
 			width: 210,
 			change: function( event, ui ) {
-				console.log('selected font ' +ui.item.label);
+				//console.log('selected font ' +ui.item.label + 'in select menu');
 	    		if (options && canvas) {//if selected object and canvas
 	    			options.target.set({fontFamily: ui.item.label});
+	    			//console.log('вызов addFontStylePicker ' +options + canvas + font_style_tool);
 	    			editorfn.addFontStylePicker(options, canvas, font_style_tool);
 	    			canvas.renderAll();
 	    		}
 			}
 		});
 		if (options && canvas) {//if selected object and canvas set default text
-			console.log('set selected font-family ' +options.target.get('fontFamily'));
+			//console.log('set selected font-family ' +options.target.get('fontFamily')+'in select menu');
 			$("#"+font_family_tool.picker.attr('id')+"-button span").text((options.target.get('fontFamily')));
 			};
 	};
@@ -128,20 +131,18 @@
 	editorfn.addFontStylePicker = function(options, canvas, font_style_tool){
 				//console.log('set selected option ' +options.target.get('fontFamily'));
 				var canvas_font_family = options.target.get('fontFamily'),
-					pdf_bold, pdf_italic = false;
+					font_style_tool_status = false;
 					
-				if ($("option[id='"+canvas_font_family+"']").hasClass('pdf_bold')){
-					pdf_bold = true;
+				if ($("option[id='"+canvas_font_family+"']").hasClass('font_style_tool_active')){
+					font_style_tool_status = true;
 				}
-				if ($("option[id='"+canvas_font_family+"']").hasClass('pdf_italic')){
-					pdf_italic = true;
-				}
-				if (pdf_bold || pdf_italic == true){//отключаем обе кнопки, даже если одна из них неактивна
-					//console.log('активируем кнопки');
+
+				if (font_style_tool_status){
+					//console.log('активируем кнопки ж и к');
 					editorfn.addEventHandlersToButtons(options, canvas);
 					editorfn.updateFontButtonsByCanvas(options, font_style_tool);
 					font_style_tool.container.show();	
-				} else if (pdf_bold || pdf_italic == false) {
+				} else {
 					editorfn.resetFontStyle(options);
 					editorfn.destroyFontStylePicker(font_style_tool);
 				}
@@ -170,7 +171,9 @@
 		};
 
 		editorfn.addEventHandlersToButtons = function(options, canvas){
+			$(".font_style_button").unbind( "click" );
 			$(".font_style_button").click(function () {
+				//console.log('кликнули по кнопке');
 				if ($(this).hasClass("pressed")){
 					$(this).removeClass("pressed");
 					if (options && canvas) {//if selected object and canvas

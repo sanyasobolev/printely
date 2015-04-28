@@ -5,9 +5,10 @@ class SvgConverter < Prawn::Document
   def to_pdf(order, canvas_settings)
 
       font_families.update("Arial" => {
-                               :normal => "#{Rails.root.to_s}/app/assets/fonts/arial.ttf",
-                               :bold => "#{Rails.root.to_s}/app/assets/fonts/arial_bold.ttf",
-                               :italic => "#{Rails.root.to_s}/app/assets/fonts/arial_italic.ttf"
+                               :normal => "#{Rails.root.to_s}/app/assets/fonts/arial.woff",
+                               :bold => "#{Rails.root.to_s}/app/assets/fonts/arial_bold.woff",
+                               :italic => "#{Rails.root.to_s}/app/assets/fonts/arial_italic.woff",
+                               :bold_italic => "#{Rails.root.to_s}/app/assets/fonts/arial_bold_italic.woff" 
                                           })
       font_families.update("Courier New" => {
                                :normal => "#{Rails.root.to_s}/app/assets/fonts/courier_new.ttf"
@@ -16,9 +17,10 @@ class SvgConverter < Prawn::Document
                                :normal => "#{Rails.root.to_s}/app/assets/fonts/calibri.ttf"
                                           })                                          
       font_families.update("Times New Roman" => {
-                               :normal => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman.ttf",
-                               :bold => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman_bold.ttf",
-                               :italic => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman_italic.ttf"                                                                            
+                               :normal => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman.woff",
+                               :bold => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman_bold.woff",
+                               :italic => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman_italic.woff",
+                               :bold_italic => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman_bold_italic.woff"                                                                            
                                           })    
       font_families.update("Asylbek" => {
                                :normal => "#{Rails.root.to_s}/app/assets/fonts/asylbek.ttf"
