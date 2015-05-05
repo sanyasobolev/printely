@@ -125,6 +125,10 @@ Printely::Application.routes.draw do
   match 'paper_specification/get_layout' => 'lists/paper_specifications#get_layout'
   match 'paper_specification/get_canvas_settings' => 'lists/paper_specifications#get_canvas_settings'
   
+  namespace :admin do
+    
+  end
+  
   Ckeditor::Engine.routes.draw do
     resources :pictures, :only => [:index, :create, :destroy]
     resources :attachment_files, :only => [:index, :create, :destroy]
