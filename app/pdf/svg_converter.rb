@@ -5,7 +5,7 @@ class SvgConverter < Prawn::Document
   def to_pdf(order, canvas_settings)
 
       font_families.update("Arial" => {
-                               :normal => "#{Rails.root.to_s}/app/assets/fonts/arial/arial_full.ttf",
+                               :normal => "#{Rails.root.to_s}/app/assets/fonts/arial/arial.ttf",
                                :bold => "#{Rails.root.to_s}/app/assets/fonts/arial/arial_bold_full.ttf",
                                :italic => "#{Rails.root.to_s}/app/assets/fonts/arial/arial_italic_full.ttf",
                                :bold_italic => "#{Rails.root.to_s}/app/assets/fonts/arial/arial_bold_italic_full.ttf" 
