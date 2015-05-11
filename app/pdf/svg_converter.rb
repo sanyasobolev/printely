@@ -6,9 +6,9 @@ class SvgConverter < Prawn::Document
 
       font_families.update("Arial" => {
                                :normal => "#{Rails.root.to_s}/app/assets/fonts/arial/arial.ttf",
-                               :bold => "#{Rails.root.to_s}/app/assets/fonts/arial/arial_bold_full.ttf",
-                               :italic => "#{Rails.root.to_s}/app/assets/fonts/arial/arial_italic_full.ttf",
-                               :bold_italic => "#{Rails.root.to_s}/app/assets/fonts/arial/arial_bold_italic_full.ttf" 
+                               :bold => "#{Rails.root.to_s}/app/assets/fonts/arial/arial_bold.ttf",
+                               :italic => "#{Rails.root.to_s}/app/assets/fonts/arial/arial_italic.ttf",
+                               :bold_italic => "#{Rails.root.to_s}/app/assets/fonts/arial/arial_bold_italic.ttf" 
                                           })
       font_families.update("Asylbek" => {
                                :normal => "#{Rails.root.to_s}/app/assets/fonts/asylbek/asylbek.ttf"
@@ -35,10 +35,10 @@ class SvgConverter < Prawn::Document
                                :normal => "#{Rails.root.to_s}/app/assets/fonts/segoe_print/segoe_print.ttf"
                                           })                                                                                                                                                                                                                                                                                  
       font_families.update("Times New Roman" => {
-                               :normal => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman/times_new_roman_full.ttf",
-                               :bold => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman/times_new_roman_bold_full.ttf",
-                               :italic => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman/times_new_roman_italic_full.ttf",
-                               :bold_italic => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman/times_new_roman_bold_italic_full.ttf"                                                                            
+                               :normal => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman/times_new_roman.ttf",
+                               :bold => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman/times_new_roman_bold.ttf",
+                               :italic => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman/times_new_roman_italic.ttf",
+                               :bold_italic => "#{Rails.root.to_s}/app/assets/fonts/times_new_roman/times_new_roman_bold_italic.ttf"                                                                            
                                           }) 
       font_families.update("Trafaret" => {
                                :normal => "#{Rails.root.to_s}/app/assets/fonts/trafaret/trafaret.ttf"
