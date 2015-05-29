@@ -84,7 +84,6 @@ div.wizard_step.finished {
    height: 0;
    border-bottom: 45px solid white;
    border-left: 45px solid transparent;
-
 }
 
 .trim_right {
@@ -94,12 +93,10 @@ div.wizard_step.finished {
    height: 0;
    border-bottom: 45px solid white;
    border-right: 45px solid transparent;
-
-
 }
 
-.question {
-    float: left;
+.wrapper_question h2 {
+  float: left;
   background-color: white;
   height: 45px;
   display: block;
