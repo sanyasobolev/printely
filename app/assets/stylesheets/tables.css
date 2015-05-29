@@ -182,6 +182,19 @@ td.delivery_price {
 }
 
 
+/*таблица с вариантами действий пользователя*/
+
+table.options {
+  width: 900px;
+  align: center;
+  border: 0px;
+}
+
+table.options td {
+  text-align:center;
+  width:300px;
+}
+
 
 
 

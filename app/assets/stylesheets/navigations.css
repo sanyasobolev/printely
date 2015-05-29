@@ -62,4 +62,77 @@ div.wizard_step.finished {
 	color: gray
 }
 
+/*дерево вариантов выбора действий*/
+.wrapper_image_and_question{
+  position: relative;
+}
+
+.wrapper_question {
+  display: block;
+  margin-left: 164px;
+  margin-right: 164px;
+  width: 572px;
+  position: absolute;
+  top: 255px;
+
+}
+
+.trim_left {
+  float: left;
+  display: block;
+   width: 0;
+   height: 0;
+   border-bottom: 45px solid white;
+   border-left: 45px solid transparent;
+
+}
+
+.trim_right {
+    float: left;
+   display: block;
+   width: 0;
+   height: 0;
+   border-bottom: 45px solid white;
+   border-right: 45px solid transparent;
+
+
+}
+
+.question {
+    float: left;
+  background-color: white;
+  height: 45px;
+  display: block;
+  text-align: center;
+  width: 480px;
+}
+
+.chart_options {
+  display: block;
+  height: 70px;
+  width: 900px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.end_node {
+  background: #b5babf;
+  display: block;
+  width:  5px;
+  height: 5px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vertical_line {
+  width: 1px;
+  height: 30px;
+  background: #b5babf;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
