@@ -69,8 +69,8 @@ div.wizard_step.finished {
 
 .wrapper_question {
   display: block;
-  margin-left: 164px;
-  margin-right: 164px;
+  margin-left: 294px;
+  margin-right: 294px;
   width: 572px;
   position: absolute;
   top: 255px;
@@ -101,7 +101,7 @@ div.wizard_step.finished {
   height: 45px;
   display: block;
   text-align: center;
-  width: 480px;
+  width: 220px;
 }
 
 .chart_options {
