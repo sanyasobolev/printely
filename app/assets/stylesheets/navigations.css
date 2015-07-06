@@ -240,7 +240,9 @@ div.wizard_step.finished {
   background: #B5BABF none repeat scroll 0% 0%;
 }
 
-
+h3.option_desc_header {
+	font-weight: normal;
+}
 
 
 
