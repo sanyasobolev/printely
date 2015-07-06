@@ -240,15 +240,6 @@ div.wizard_step.finished {
   background: #B5BABF none repeat scroll 0% 0%;
 }
 
-.options td {
-  width: 205px;
-}
-
-.options td.option_desc {
-  padding-left: 10px;
-  padding-right: 10px;
-  vertical-align: top;
-}
 
 
 
