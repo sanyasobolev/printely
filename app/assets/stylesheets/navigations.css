@@ -131,4 +131,125 @@ div.wizard_step.finished {
   margin-right: auto;
 }
 
+.nodes_container {
+  display: block;
+  width: 900px;
+  height: 35px;
+}
+
+.nodes_container .empty_node {
+  display: block;
+  width: 110px;
+  height: 35px;
+  float: left;
+  position: relative;
+}
+
+.nodes_container .empty_node2 {
+  display: block;
+  width: 225px;
+  height: 35px;
+  float: left;
+  position: relative;
+}
+
+.nodes_container .left_node {
+  display: block;
+  width: 115px;
+  height: 35px;
+  float: left;
+  position: relative;
+}
+
+.nodes_container .left_node .end_node {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.nodes_container .left_node .vertical_line {
+  position: absolute;
+  bottom: 4px;
+  left: 2px;
+}
+
+.nodes_container .left_node .gorizontal_line {
+  position: absolute;
+  left: 2px;
+  top: 0px;
+  width: 100%;
+  height: 1px;
+  background: #B5BABF none repeat scroll 0% 0%;
+}
+
+.nodes_container .right_node {
+  display: block;
+  width: 112px;
+  height: 35px;
+  float: left;
+  position: relative;
+}
+
+.nodes_container .right_node .end_node {
+  position: absolute;
+  bottom: 4px;
+  right: 0px;
+}
+
+.nodes_container .right_node .vertical_line {
+  position: absolute;
+  bottom: 4px;
+  right: 2px;
+}
+
+.nodes_container .right_node .gorizontal_line {
+  position: absolute;
+  right: 2px;
+  top: 0px;
+  width: 100%;
+  height: 1px;
+  background: #B5BABF none repeat scroll 0% 0%;
+}
+
+.nodes_container .middle_node {
+  display: block;
+  width: 225px;
+  height: 35px;
+  float: left;
+  position: relative;
+}
+
+.nodes_container .middle_node .end_node {
+  position: absolute;
+  bottom: 0px;
+  right: 112px;
+}
+
+.nodes_container .middle_node .vertical_line {
+  position: absolute;
+  bottom: 4px;
+  right: 114px;
+}
+
+.nodes_container .middle_node .gorizontal_line {
+  position: absolute;
+  right: 2px;
+  top: 0px;
+  width: 100%;
+  height: 1px;
+  background: #B5BABF none repeat scroll 0% 0%;
+}
+
+.options td {
+  width: 205px;
+}
+
+.options td.option_desc {
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: top;
+}
+
+
+
 
