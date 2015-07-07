@@ -62,9 +62,36 @@ div.wizard_step.finished {
 	color: gray
 }
 
-/*дерево вариантов выбора действий*/
+/*дерево вариантов выбора действий на посадочной странице,
+ организовано таким образом, т.к.ckeditor сбрасывает классы у дочерних
+ элементов*/
 .wrapper_image_and_question{
   position: relative;
+}
+
+.wrapper_image_and_question ul {
+  position: absolute;
+  color: white;
+  list-style-type: square;
+  line-height: 25px;
+  padding: 5px 10px 5px 70px;
+  margin-top: 40px;
+}
+
+.wrapper_image_and_question .blue ul {
+	background-color: #0072C5;
+}
+
+.wrapper_image_and_question .blue_light ul {
+	background-color: #01BCF3;
+}
+
+.wrapper_image_and_question .red ul {
+	background-color: #DC3C00;
+}
+
+.wrapper_image_and_question .green_dark ul {
+	background-color: #008272
 }
 
 .wrapper_question {
@@ -240,9 +267,7 @@ div.wizard_step.finished {
   background: #B5BABF none repeat scroll 0% 0%;
 }
 
-h3.option_desc_header {
-	font-weight: normal;
-}
+
 
 
 

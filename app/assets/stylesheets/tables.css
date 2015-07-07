@@ -193,12 +193,13 @@ table.options {
 table.options td {
   text-align:center;
   width:205px;
-}
-
-table.options td.option_desc {
   padding-left: 10px;
   padding-right: 10px;
   vertical-align: top;
+}
+
+table.options td h3 {
+	font-weight: normal;
 }
 
 
