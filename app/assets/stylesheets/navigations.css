@@ -78,19 +78,19 @@ div.wizard_step.finished {
   margin-top: 40px;
 }
 
-.wrapper_image_and_question.blue ul {
+.wrapper_image_and_question.blue_list ul {
 	background-color: #0072C5;
 }
 
-.wrapper_image_and_question.blue_light ul {
+.wrapper_image_and_question.blue_light_list ul {
 	background-color: #01BCF3;
 }
 
-.wrapper_image_and_question.red ul {
+.wrapper_image_and_question.red_list ul {
 	background-color: #DC3C00;
 }
 
-.wrapper_image_and_question.green_dark ul {
+.wrapper_image_and_question.green_dark_list ul {
 	background-color: #008272
 }
 
