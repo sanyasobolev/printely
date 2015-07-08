@@ -27,7 +27,7 @@ class Page < ActiveRecord::Base
   TITLE_MAX_LENGTH = 255
   TITLE_RANGE = TITLE_MIN_LENGTH..TITLE_MAX_LENGTH
 
-  BODY_MAX_LENGTH = 10000
+  BODY_MAX_LENGTH = 20000
 
   #размер боксов полей в форме
   TITLE_SIZE = 60
