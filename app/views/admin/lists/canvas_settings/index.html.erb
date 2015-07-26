@@ -1,0 +1,19 @@
+<h2><%= @title %></h2>
+<p><%= link_to 'Создать', new_admin_lists_canvas_setting_path, :class => 'button_style_long' %></p>
+<table class="default_table">
+  <tr class="header">
+    <th></th>
+    <th><%= Lists::CanvasSetting.human_attribute_name("margin_top") %></th>
+    <th><%= Lists::CanvasSetting.human_attribute_name("margin_left") %></th>
+    <th><%= Lists::CanvasSetting.human_attribute_name("width") %></th>
+    <th><%= Lists::CanvasSetting.human_attribute_name("height") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'canvas_setting' , :collection => @canvas_settings %>
+
+</table>
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>
+    
+    
+    

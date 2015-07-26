@@ -10,6 +10,16 @@ class ApplicationController < ActionController::Base
   before_filter :authorized?
   before_filter :set_locale
   
+  I18n.config.enforce_available_locales = true
+  #The possible values are:
+  #false: if you
+    #want to skip the locale validation
+    #don't care about locales
+  #true: if you
+    #want the application to raise an error if an invalid locale is passed (or)
+    #want to default to the new Rails behaviors (or)
+    #care about locale validation
+  
   #set locale from domain
   def set_locale 
     I18n.locale = extract_locale_from_tld || I18n.default_locale

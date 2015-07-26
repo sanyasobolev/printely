@@ -1,0 +1,24 @@
+<tr class="grey_on_hover border_cell text-center">
+  <td><%=h (order.id) %></td>
+  <td><%= order.user.first_name %> <%= order.user.second_name %> <br /> <%= order.user.email %> <br /> <%= order.user.phone %> </td>
+  <td>
+  	<% if order.delivery_date != nil %>
+	  	<span class="bold"><%=h (Russian::strftime(order.delivery_date, "%d %B")) %></span> <br />
+	  	<%= render :partial => 'orders/delivery/show_time', :locals => {:order => order} %>
+	<% end %>
+  </td>	
+  <td><%=h (order.delivery_town.title) if order.delivery_town %></td>
+  <td><%=h (order.order_status.title) %></td>
+  <td><span class="bold"><%= order.cost %></span></td>
+  <td><%=h (order.order_type.title) %></td>
+  <td><%= link_to image_tag("orders/materials.png", :border => "0"), get_materials_admin_order_path(order), target: "_blank", :title => 'Материалы в заказе' %></td>
+  <td><%= link_to image_tag("orders/view_details.png", :border => "0"), admin_order_path(order), :title => 'Детали' %></td>
+  <td><%= link_to image_tag("orders/edit_documents.png", :border => "0"), edit_documents_admin_order_path(order), :title => 'Редактировать документы' %></td>
+  <td><%= link_to image_tag("orders/edit_delivery.png", :border => "0"), edit_delivery_admin_order_path(order), :title => 'Редактировать доставку' %></td>
+  <td><%= link_to image_tag("orders/edit_status.png", :border => "0"), edit_status_admin_order_path(order), :title => 'Редактировать статус' %></td>
+  <td>
+    <%= link_to 'C6', cover_admin_order_path(order, :format => 'c6'), :target => "_blank", :title => '10x15 до 20ти шт.' %>
+    <%= link_to 'C5', cover_admin_order_path(order, :format => 'c5'), :target => "_blank", :title => '10x15 более 20ти шт.'  %>
+    <%= link_to 'C4', cover_admin_order_path(order, :format => 'c4'), :target => "_blank", :title => 'A4'  %>
+  </td>
+</tr>

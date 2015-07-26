@@ -20,8 +20,8 @@ $(document).ready(function() {
 		url_for_update_document: "/document/price_update",
         url_for_load_paper_sizes: "/document/get_paper_sizes",
         url_for_load_paper_types: "/document/get_paper_types",
-		url_for_load_layout: "/paper_specification/get_layout", 
-		url_for_load_canvas_settings: "/paper_specification/get_canvas_settings",
+		url_for_load_background_image: "/product_background/load_image", 
+		url_for_load_canvas_settings: "/canvas_setting/show",
 	};
 
 	var progress = {

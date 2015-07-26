@@ -1,0 +1,18 @@
+<h2><%= @title %></h2>
+<p><%= link_to 'Создать', new_admin_lists_order_type_path, :class => 'button_style_long' %></p>
+<table class="default_table">
+  <tr class="header">
+    <th><%= Lists::OrderType.human_attribute_name("id") %></th>
+    <th><%= Lists::OrderType.human_attribute_name("title") %></th>
+    <th><%= Lists::OrderType.human_attribute_name("description") %></th>
+    <th><%= Lists::OrderType.human_attribute_name("service_id") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'order_type' , :collection => @order_types %>
+
+</table>
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>
+    
+    
+    

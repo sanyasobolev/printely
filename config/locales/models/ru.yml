@@ -197,9 +197,11 @@ ru:
         in_stock: "В наличии"
         price: "Цена"
         order_type_id: "Тип заказа"
-        layout: "Макет"
-        remove_layout: "Удалить макет"
         canvas_setting_ids: "Настройки canvas"
+        product_background_ids: "Изображение продукта"
+      lists/product_background:
+        title: "Название"
+        image: "Изображение"
       lists/print_margin:
         margin: "Поля"
         price: "Цена"

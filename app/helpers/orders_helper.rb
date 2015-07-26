@@ -10,11 +10,11 @@ module OrdersHelper
     return cost
   end
   
-  def read_document_layout(document)
-    if document.paper_specification.layout.url
-      return (image_tag document.paper_specification.layout.url)
+  def read_product_background_image(document)
+    if document.paper_specification.product_backgrounds.first.image_url
+      return (image_tag document.paper_specification.product_backgrounds.first.image_url)
     else 
-      return 'Нет изображения макета'
+      return 'Нет изображения продукта'
     end
   end
   

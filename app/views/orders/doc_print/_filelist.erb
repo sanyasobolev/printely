@@ -7,13 +7,13 @@
 		      <% else %>
 		        style="display: none;">
 		      <% end %>
-		    <%= render :partial=>'orders/doc_print/header_table_with_documents' %>
+		    <%= render :partial=>'orders/doc_print/header_table' %>
 		    </tr>
 	    </thead>
 	    <%= render :partial => 'documents/doc_print/document', :collection => order.documents %>
 	  </table>
 
-    <%= render :partial => 'orders/share/progress_panel' %>
+    <%= render :partial => 'share/progress_bar/progress_panel' %>
 
 	  <%#*кнопка выбора файлов%>
 	  <% unless order.new_record? %>

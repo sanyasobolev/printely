@@ -1,0 +1,16 @@
+<h2>Изображения продуктов</h2>
+<p><%= link_to 'Создать', new_admin_lists_product_background_path, :class => 'button_style_long' %></p>
+<table class="default_table">
+  <tr class="header">
+    <th></th>
+    <th><%= Lists::ProductBackground.human_attribute_name("title") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'product_background' , :collection => @productbgs %>
+
+</table>
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>
+    
+    
+    

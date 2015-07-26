@@ -7,7 +7,7 @@
     //load canvas layout
     editorfn.loadCanvasLayout = function (document, order){
 		$("div#canvas_bg").load(
-			document.url_for_load_layout, 
+			document.url_for_load_background_image, 
 			{
 				selected_paper_type : document.selected_paper_type,
 				selected_paper_size : document.selected_paper_size

@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       if current_user.has_role?("Administrator")
-        redirect_to admin_users_path
+        redirect_to admin_settings_path
       else
         redirect_to myoffice_path
       end

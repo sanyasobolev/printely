@@ -1,7 +1,0 @@
-<tr class="grey_on_hover">
-  <td><%=h (order_type.id) %></td>
-  <td><%=h (order_type.title) %></td>
-  <td><%=h (order_type.description) %></td>
-  <td><%=h (order_type.service.title) unless order_type.service.nil? %></td>
-  <td><%= link_to 'Редактировать', edit_lists_order_type_path(order_type) %></td>
-</tr>

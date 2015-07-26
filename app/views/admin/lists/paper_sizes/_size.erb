@@ -1,0 +1,8 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'X', admin_lists_paper_size_path(size), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%=h (size.width) %></td>
+  <td><%=h (size.length) %></td>
+  <td><%=h (size.size) %></td>
+  <td><%=h (size.size_iso_216) %></td>
+  <td><%= link_to 'Редактировать', edit_admin_lists_paper_size_path(size) %></td>
+</tr>

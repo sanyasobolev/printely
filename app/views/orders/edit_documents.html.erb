@@ -1,9 +1,0 @@
-<%= render :partial => 'orders/share/title', :locals => {:title => @title } %>
-<%= render :partial => 'orders/share/js_upload_vars', :locals => {:upload_button => @upload_button, :order => @order } %>
-
-<%= form_for @order, url: update_documents_order_path, :html => { :method => :put, :id => @order.id} do |order| -%>
-  	<%= render :partial => @partial, :locals => {:order => @order} %>	
-  	<%= render :partial => 'orders/share/documents_price', :locals => {:order => @order} %>	
-    <%= render :partial => 'orders/share/submit', :locals => {:order => order, :title => 'Сохранить'} %>	 
-<% end -%>
-<div class="fl_clear"></div>

@@ -1,0 +1,14 @@
+<%= render :partial => 'orders/share/title', :locals => {:title => @title } %>
+
+<%= form_for @order, :url => update_status_admin_order_path(@order), :html => { :method => :put, :id => @order.id } do |order| -%>
+	<div class="form_align">
+		<%= order.label(:order_status_id) %>
+		<%= order.collection_select :order_status_id, Lists::OrderStatus.all, :id, :title %>
+	</div>
+	<div class="form_align">
+		<%= order.label(:manager_comment) %>
+		<%= order.text_area(:manager_comment) %>
+	</div>
+
+  <%= render :partial => 'orders/share/submit', :locals => {:order => order, :title => 'Сохранить'}  %>	
+<% end -%>

@@ -1,0 +1,17 @@
+<h2>Роли пользователей</h2>
+<table class="default_table">
+  <tr class="header">
+    <!--<th>Удаление</th>!-->
+    <th><%= Role.human_attribute_name("name") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'role', :collection => @roles  %>
+
+</table>
+<%#= link_to 'Создать роль', new_role_path %>
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>
+
+
+
+

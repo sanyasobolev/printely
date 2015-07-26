@@ -1,8 +1,0 @@
-<tr class="grey_on_hover">
-  <td><%=h (role.name) %></td>
-  <td>
-  <% unless role.name == 'Administrator' %>
-    <%= link_to 'Редактировать', edit_role_path(role) %>
-  <% end %>
-  </td>
-</tr>

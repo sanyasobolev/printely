@@ -1,7 +1,7 @@
 <table>
   <tr>
       <td>
-        <%= link_to_if(@order.order_type.title == 'envelope_print', 'PDF', download_pdf_document_path(@order.documents.first), :class => "button_style_long") do %>
+        <%= link_to_if(@order.order_type.title == 'envelope_print', 'PDF', download_pdf_admin_document_path(@order.documents.first), :class => "button_style_long") do %>
       	<% end %>
       </td>
   </tr>

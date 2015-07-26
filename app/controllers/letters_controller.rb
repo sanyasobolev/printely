@@ -1,7 +1,6 @@
 # encoding: utf-8
 class LettersController < ApplicationController
  layout 'letters', :only => [:sent, :new]
- layout 'application', :only => [:admin, :show]
 
  skip_before_filter :login_required, :authorized?,
                     :only => [:sent, :new, :create]
@@ -28,30 +27,6 @@ class LettersController < ApplicationController
         wants.xml {render :xml => @letter.errors}
       end
     end
-  end
-
-  def show
-    @title = 'Письмо клиента'
-    @letter = Letter.find_by_id(params[:id])
-    respond_to do |wants|
-      wants.html
-      wants.xml { render :xml => @letter.to_xml }
-    end
-  end
-
-  def destroy
-    @letter = Letter.find(params[:id])
-    @letter.destroy
-    respond_to do |wants|
-      flash[:notice] = 'Запись удалена'
-      wants.html { redirect_to admin_letters_path }
-      wants.xml { render :nothing => true }
-    end
-  end
-
-  def admin
-    @title = 'Администрирование - Обратная связь'
-    @letters = Letter.find(:all, :order => 'created_at DESC')
   end
 
 end

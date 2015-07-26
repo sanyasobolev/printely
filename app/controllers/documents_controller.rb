@@ -2,16 +2,37 @@
 class DocumentsController < ApplicationController
 
   skip_before_filter :authorized?,
-                     :only => [:create, :destroy, :price_update, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors]
+                     :only => [
+                       :create, 
+                       :destroy, 
+                       :price_update, 
+                       :get_paper_sizes, 
+                       :get_paper_types, 
+                       :get_print_margins, 
+                       :get_print_colors
+                       ]
 
   skip_before_filter :verify_authenticity_token,
                      :only => [:create]
 
   before_filter :find_order,
-                :only => [:create, :destroy, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors]
+                :only => [
+                  :create, 
+                  :destroy, 
+                  :get_paper_sizes, 
+                  :get_paper_types, 
+                  :get_print_margins, 
+                  :get_print_colors]
   
   before_filter :find_or_build_document,
-                :only => [:create, :destroy, :get_paper_sizes, :get_paper_types, :get_print_margins, :get_print_colors]
+                :only => [
+                  :create, 
+                  :destroy, 
+                  :get_paper_sizes, 
+                  :get_paper_types, 
+                  :get_print_margins, 
+                  :get_print_colors
+                  ]
 
 
   def create
@@ -45,6 +66,59 @@ class DocumentsController < ApplicationController
            end
          end 
     end
+  end
+
+  def destroy
+    respond_to do |format|
+      unless @document.destroy
+        flash[:error] = 'Документ не может быть удален.'
+      end
+        format.js { render :template => 'documents/destroy.js.erb', :layout => false }
+    end
+  end
+
+  def price_update
+    @document = Document.find_by_id(params[:id])
+    @queue_files_count = params[:queue_files_count] ? params[:queue_files_count] : 0
+
+    if params[:order_type] == 'foto_print' && params[:margins] #на случай если придет только quantity
+      @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
+      @document.print_margin = Lists::PrintMargin.find_by_id(params[:margins])
+      @document.save
+    elsif params[:order_type] == 'doc_print' && params[:print_color]#на случай если придет только quantity
+      @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
+      @document.print_color = Lists::PrintColor.find_by_id(params[:print_color])
+      @document.binding = Lists::Binding.find_by_id(params[:binding])
+      @document.save
+    elsif params[:order_type] == 'envelope_print' && params[:paper_type]#на случай если придет только quantity
+      @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
+      @document.save
+    end
+    
+    if params[:quantity]
+      @document.update_attribute(:quantity, params[:quantity])
+    end
+    
+    if params[:pre_print_operation]
+      pre_print_operation = Lists::PrePrintOperation.find_by_id(params[:pre_print_operation].to_i)
+      if params[:check_status].to_i == 1
+        @document.pre_print_operations << pre_print_operation
+      else
+        @document.pre_print_operations.delete(pre_print_operation)
+      end
+      @document.save
+    end
+    
+    if params[:page_count]
+      @document.update_attribute(:page_count, params[:page_count])
+    end
+    
+    set_price(@document)
+    change_file_name
+    
+    respond_to do |format|
+        format.js
+      end
   end
 
   def get_paper_sizes
@@ -164,7 +238,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-
   def get_print_margins
     @available_margins = Lists::PrintMargin.where(["order_type_id = ? or order_type_id = ?", Lists::OrderType.where(:title => params[:order_type]), 1]) #order_type or all order types
     @select_list = ''
@@ -188,67 +261,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-
-  def price_update
-    @document = Document.find_by_id(params[:id])
-    @queue_files_count = params[:queue_files_count] ? params[:queue_files_count] : 0
-
-    if params[:order_type] == 'foto_print' && params[:margins] #на случай если придет только quantity
-      @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
-      @document.print_margin = Lists::PrintMargin.find_by_id(params[:margins])
-      @document.save
-    elsif params[:order_type] == 'doc_print' && params[:print_color]#на случай если придет только quantity
-      @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
-      @document.print_color = Lists::PrintColor.find_by_id(params[:print_color])
-      @document.binding = Lists::Binding.find_by_id(params[:binding])
-      @document.save
-    elsif params[:order_type] == 'envelope_print' && params[:paper_type]#на случай если придет только quantity
-      @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
-      @document.save
-    end
-    
-    if params[:quantity]
-      @document.update_attribute(:quantity, params[:quantity])
-    end
-    
-    if params[:pre_print_operation]
-      pre_print_operation = Lists::PrePrintOperation.find_by_id(params[:pre_print_operation].to_i)
-      if params[:check_status].to_i == 1
-        @document.pre_print_operations << pre_print_operation
-      else
-        @document.pre_print_operations.delete(pre_print_operation)
-      end
-      @document.save
-    end
-    
-    if params[:page_count]
-      @document.update_attribute(:page_count, params[:page_count])
-    end
-    
-    set_price(@document)
-    change_file_name
-    
-    respond_to do |format|
-        format.js
-      end
-  end
-  
-  def destroy
-    respond_to do |format|
-      unless @document.destroy
-        flash[:error] = 'Документ не может быть удален.'
-      end
-        format.js { render :template => 'documents/destroy.js.erb', :layout => false }
-    end
-  end
-  
-  def download_pdf
-    @document = Document.find_by_id(params[:id])
-    output = SvgConverter
-                  .new(:page_size => [@document.get_canvas_setting.width,@document.get_canvas_setting.height],:margin => 0)
-                  .to_pdf(@document.order, @document.get_canvas_setting)
-    send_data output, :type => 'application/pdf', :filename => "document.pdf"
-  end
 
   private
     def find_order

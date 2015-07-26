@@ -1,0 +1,62 @@
+<div class="form_align">
+	<%= f.label :paper_type_id %>
+	<%= f.collection_select(:paper_type_id,
+                      Lists::PaperType.find(:all),
+                      :id,
+                      :paper_type_with_grade) %>
+</div>
+
+<div class="form_align">
+	<%= f.label :paper_size_id %>
+	<%= f.collection_select(:paper_size_id,
+                      Lists::PaperSize.find(:all),
+                      :id,
+                      :paper_size_with_iso) %>
+</div>
+
+<div class="form_align">
+	<%= f.label :price %>
+  	<%= f.text_field :price, :class => 'req_input'  %>
+</div>
+
+<div class="form_align">
+	<%= f.label :in_stock %>
+  	<%= f.check_box :in_stock %>
+</div>
+
+<div class="form_align">
+	<%= f.label :order_type_id %>
+	<%= f.collection_select(:order_type_id,
+                      Lists::OrderType.find(:all),
+                      :id,
+                      :title) %>
+</div>
+
+<div class="form_align">
+	<%= f.label :product_background_ids %>
+	<%= collection_select :pspec,
+						  :product_background_ids, 
+						  Lists::ProductBackground.find(:all), 
+						  :id, 
+						  :title, 						  
+						  { :selected => pspec.product_background_ids, :prompt => 'нет изображения' }, 
+						  { 
+						  	:multiple => false, 
+						  	:name => 'pspec[product_background_ids][]'					
+						  } -%>
+</div>
+
+<div class="form_align">
+	<%= f.label :canvas_setting_ids %>
+	<%= collection_select :pspec,
+						  :canvas_setting_ids, 
+						  Lists::CanvasSetting.find(:all), 
+						  :id, 
+						  :canvas_setting_description, 						  
+						  { :selected => pspec.canvas_setting_ids, :prompt => 'нет canvas' }, 
+						  { 
+						  	:multiple => false, 
+						  	:name => 'pspec[canvas_setting_ids][]'					
+						  } -%>
+</div>
+

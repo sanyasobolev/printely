@@ -23,7 +23,7 @@
         </td>
         <td class="delivery_date_show">
         	   <%= h (Russian::strftime(order.delivery_date, "%d %B %Y года")) %> <br />
-	  		   <%= render :partial => 'orders/delivery/delivery_period', :locals => {:order => order}  %>
+	  		   <%= render :partial => 'orders/delivery/show_time', :locals => {:order => order}  %>
         </td>      
     </tr>
   </table>

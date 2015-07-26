@@ -1,0 +1,12 @@
+<% @str_1 = "<div class=\"link_container_for_service\" onclick= \"window.location = '/services/#{service.permalink}/subservices';\">" %>
+<% @str_2 = "</div>" %>
+
+<%= @str_1.html_safe %>
+  <%= image_tag(service.service_header_icon.url, :border => '0') %>
+  <div class="service_title">
+    <%= service.title %>
+  </div>
+  <div class="service_synopsis">
+    <%= service.synopsis %>
+  </div>
+<%= @str_2.html_safe %>

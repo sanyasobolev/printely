@@ -1,2 +1,0 @@
-module Lists::PrintColorsHelper
-end

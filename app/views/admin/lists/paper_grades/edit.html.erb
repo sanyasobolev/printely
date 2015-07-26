@@ -1,0 +1,15 @@
+<h1>Редактирование</h1>
+<div class="form_shape">
+	<%= form_for :grade, :url => admin_lists_paper_grade_path(@grade), :html => {:method => :put} do |f| %>
+	  <%= f.error_messages %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_lists_paper_grades_path}  %>
+
+</div>
+
+
+

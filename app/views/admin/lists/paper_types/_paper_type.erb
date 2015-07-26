@@ -1,0 +1,7 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'X', admin_lists_paper_type_path(paper_type), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%=h (paper_type.paper_type) %></td>
+  <td><%= density_to_ru(paper_type.paper_density.density) unless paper_type.paper_density.nil? %></td>
+  <td><%= paper_type.paper_grade.grade unless paper_type.paper_grade.nil? %></td>
+  <td><%= link_to 'Редактировать', edit_admin_lists_paper_type_path(paper_type) %></td>
+</tr>

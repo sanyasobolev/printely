@@ -33,7 +33,7 @@
   <p>Прайс-листа на эту услугу нет.</p>
 <% end %>
 <br />
-<%= render :partial => 'subservice_for_user', :collection => @subservices, :locals => { :service_id => @service.permalink} %>
+<%= render :partial => 'subservice', :collection => @subservices, :locals => { :service_id => @service.permalink} %>
 
 <div class="fl_clear">
 </div>

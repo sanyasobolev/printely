@@ -5,9 +5,6 @@
 
     <%= hidden_field_tag "attribute", "email", :id => nil %>
     <%= render :partial => 'profile', :locals => {:form => f} %>
-    <%  if @user != current_user %>
-      <%= render :partial => 'edit_role', :locals => {:form => f} %>
-    <%  end %>
 
     <div class="submit_area">
       <%= submit_tag 'Изменить данные', :class => 'submit' %>

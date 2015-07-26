@@ -1,7 +1,0 @@
-<tr class="grey_on_hover">
-  <td><%= link_to 'Х', lists_scan_specification_path(scan_specification_for_admin), :method => :delete, :confirm => 'Действительно хотите удалить запись?' %></td>
-  <td><%= scan_specification_for_admin.paper_size.size %></td>
-  <td><%= scan_specification_for_admin.price %></td>
-  <td><%= scan_specification_for_admin.order_type.title %></td>
-  <td><%= link_to 'Редактировать', edit_lists_scan_specification_path(scan_specification_for_admin) %></td>
-</tr>

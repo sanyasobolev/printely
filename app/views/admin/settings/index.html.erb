@@ -1,0 +1,73 @@
+<h1 class="orange">
+  Администрирование системы
+</h1>
+
+	<div class="zero_level">
+		<p>Контент сайта</p>
+	</div>
+	<div class="first_level">
+	<%= link_to 'Разделы верхнего меню', admin_sections_path %><br/>
+	<%= link_to 'Подразделы верхнего меню', admin_subsections_path %><br/>
+	<%= link_to 'Страницы', admin_pages_path %><br/>
+	<%= link_to 'Статьи и новости', admin_articles_path %><br/>
+	<%= link_to 'Категории статей', admin_categories_path %><br/>
+	<%= link_to 'Услуги',  admin_services_path%><br/>
+	<%= link_to 'Подуслуги',  admin_subservices_path%><br/>
+	</div>
+	<div class="zero_level">
+		<p>Доступ</p>
+	</div>
+	<div class="first_level">
+	<%= link_to 'Пользователи', admin_users_path %><br/>
+	<%= link_to 'Роли', admin_roles_path %><br/>
+	<%= link_to 'Права', admin_rights_path %><br/>	
+	</div>
+	
+	<div class="zero_level">
+		<p>Управление заказами</p>
+	</div>
+	<div class="first_level">
+	<%= link_to 'Заказы',  admin_orders_path %><br/>
+	<%= link_to 'Спецификации бумаг',  admin_lists_paper_specifications_path %><br/>
+	<%= link_to 'Спецификация услуг по сканированию',  admin_lists_scan_specifications_path %> <br />
+	</div>
+
+	<div class="zero_level">
+		<p>Управление доставкой</p>
+	</div>
+	<div class="first_level">
+		<%= link_to 'Зоны доставки и цены',  admin_lists_delivery_zones_path%><br/>
+		<%= link_to 'Населенные пункты',  admin_lists_delivery_towns_path%><br/>
+	</div>
+
+	
+	<div class="zero_level">
+		<p>Справочники</p>
+	</div>
+	<div class="first_level">
+		<%= link_to 'Cтатусы заказов',  admin_lists_order_statuses_path %> <br />
+		<%= link_to 'Типы заказов',  admin_lists_order_types_path %> <br />
+		<%= link_to 'Классы бумаги',  admin_lists_paper_grades_path %> <br />
+		<%= link_to 'Типы бумаги',  admin_lists_paper_types_path %> <br />
+		<%= link_to 'Размеры бумаги',  admin_lists_paper_sizes_path %><br />
+		<%= link_to 'Плотности бумаги',  admin_lists_paper_densities_path %><br />
+		<%= link_to 'Поля и отступы',  admin_lists_print_margins_path %><br />
+		<%= link_to 'Цветность печати',  admin_lists_print_colors_path %><br />
+		<%= link_to 'Допечатные операции',  admin_lists_pre_print_operations_path %><br />
+		<%= link_to 'Переплет',  admin_lists_bindings_path %><br />
+		<%= link_to 'Настройки canvas',  admin_lists_canvas_settings_path %><br />
+		<%= link_to 'Изображения продуктов',  admin_lists_product_backgrounds_path %><br />
+	</div>
+	
+	<div class="zero_level">
+		<p>Письма</p>
+	</div>
+	<div class="first_level">
+		<%= link_to 'Обратная связь от пользователей',  admin_letters_path%><br/>
+		<%= link_to 'Рассылки',  admin_mailings_path%><br/>
+	</div>
+	
+
+
+<br/><br/><br/><br/><br/>
+

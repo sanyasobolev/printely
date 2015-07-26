@@ -1,18 +1,14 @@
 # encoding: utf-8
 class Lists::PaperSpecification < ActiveRecord::Base
   
-    mount_uploader :layout, LayoutUploader
-    
     attr_accessible :paper_type_id, 
                     :paper_size_id, 
                     :in_stock, 
                     :id, 
                     :price, 
                     :order_type_id,
-                    :layout,
-                    :layout_cache,
-                    :remove_layout,
-                    :canvas_setting_ids
+                    :canvas_setting_ids,
+                    :product_background_ids
     
     has_many :documents
     has_many :print_margins, :through => :documents
@@ -22,6 +18,7 @@ class Lists::PaperSpecification < ActiveRecord::Base
     belongs_to :order_type
 
     has_and_belongs_to_many :canvas_settings
+    has_and_belongs_to_many :product_backgrounds
 
     validates :paper_type_id, :uniqueness => { 
     :scope => :paper_size_id,

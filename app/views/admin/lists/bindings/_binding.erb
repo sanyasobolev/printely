@@ -1,0 +1,6 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'X', admin_lists_binding_path(binding), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%=h (binding.binding) %></td>
+  <td><%=h (binding.price) %></td>
+  <td><%= link_to 'Редактировать', edit_admin_lists_binding_path(binding) %></td>
+</tr>

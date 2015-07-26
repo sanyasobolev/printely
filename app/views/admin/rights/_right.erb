@@ -1,0 +1,8 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'X', admin_right_path(right), :confirm => 'Вы действительно хотите удалить право?', :method => :delete %></td>
+  <td><%=h (right.name) %></td>
+  <td><%=h (right.controller) %></td>
+  <td><%=h (right.action) %></td>
+  <td><%=h (right.description) %></td>
+  <td><%= link_to 'Редактировать', edit_admin_right_path(right) %></td>
+</tr>

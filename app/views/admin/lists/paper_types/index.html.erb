@@ -1,0 +1,18 @@
+<h2>Типы бумаги</h2>
+<p><%= link_to 'Создать', new_admin_lists_paper_type_path, :class => 'button_style_long' %></p>
+<table class="default_table">
+  <tr class="header">
+    <th></th>
+    <th><%= Lists::PaperType.human_attribute_name("paper_type") %></th>
+    <th><%= Lists::PaperType.human_attribute_name("paper_density_id") %></th>
+	<th><%= Lists::PaperType.human_attribute_name("paper_grade_id") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'paper_type' , :collection => @paper_types %>
+
+</table>
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>
+    
+    
+    

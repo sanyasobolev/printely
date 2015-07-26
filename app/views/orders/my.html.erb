@@ -20,13 +20,13 @@
 	      <th><%= Order.human_attribute_name(:order_type) %></th>
 	      <th><%= Order.human_attribute_name(:details) %></th>
 	    </tr>
-	    <%= render :partial => 'order_for_user', :collection => @my_orders  %>
+	    <%= render :partial => 'orders/my/order', :collection => @my_orders  %>
 	  </table>
 		<div class="paginator">
 			<%= paginate @my_orders, :param_name => :my_orders_page %>
 		</div>
 	<% else %>
-	  <%= render :partial => 'no_orders' %>
+	  <%= render :partial => 'my/no_orders' %>
 	<% end %>
 
   <div class="fl_clear"></div>

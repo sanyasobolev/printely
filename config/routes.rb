@@ -7,7 +7,6 @@ Printely::Application.routes.draw do
   match "myoffice" => "orders#index", :as => :myoffice
 
   resources :users do
-      get 'admin', :on => :collection
       get 'forgot_password', :on => :collection
       post 'reset_password', :on => :collection
       get 'edit_profile', :on => :member
@@ -18,14 +17,12 @@ Printely::Application.routes.draw do
       get 'check_phone', :on => :collection
       get 'check_pass', :on => :collection
   end
-  resources :rights
-  resources :roles
 
   resources :embedded_images
+  match 'canvas_setting/show' => 'canvas_settings#show'
 
   resources :documents do
     resources :embedded_images
-    get 'download_pdf', :on => :member
   end
   match 'document/price_update' => 'documents#price_update'
   match 'document/get_paper_sizes' => 'documents#get_paper_sizes'
@@ -36,15 +33,6 @@ Printely::Application.routes.draw do
   resources :orders do
     resources :documents
     get 'my', :on => :collection
-    get 'admin', :on => :collection
-    get 'cover', :on => :member
-    get 'get_materials', :on => :member
-    get 'edit_documents', :on => :member
-    get 'edit_delivery', :on => :member
-    get 'edit_status', :on => :member
-    put 'update_documents', :on => :member
-    put 'update_delivery', :on => :member
-    put 'update_status', :on => :member
   end
   match '/order/set_documents_price' => 'orders#set_documents_price'
   match '/order/set_delivery_price' => 'orders#set_delivery_price'
@@ -59,74 +47,75 @@ Printely::Application.routes.draw do
   end
 
   resources :articles do
-    get 'admin', :on => :collection
     get 'item_news', :on => :collection
   end
   match 'news/:id' => 'articles#show', :as => :news, 
                                         defaults: { item: 'news' }
 
-  resources :services do
-    resources :subservices
-    get 'admin', :on => :collection
-  end
-  
-  resources :subservices do
-    get 'admin', :on => :collection
+  resources :categories do
+    resources :articles
   end
 
+  resources :services do
+    resources :subservices
+  end
+  
   resources :pages do
-    get 'admin', :on => :collection
     get 'no_page', :on => :collection
   end
 
-  resources :sections do
-    get 'admin', :on => :collection
-  end
-
-  resources :subsections do 
-    get 'admin', :on => :collection
-  end
-  
-  resources :categories do
-    resources :articles
-    get 'admin', :on => :collection
-  end
-
   resources :letters do
-    get 'admin', :on => :collection
     get 'sent', :on => :collection
   end
   
-  resources :mailings do
-    get 'admin', :on => :collection
-  end
-
-  namespace :lists do
-    resources :order_statuses
-    resources :order_types
-    resources :paper_grades
-    resources :paper_densities
-    resources :canvas_settings
-    resources :paper_types
-    resources :paper_sizes
-    resources :paper_specifications do
-      get 'admin', :on => :collection
-    end
-    resources :scan_specifications do
-      get 'admin', :on => :collection
-    end
-    resources :print_margins
-    resources :print_colors
-    resources :pre_print_operations
-    resources :bindings
-    resources :delivery_zones
-    resources :delivery_towns
-  end
-  match 'paper_specification/get_layout' => 'lists/paper_specifications#get_layout'
-  match 'paper_specification/get_canvas_settings' => 'lists/paper_specifications#get_canvas_settings'
+  match 'product_background/load_image' => 'product_backgrounds#load_image'
   
   namespace :admin do
-    
+    resources :settings
+    resources :articles
+    resources :categories
+    resources :documents do
+      get 'download_pdf', :on => :member
+    end
+    resources :letters
+    resources :mailings 
+    resources :orders do
+      resources :documents
+      get 'cover', :on => :member
+      get 'get_materials', :on => :member
+      get 'edit_documents', :on => :member
+      get 'edit_delivery', :on => :member
+      get 'edit_status', :on => :member
+      put 'update_documents', :on => :member
+      put 'update_delivery', :on => :member
+      put 'update_status', :on => :member
+    end
+    resources :pages
+    resources :rights
+    resources :roles
+    resources :sections
+    resources :subsections
+    resources :services
+    resources :subservices
+    resources :users
+    namespace :lists do
+      resources :bindings
+      resources :order_statuses
+      resources :order_types
+      resources :paper_grades
+      resources :paper_densities
+      resources :canvas_settings
+      resources :paper_types
+      resources :paper_sizes
+      resources :paper_specifications
+      resources :print_margins
+      resources :product_backgrounds
+      resources :delivery_towns
+      resources :delivery_zones
+      resources :pre_print_operations
+      resources :print_colors
+      resources :scan_specifications
+    end
   end
   
   Ckeditor::Engine.routes.draw do

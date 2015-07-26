@@ -6,21 +6,6 @@ class UsersController < ApplicationController
                      :only => [:new, :create, :forgot_password, :reset_password, :check_email, :check_phone, :check_pass]
 
 
-
-  def admin #страница администратора
-
-  end
-
-  def index
-    @title = 'Администрирование - Пользователи системы'
-    @users = params[:role] ? User.where(:role_id => Role.where(:name => params[:role])) : User.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml { render :xml => @users }
-      format.js
-    end
-  end
-
   def new
     @title = 'Регистрация'
     @user = User.new
@@ -62,19 +47,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    user_for_delete = User.find(params[:id])
-    respond_to do |wants|
-      if user_for_delete == current_user
-        flash[:error] = 'Нельзя удалить самого себя!'
-        else
-        user_for_delete.destroy
-      end
-      wants.html { redirect_to users_path }
-      wants.xml { render :nothing => true }
-    end
-  end
-  
   def forgot_password
     @title = 'Сброс пароля'
     respond_to do |format|

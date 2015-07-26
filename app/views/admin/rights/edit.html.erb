@@ -1,0 +1,14 @@
+<%= error_messages_for 'right' %>
+<h1>Редактирование права</h1>
+
+<div class="form_shape">
+	<%= form_for :right, :url => admin_right_path(@right), :html => {:method => :put, :id => 'edit_right'} do |f| %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_rights_path}  %>
+</div>
+
+

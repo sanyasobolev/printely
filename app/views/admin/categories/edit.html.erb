@@ -1,0 +1,10 @@
+<%= error_messages_for :category %>
+<h2>Редактирование категории</h2>
+  <%= form_for :category, :url => admin_category_path(@category), :html => {:method => :put} do |f| -%>
+    <%= render :partial => 'form', :locals => {:f => f} %>
+	<div class="submit_area">
+		<%= submit_tag 'Сохранить', :class => 'submit' %>
+	</div> 
+<% end -%>
+<%= render :partial => 'share/cancel', :locals => {:path => admin_categories_path}  %>
+

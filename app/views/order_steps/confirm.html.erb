@@ -15,10 +15,10 @@
 	   	<h2>Доставка - <%= @delivery_type %></h2>
 	  	<%= render :partial => 'orders/delivery/show', :locals => {:order => @order, :show_header => false} %>	
   	</div>
-  	<%= render :partial => 'orders/share/delivery_price', :locals => {:order => @order} %>	
+  	<%= render :partial => 'orders/delivery/price', :locals => {:order => @order} %>	
   	<%= render :partial => 'orders/share/order_cost', :locals => {:order => @order} %>	
 	<%= render :partial => 'orders/share/submit', :locals => {:order => order, :title => 'Оформить заказ'}  %>	
 <% end -%>
-  <%= render :partial => 'orders/share/previous_step', :locals => {:order => @order, :title => 'Назад к доставке'}  %>
+  <%= render :partial => 'previous_step', :locals => {:order => @order, :title => 'Назад к доставке'}  %>
 
 <div class="fl_clear"></div>

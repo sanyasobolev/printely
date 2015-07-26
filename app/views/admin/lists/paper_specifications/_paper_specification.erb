@@ -1,0 +1,9 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'X', admin_lists_paper_specification_path(paper_specification), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%= h (paper_specification.paper_size_with_iso) unless paper_specification.paper_size.nil? %></td>
+  <td><%= h (density_to_ru(paper_specification.paper_type.paper_type_with_grade_and_density)) unless paper_specification.paper_type.nil? %></td>
+  <td><%= h (paper_specification.price) %></td>
+  <td><%= boolean_to_ru(paper_specification.in_stock) %></td>
+  <td><%= h (paper_specification.order_type.title) %></td>
+  <td><%= link_to 'Редактировать', edit_admin_lists_paper_specification_path(paper_specification) %></td>
+</tr>
