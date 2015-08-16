@@ -46,8 +46,8 @@ class OrderStepsController < ApplicationController
         @upload_button = 'icons/plus_grey.png'
         @form_header = 'Разработайте дизайн Вашего конверта'
         @partial = 'documents/envelope_print/document'
-            
-        @document = @order.documents.empty? ? @order.documents.create : @order.documents.first
+
+        @document = @order.documents.empty? ? @order.documents.build(@order.order_type) : @order.documents.first
         @document.docfile = Rails.root.join("public/fallback/default.png").open
         @document.save! 
       end 

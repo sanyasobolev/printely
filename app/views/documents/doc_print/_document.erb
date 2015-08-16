@@ -21,32 +21,12 @@
  		<% end %>
     </td>
     
-    <td class="paper">
-	    <div class="paper_size">  
-	      	<%= select_tag("order[documents_attributes][#{document.id}][paper_size]", {}, {:class => 'paper_size_selector'}) %>
-	    	<%= i.label :paper_size, :class => 'float_left'  %>
-	    </div>
-	    <div class="fl_clear"></div>
-	    <div class="paper_type">
-	    	<%= select_tag("order[documents_attributes][#{document.id}][paper_type]", {}, {:disabled => true, :class => 'paper_type_selector'}) %>
-			<%= i.label :paper_type, :class => 'float_left'  %>
-	    </div>
-	    <div class="fl_clear"></div>
-	    <div class="quantity">	      
-	    	<div class="quantity_selector float_right">
-		        <%= button_tag(' ', :type => 'button', :class => 'decrease_quantity') %>
-		        <%= i.text_field(:quantity) %>
-		        <%= button_tag(' ', :type => 'button', :class => 'increase_quantity') %>
-	 		</div>
-	 		<%= i.label :quantity, :class => 'float_left' %>
-	    </div>
-	    <div class="fl_clear"></div>
-    </td>
+	<%= render :partial => 'documents/paper', :locals => {:order => @order, :document => document, :i => i} %>
 
     <td class="print_settings">
     	<div class="print_color">
     		<%= i.label :print_color, :class => 'float_left' %>
-      		<%= select_tag("order[documents_attributes][#{document.id}][print_color]", {}, {:disabled => true, :class => 'print_color_selector'}) %>
+      		<%= select_tag("order[documents_attributes][#{document.id}][print_color]", options_from_collection_for_select(Lists::PrintColor.available_print_colors(@order.order_type.title), 'id', 'color', document.print_color.id), {:class => 'print_color_selector'}) %>
     	</div> 
     	<div class="fl_clear"></div> 
 	      <%= i.text_area :user_comment, :placeholder => Document.human_attribute_name("user_comment"), :class => 'document_uploaded_user_comment' %>

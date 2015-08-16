@@ -24,7 +24,7 @@ Printely::Application.routes.draw do
   resources :documents do
     resources :embedded_images
   end
-  match 'document/price_update' => 'documents#price_update'
+  match 'document/update' => 'documents#update'
   match 'document/get_paper_sizes' => 'documents#get_paper_sizes'
   match 'document/get_paper_types' => 'documents#get_paper_types'
   match 'document/get_print_margins' => 'documents#get_print_margins'

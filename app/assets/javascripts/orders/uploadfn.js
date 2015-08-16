@@ -48,6 +48,7 @@
        				progress.label.css("display", "block");
        			}
        		break;
+       		
        		default:
 		       	next_value = progress.bar.val() + step;
 		       	progress.bar.val(next_value);
@@ -56,19 +57,12 @@
 		       	if(progress.state==false){
 		       		progress.panel.css("display", "none");		
 		       	} else {
-			       	if($("table#fileList tr.document").exists() && $("table#fileList tr.document:not(.calculated)").length == 0) { //если все загрузилось
-			       		progress.panel.css("display", "none");
-			       		progress.label.html('success');
-			       		uploadfn.show_fileListHeader();
-			       		uploadfn.show_all_documents();
-			       	}
-			       	else{
 			       		progress.panel.css("display", "block");
 			       		progress.label.html(label);
-			       	} 
-		       	}
-       		break;
-       	}
+			       	   }
+		    break;
+       	
+    	}
     };
     
     
@@ -109,23 +103,6 @@
         	loader.hide();       		
      };
     
-    //load paper sizes
-    uploadfn.loadPaperSizes = function (document, order) {
-    	$("select[name*='paper_size']").on("load_sizes", function(event) {
-        	document_id = this.parentNode.parentNode.parentNode.id ? this.parentNode.parentNode.parentNode.id : document.document_id; 
-        	$(this).load(
-	     		document.url_for_load_paper_sizes, 
-	        	{
-	        		order_id: order.order_id, 
-	        		id: document_id, 
-	        		order_type: order.order_type
-	        		},
-	        	function(){
-	        		$(this).change();
-	        		});
-        	});
-		$("select[name*='paper_size']:not([class*='with_loaded_paper_sizes'])").addClass("with_loaded_paper_sizes").trigger("load_sizes");
-     };
     
     //load paper types
     uploadfn.loadPaperTypes = function (document, order){
@@ -158,7 +135,7 @@
         		function(){
         			$(this).attr("disabled",false);
         			$(this).change(); //for update document price
-        			uploadfn.calculate_documents();
+        			
         		}
         		);
     };
@@ -175,7 +152,7 @@
         		function(){
         			$(this).attr("disabled",false);
         			$(this).change(); //for update document price
-        			uploadfn.calculate_documents();
+        			
         		}
         		);
     };
@@ -195,10 +172,9 @@
 	          		quantity: document.selected_quantity, 
 	          		page_count: document.selected_page_count,
 	          		order_type: order.order_type,
-	          		queue_files_count: document.queue_files_count
 	          	},
 	          	function(){
-					$.post( order.url_for_update_documents_price, {id: order.order_id} );   	
+					  	uploadfn.calculateOrderPrice(order);
 	          	}			
           	 );
           	 delete document.document_id;
@@ -210,6 +186,11 @@
           	 delete document.selected_page_count; 
           	 delete document.pre_print_operation;
           	 delete document.pre_print_operation_check_status;
+    };
+    
+    uploadfn.calculateOrderPrice = function(order)
+    {
+    	$.post( order.url_for_update_documents_price, {id: order.order_id} ); 
     };
 
     //проверка значения количества

@@ -22,7 +22,7 @@ $(document).ready(function(){
 		
 	var document = {
 		url_for_create_document: url_for_create_document,
-		url_for_update_document: "/document/price_update",
+		url_for_update_document: "/document/update",
         url_for_load_paper_sizes: "/document/get_paper_sizes",
         url_for_load_paper_types: "/document/get_paper_types",
         url_for_load_print_colors: "/document/get_print_colors",
@@ -60,14 +60,19 @@ $(document).ready(function(){
       	$(response).hide().appendTo('#fileList');//
 
 		//update progress bar
-		uploadfn.progress_observer(progress, 50/document.queue_files_count, 'Грузим файлы...');
+		uploadfn.progress_observer(progress, 100/document.queue_files_count, 'Грузим файлы...');
        },
       onAllComplete : function(){
+        progress.state = false;
+      	uploadfn.progress_observer(progress, 0, 'Готово.');
+      	uploadfn.show_fileListHeader();
+		uploadfn.show_all_documents();
 
-      	uploadfn.progress_observer(progress, 0, 'Считаем стоимость...');
-        
-   		//load paper_sizes------------------------------------------------------------------------------------
-		uploadfn.loadPaperSizes(document, order);
+        //update order cost------------------------------------------------------------------------------------
+		uploadfn.calculateOrderPrice(order);
+		
+		//считаем кол-во документов
+		uploadfn.calculate_documents();
 		
         //load paper_types for event change paper_size
         $("select[name*='paper_size']:not([class*='with_bind_change_event'])").addClass("with_bind_change_event").change(function(event){
@@ -167,10 +172,10 @@ $(document).ready(function(){
     	}
     });
     
+		//считаем кол-во документов
+		uploadfn.calculate_documents();
+    
     //подключение хендлеров по управлению ценой (при уже загруженных документах - в случае рефреша страницы)
-
-   		//load paper_sizes------------------------------------------------------------------------------------
-		uploadfn.loadPaperSizes(document, order);
 		
         //load paper_types for event change paper_size
         $("select[name*='paper_size']:not([class*='with_bind_change_event'])").addClass("with_bind_change_event").change(function(event){

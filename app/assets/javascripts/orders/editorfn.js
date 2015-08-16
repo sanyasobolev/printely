@@ -9,8 +9,7 @@
 		$("div#canvas_bg").load(
 			document.url_for_load_background_image, 
 			{
-				selected_paper_type : document.selected_paper_type,
-				selected_paper_size : document.selected_paper_size
+				order_id : order.order_id
 				}, 
 			function() {
 				$(this).change();

@@ -3,13 +3,13 @@
 			<tr class="paper_size">
 				<td class="text-center">
 					<%= i.label :paper_size, :class => 'wide envelope_size' %>
-					<%= select_tag("order[documents_attributes][#{order.documents.first.id}][paper_size]", {}, {:class => 'wide envelope_size_selector'}) %>
+					<%= select_tag "order[documents_attributes][#{order.documents.first.id}][paper_size]", options_from_collection_for_select(Lists::PaperSize.available_paper_sizes(order.order_type.title), 'id', 'paper_size_with_iso', order.documents.first.get_paper_size.id), {:class => 'wide envelope_size_selector'} %>
 				</td>
 			</tr>
 			<tr class="paper_type">
 				<td class="text-center">
 					<%= i.label :paper_type, :class => 'wide envelope_type' %>
-					<%= select_tag("order[documents_attributes][#{order.documents.first.id}][paper_type]", {}, {:disabled => true, :class => 'wide envelope_type_selector'}) %>
+					<%= select_tag "order[documents_attributes][#{order.documents.first.id}][paper_type]", options_from_collection_for_select(Lists::PaperType.available_paper_types(order.order_type.title, order.documents.first.get_paper_size.id), 'id', 'paper_type', order.documents.first.get_paper_type.id), {:class => 'wide envelope_type_selector'} %>
 				</td>
 			</tr>
 			<tr class="document" id="<%= order.documents.first.id %>" name="document">
@@ -45,7 +45,9 @@
 							
 							<div class="canvas_panel" rel="<%= order_documents_path(order) %>">
 								
-								<div id="canvas_bg"></div>
+								<div id="canvas_bg">
+									<%= product_background_item(order) %>
+								</div>
 								
 								<canvas id="canvas" ></canvas>
 							

@@ -33,7 +33,17 @@ class Order < ActiveRecord::Base
 
   DEFAULT_START_TIME = '07:00'
   DEFAULT_END_TIME = '00:00'
-  
+
+  def calculate_documents_price
+    full_documents_cost = 0
+    if self.documents.size > 0
+      self.documents.each do |document|
+        (full_documents_cost += document.cost)
+      end
+    end  
+    self.update_attribute(:documents_price, full_documents_cost)
+  end  
+
 #  validates :delivery_street, :presence => {
 #    :message => "Заполните, пожалуйста, регион доставки."
 #  }

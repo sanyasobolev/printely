@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
                      :only => [
                        :create, 
                        :destroy, 
-                       :price_update, 
+                       :update, 
                        :get_paper_sizes, 
                        :get_paper_types, 
                        :get_print_margins, 
@@ -38,7 +38,7 @@ class DocumentsController < ApplicationController
   def create
     case @order.order_type.title
     when 'foto_print', 'doc_print'
-        @document.docfile = params[:file]
+        @document.docfile = params[:document][:docfile]
         respond_to do |format|  
           unless @document.save
             flash[:error] = 'File could not be uploaded'
@@ -54,8 +54,7 @@ class DocumentsController < ApplicationController
 
        #save image data to file
        @document.docfile = params[:image] if params[:image]
-       
-     
+            
        respond_to do |format|  
            unless @document.save
              flash[:error] = 'File could not be uploaded'
@@ -77,24 +76,28 @@ class DocumentsController < ApplicationController
     end
   end
 
-  def price_update
+  def update
     @document = Document.find_by_id(params[:id])
-    @queue_files_count = params[:queue_files_count] ? params[:queue_files_count] : 0
-
-    if params[:order_type] == 'foto_print' && params[:margins] #на случай если придет только quantity
-      @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
-      @document.print_margin = Lists::PrintMargin.find_by_id(params[:margins])
-      @document.save
-    elsif params[:order_type] == 'doc_print' && params[:print_color]#на случай если придет только quantity
-      @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
-      @document.print_color = Lists::PrintColor.find_by_id(params[:print_color])
-      @document.binding = Lists::Binding.find_by_id(params[:binding])
-      @document.save
-    elsif params[:order_type] == 'envelope_print' && params[:paper_type]#на случай если придет только quantity
-      @document.paper_specification = Lists::PaperSpecification.where(:paper_type_id => params[:paper_type]).where(:paper_size_id => params[:paper_size]).first
-      @document.save
-    end
     
+    case params[:order_type]
+      when 'foto_print'
+        if params[:margins] #на случай если придет только quantity
+          @document.paper_specification = Lists::PaperSpecification.find_paper_specification(params[:paper_size], params[:paper_type])
+          @document.print_margin = Lists::PrintMargin.find_by_id(params[:margins])     
+        end
+      when 'doc_print'
+        if params[:print_color]#на случай если придет только quantity
+          @document.paper_specification = Lists::PaperSpecification.find_paper_specification(params[:paper_size], params[:paper_type])
+          @document.print_color = Lists::PrintColor.find_by_id(params[:print_color])
+          @document.binding = Lists::Binding.find_by_id(params[:binding])
+        end
+      when 'envelope_print'
+        if params[:paper_type]#на случай если придет только quantity
+          @document.paper_specification = Lists::PaperSpecification.find_paper_specification(params[:paper_size], params[:paper_type])
+        end    
+    @document.save
+    end
+   
     if params[:quantity]
       @document.update_attribute(:quantity, params[:quantity])
     end
@@ -113,28 +116,16 @@ class DocumentsController < ApplicationController
       @document.update_attribute(:page_count, params[:page_count])
     end
     
-    set_price(@document)
-    change_file_name
+    @document.calculate_cost
+    @document.change_file_name
     
     respond_to do |format|
-        format.js
-      end
+      format.js
+    end
   end
 
   def get_paper_sizes
-    @all_paper_sizes = Lists::PaperSize.all
-    @available_paper_sizes = Array.new
-    
-    @all_paper_sizes.each do |paper_size|
-      if paper_size.paper_specifications.size > 0 #if have paper_specifications
-        paper_size.paper_specifications.each do |paper_specification|
-          if paper_specification.in_stock == true && (paper_specification.order_type.title == params[:order_type] || paper_specification.order_type.title == 'all') #if paper in stock
-            @available_paper_sizes << paper_size
-            break
-          end
-        end
-      end
-    end
+    @available_paper_sizes = Lists::PaperSize.available_paper_sizes(params[:order_type])
 
     @select_list = ''
     for available_paper_size in @available_paper_sizes
@@ -162,26 +153,14 @@ class DocumentsController < ApplicationController
   end
 
   def get_paper_types
-  @all_paper_types = Lists::PaperType.all
-  @all_paper_grades = Lists::PaperGrade.all
-  @available_paper_types = Array.new
-  @available_paper_grades = Array.new
-    
-  @all_paper_types.each do |paper_type|
-    if paper_type.paper_specifications.size > 0 #if have paper_specifications
-      paper_type.paper_specifications.each do |paper_specification|
-        if paper_specification.in_stock == true && paper_specification.paper_size_id == params[:selected_paper_size].to_i && (paper_specification.order_type.title == params[:order_type] || paper_specification.order_type.title == 'all') #if paper in stock, have selected size and have order type
-           @available_paper_types << paper_type
-           break
-        end
-      end
-    end
-  end
+  @available_paper_types = Lists::PaperType.available_paper_types(
+                                            params[:order_type], 
+                                            params[:selected_paper_size]
+                                            )
+  @available_paper_grades = Lists::PaperGrade.paper_grades_by_paper_types(
+                                            @available_paper_types
+                                            )
   
-  @available_paper_types.each do |paper_type|
-    @available_paper_grades << paper_type.paper_grade
-  end
-  @available_paper_grades = @available_paper_grades.uniq
   
   @select_list = ""
   for available_paper_grade in @available_paper_grades
@@ -215,7 +194,7 @@ class DocumentsController < ApplicationController
   end
   
   def get_print_colors
-    @available_print_colors = Lists::PrintColor.where(["order_type_id = ? or order_type_id = ?", Lists::OrderType.where(:title => params[:order_type]), 1])#order_type or all order types
+    @available_print_colors = Lists::PrintColor.available_print_colors(params[:order_type])
     
     @select_list = ''
     for available_print_color in @available_print_colors
@@ -239,7 +218,8 @@ class DocumentsController < ApplicationController
   end
 
   def get_print_margins
-    @available_margins = Lists::PrintMargin.where(["order_type_id = ? or order_type_id = ?", Lists::OrderType.where(:title => params[:order_type]), 1]) #order_type or all order types
+    @available_margins = Lists::PrintMargin.available_print_margins(params[:order_type])    
+    
     @select_list = ''
     for available_margin in @available_margins
       value = available_margin.id
@@ -269,28 +249,7 @@ class DocumentsController < ApplicationController
     end
 
     def find_or_build_document
-      @document = params[:id] ? @order.documents.find(params[:id]) : @order.documents.build(params[:document])
+      @document = params[:id] ? @order.documents.find(params[:id]) : @order.documents.build(@order.order_type)
     end
 
-    def set_price(document)
-      margin_price = document.print_margin.nil? ? 0 : document.print_margin.price
-      print_color_price = document.print_color.nil? ? 0 : document.print_color.price
-      binding_price = document.binding.nil? ? 0 : document.binding.price
-
-      pre_print_operations_price = 0
-      if document.pre_print_operations.size > 0 
-        document.pre_print_operations.each do |pre_print_operation|
-          pre_print_operations_price = pre_print_operations_price + pre_print_operation.price
-        end
-      end
-      
-      document.price = (document.paper_specification.price + margin_price + print_color_price)*document.page_count + binding_price + pre_print_operations_price
-      document.cost = (document.price - pre_print_operations_price)*document.quantity + pre_print_operations_price
-      document.save
-    end
-    
-    def change_file_name
-      @document.docfile.recreate_versions!
-      @document.save!      
-    end
 end

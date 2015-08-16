@@ -17,7 +17,7 @@ $(document).ready(function() {
 		document_id: $('table#fileList tr.document').attr("id"),
 		url_for_create_document: url_for_create_document,
 		url_for_create_emb_images: $('input#embedded_image_imgfile').attr('rel'),
-		url_for_update_document: "/document/price_update",
+		url_for_update_document: "/document/update",
         url_for_load_paper_sizes: "/document/get_paper_sizes",
         url_for_load_paper_types: "/document/get_paper_types",
 		url_for_load_background_image: "/product_background/load_image", 
@@ -52,11 +52,10 @@ $(document).ready(function() {
 			envdocument.selected_paper_size = $("select[name*='["+envdocument.document_id+"][paper_size]']").val();
   			envdocument.selected_quantity = $("input[name*='["+envdocument.document_id+"][quantity]']").val();
 
-			editorfn.loadCanvasLayout(envdocument, order);
 			editorfn.getCanvasSettings(envdocument, canvas);
 			uploadfn.show_loader_for_div("order_documents_price_value");
             uploadfn.calculateDocumentAndOrderPrice(envdocument, order);
-            
+			editorfn.loadCanvasLayout(envdocument, order);            
 		});		
 
 		//change handler for quantity with debounce (if user click many times)       
@@ -287,11 +286,13 @@ $(document).ready(function() {
 	
 	//--------------------------------------------------------------------------------------------------------
 
+    //load canvas settings
+    envdocument.document_id = $('table#fileList tr.document').attr("id");
+    envdocument.selected_paper_type = $("select[name*='["+envdocument.document_id+"][paper_type]']").val(); 
+	envdocument.selected_paper_size = $("select[name*='["+envdocument.document_id+"][paper_size]']").val();
+  			
+    editorfn.getCanvasSettings(envdocument, canvas);
 
-	//initialize load paper size-------------------------------------------
-	uploadfn.loadPaperSizes(envdocument, order);
-    //-------------------------------------------------------------------
-    
 	//canvas events
 	canvas.on('object:selected', onObjectSelected);
 	canvas.on('before:selection:cleared', allControlsUnBind);

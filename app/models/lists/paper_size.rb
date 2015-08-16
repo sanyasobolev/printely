@@ -10,6 +10,16 @@ class Lists::PaperSize < ActiveRecord::Base
   has_many :documents, :through => :paper_specifications
   has_many :pricelist_scans
   
+  default_scope order('size asc')  
+  scope :available_paper_sizes, lambda { 
+      |order_type| joins(:paper_specifications => :order_type).where("lists_order_types.title = ? OR lists_order_types.title = ?", order_type, 'all').where('lists_paper_specifications.in_stock' => true).uniq.order('lists_paper_sizes.size')
+  }
+
+  def self.default_paper_size(order_type)
+    available_paper_sizes(order_type.title).first
+  end
+  
+  
     validates :width, :presence => {
       :message => "Не должно быть пустым."
     }
@@ -23,7 +33,7 @@ class Lists::PaperSize < ActiveRecord::Base
       :message => 'Такой размер уже есть'
     }
   
-  default_scope order('size asc')
+
   
     def paper_size_with_iso
       if self.size_iso_216.blank?

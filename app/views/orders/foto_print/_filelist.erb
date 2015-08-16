@@ -15,10 +15,6 @@
 	
     <%= render :partial => 'share/progress_bar/progress_panel' %>
 
-	  <%#*кнопка выбора файлов%>
-	  <% unless order.new_record? %>
-		<%= fields_for Document.new do |f| %>
-		  <%= f.file_field :docfile, :rel => order_documents_path(order) %>
-		<% end %>
-	  <% end %>
-	  <%= hidden_field_tag 'quantity_documents_for_validate' %>
+	<%#*кнопка выбора файлов%>
+	<%= file_field_tag 'document[docfile]',:id => 'document_docfile', :rel => order_documents_path(order) %>
+	<%= hidden_field_tag 'quantity_documents_for_validate' %>

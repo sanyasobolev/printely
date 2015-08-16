@@ -97,7 +97,7 @@ class OrdersController < ApplicationController
  end
 
  def set_documents_price
-    update_documents_price(@order)
+    @order.calculate_documents_price
     respond_to do |format|
         format.js { render 'orders/share/documents_price'}
     end
@@ -105,16 +105,6 @@ class OrdersController < ApplicationController
 
   private
   
-  def update_documents_price(order)
-    documents_price = 0
-    if order.documents.size > 0
-      order.documents.each do |document|
-        (documents_price = documents_price + document.cost) unless document.cost.nil?
-      end
-    end  
-    order.update_attribute(:documents_price, documents_price)
-  end  
-
   def update_delivery_price(order)
       if order.delivery_type == 'Курьер'
         #ищем цену доставки в прайсе и проверяем есть ли уже заказы на дату

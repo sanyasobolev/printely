@@ -1,3 +1,4 @@
+# encoding: utf-8
 module DocumentsHelper
 
 require 'ole/storage'
@@ -34,5 +35,15 @@ require 'ole/storage'
       end
     end
   end
+  
+  def product_background_item(order)
+    document = order.documents.first
+    pspec = document.paper_specification
+
+    item = pspec.product_backgrounds.empty? ? 'Нет изображения макета' : "<img src='"+"#{pspec.product_backgrounds.first.image_url}"+"'>"
+    return item.html_safe
+  end
+    
+  
   
 end

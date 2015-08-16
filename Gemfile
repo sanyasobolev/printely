@@ -13,10 +13,10 @@ gem "ransack", '1.1.0'  #search engine
 gem 'delayed_job_active_record'#send mailings in background
 gem "daemons" #daemon for delayed job
 gem 'pdf-reader', "~> 1.3.3" #for get count pages in pdf
-gem 'ruby-ole' #for information from office document
+gem 'ruby-ole', '1.2.11.7' #for information from office document
 gem 'kaminari' #pagination
-gem 'prawn' #pdf generator
-gem 'prawn-svg' #svg to pdf
+gem 'prawn', '1.3.0' #pdf generator
+gem 'prawn-svg', '0.16.0' #svg to pdf
 gem 'wicked' # wizard
 
 #for multiple upload files
