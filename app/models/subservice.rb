@@ -1,12 +1,12 @@
 # encoding: utf-8
 class Subservice < ActiveRecord::Base
 
-  attr_accessible :title, :synopsis, :subservice_header_icon, :subservice_id, :order_type_id, :service_id
-
-  #paperclipe
-  has_attached_file :subservice_header_icon,
-                    :url => "/assets/subservices/:id_:basename.:extension",
-                    :path => ":rails_root/app/assets/images/subservices/:id_:basename.:extension"
+  attr_accessible :title, 
+                  :synopsis,
+                  :header_icon, 
+                  :subservice_id, 
+                  :order_type_id, 
+                  :service_id
 
   belongs_to :service
   has_one :page
@@ -14,6 +14,8 @@ class Subservice < ActiveRecord::Base
 
   before_create :create_permalink
   before_save :update_permalink
+
+  mount_uploader :header_icon, HeaderIconUploader
 
   #максмимальные и минимальные значения для полей
   TITLE_MAX_LENGTH = 80
@@ -29,6 +31,11 @@ class Subservice < ActiveRecord::Base
             :service_id,
             :presence => true
 
+  validates :header_icon, :presence => {
+                    :message => "Не должно быть пустым."
+                    },
+                    :on => :create
+
   #проверка длины строк
   validates :title, :length => {
     :maximum => TITLE_MAX_LENGTH
@@ -42,12 +49,6 @@ class Subservice < ActiveRecord::Base
   validates :title,
             :permalink,
             :uniqueness => true
-
-  #проверка приложенного файла
-  validates_attachment :subservice_header_icon,
-                       :presence => true,
-                       :content_type => { :content_type => /image/ },
-                       :size => { :in => 0..1.megabytes }
 
   #транслитерация названия статьи в ссылку
   def create_permalink

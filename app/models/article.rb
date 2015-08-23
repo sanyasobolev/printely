@@ -1,12 +1,15 @@
 # encoding: utf-8
 class Article < ActiveRecord::Base
 
-attr_accessible :title, :synopsis, :this_news, :body, :category_id, :published, :header_image
+attr_accessible :title, 
+                :synopsis, 
+                :this_news, 
+                :body, 
+                :category_id, 
+                :published, 
+                :article_header_image
 
-#paperclipe
-has_attached_file :header_image,
-                  :url => "/articles/:basename.:extension",
-                  :path => ":rails_root/public/articles/:filename"
+mount_uploader :article_header_image, ArticleHeaderImageUploader
 
 belongs_to :user
 belongs_to :category
@@ -33,7 +36,12 @@ BODY_COLS_SIZE = 60
             :body,
             :category_id,
             :presence => true
-
+            
+  validates :article_header_image, :presence => {
+                    :message => "Не должно быть пустым."
+                    },
+                    :on => :create
+         
  # поля должны быть уникальны
   validates :title,
             :permalink,
@@ -49,12 +57,6 @@ BODY_COLS_SIZE = 60
   validates :body, :length => {
     :maximum => BODY_MAX_LENGTH
   }
-
-  #проверка приложенного файла
-  validates_attachment :header_image,
-                       :presence => true,
-                       :content_type => { :content_type => /image/ },
-                       :size => { :in => 0..1.megabytes }
 
   scope :articles_for_user, where("published=true AND this_news=false").order('created_at DESC') 
   scope :news_for_user, where("published=true AND this_news=true").order('created_at DESC') 

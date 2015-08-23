@@ -5,9 +5,7 @@ gem 'mysql2'
 gem "russian"
 gem "rdoc"
 gem "dynamic_form" #отображение ошибок
-gem "ckeditor", "4.0.4" #WYSIWYG редактор
-gem "paperclip", "3.1.4" #загрузка файлов на сервер
-gem "cocaine", "0.3.2" #for piperclip
+gem "ckeditor" #WYSIWYG редактор
 gem 'gon', '3.0.5' #for pass variables to JS
 gem "ransack", '1.1.0'  #search engine
 gem 'delayed_job_active_record'#send mailings in background
@@ -18,10 +16,9 @@ gem 'kaminari' #pagination
 gem 'prawn', '1.3.0' #pdf generator
 gem 'prawn-svg', '0.16.0' #svg to pdf
 gem 'wicked' # wizard
-
-#for multiple upload files
 gem 'carrierwave'
 gem 'rmagick'
+gem 'mini_magick'
 gem 'flash_cookie_session'
 gem 'haml-rails'
 

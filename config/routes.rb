@@ -117,11 +117,6 @@ Printely::Application.routes.draw do
       resources :scan_specifications
     end
   end
-  
-  Ckeditor::Engine.routes.draw do
-    resources :pictures, :only => [:index, :create, :destroy]
-    resources :attachment_files, :only => [:index, :create, :destroy]
-  end
 
   # setup pages#show to give clean URLS
   match ':section_id', :as => :section_page,

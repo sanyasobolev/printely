@@ -1,12 +1,12 @@
 # encoding: utf-8
 class Service < ActiveRecord::Base
 
-  attr_accessible :title, :synopsis, :service_header_icon, :service_id, :pricelist, :order_type_id
-
-  #paperclipe
-  has_attached_file :service_header_icon,
-                    :url => "/assets/services/:basename.:extension",
-                    :path => ":rails_root/app/assets/images/services/:filename"
+  attr_accessible :title, 
+                  :synopsis, 
+                  :header_icon, 
+                  :service_id, 
+                  :pricelist, 
+                  :order_type_id
 
   has_many :subservices, :dependent => :destroy
   has_one :page
@@ -14,6 +14,8 @@ class Service < ActiveRecord::Base
 
   before_create :create_permalink
   before_save :update_permalink
+
+  mount_uploader :header_icon, HeaderIconUploader
 
   #максмимальные и минимальные значения для полей
   TITLE_MAX_LENGTH = 80
@@ -26,8 +28,13 @@ class Service < ActiveRecord::Base
 
   # поля должны быть не пустыми
   validates :title,
-            :service_header_icon,
             :presence => true
+
+  validates :header_icon, :presence => {
+                    :message => "Не должно быть пустым."
+                    },
+                    :on => :create
+         
 
   #проверка длины строк
   validates :title, :length => {
@@ -42,11 +49,6 @@ class Service < ActiveRecord::Base
   validates :title,
             :permalink,
             :uniqueness => true
-
-  #проверка приложенного файла
-  validates_attachment :service_header_icon,
-                       :content_type => { :content_type => /image/ },
-                       :size => { :in => 0..1.megabytes }
 
   #транслитерация названия услуги в ссылку
   def create_permalink

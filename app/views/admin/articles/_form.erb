@@ -10,8 +10,7 @@
   <%= f.cktext_area :synopsis,
                     :rows => Article::SYNOPSIS_ROWS_SIZE,
                     :cols => Article::SYNOPSIS_COLS_SIZE,
-                    :height => '150px',
-                    :language => 'ru'
+                    :height => '150px'
                     %>
 </p>
 
@@ -20,14 +19,13 @@
   <%= f.cktext_area :body,
                     :rows => Article::BODY_ROWS_SIZE,
                     :cols => Article::BODY_COLS_SIZE,
-                    :height => '400px',
-                    :language => 'ru'
+                    :height => '400px'
                     %>
 </p>
 
 <p>
-  <%= f.label :header_image %>
-  <%= f.file_field :header_image %>
+  <%= f.label :article_header_image %>
+  <%= f.file_field :article_header_image %>
 </p>
 
 <p>
