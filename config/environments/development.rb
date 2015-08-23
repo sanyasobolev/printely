@@ -35,20 +35,4 @@ Printely::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  #paperclip options
-  Paperclip.options[:command_path] = "/usr/bin/"
-
-  Paperclip.interpolates :assets_host  do |attachment, style|
-      "http://localhost:3000"
-  end
-
-  Paperclip.interpolates :order_created do |attachment, style|
-    attachment.instance.order.created_at.to_formatted_s(:day_month_year)
-  end
-  Paperclip.interpolates :order_number do |attachment, style|
-    attachment.instance.order.id
-  end
-  Paperclip.interpolates :name_docfile do |attachment, style|
-    @str = "#{attachment.instance.id}_#{attachment.instance.print_format.parameterize}_#{attachment.instance.paper_type.parameterize}_#{attachment.instance.quantity}_#{attachment.instance.margins.parameterize}_#{attachment.instance.user_comment.parameterize}"
-  end
 end
