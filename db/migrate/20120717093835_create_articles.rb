@@ -8,7 +8,8 @@ class CreateArticles < ActiveRecord::Migration
       t.column :published_at, :datetime
       t.column :category_id, :integer
       t.column :user_id, :integer
-      t.timestamps
+      t.column :permalink, :string
+      t.timestamps null: false
     end
   end
 

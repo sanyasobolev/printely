@@ -31,7 +31,7 @@
 <p>
   <%= Article.human_attribute_name("category_id") %><br />
   <%= f.collection_select(:category_id,
-                          Category.find(:all),
+                          Category.all,
                           :id,
                           :name) %>
 </p>

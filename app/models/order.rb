@@ -1,22 +1,6 @@
 # encoding: utf-8
 class Order < ActiveRecord::Base
 
-  attr_accessible :delivery_town_id, 
-                  :delivery_street, 
-                  :delivery_address, 
-                  :delivery_date, 
-                  :delivery_start_time, 
-                  :delivery_end_time,  
-                  :delivery_price, 
-                  :delivery_type, 
-                  :documents_attributes, 
-                  :order_status_id, 
-                  :cost, 
-                  :manager_comment, 
-                  :created_at, 
-                  :order_type_id,
-                  :documents_price
-
   belongs_to :user
   belongs_to :order_status, :class_name => "Lists::OrderStatus"
   belongs_to :order_type, :class_name => "Lists::OrderType"
@@ -44,18 +28,6 @@ class Order < ActiveRecord::Base
     self.update_attribute(:documents_price, full_documents_cost)
   end  
 
-#  validates :delivery_street, :presence => {
-#    :message => "Заполните, пожалуйста, регион доставки."
-#  }
-  
-#  validates :delivery_address, :presence => {
-#    :message => "Заполните, пожалуйста, адрес доставки."
-#  }
-  
-#  validates :delivery_date, :presence => {
-#    :message => "Заполните, пожалуйста, дату доставки."
-#  }
-  
   def get_document_specification
      @lines = Hash.new
      Lists::PaperSpecification.all.each do |pspec|

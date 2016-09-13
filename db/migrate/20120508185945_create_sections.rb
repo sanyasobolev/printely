@@ -6,7 +6,8 @@ class CreateSections < ActiveRecord::Migration
       t.column :order, :integer
       t.column :controller, :string, :default => 'no'
       t.column :action, :string, :default => 'no'
-      t.timestamps
+      t.column :published, :boolean, :default => false
+      t.timestamps null: false
     end
   end
 

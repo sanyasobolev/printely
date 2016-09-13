@@ -13,7 +13,7 @@ class CreateCkeditorAssets < ActiveRecord::Migration
 		  t.integer :width
 		  t.integer :height
 		  
-      t.timestamps
+      t.timestamps null: false
     end
     
     add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"

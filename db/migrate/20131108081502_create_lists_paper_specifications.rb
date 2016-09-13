@@ -4,7 +4,7 @@ class CreateListsPaperSpecifications < ActiveRecord::Migration
       t.integer :paper_type_id
       t.integer :paper_size_id
       t.boolean :in_stock
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

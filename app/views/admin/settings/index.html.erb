@@ -6,22 +6,23 @@
 		<p>Контент сайта</p>
 	</div>
 	<div class="first_level">
-	<%= link_to 'Разделы верхнего меню', admin_sections_path %><br/>
-	<%= link_to 'Подразделы верхнего меню', admin_subsections_path %><br/>
-	<%= link_to 'Страницы', admin_pages_path %><br/>
+	<%= link_to 'Разделы сайта', admin_sections_path %><br/>
+	<%= link_to 'Страницы сайта', admin_pages_path %><br/>
 	<%= link_to 'Статьи и новости', admin_articles_path %><br/>
 	<%= link_to 'Категории статей', admin_categories_path %><br/>
 	<%= link_to 'Услуги',  admin_services_path%><br/>
 	<%= link_to 'Подуслуги',  admin_subservices_path%><br/>
 	</div>
-	<div class="zero_level">
-		<p>Доступ</p>
-	</div>
-	<div class="first_level">
-	<%= link_to 'Пользователи', admin_users_path %><br/>
-	<%= link_to 'Роли', admin_roles_path %><br/>
-	<%= link_to 'Права', admin_rights_path %><br/>	
-	</div>
+	
+	<% if current_user.admin? %>
+		<div class="zero_level">
+			<p>Доступ</p>
+		</div>
+		<div class="first_level">
+			<%= link_to 'Учетные записи', admin_users_path %><br/>
+			<%= link_to 'Роли', admin_roles_path %><br/>
+		</div>		
+	<%end%>
 	
 	<div class="zero_level">
 		<p>Управление заказами</p>

@@ -5,11 +5,9 @@ class CreateListsPaperTypes < ActiveRecord::Migration
       t.string :paper_type
       t.integer :paper_grade_id
       t.integer :paper_density_id
-      t.timestamps
+      t.timestamps null: false
     end
 
-    Lists::PaperType.create(:paper_type => 'Глянцевая')
-    Lists::PaperType.create(:paper_type => 'Матовая')
-    Lists::PaperType.create(:paper_type => 'Сатин')
+
   end
 end

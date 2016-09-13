@@ -405,14 +405,8 @@ a.boardlink:hover, a.boardlink:active {
     color: #F7941D;
     text-decoration:none;
 }
-a#forgot_password{
-  width: 160px;
-  position: absolute;
-  left: 720px;
-  top: -10px;
-}
 
-a#sign_in {
+a#sign_up {
     background-color: white;
     border: 0 none;
     color: #0072c5;
@@ -420,7 +414,15 @@ a#sign_in {
     margin: 20px 20px 0 0;
 }
 
-a.cancel, a#forgot_password{
+a#forgot_your_password {
+    background-color: white;
+    border: 0 none;
+    color: #0072c5;
+    font-size: 1em;
+    margin: 0 0 20px 20px ;
+}
+
+a.cancel{
     background-color: white;
     border: 0 none;
     color: #0072c5;
@@ -430,7 +432,7 @@ a.cancel, a#forgot_password{
     margin: 20px 20px 0 0;
 }
 
-a.cancel:hover, a#forgot_password:hover , a#sign_in:hover{
+a.cancel:hover, a#forgot_your_password:hover , a#sign_up:hover{
     cursor: pointer;
     color: black;
     text-decoration: none;

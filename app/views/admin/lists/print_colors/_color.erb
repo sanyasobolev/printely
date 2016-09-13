@@ -1,5 +1,5 @@
 <tr class="grey_on_hover">
-  <td><%= link_to 'X', admin_lists_print_color_path(color), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%= link_to 'X', admin_lists_print_color_path(color), data: {confirm: 'Действительно хотите удалить?'}, :method => :delete %></td>
   <td><%=h (color.color) %></td>
   <td><%=h (color.price) %></td>
   <td><%=h (color.order_type.title) %></td>

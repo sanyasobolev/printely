@@ -16,7 +16,7 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(params[:category])
+    @category = Category.new(category_params)
     respond_to do |wants|
       if @category.save
         flash[:notice] = 'Категория создана'
@@ -30,14 +30,14 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find_by_permalink(params[:id])
+    @category = Category.find_by permalink: params[:id]
     @title = "Редактирование категории - #{@category.name}"
   end
 
   def update
-    @category = Category.find_by_permalink(params[:id])
+    @category = Category.find_by permalink: params[:id]
     respond_to do |wants|
-    if @category.update_attributes(params[:category])
+    if @category.update_attributes(category_params)
         flash[:notice] = 'Категория обновлена'
         wants.html { redirect_to admin_categories_path }
         wants.xml { render :xml => @category.to_xml }
@@ -49,12 +49,18 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find_by_permalink(params[:id])
+    @category = Category.find_by permalink: params[:id]
     @category.destroy
     respond_to do |wants|
       wants.html { redirect_to admin_categories_path }
       wants.xml { render :nothing => true }
     end
+  end
+
+  private
+  
+  def category_params
+    params.require(:category).permit(:name)
   end
 
 end

@@ -6,8 +6,7 @@ class CreateSubservices < ActiveRecord::Migration
       t.column :synopsis, :string
       t.column :service_id, :integer
       t.column :permalink, :string
-      t.has_attached_file :subservice_header_icon
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

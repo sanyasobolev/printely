@@ -186,6 +186,14 @@ img.document_uploaded_thumb {
 
 /*divs---------------------*/
 
+div#remember_me{
+  width: 160px;
+  position: absolute;
+  left: 720px;
+  top: 8px;
+}
+
+
 div.paper_size, .paper_type, .quantity {
 	height: 33px;
 	margin: 10px 20px 0px 20px;

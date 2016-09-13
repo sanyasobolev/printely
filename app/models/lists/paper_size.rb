@@ -1,7 +1,5 @@
 # encoding: utf-8
 class Lists::PaperSize < ActiveRecord::Base
-  attr_accessible :size, :id, :size_iso_216, :width, :length
-
   before_create :create_size
   before_save :update_size
 
@@ -10,10 +8,10 @@ class Lists::PaperSize < ActiveRecord::Base
   has_many :documents, :through => :paper_specifications
   has_many :pricelist_scans
   
-  default_scope order('size asc')  
-  scope :available_paper_sizes, lambda { 
-      |order_type| joins(:paper_specifications => :order_type).where("lists_order_types.title = ? OR lists_order_types.title = ?", order_type, 'all').where('lists_paper_specifications.in_stock' => true).uniq.order('lists_paper_sizes.size')
-  }
+  default_scope {order('size asc')} 
+  scope :available_paper_sizes, -> {lambda { 
+      |order_type| joins(:paper_specifications => :order_type).where("lists_order_types.title = ? OR lists_order_types.title = ?", order_type, 'all').where('lists_paper_specifications.in_stock' => true).uniq
+  }}
 
   def self.default_paper_size(order_type)
     available_paper_sizes(order_type.title).first
@@ -56,7 +54,7 @@ class Lists::PaperSize < ActiveRecord::Base
       length_cm = length/10.0
     end
       
-    @attributes['size'] = "#{width_cm}" + "×" + "#{length_cm}"
+    self[:size] = "#{width_cm}" + "×" + "#{length_cm}"
   end
 
   def update_size

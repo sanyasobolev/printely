@@ -7,7 +7,7 @@ class CreateMailings < ActiveRecord::Migration
       t.integer :all_mails, :default => 0
       t.boolean :published, :default => false
       t.datetime :published_at
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

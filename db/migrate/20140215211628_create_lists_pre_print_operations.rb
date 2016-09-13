@@ -3,7 +3,7 @@ class CreateListsPrePrintOperations < ActiveRecord::Migration
     create_table :lists_pre_print_operations do |t|
       t.string :operation
       t.float :price, :default => 0
-      t.timestamps
+      t.timestamps null: false
     end
 
     create_table :documents_pre_print_operations, :id => false do |t|

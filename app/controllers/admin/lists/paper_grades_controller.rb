@@ -12,7 +12,7 @@ class Admin::Lists::PaperGradesController < ApplicationController
 
   def update
     @grade = ::Lists::PaperGrade.find(params[:id])
-    if @grade.update_attributes(params[:grade])
+    if @grade.update_attributes(paper_grade_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -26,7 +26,7 @@ class Admin::Lists::PaperGradesController < ApplicationController
   end
 
   def create
-    @grade = ::Lists::PaperGrade.new(params[:grade])
+    @grade = ::Lists::PaperGrade.new(paper_grade_params)
     if @grade.save
       flash[:notice] = 'Класс создан удачно.'
       redirect_to :action => 'index'
@@ -39,5 +39,11 @@ class Admin::Lists::PaperGradesController < ApplicationController
     ::Lists::PaperGrade.find(params[:id]).destroy
     redirect_to :action => 'index'
   end
+
+  private
   
+  def paper_grade_params
+    params.require(:grade).permit(:grade)
+  end
+
 end

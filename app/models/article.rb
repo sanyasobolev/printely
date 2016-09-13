@@ -1,14 +1,6 @@
 # encoding: utf-8
 class Article < ActiveRecord::Base
 
-attr_accessible :title, 
-                :synopsis, 
-                :this_news, 
-                :body, 
-                :category_id, 
-                :published, 
-                :article_header_image
-
 mount_uploader :article_header_image, ArticleHeaderImageUploader
 
 belongs_to :user
@@ -58,11 +50,12 @@ BODY_COLS_SIZE = 60
     :maximum => BODY_MAX_LENGTH
   }
 
-  scope :articles_for_user, where("published=true AND this_news=false").order('created_at DESC') 
-  scope :news_for_user, where("published=true AND this_news=true").order('created_at DESC') 
-  scope :news_for_welcome, where("published=true AND this_news=true").order('created_at DESC').limit(2)
-  scope :articles_for_user_with_category, lambda { |category| where("category_id=#{category.id.to_i} AND published=true AND this_news=false").order('created_at DESC')} 
-
+  default_scope {order(published_at: :desc)}
+  scope :articles_for_user, -> {where("published=true AND this_news=false").order('created_at DESC')} 
+  scope :news_for_user, -> {where("published=true AND this_news=true").order('created_at DESC') }
+  scope :news_for_welcome, -> {where("published=true AND this_news=true").order('created_at DESC').limit(2)}
+  scope :articles_for_user_with_category, ->(category) { where("category_id=#{category.id.to_i} AND published=true AND this_news=false").order('created_at DESC')}
+  scope :show, ->(permalink) {where("published=true AND permalink=?", permalink).first! }
 
   def update_published_at
     self.published_at = Time.now if published == true
@@ -70,7 +63,7 @@ BODY_COLS_SIZE = 60
 
   #транслитерация названия статьи в ссылку
   def create_permalink
-    @attributes['permalink'] = title.parameterize
+    self[:permalink] = title.parameterize
   end
 
   def update_permalink

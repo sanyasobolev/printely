@@ -13,7 +13,7 @@ class Admin::Lists::PaperSizesController < ApplicationController
 
   def update
     @size = ::Lists::PaperSize.find(params[:id])
-    if @size.update_attributes(params[:size])
+    if @size.update_attributes(paper_size_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -27,7 +27,7 @@ class Admin::Lists::PaperSizesController < ApplicationController
   end
 
   def create
-    @size = ::Lists::PaperSize.new(params[:size])
+    @size = ::Lists::PaperSize.new(paper_size_params)
     if @size.save
       flash[:notice] = 'Размер создан удачно.'
       redirect_to :action => 'index'
@@ -41,5 +41,10 @@ class Admin::Lists::PaperSizesController < ApplicationController
     redirect_to :action => 'index'
   end
   
+  private
+  
+  def paper_size_params
+    params.require(:size).permit(:size, :size_iso_216, :width, :length)
+  end
 
 end

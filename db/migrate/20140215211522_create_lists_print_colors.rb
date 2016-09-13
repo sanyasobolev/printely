@@ -3,7 +3,7 @@ class CreateListsPrintColors < ActiveRecord::Migration
     create_table :lists_print_colors do |t|
       t.string :color
       t.float :price, :default => 0
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

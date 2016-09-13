@@ -1,5 +1,5 @@
 <tr class="grey_on_hover">
-  <td><%= link_to 'X', admin_lists_paper_density_path(density), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%= link_to 'X', admin_lists_paper_density_path(density), data: {confirm: 'Действительно хотите удалить?'}, :method => :delete %></td>
   <td><%=h (density_to_ru(density.density)) %></td>
   <td><%= link_to 'Редактировать', edit_admin_lists_paper_density_path(density) %></td>
 </tr>

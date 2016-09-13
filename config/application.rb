@@ -4,9 +4,9 @@ require 'rails/all'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  # Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
+  Bundler.require(:default, Rails.env)
 end
 
 module Printely
@@ -36,6 +36,16 @@ module Printely
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
      config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
      config.i18n.default_locale = :ru
+     
+     config.i18n.enforce_available_locales = true
+        #The possible values are:
+        #false: if you
+          #want to skip the locale validation
+          #don't care about locales
+        #true: if you
+          #want the application to raise an error if an invalid locale is passed (or)
+          #want to default to the new Rails behaviors (or)
+          #care about locale validation
 
 
     # Configure the default encoding used in templates for Ruby 1.9.
@@ -49,12 +59,6 @@ module Printely
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
 
-    # Enforce whitelist mode for mass assignment.
-    # This will create an empty whitelist of attributes available for mass-assignment for all models
-    # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
-    # parameters by using an attr_accessible or attr_protected declaration.
-    config.active_record.whitelist_attributes = true
-
      # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
@@ -66,5 +70,7 @@ module Printely
     #config.assets.paths << Rails.root.join("app", "assets", "javascripts", "validation")
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     Rails.application.config.assets.compress = true
+    
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

@@ -13,7 +13,7 @@ class Admin::RightsController < ApplicationController
 
   def update
     @right = Right.find(params[:id])
-    if @right.update_attributes(params[:right])
+    if @right.update_attributes(right_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -27,7 +27,7 @@ class Admin::RightsController < ApplicationController
   end
 
   def create
-    @right = Right.new(params[:right])
+    @right = Right.new(right_params)
     if @right.save
       flash[:notice] = 'Право создано удачно.'
       redirect_to :action => 'index'
@@ -39,6 +39,12 @@ class Admin::RightsController < ApplicationController
   def destroy
     Right.find(params[:id]).destroy
     redirect_to :action => 'index'
+  end
+  
+  private
+  
+  def right_params
+    params.require(:right).permit(:name, :controller, :action, :description)
   end
   
   

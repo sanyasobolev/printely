@@ -1,7 +1,7 @@
 <% if @page_about_services %>
   <%= render :partial => 'pages/show_page', :locals => {:page => @page_about_services} %>
 <% else %>
-  <%= render :text => 'Страница описания раздела удалена или не опубликована' %>
+  <%= render :plain => 'Страница описания раздела удалена или не опубликована' %>
 <% end %>
 
 <%= render :partial => 'service', :collection => @services %>

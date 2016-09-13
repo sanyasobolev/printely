@@ -5,7 +5,7 @@
         <td class="delivery_location_edit">
         	<div class="delivery_town">
 	            <%= order.collection_select(:delivery_town_id,
-						                      Lists::DeliveryTown.find(:all),
+						                      Lists::DeliveryTown.all,
 						                      :id,
 						                      :title,
 						                      { :prompt => true},

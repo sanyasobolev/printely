@@ -1,16 +1,6 @@
 # encoding: utf-8
 class DocumentsController < ApplicationController
-
-  skip_before_filter :authorized?,
-                     :only => [
-                       :create, 
-                       :destroy, 
-                       :update, 
-                       :get_paper_sizes, 
-                       :get_paper_types, 
-                       :get_print_margins, 
-                       :get_print_colors
-                       ]
+  before_filter :login_required
 
   skip_before_filter :verify_authenticity_token,
                      :only => [:create]
@@ -44,7 +34,7 @@ class DocumentsController < ApplicationController
             flash[:error] = 'File could not be uploaded'
           else
             format.js do
-              render :text => render_to_string(:partial => "documents/#{@order.order_type.title}/document", :locals => {:document => @document})
+              render :plain => render_to_string(:partial => "documents/#{@order.order_type.title}/document", :locals => {:document => @document})
             end
           end
         end   
@@ -60,7 +50,7 @@ class DocumentsController < ApplicationController
              flash[:error] = 'File could not be uploaded'
            else
              format.js do
-               render :text => 'file created', :status => 200, :content_type => 'text/html'
+               render :plain => 'file created', :status => 200
              end
            end
          end 
@@ -77,19 +67,19 @@ class DocumentsController < ApplicationController
   end
 
   def update
-    @document = Document.find_by_id(params[:id])
+    @document = Document.find(params[:id])
     
     case params[:order_type]
       when 'foto_print'
         if params[:margins] #на случай если придет только quantity
           @document.paper_specification = Lists::PaperSpecification.find_paper_specification(params[:paper_size], params[:paper_type])
-          @document.print_margin = Lists::PrintMargin.find_by_id(params[:margins])     
+          @document.print_margin = Lists::PrintMargin.find(params[:margins])     
         end
       when 'doc_print'
         if params[:print_color]#на случай если придет только quantity
           @document.paper_specification = Lists::PaperSpecification.find_paper_specification(params[:paper_size], params[:paper_type])
-          @document.print_color = Lists::PrintColor.find_by_id(params[:print_color])
-          @document.binding = Lists::Binding.find_by_id(params[:binding])
+          @document.print_color = Lists::PrintColor.find(params[:print_color])
+          @document.binding = Lists::Binding.find(params[:binding])
         end
       when 'envelope_print'
         if params[:paper_type]#на случай если придет только quantity
@@ -103,7 +93,7 @@ class DocumentsController < ApplicationController
     end
     
     if params[:pre_print_operation]
-      pre_print_operation = Lists::PrePrintOperation.find_by_id(params[:pre_print_operation].to_i)
+      pre_print_operation = Lists::PrePrintOperation.find(params[:pre_print_operation].to_i)
       if params[:check_status].to_i == 1
         @document.pre_print_operations << pre_print_operation
       else
@@ -244,7 +234,7 @@ class DocumentsController < ApplicationController
 
   private
     def find_order
-      @order = Order.find_by_id(params[:order_id])
+      @order = Order.find(params[:order_id])
       raise ActiveRecord::RecordNotFound unless @order
     end
 

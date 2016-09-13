@@ -5,16 +5,8 @@ class CreateServices < ActiveRecord::Migration
       t.column :title, :string
       t.column :synopsis, :string
       t.column :permalink, :string
-      t.has_attached_file :service_header_icon
-      t.timestamps
+      t.timestamps null: false
     end
-    #    создание страницы для описания всех услуг
-    Page.create(
-    :id => '2',
-    :title => 'services',
-    :permalink => 'services',
-    :body => 'Эта страница с описанием всех услуг',
-    :user_id => '1',
-    :published => true)
+
   end
 end

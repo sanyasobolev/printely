@@ -4,7 +4,7 @@ class CreateListsScanSpecifications < ActiveRecord::Migration
       t.integer :paper_size_id
       t.float :price, :default => 0
       t.integer :order_type_id, :default => 1
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

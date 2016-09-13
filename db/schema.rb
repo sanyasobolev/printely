@@ -9,342 +9,353 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140602185927) do
+ActiveRecord::Schema.define(version: 20150914142857) do
 
-  create_table "articles", :force => true do |t|
-    t.string   "title"
-    t.text     "synopsis"
-    t.text     "body"
-    t.boolean  "published",                 :default => false
+  create_table "articles", force: :cascade do |t|
+    t.string   "title",                limit: 255
+    t.text     "synopsis",             limit: 65535
+    t.text     "body",                 limit: 65535
+    t.boolean  "published",                          default: false
     t.datetime "published_at"
-    t.integer  "category_id",               :default => 1
-    t.integer  "user_id"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
-    t.string   "header_image_file_name"
-    t.string   "header_image_content_type"
-    t.integer  "header_image_file_size"
-    t.datetime "header_image_updated_at"
-    t.string   "permalink"
-    t.boolean  "this_news",                 :default => false
+    t.integer  "category_id",          limit: 4
+    t.integer  "user_id",              limit: 4
+    t.string   "permalink",            limit: 255
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.boolean  "this_news",                          default: false
+    t.string   "article_header_image", limit: 255
   end
 
-  create_table "categories", :force => true do |t|
-    t.string   "name"
-    t.string   "permalink"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "canvas_settings_paper_specifications", id: false, force: :cascade do |t|
+    t.integer "canvas_setting_id",      limit: 4
+    t.integer "paper_specification_id", limit: 4
   end
 
-  create_table "ckeditor_assets", :force => true do |t|
-    t.string   "data_file_name",                  :null => false
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.integer  "assetable_id"
-    t.string   "assetable_type",    :limit => 30
-    t.string   "type",              :limit => 30
-    t.integer  "width"
-    t.integer  "height"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "permalink",  limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",    limit: 255, null: false
+    t.string   "data_content_type", limit: 255
+    t.integer  "data_file_size",    limit: 4
+    t.integer  "assetable_id",      limit: 4
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width",             limit: 4
+    t.integer  "height",            limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
-  create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0, :null => false
-    t.integer  "attempts",   :default => 0, :null => false
-    t.text     "handler",                   :null => false
-    t.text     "last_error"
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   limit: 4,     default: 0, null: false
+    t.integer  "attempts",   limit: 4,     default: 0, null: false
+    t.text     "handler",    limit: 65535,             null: false
+    t.text     "last_error", limit: 65535
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.string   "locked_by",  limit: 255
+    t.string   "queue",      limit: 255
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "documents", :force => true do |t|
-    t.integer  "order_id"
-    t.string   "docfile"
-    t.text     "user_comment"
-    t.integer  "quantity",               :default => 1
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
-    t.float    "price"
-    t.string   "user_filename"
-    t.integer  "page_count",             :default => 1
-    t.integer  "paper_specification_id"
-    t.float    "cost"
-    t.integer  "print_margin_id"
-    t.integer  "print_color_id"
-    t.integer  "binding_id"
+  create_table "documents", force: :cascade do |t|
+    t.integer  "order_id",                  limit: 4
+    t.string   "docfile",                   limit: 255
+    t.text     "user_comment",              limit: 65535
+    t.integer  "quantity",                  limit: 4,     default: 1
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.float    "price",                     limit: 24,    default: 0.0
+    t.string   "user_filename",             limit: 255
+    t.integer  "document_specification_id", limit: 4
+    t.integer  "page_count",                limit: 4,     default: 1
+    t.integer  "paper_specification_id",    limit: 4
+    t.float    "cost",                      limit: 24,    default: 0.0
+    t.integer  "print_margin_id",           limit: 4
+    t.integer  "print_color_id",            limit: 4
+    t.integer  "binding_id",                limit: 4
   end
 
-  create_table "documents_pre_print_operations", :id => false, :force => true do |t|
-    t.integer "document_id"
-    t.integer "pre_print_operation_id"
+  create_table "documents_pre_print_operations", id: false, force: :cascade do |t|
+    t.integer "document_id",            limit: 4
+    t.integer "pre_print_operation_id", limit: 4
   end
 
-  create_table "letters", :force => true do |t|
-    t.string   "name"
-    t.string   "phone"
-    t.string   "email"
-    t.text     "question"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "embedded_images", force: :cascade do |t|
+    t.integer  "document_id", limit: 4
+    t.string   "imgfile",     limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
-  create_table "lists_bindings", :force => true do |t|
-    t.string   "binding"
-    t.float    "price",      :default => 0.0
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+  create_table "letters", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "phone",      limit: 255
+    t.string   "email",      limit: 255
+    t.text     "question",   limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
-  create_table "lists_delivery_towns", :force => true do |t|
-    t.string   "title"
-    t.integer  "delivery_zone_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+  create_table "lists_bindings", force: :cascade do |t|
+    t.string   "binding",    limit: 255
+    t.float    "price",      limit: 24,  default: 0.0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
-  create_table "lists_delivery_zones", :force => true do |t|
-    t.string   "title"
-    t.float    "price",      :default => 0.0
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+  create_table "lists_canvas_settings", force: :cascade do |t|
+    t.integer  "margin_top",  limit: 4, default: 0
+    t.integer  "margin_left", limit: 4, default: 0
+    t.integer  "width",       limit: 4, default: 100
+    t.integer  "height",      limit: 4, default: 100
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  create_table "lists_order_statuses", :force => true do |t|
-    t.string   "title"
-    t.integer  "key"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "lists_delivery_towns", force: :cascade do |t|
+    t.string   "title",            limit: 255
+    t.integer  "delivery_zone_id", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
-  create_table "lists_order_types", :force => true do |t|
-    t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "lists_delivery_zones", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.float    "price",      limit: 24,  default: 0.0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
-  create_table "lists_paper_grades", :force => true do |t|
-    t.string   "grade"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "lists_order_statuses", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.integer  "key",        limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "lists_paper_sizes", :force => true do |t|
-    t.string   "size"
-    t.string   "size_iso_216"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+  create_table "lists_order_types", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "service_id",  limit: 4
+    t.string   "description", limit: 255
   end
 
-  create_table "lists_paper_specifications", :force => true do |t|
-    t.integer  "paper_type_id"
-    t.integer  "paper_size_id"
+  create_table "lists_paper_densities", force: :cascade do |t|
+    t.integer  "density",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "lists_paper_grades", force: :cascade do |t|
+    t.string   "grade",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "lists_paper_sizes", force: :cascade do |t|
+    t.string   "size",         limit: 255
+    t.string   "size_iso_216", limit: 255
+    t.integer  "width",        limit: 4
+    t.integer  "length",       limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "lists_paper_specifications", force: :cascade do |t|
+    t.integer  "paper_type_id", limit: 4
+    t.integer  "paper_size_id", limit: 4
     t.boolean  "in_stock"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.float    "price"
-    t.integer  "order_type_id", :default => 1
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.float    "price",         limit: 24
+    t.integer  "order_type_id", limit: 4,  default: 1
   end
 
-  create_table "lists_paper_types", :force => true do |t|
-    t.string   "paper_type"
-    t.integer  "paper_grade_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+  create_table "lists_paper_types", force: :cascade do |t|
+    t.string   "paper_type",       limit: 255
+    t.integer  "paper_grade_id",   limit: 4
+    t.integer  "paper_density_id", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
-  create_table "lists_pre_print_operations", :force => true do |t|
-    t.string   "operation"
-    t.float    "price",         :default => 0.0
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.integer  "order_type_id", :default => 1
+  create_table "lists_pre_print_operations", force: :cascade do |t|
+    t.string   "operation",     limit: 255
+    t.float    "price",         limit: 24,  default: 0.0
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "order_type_id", limit: 4,   default: 1
   end
 
-  create_table "lists_print_colors", :force => true do |t|
-    t.string   "color"
-    t.float    "price",         :default => 0.0
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.integer  "order_type_id", :default => 1
+  create_table "lists_print_colors", force: :cascade do |t|
+    t.string   "color",         limit: 255
+    t.float    "price",         limit: 24,  default: 0.0
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "order_type_id", limit: 4,   default: 1
   end
 
-  create_table "lists_print_margins", :force => true do |t|
-    t.string   "margin"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.float    "price",         :default => 0.0
-    t.integer  "order_type_id", :default => 1
+  create_table "lists_print_margins", force: :cascade do |t|
+    t.string   "margin",        limit: 255
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.float    "price",         limit: 24,  default: 0.0
+    t.integer  "order_type_id", limit: 4,   default: 1
   end
 
-  create_table "mailings", :force => true do |t|
-    t.string   "subject"
-    t.text     "body"
-    t.integer  "sent_mails",   :default => 0
-    t.integer  "all_mails",    :default => 0
-    t.boolean  "published",    :default => false
+  create_table "lists_product_backgrounds", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "image",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "lists_scan_specifications", force: :cascade do |t|
+    t.integer  "paper_size_id", limit: 4
+    t.float    "price",         limit: 24, default: 0.0
+    t.integer  "order_type_id", limit: 4,  default: 1
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  create_table "mailings", force: :cascade do |t|
+    t.string   "subject",      limit: 255
+    t.text     "body",         limit: 65535
+    t.integer  "sent_mails",   limit: 4,     default: 0
+    t.integer  "all_mails",    limit: 4,     default: 0
+    t.boolean  "published",                  default: false
     t.datetime "published_at"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
-  create_table "orders", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "delivery_street"
-    t.string   "delivery_address"
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id",             limit: 4
+    t.string   "delivery_street",     limit: 255
+    t.string   "delivery_address",    limit: 255
     t.date     "delivery_date"
     t.time     "delivery_start_time"
     t.time     "delivery_end_time"
-    t.float    "cost"
-    t.text     "manager_comment"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.float    "delivery_price"
-    t.string   "delivery_type"
-    t.float    "cost_min"
-    t.float    "cost_max"
-    t.integer  "order_status_id"
-    t.integer  "order_type_id"
-    t.integer  "delivery_town_id"
+    t.float    "cost",                limit: 24
+    t.text     "manager_comment",     limit: 65535
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.float    "delivery_price",      limit: 24,    default: 0.0
+    t.string   "delivery_type",       limit: 255
+    t.integer  "order_status_id",     limit: 4
+    t.integer  "order_type_id",       limit: 4
+    t.integer  "delivery_town_id",    limit: 4
+    t.float    "documents_price",     limit: 24,    default: 0.0
   end
 
-  create_table "pages", :force => true do |t|
-    t.string   "title"
-    t.string   "permalink"
-    t.text     "body"
-    t.boolean  "published",     :default => false
+  create_table "pages", force: :cascade do |t|
+    t.string   "title",         limit: 255
+    t.string   "permalink",     limit: 255
+    t.text     "body",          limit: 65535
+    t.boolean  "published",                   default: false
     t.datetime "published_at"
-    t.integer  "user_id"
-    t.integer  "section_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.integer  "service_id"
-    t.integer  "subservice_id"
-    t.integer  "subsection_id"
+    t.integer  "user_id",       limit: 4
+    t.integer  "section_id",    limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "service_id",    limit: 4
+    t.integer  "subservice_id", limit: 4
+    t.integer  "subsection_id", limit: 4
   end
 
-  create_table "pricelist_scans", :force => true do |t|
-    t.string   "work_name"
-    t.string   "work_desc"
-    t.float    "price_min",  :default => 0.0
-    t.float    "price_max",  :default => 0.0
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+  create_table "paper_specifications_product_backgrounds", id: false, force: :cascade do |t|
+    t.integer "product_background_id",  limit: 4
+    t.integer "paper_specification_id", limit: 4
   end
 
-  create_table "rights", :force => true do |t|
-    t.string "name"
-    t.string "controller"
-    t.string "action"
-    t.string "description"
-  end
-
-  create_table "rights_roles", :id => false, :force => true do |t|
-    t.integer "right_id"
-    t.integer "role_id"
-  end
-
-  create_table "roles", :force => true do |t|
-    t.string "name"
-  end
-
-  create_table "scans", :force => true do |t|
-    t.integer  "order_id"
-    t.integer  "scan_documents_quantity",            :default => 1
-    t.integer  "base_correction_documents_quantity", :default => 0
-    t.integer  "coloring_documents_quantity",        :default => 0
-    t.integer  "restoration_documents_quantity",     :default => 0
-    t.float    "cost_min"
-    t.float    "cost_max"
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
-  end
-
-  create_table "sections", :force => true do |t|
-    t.string   "title"
-    t.integer  "order"
-    t.string   "controller", :default => "no"
-    t.string   "action",     :default => "no"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "published",  :default => false
-    t.string   "permalink"
-  end
-
-  create_table "services", :force => true do |t|
-    t.string   "title"
-    t.string   "synopsis"
-    t.string   "permalink"
-    t.string   "service_header_icon_file_name"
-    t.string   "service_header_icon_content_type"
-    t.integer  "service_header_icon_file_size"
-    t.datetime "service_header_icon_updated_at"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
-    t.string   "pricelist"
-    t.integer  "order_type_id",                    :default => 1
-  end
-
-  create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
-
-  create_table "subsections", :force => true do |t|
-    t.string   "title"
-    t.integer  "order"
-    t.string   "controller", :default => "no"
-    t.string   "action",     :default => "no"
-    t.boolean  "published",  :default => false
-    t.string   "permalink"
-    t.integer  "section_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
-  create_table "subservices", :force => true do |t|
-    t.string   "title"
-    t.string   "synopsis"
-    t.integer  "service_id"
-    t.string   "permalink"
-    t.string   "subservice_header_icon_file_name"
-    t.string   "subservice_header_icon_content_type"
-    t.integer  "subservice_header_icon_file_size"
-    t.datetime "subservice_header_icon_updated_at"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
-    t.integer  "order_type_id",                       :default => 1
-  end
-
-  create_table "users", :force => true do |t|
-    t.string   "hashed_password"
-    t.string   "salt"
-    t.string   "first_name"
-    t.string   "second_name"
-    t.string   "email"
-    t.string   "phone"
-    t.datetime "remember_token_expires_at"
-    t.string   "remember_token"
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",        limit: 255,   null: false
+    t.string   "title",       limit: 255,   null: false
+    t.text     "description", limit: 65535, null: false
+    t.text     "the_role",    limit: 65535, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "role_id",                   :default => 2
   end
+
+  create_table "sections", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "controller", limit: 255
+    t.string   "action",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "permalink",  limit: 255
+    t.string   "ancestry",   limit: 255
+    t.integer  "position",   limit: 4
+  end
+
+  add_index "sections", ["ancestry"], name: "index_sections_on_ancestry", using: :btree
+
+  create_table "services", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.string   "synopsis",    limit: 255
+    t.string   "permalink",   limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "pricelist",   limit: 255
+    t.string   "header_icon", limit: 255
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", limit: 255,   null: false
+    t.text     "data",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "subservices", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.string   "synopsis",    limit: 255
+    t.integer  "service_id",  limit: 4
+    t.string   "permalink",   limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "header_icon", limit: 255
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name",             limit: 255
+    t.string   "second_name",            limit: 255
+    t.string   "phone",                  limit: 255
+    t.integer  "role_id",                limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

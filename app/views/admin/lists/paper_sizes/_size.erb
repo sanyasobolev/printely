@@ -1,5 +1,5 @@
 <tr class="grey_on_hover">
-  <td><%= link_to 'X', admin_lists_paper_size_path(size), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%= link_to 'X', admin_lists_paper_size_path(size), data: {confirm: 'Действительно хотите удалить?'}, :method => :delete %></td>
   <td><%=h (size.width) %></td>
   <td><%=h (size.length) %></td>
   <td><%=h (size.size) %></td>

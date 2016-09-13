@@ -13,7 +13,7 @@ class Admin::Lists::PaperTypesController < ApplicationController
 
   def update
     @paper_type = ::Lists::PaperType.find(params[:id])
-    if @paper_type.update_attributes(params[:paper_type])
+    if @paper_type.update_attributes(paper_types_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -27,7 +27,7 @@ class Admin::Lists::PaperTypesController < ApplicationController
   end
 
   def create
-    @paper_type = ::Lists::PaperType.new(params[:paper_type])
+    @paper_type = ::Lists::PaperType.new(paper_types_params)
     if @paper_type.save
       flash[:notice] = 'Тип создан удачно.'
       redirect_to :action => 'index'
@@ -39,6 +39,13 @@ class Admin::Lists::PaperTypesController < ApplicationController
   def destroy
     ::Lists::PaperType.find(params[:id]).destroy
     redirect_to :action => 'index'
+  end
+
+
+  private
+  
+  def paper_types_params
+    params.require(:paper_type).permit(:paper_type, :paper_grade_id, :paper_density_id)
   end
 
 

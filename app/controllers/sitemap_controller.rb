@@ -1,14 +1,12 @@
 # encoding: utf-8
 class SitemapController < ApplicationController
-  skip_before_filter :login_required, :authorized?
   layout 'sitemap'
   
   def index
     @title = 'Карта сайта'
     @count_in_column = 3 #количество разделов в столбце
     #поиск всех опубликованных разделов
-    @sections = Section.find(:all,
-                             :conditions => 'published=true')
+    @sections = Section.all
     i=1
     @left_sections=[]
     @right_sections=[]

@@ -23,7 +23,7 @@
 <div class="form_align">
   <%= f.label :service_id %>
   <%= f.collection_select(:service_id,
-                          Service.find(:all),
+                          Service.all,
                           :id,
                           :title) %>
 </div>

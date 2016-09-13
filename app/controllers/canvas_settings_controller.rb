@@ -1,7 +1,6 @@
 class CanvasSettingsController < ApplicationController
-
-  skip_before_filter :authorized?,
-                     :only => [:show]
+  
+  before_filter :login_required
   
   def show
     @pspec = Lists::PaperSpecification.find_paper_specification(params[:selected_paper_size], params[:selected_paper_type])

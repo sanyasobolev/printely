@@ -2,27 +2,23 @@
 class OrdersController < ApplicationController
   layout 'order', :only => [:index, :my, :show]
   
-  skip_before_filter :authorized?,
-                     :only => [:index, 
-                               :my, 
-                               :new, 
-                               :show, 
-                               :destroy, 
-                               :set_documents_price, 
-                               :set_delivery_price
-                               ]
+  before_filter :login_required
+  
+  before_action :find_order, :only => [:show,
+                                       :destroy,
+                                       :set_documents_price,
+                                       :set_delivery_price
+                                       ]
+                                          
+  before_action :owner_required, :only => [:show,
+                                          :destroy,
+                                          :set_documents_price,
+                                          :set_delivery_price
+                                          ]
 
-  before_filter :your_order?,
-                :only => [:show,
-                          :destroy,
-                          :set_documents_price,
-                          :set_delivery_price
-                          ]
-
-  skip_before_filter :verify_authenticity_token,
-                     :only => [:new, 
-                               :show
-                               ]
+  skip_before_action :verify_authenticity_token, :only => [:new, 
+                                                           :show
+                                                           ]
 
   def index
     @title = 'Личный кабинет'
@@ -104,7 +100,13 @@ class OrdersController < ApplicationController
  end
 
   private
-  
+
+  def find_order
+    @order = Order.find(params[:id])
+    #theRole
+    for_ownership_check(@order)
+  end
+
   def update_delivery_price(order)
       if order.delivery_type == 'Курьер'
         #ищем цену доставки в прайсе и проверяем есть ли уже заказы на дату

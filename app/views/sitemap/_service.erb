@@ -1,9 +1,8 @@
 <div class="first_level">
   <%= link_to service.title, service_subservices_path(service), :class => "site_map_link" %>
 </div>
-<% subservices = Subservice.find(:all,
-                                 :order => 'title',
-                                 :conditions => "service_id=#{service.id.to_i}") %>
+<% subservices = Subservice.for_service(service)
+
 <% if subservices %>
   <%= render :partial => 'subservice', :collection => subservices, :locals => {:service => service} %>
 <% end %>

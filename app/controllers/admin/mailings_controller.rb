@@ -6,7 +6,7 @@ class Admin::MailingsController < ApplicationController
 
   def index
     @title = 'Рассылки'
-    @mailings = Mailing.find(:all, :order => 'created_at DESC')
+    @mailings = Mailing.all
   end
    
   def new
@@ -15,7 +15,7 @@ class Admin::MailingsController < ApplicationController
   end
 
   def create
-    @mailing = Mailing.new(params[:mailing])
+    @mailing = Mailing.new(mailing_params)
     @mailing.all_mails = User.all.count
     respond_to do |wants|
       if @mailing.save
@@ -39,8 +39,8 @@ class Admin::MailingsController < ApplicationController
   end
 
   def update
-    @mailing = Mailing.find_by_id(params[:id])
-    @mailing.attributes = params[:mailing]
+    @mailing = Mailing.find(params[:id])
+    @mailing.attributes = mailing_params
     @mailing.sent_mails = 0
     respond_to do |wants|
       if @mailing.save
@@ -72,11 +72,17 @@ class Admin::MailingsController < ApplicationController
   private
   
     def set_published_false
-      @mailing = Mailing.find_by_id(params[:id])
+      @mailing = Mailing.find(params[:id])
       if @mailing.published == true
          @mailing.published = false
          @mailing.save
       end
     end
+    
+  def mailing_params
+    params.require(:mailing).permit(:subject, :body, :sent_mails, :all_mails, :published)
+  end   
+ 
+
   
 end

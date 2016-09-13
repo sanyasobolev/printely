@@ -12,7 +12,7 @@ class Admin::Lists::ProductBackgroundsController < ApplicationController
   end
 
   def create
-    @productbg = ::Lists::ProductBackground.new(params[:productbg])
+    @productbg = ::Lists::ProductBackground.new(product_background_params)
     if @productbg.save
       flash[:notice] = 'Загружено успешно'
       redirect_to :action => 'index'
@@ -28,7 +28,7 @@ class Admin::Lists::ProductBackgroundsController < ApplicationController
 
   def update
     @productbg = ::Lists::ProductBackground.find(params[:id])
-    if @productbg.update_attributes(params[:productbg])
+    if @productbg.update_attributes(product_background_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -41,6 +41,12 @@ class Admin::Lists::ProductBackgroundsController < ApplicationController
     redirect_to :action => 'index'
   end
 
-
+  private
+  
+  def product_background_params
+    params.require(:productbg).permit(:title, 
+                                      :image, 
+                                      :image_cache)
+  end
 
 end

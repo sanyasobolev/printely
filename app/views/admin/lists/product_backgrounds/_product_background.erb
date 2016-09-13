@@ -1,5 +1,5 @@
 <tr class="grey_on_hover">
-  <td><%= link_to 'X', admin_lists_product_background_path(product_background), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%= link_to 'X', admin_lists_product_background_path(product_background), data: {confirm: 'Действительно хотите удалить?'}, :method => :delete %></td>
   <td><%= product_background.title %></td>
   <td><%= link_to 'Редактировать', edit_admin_lists_product_background_path(product_background) %></td>
 </tr>

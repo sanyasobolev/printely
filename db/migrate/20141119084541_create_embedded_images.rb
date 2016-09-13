@@ -5,7 +5,7 @@ class CreateEmbeddedImages < ActiveRecord::Migration
       t.string :imgfile
       t.column :created_at, :datetime 
       t.column :updated_at, :datetime
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

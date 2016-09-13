@@ -15,7 +15,7 @@ class UserMailer < ActionMailer::Base
     @status = Lists::OrderStatus.where(:id => order.order_status_id).first.title
     @myoffice  = "http://printely.ru/myoffice"
     @url_to_order = "http://printely.ru/orders/#{@order.id}"
-    @user = User.find_by_id(order.user_id)
+    @user = User.find(order.user_id)
     mail(:to => @user.email, :subject => "Заказ №#{@order.id} создан и находится #{@status}")
   end
 
@@ -25,7 +25,7 @@ class UserMailer < ActionMailer::Base
     @status = Lists::OrderStatus.where(:id => order.order_status_id).first.title
     @myoffice  = "http://printely.ru/myoffice"
     @url_to_order = "http://printely.ru/orders/#{@order.id}"
-    @user = User.find_by_id(order.user_id)
+    @user = User.find(order.user_id)
     mail(:to => @user.email, :subject => "Заказ №#{@order.id} #{@status}")
   end
 
@@ -34,14 +34,14 @@ class UserMailer < ActionMailer::Base
     @order = order
     @status = Lists::OrderStatus.where(:id => order.order_status_id).first.title
     @url_to_letters = "http://printely.ru/letters/new"
-    @user = User.find_by_id(order.user_id)
+    @user = User.find(order.user_id)
     mail(:to => @user.email, :subject => "Заказ №#{@order.id} #{@status}")
   end
   
   #рассылка при удалении заказа
   def email_user_about_remove_order(order)
     @order = order
-    @user = User.find_by_id(order.user_id)
+    @user = User.find(order.user_id)
     mail(:to => @user.email, :subject => "Заказ №#{@order.id} будет удален из системы")
   end
 
@@ -49,7 +49,7 @@ class UserMailer < ActionMailer::Base
    def self.email_all_admins_about_new_user(new_user)
      @admins = User.where(:role_id => "1")
      @admins.each do |admin|
-       email_about_new_user(admin, new_user).deliver
+       email_about_new_user(admin, new_user).deliver_now
      end
    end
 
@@ -61,7 +61,7 @@ class UserMailer < ActionMailer::Base
    def self.email_all_admins_about_new_order(new_order)
      @admins = User.where(:role_id => "1")
      @admins.each do |admin|
-       email_about_new_order(admin, new_order).deliver
+       email_about_new_order(admin, new_order).deliver_now
      end
    end
 
@@ -74,7 +74,7 @@ class UserMailer < ActionMailer::Base
    def self.email_all_admins_about_new_letter(new_letter)
      @admins = User.where(:role_id => "1")
      @admins.each do |admin|
-       email_about_new_letter(admin, new_letter).deliver
+       email_about_new_letter(admin, new_letter).deliver_now
      end
    end
 

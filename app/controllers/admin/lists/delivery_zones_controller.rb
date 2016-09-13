@@ -13,7 +13,7 @@ class Admin::Lists::DeliveryZonesController < ApplicationController
 
   def update
     @delivery_zone = ::Lists::DeliveryZone.find(params[:id])
-    if @delivery_zone.update_attributes(params[:delivery_zone])
+    if @delivery_zone.update_attributes(delivery_zone_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -27,7 +27,7 @@ class Admin::Lists::DeliveryZonesController < ApplicationController
   end
 
   def create
-    @delivery_zone = ::Lists::DeliveryZone.new(params[:delivery_zone])
+    @delivery_zone = ::Lists::DeliveryZone.new(delivery_zone_params)
     if @delivery_zone.save
       flash[:notice] = 'Зона создана удачно.'
       redirect_to :action => 'index'
@@ -40,6 +40,11 @@ class Admin::Lists::DeliveryZonesController < ApplicationController
     ::Lists::DeliveryZone.find(params[:id]).destroy
     redirect_to :action => 'index'
   end
-    
+
+  private
+  
+  def delivery_zone_params
+    params.require(:delivery_zone).permit(:title, :price)
+  end  
 
 end

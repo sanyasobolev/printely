@@ -14,17 +14,6 @@ class Document < ActiveRecord::Base
 
   mount_uploader :docfile, DocumentUploader
 
-  attr_accessible :docfile, 
-                  :user_comment, 
-                  :quantity, 
-                  :price, 
-                  :cost, 
-                  :paper_specification_id, 
-                  :page_count, 
-                  :print_margin_id, 
-                  :print_color_id, 
-                  :binding_id
-
   def initialize(order_type, args={})
     args = defaults(order_type).merge(args)
     @paper_specification_id = args[:paper_specification_id]

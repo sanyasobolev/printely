@@ -1,16 +1,12 @@
 # encoding: utf-8
 class SubservicesController < ApplicationController
   layout 'subservices', :only => [:index, :show]
-  skip_before_filter :login_required, :authorized?,
-                           :only => [:index, :show]
 
   def index
     if params[:service_id]
-      @service = Service.find_by_permalink(params[:service_id])
+      @service = Service.find_by permalink: params[:service_id]
       @title = @service.title
-      @page_about_service = Page.find_by_service_id(@service.id.to_i,
-                                                    :include => :user,
-                                                    :conditions => "published=true" )
+      @page_about_service = Page.page_of_service(@service)
       
       @pricelist_for_service_model_name = @service.pricelist.to_s #model name
       
@@ -41,12 +37,10 @@ class SubservicesController < ApplicationController
   end
 
    def show
-    @service = Service.find_by_permalink(params[:service_id])
-    @subservice = Subservice.find_by_permalink(params[:id])
+    @service = Service.find_by permalink: params[:service_id]
+    @subservice = Subservice.find_by permalink: params[:id]
     @title = @subservice.title
-    @page_about_subservice = Page.find_by_subservice_id(@subservice.id.to_i,
-                                                       :include => :user,
-                                                       :conditions => "published=true" )
+    @page_about_subservice = Page.page_of_subservice(@subservice)
     respond_to do |wants|
       wants.html
       wants.xml { render :xml => @subservice.to_xml }

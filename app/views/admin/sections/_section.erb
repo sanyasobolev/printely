@@ -1,13 +1,4 @@
-<tr class="grey_on_hover">
-  <td>
-    <% if section.controller == 'no' %>
-      <%= link_to 'Х', admin_section_path(section), :method => :delete, :confirm => 'Все страницы этого раздела также удалятся! Действительно хотите удалить раздел?' %>
-    <% end %>
-  </td>
-  <td><%= section.title %></td>
-  <td><%= section.order %></td>
-  <td><%= section.controller %></td>
-  <td><%= section.action %></td>
-  <td><%= boolean_to_ru(section.published) %></td>
-  <td><%= link_to 'Редактировать', edit_admin_section_path(section) %></td>
-</tr>
+  <span class="grey_text"><%= section.position %></span>
+  <span class="bold"><%= section.title %></span>
+  <span class="grey_text"> (cтраница: <%= section.page.nil? ? "Нет" : section.page.title %>)</span>
+  <%= render :partial => 'share/cud_panel', :locals => {:section => section} %>

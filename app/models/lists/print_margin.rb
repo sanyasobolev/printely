@@ -1,15 +1,14 @@
 # encoding: utf-8
 class Lists::PrintMargin < ActiveRecord::Base
-   attr_accessible :id, :margin, :price, :order_type_id
    
    has_many :documents
    has_many :paper_specifications, :through => :documents
    
    belongs_to :order_type
 
-   scope :available_print_margins, lambda { 
+   scope :available_print_margins, -> {lambda { 
       |order_type| joins(:order_type).where("lists_order_types.title = ? OR lists_order_types.title = ?", order_type, 'all').order('lists_print_margins.margin ASC')
-    }
+    }}
     
     def self.default_print_margin(order_type)
       available_print_margins(order_type.title).first

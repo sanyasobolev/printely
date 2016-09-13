@@ -5,7 +5,7 @@ class CreateListsCanvasSettings < ActiveRecord::Migration
       t.integer :margin_left, :default => 0
       t.integer :width, :default => 100
       t.integer :height, :default => 100
-      t.timestamps
+      t.timestamps null: false
     end
     
     create_table :canvas_settings_paper_specifications, :id => false do |t|

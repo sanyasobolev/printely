@@ -1,9 +1,8 @@
 # encoding: utf-8
 class EmbeddedImagesController < ApplicationController
   
-  skip_before_filter :authorized?,
-                     :only => [:create, :destroy]
-
+  before_filter :login_required
+  
   skip_before_filter :verify_authenticity_token,
                      :only => [:create]
 
@@ -20,7 +19,7 @@ class EmbeddedImagesController < ApplicationController
         flash[:error] = 'File could not be uploaded'
       else
         format.js do
-          render :text => render_to_string(:partial => 'embedded_images/embedded_image', :locals => {:embedded_image => @embedded_image})
+          render :plain => render_to_string(:partial => 'embedded_images/embedded_image', :locals => {:embedded_image => @embedded_image})
         end
       end
     end
@@ -37,7 +36,7 @@ class EmbeddedImagesController < ApplicationController
 
   private
     def find_document
-      @document = Document.find_by_id(params[:document_id])
+      @document = Document.find(params[:document_id])
       raise ActiveRecord::RecordNotFound unless @document
     end
 

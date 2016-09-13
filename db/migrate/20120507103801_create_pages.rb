@@ -9,15 +9,9 @@ class CreatePages < ActiveRecord::Migration
       t.column :published_at, :datetime
       t.column :user_id, :integer
       t.column :section_id, :integer
-      t.timestamps
+      t.timestamps null: false
     end
-    Page.create(
-        :id => '1',
-        :title => 'Printely',
-        :permalink => 'printely',
-        :body => 'Добро пожаловать',
-        :user_id => '1',
-        :section_id => '0')
+
   end
 
   def self.down

@@ -3,7 +3,7 @@ class CreateListsDeliveryTowns < ActiveRecord::Migration
     create_table :lists_delivery_towns do |t|
       t.string :title
       t.integer :delivery_zone_id
-      t.timestamps
+      t.timestamps null: false
     end
     
     add_column :orders, :delivery_town_id, :integer

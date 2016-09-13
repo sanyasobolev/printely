@@ -11,14 +11,14 @@ class Admin::Lists::ScanSpecificationsController < ApplicationController
   end
 
   def edit
-    @line = ::Lists::ScanSpecification.find_by_id(params[:id])
+    @line = ::Lists::ScanSpecification.find(params[:id])
     @title = "Редактирование записи"
   end
 
   def update
-    @line = ::Lists::ScanSpecification.find_by_id(params[:id])
+    @line = ::Lists::ScanSpecification.find(params[:id])
     respond_to do |wants|
-      if @line.update_attributes(params[:line])
+      if @line.update_attributes(scan_specification_params)
           flash[:notice] = 'Запись обновлена'
           wants.html { redirect_to admin_lists_scan_specifications_path }
           wants.xml { render :xml => @line.to_xml }
@@ -35,7 +35,7 @@ class Admin::Lists::ScanSpecificationsController < ApplicationController
   end
 
   def create
-    @line = ::Lists::ScanSpecification.new(params[:line])
+    @line = ::Lists::ScanSpecification.new(scan_specification_params)
     respond_to do |wants|
       if @line.save
         flash[:notice] = 'Запись создана'
@@ -49,12 +49,20 @@ class Admin::Lists::ScanSpecificationsController < ApplicationController
   end
 
   def destroy
-    @line = ::Lists::ScanSpecification.find_by_id(params[:id])
+    @line = ::Lists::ScanSpecification.find(params[:id])
     @line.destroy
     respond_to do |wants|
       wants.html { redirect_to admin_lists_scan_specifications_path }
       wants.xml { render :nothing => true }
     end
+  end
+
+  private
+  
+  def scan_specification_params
+    params.require(:line).permit(:paper_size_id, 
+                                 :price, 
+                                 :order_type_id)
   end
 
 end

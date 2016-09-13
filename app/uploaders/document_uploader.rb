@@ -80,11 +80,11 @@ class DocumentUploader < CarrierWave::Uploader::Base
   def filename
     if model.paper_specification_id
       paper_specification = Lists::PaperSpecification.find_by_id(model.paper_specification_id)
-      margins = model.print_margin.nil? ? '' : ("_#{Lists::PrintMargin.find_by_id(model.print_margin_id).margin}").parameterize
-      paper_type = Lists::PaperType.find_by_id(paper_specification.paper_type_id)
+      margins = model.print_margin.nil? ? '' : ("_#{Lists::PrintMargin.find(model.print_margin_id).margin}").parameterize
+      paper_type = Lists::PaperType.find(paper_specification.paper_type_id)
       paper_grade = paper_type.paper_grade.grade
-      paper_size = Lists::PaperSize.find_by_id(paper_specification.paper_size_id).size
-      print_color = model.print_color.nil? ? '' : ("_#{Lists::PrintColor.find_by_id(model.print_color_id).color}").parameterize
+      paper_size = Lists::PaperSize.find(paper_specification.paper_size_id).size
+      print_color = model.print_color.nil? ? '' : ("_#{Lists::PrintColor.find(model.print_color_id).color}").parameterize
       img_proc = model.pre_print_operations.size == 0 ? '_' : '_img_proc_yes_' 
       "#{secure_token}_PP#{img_proc}#{paper_size.parameterize}_#{paper_type.paper_type.parameterize}_#{paper_grade.parameterize}_#{model.quantity}#{margins}#{print_color}.#{get_file_extension}" if original_filename.present?
     else

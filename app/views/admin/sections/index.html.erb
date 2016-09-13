@@ -1,18 +1,6 @@
-<h2>Редактирование разделов сайта</h2>
-  <p><%= link_to 'Создать раздел', new_admin_section_path, :class => 'button_style_long' %></p>
-  <table class ="default_table">
-    <tr class="header">
-      <th></th>
-      <th><%= Section.human_attribute_name("title") %></th>
-      <th><%= Section.human_attribute_name("order") %></th>
-      <th><%= Section.human_attribute_name("controller") %></th>
-      <th><%= Section.human_attribute_name("action") %></th>
-      <th><%= Section.human_attribute_name("published") %></th>
-      <th></th>
-    </tr>
-
-    <%= render :partial => 'section', :collection => @sections %>
-
-  </table>
+<h1><%= @title %></h1>
+  <p><%= link_to image_tag("icons/plus_double_large.png",  id: '25'), new_admin_section_path %></p>
   
+  <%= nested_sections @sections.arrange(:order => :position) %>
+    
 <%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>

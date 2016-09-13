@@ -3,7 +3,7 @@ class CreateListsDeliveryZones < ActiveRecord::Migration
     create_table :lists_delivery_zones do |t|
       t.string :title
       t.float :price, :default => 0
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

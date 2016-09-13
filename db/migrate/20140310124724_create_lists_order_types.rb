@@ -2,29 +2,9 @@ class CreateListsOrderTypes < ActiveRecord::Migration
   
   def self.up
       create_table :lists_order_types do |t|
-      t.string :title
-      t.timestamps
+        t.string :title
+        t.timestamps null: false
       end
-
-      Lists::OrderType.create(
-          :id => '1',
-          :title => 'all'
-          )
-
-      Lists::OrderType.create(
-          :id => '2',
-          :title => 'foto_print'
-          )
-
-      Lists::OrderType.create(
-          :id => '3',
-          :title => 'doc_print'
-          )
-
-      Lists::OrderType.create(
-          :id => '4',
-          :title => 'scan'
-          )
 
       add_column :lists_paper_specifications, :order_type_id, :integer, :default => 1
       add_column :lists_print_colors, :order_type_id, :integer, :default => 1

@@ -6,7 +6,7 @@
 <div class="form_align">
 	<%= f.label :delivery_zone_id %>
 	<%= f.collection_select(:delivery_zone_id,
-                      Lists::DeliveryZone.find(:all),
+                      Lists::DeliveryZone.all,
                       :id,
                       :title) %>
 </div>

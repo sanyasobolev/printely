@@ -1,6 +1,5 @@
 # encoding: utf-8
 class SessionsController < ApplicationController
-  skip_before_filter :login_required, :authorized?
 
   layout 'login'
 
@@ -9,13 +8,9 @@ class SessionsController < ApplicationController
   end
 
   def create # вход в систему
-  	self.current_user = User.authenticate(params[:user][:email], params[:user][:password])
+  	current_user = User.authenticate(params[:user][:email], params[:user][:password])
     if logged_in?
-      if params[:remember_me] == "1" #если юзер поставил галочку "запомнить меня"
-        current_user.remember_me unless current_user.remember_token?
-        cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
-      end
-      if current_user.has_role?("Administrator")
+      if current_user.admin? || current_user.has_role?(:settings, :index)
         redirect_to admin_settings_path
       else
         redirect_to myoffice_path

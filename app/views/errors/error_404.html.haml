@@ -1,5 +1,5 @@
 = image_tag "errors/error.jpg", :border => '0', :class => "error_image" 
-%div.page_not_found
+%div.error_page
   %h1 Ой!
   %h2 По этому адресу у нас пока нет страниц.
   %p
@@ -12,3 +12,5 @@
     %li 
       воспользоваться
       = link_to 'картой сайта.', :sitemap
+  %div.error_details
+    %p.grey_color Ошибка 404

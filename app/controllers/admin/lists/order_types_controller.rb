@@ -13,7 +13,7 @@ class Admin::Lists::OrderTypesController < ApplicationController
 
   def update
     @order_type = ::Lists::OrderType.find(params[:id])
-    if @order_type.update_attributes(params[:order_type])
+    if @order_type.update_attributes(order_type_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -27,7 +27,7 @@ class Admin::Lists::OrderTypesController < ApplicationController
   end
 
   def create
-    @order_type = ::Lists::OrderType.new(params[:order_type])
+    @order_type = ::Lists::OrderType.new(order_type_params)
     if @order_type.save
       flash[:notice] = 'Класс создан удачно.'
       redirect_to :action => 'index'
@@ -36,5 +36,10 @@ class Admin::Lists::OrderTypesController < ApplicationController
     end
   end
 
+  private
+  
+  def order_type_params
+    params.require(:order_type).permit(:title, :service_id, :description)
+  end  
 
 end

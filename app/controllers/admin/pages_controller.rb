@@ -1,15 +1,16 @@
 # encoding: utf-8
 class Admin::PagesController < ApplicationController
-
+  before_filter :login_required
+  before_action :role_required
 
   def index
     @title = 'Администрирование - Страницы'
-    @main_page = Page.find_by_id(1)
-    @pages = Page.find(:all, :order => 'published_at DESC', :conditions => "id!=1")
+    @main_page = Page.main_page
+    @pages = Page.all_pages
   end
 
   def show
-    @page = Page.find_by_permalink(params[:id])
+    @page = Page.find_by permalink: params[:id]
     @title = @page.title
     respond_to do |wants|
       wants.html { render 'pages/show' }
@@ -23,7 +24,7 @@ class Admin::PagesController < ApplicationController
   end
 
   def create
-    @page = Page.new(params[:page])
+    @page = Page.new(page_params)
     @current_user.pages << @page
     respond_to do |wants|
       if @page.save
@@ -38,7 +39,7 @@ class Admin::PagesController < ApplicationController
   end
 
   def edit
-    @page = Page.find_by_permalink(params[:id])
+    @page = Page.find_by permalink: params[:id]
     @title = "Редактирование страницы - #{@page.title}"
     if @page.id == 1
       @main_page = @page
@@ -47,8 +48,8 @@ class Admin::PagesController < ApplicationController
   end
 
   def update
-    @page = Page.find_by_permalink(params[:id])
-    @page.attributes = params[:page]
+    @page = Page.find_by permalink: params[:id]
+    @page.attributes = page_params
     respond_to do |wants|
       if @page.save
         flash[:notice] = "Страница обновлена"
@@ -62,7 +63,7 @@ class Admin::PagesController < ApplicationController
   end
 
   def destroy
-    page_for_delete = Page.find_by_permalink(params[:id])
+    page_for_delete = Page.find_by permalink: params[:id]
     respond_to do |wants|
       if page_for_delete.id == 1
         flash[:error] = "Нельзя удалить главную страницу!"
@@ -73,6 +74,20 @@ class Admin::PagesController < ApplicationController
       wants.html { redirect_to admin_pages_path }
       wants.xml { render :nothing => true }
     end
+  end
+  
+  private
+  
+  def page_params
+    params.require(:page).permit(:title, 
+                                 :permalink, 
+                                 :body, 
+                                 :user_id, 
+                                 :section_id, 
+                                 :subsection_id,
+                                 :published, 
+                                 :service_id, 
+                                 :subservice_id)
   end
   
 end

@@ -1,14 +1,13 @@
 # encoding: utf-8
 class ArticlesController < ApplicationController
+  
   layout 'articles', :only => [:index]
   layout 'wo_categories', :only => [:show, :item_news]
-  skip_before_filter :login_required, :authorized?,
-                     :only => [:index, :item_news, :show]
 
   def index
-    @title = Section.find_by_controller(controller_name).title
+    @title = Section.find_by(controller: controller_name).title
     if params[:category_id]
-      @category = Category.find_by_permalink(params[:category_id])
+      @category = Category.find_by permalink: params[:category_id]
       @articles = Article.articles_for_user_with_category(@category)
     else
       @articles = Article.articles_for_user 
@@ -24,7 +23,7 @@ class ArticlesController < ApplicationController
   end
   
   def show
-    @article = Article.find_by_permalink_and_published(params[:id], true)
+    @article = Article.show(params[:id])
     @title = @article.title
     respond_to do |wants|
       wants.html

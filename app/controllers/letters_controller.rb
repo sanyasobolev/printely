@@ -2,9 +2,6 @@
 class LettersController < ApplicationController
  layout 'letters', :only => [:sent, :new]
 
- skip_before_filter :login_required, :authorized?,
-                    :only => [:sent, :new, :create]
-
  def sent
     @title = 'Спасибо!'
   end
@@ -15,7 +12,7 @@ class LettersController < ApplicationController
   end
 
   def create
-    @letter = Letter.new(params[:letter])
+    @letter = Letter.new(letter_params)
     respond_to do |wants|
       if @letter.save
         UserMailer.email_all_admins_about_new_letter(@letter)
@@ -27,6 +24,12 @@ class LettersController < ApplicationController
         wants.xml {render :xml => @letter.errors}
       end
     end
+  end
+
+ private
+  
+  def letter_params
+    params.require(:letter).permit(:name, :email, :question)
   end
 
 end

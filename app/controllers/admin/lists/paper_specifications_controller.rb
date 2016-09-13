@@ -12,7 +12,7 @@ class Admin::Lists::PaperSpecificationsController < ApplicationController
   end
 
   def create
-    @pspec = ::Lists::PaperSpecification.new(params[:pspec])
+    @pspec = ::Lists::PaperSpecification.new(paper_specification_params)
     if @pspec.save
       flash[:notice] = 'Параметр создан удачно.'
       redirect_to :action => 'index'
@@ -28,7 +28,7 @@ class Admin::Lists::PaperSpecificationsController < ApplicationController
 
   def update
     @pspec = ::Lists::PaperSpecification.find(params[:id])
-    if @pspec.update_attributes(params[:pspec])
+    if @pspec.update_attributes(paper_specification_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -41,5 +41,16 @@ class Admin::Lists::PaperSpecificationsController < ApplicationController
     redirect_to :action => 'index'
   end
 
+  private
+  
+  def paper_specification_params
+    params.require(:pspec).permit(:paper_type_id, 
+                                  :paper_size_id, 
+                                  :in_stock, 
+                                  :price, 
+                                  :order_type_id,
+                                  :canvas_setting_ids,
+                                  :product_background_ids)
+  end
 
 end

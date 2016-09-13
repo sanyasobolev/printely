@@ -3,7 +3,7 @@ class CreateListsProductBackgrounds < ActiveRecord::Migration
     create_table :lists_product_backgrounds do |t|
       t.string :title
       t.string :image
-      t.timestamps
+      t.timestamps null: false
     end
   
   

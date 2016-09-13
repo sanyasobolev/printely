@@ -4,10 +4,8 @@ class CreateCategories < ActiveRecord::Migration
     create_table :categories do |t|
       t.column :name, :string
       t.column :permalink, :string
-      t.timestamps
+      t.timestamps null: false
     end
-    default_category = Category.create(:name => "Тестовая категория")
-    change_column :articles, :category_id, :integer, :default => default_category
   end
 
   def self.down

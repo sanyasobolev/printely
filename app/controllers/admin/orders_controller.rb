@@ -151,11 +151,11 @@ class Admin::OrdersController < ApplicationController
         @order.update_attribute(:order_status_id, get_status_id_from_key(new_status_key))
         case new_status_key
         when 50 #order complete
-          UserMailer.email_user_about_complete_order(@order).deliver
+          UserMailer.email_user_about_complete_order(@order).deliver_now
         when 10 #order remove
-          UserMailer.email_user_about_remove_order(@order).deliver
+          UserMailer.email_user_about_remove_order(@order).deliver_now
         else #change status
-          UserMailer.email_user_about_change_status(@order).deliver
+          UserMailer.email_user_about_change_status(@order).deliver_now
         end
       end
     respond_to do |wants|
@@ -178,7 +178,7 @@ class Admin::OrdersController < ApplicationController
   private
 
   def find_order
-    @order = Order.find_by_id(params[:id])
+    @order = Order.find(params[:id])
   end
   
   def get_status_id_from_key(key)

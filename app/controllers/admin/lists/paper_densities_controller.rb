@@ -12,7 +12,7 @@ class Admin::Lists::PaperDensitiesController < ApplicationController
 
   def update
     @density = ::Lists::PaperDensity.find(params[:id])
-    if @density.update_attributes(params[:density])
+    if @density.update_attributes(paper_density_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -26,7 +26,7 @@ class Admin::Lists::PaperDensitiesController < ApplicationController
   end
 
   def create
-    @density = ::Lists::PaperDensity.new(params[:density])
+    @density = ::Lists::PaperDensity.new(paper_density_params)
     if @density.save
       flash[:notice] = 'Плотность бумаги создана удачно.'
       redirect_to :action => 'index'
@@ -38,6 +38,12 @@ class Admin::Lists::PaperDensitiesController < ApplicationController
   def destroy
     ::Lists::PaperDensity.find(params[:id]).destroy
     redirect_to :action => 'index'
+  end
+  
+  private
+  
+  def paper_density_params
+    params.require(:density).permit(:density)
   end
   
 end

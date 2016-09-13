@@ -6,7 +6,7 @@
 <div class="form_align">
 	<%= f.label :paper_density_id %>
 	<%= f.collection_select(:paper_density_id,
-                      Lists::PaperDensity.find(:all),
+                      Lists::PaperDensity.all,
                       :id,
                       :density) %>
 </div>
@@ -14,7 +14,7 @@
 <div class="form_align">
 	<%= f.label :paper_grade_id %>
 	<%= f.collection_select(:paper_grade_id,
-                      Lists::PaperGrade.find(:all),
+                      Lists::PaperGrade.all,
                       :id,
                       :grade) %>
 </div>

@@ -4,7 +4,7 @@ class Admin::ServicesController < ApplicationController
   layout 'wo_boardlinks', :only => [:index, :new, :edit]
 
   def index
-    @title = "Администрирование - #{Section.find_by_controller(controller_name).title}"
+    @title = "Администрирование - #{Section.find_by(controller: controller_name).title}"
     @services = Service.all
     respond_to do |wants|
       wants.html
@@ -18,7 +18,7 @@ class Admin::ServicesController < ApplicationController
   end
 
   def create
-    @service = Service.new(params[:service])
+    @service = Service.new(service_params)
     respond_to do |wants|
       if @service.save
         flash[:notice] = 'Услуга создана'
@@ -32,14 +32,14 @@ class Admin::ServicesController < ApplicationController
   end
 
   def edit
-    @service = Service.find_by_permalink(params[:id])
+    @service = Service.find_by permalink: params[:id]
     @title = "Редактирование услуги - #{@service.title}"
   end
 
   def update
-    @service = Service.find_by_permalink(params[:id])
+    @service = Service.find_by permalink: params[:id]
     respond_to do |wants|
-    if @service.update_attributes(params[:service])
+    if @service.update_attributes(service_params)
         flash[:notice] = 'Услуга обновлена'
         wants.html { redirect_to admin_services_path }
         wants.xml { render :xml => @service.to_xml }
@@ -51,7 +51,7 @@ class Admin::ServicesController < ApplicationController
   end
 
   def destroy
-    @service = Service.find_by_permalink(params[:id])
+    @service = Service.find_by permalink: params[:id]
     @service.destroy
     respond_to do |wants|
       wants.html { redirect_to admin_services_path }
@@ -59,5 +59,15 @@ class Admin::ServicesController < ApplicationController
     end
   end
 
- 
+  private
+  
+  def service_params
+    params.require(:service).permit(:title, 
+                                    :synopsis, 
+                                    :header_icon, 
+                                    :service_id, 
+                                    :pricelist, 
+                                    :order_type_id)
+  end
+  
 end

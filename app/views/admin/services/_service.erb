@@ -1,5 +1,5 @@
 <tr class="grey_on_hover">
-  <td><%= link_to 'Х', admin_service_path(service), :method => :delete, :confirm => 'Действительно хотите удалить услугу?' %></td>
+  <td><%= link_to 'Х', admin_service_path(service), :method => :delete, data: {confirm: 'Действительно хотите удалить?'} %></td>
   <td><%= service.title %></td>
   <td><%= service.synopsis %></td>
   <td><%= service.permalink %></td>

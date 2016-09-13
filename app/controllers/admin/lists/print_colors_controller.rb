@@ -12,7 +12,7 @@ class Admin::Lists::PrintColorsController < ApplicationController
 
   def update
     @color = ::Lists::PrintColor.find(params[:id])
-    if @color.update_attributes(params[:color])
+    if @color.update_attributes(print_color_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -26,7 +26,7 @@ class Admin::Lists::PrintColorsController < ApplicationController
   end
 
   def create
-    @color = ::Lists::PrintColor.new(params[:color])
+    @color = ::Lists::PrintColor.new(print_color_params)
     if @color.save
       flash[:notice] = 'Параметр создан удачно.'
       redirect_to :action => 'index'
@@ -38,6 +38,12 @@ class Admin::Lists::PrintColorsController < ApplicationController
   def destroy
     ::Lists::PrintColor.find(params[:id]).destroy
     redirect_to :action => 'index'
+  end
+  
+  private
+  
+  def print_color_params
+    params.require(:color).permit(:color, :price, :order_type_id)
   end
   
 end

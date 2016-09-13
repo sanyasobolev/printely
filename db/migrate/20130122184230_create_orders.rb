@@ -10,7 +10,7 @@ class CreateOrders < ActiveRecord::Migration
       t.column :delivery_end_time, :time
       t.column :cost, :float
       t.column :manager_comment, :text
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

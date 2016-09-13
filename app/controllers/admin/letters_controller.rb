@@ -3,12 +3,12 @@ class Admin::LettersController < ApplicationController
   
   def index
     @title = 'Администрирование - Обратная связь'
-    @letters = Letter.find(:all, :order => 'created_at DESC')
+    @letters = Letter.all
   end
     
   def show
     @title = 'Письмо клиента'
-    @letter = Letter.find_by_id(params[:id])
+    @letter = Letter.find(params[:id])
     respond_to do |wants|
       wants.html
       wants.xml { render :xml => @letter.to_xml }

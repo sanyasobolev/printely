@@ -1,5 +1,5 @@
 <tr class="grey_on_hover">
-  <td><%= link_to 'X', admin_lists_print_margin_path(margin), :confirm => 'Вы действительно хотите удалить?', :method => :delete %></td>
+  <td><%= link_to 'X', admin_lists_print_margin_path(margin), data: {confirm: 'Действительно хотите удалить?'}, :method => :delete %></td>
   <td><%=h (margin.margin) %></td>
   <td><%=h (margin.price) %></td>
   <td><%=h (margin.order_type.title) %></td>

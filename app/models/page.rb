@@ -1,23 +1,11 @@
 # encoding: utf-8
 class Page < ActiveRecord::Base
 
-  attr_accessible :id, 
-                  :title, 
-                  :permalink, 
-                  :body, 
-                  :user_id, 
-                  :section_id, 
-                  :subsection_id,
-                  :published, 
-                  :service_id, 
-                  :subservice_id
-
   before_create :create_permalink
   before_save :update_permalink
   before_save :update_published_at
 
   belongs_to :section
-  belongs_to :subsection
   belongs_to :user
   belongs_to :service
   belongs_to :subservice
@@ -42,7 +30,7 @@ class Page < ActiveRecord::Base
   validates :title,
             :permalink,
             :uniqueness => true
-
+  
   validates :title, :length => {
     :within => TITLE_RANGE,
     :message => "Слишком длинное название"
@@ -53,9 +41,13 @@ class Page < ActiveRecord::Base
     :message => "Слишком много символов на странице"
   }
 
+  scope :main_page, -> {find(1)}
+  scope :all_pages, -> {where.not(id: 1).order(created_at: :desc)}
+  scope :published_pages, -> {all_pages.where(published: true).order(created_at: :asc)}
+
 #транслитерация названия страницы в ссылку
   def create_permalink
-    @attributes['permalink'] = title.parameterize
+    self[:permalink] = title.parameterize
   end
 
   def update_permalink

@@ -13,7 +13,7 @@ class Admin::Lists::DeliveryTownsController < ApplicationController
 
   def update
     @delivery_town = ::Lists::DeliveryTown.find(params[:id])
-    if @delivery_town.update_attributes(params[:delivery_town])
+    if @delivery_town.update_attributes(delivery_town_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -27,7 +27,7 @@ class Admin::Lists::DeliveryTownsController < ApplicationController
   end
 
   def create
-    @delivery_town = ::Lists::DeliveryTown.new(params[:delivery_town])
+    @delivery_town = ::Lists::DeliveryTown.new(delivery_town_params)
     if @delivery_town.save
       flash[:notice] = 'Населенный пункт создан удачно.'
       redirect_to :action => 'index'
@@ -40,6 +40,13 @@ class Admin::Lists::DeliveryTownsController < ApplicationController
     ::Lists::DeliveryTown.find(params[:id]).destroy
     redirect_to :action => 'index'
   end
+  
+  private
+  
+  def delivery_town_params
+    params.require(:delivery_town).permit(:title, :delivery_zone_id)
+  end  
+  
     
 
 end

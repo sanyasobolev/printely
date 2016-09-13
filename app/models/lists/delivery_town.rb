@@ -1,6 +1,5 @@
 # encoding: utf-8
 class Lists::DeliveryTown < ActiveRecord::Base
-   attr_accessible :title, :delivery_zone_id
 
    belongs_to :delivery_zone
    has_many :orders
@@ -13,6 +12,6 @@ class Lists::DeliveryTown < ActiveRecord::Base
       :message => 'Такой уже есть.'
     }
     
-    default_scope order('title asc')
+    default_scope {order('title asc')}
 
 end

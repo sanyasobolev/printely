@@ -1,9 +1,5 @@
 # encoding: utf-8
 class Lists::CanvasSetting < ActiveRecord::Base
-   attr_accessible :margin_top,
-                   :margin_left,
-                   :width,
-                   :height
                    
    has_and_belongs_to_many :paper_specifications
    

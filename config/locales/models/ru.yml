@@ -9,7 +9,6 @@ ru:
       right: "Право"
       role: "Роль"
       section: "Раздел"
-      subsection: "Раздел"
       user: "Пользователь"
       letter: "Обратная связь"
       service: "Услуга"
@@ -53,6 +52,7 @@ ru:
         user_id: "Автор"
         created_at: "Дата создания"
       page:
+        id: "Страница"
         title: "Заголовок страницы"
         permalink: "Название в URL"
         body: "Текст страницы"
@@ -60,7 +60,6 @@ ru:
         published_at: "Дата публикации"
         user_id: "Автор"
         created_at: "Дата создания"
-        subsection_id: "Подраздел"
         section_id: "Раздел"
         service_id: "Услуга"
         subservice_id: "Подуслуга"
@@ -73,17 +72,10 @@ ru:
         name: "Название"
       section:
         title: "Название"
-        order: "Порядковый номер (справа налево)"
+        position: "Позиция"
         controller: "Контроллер"
         action: "Действие"
-        published: "Опубликован"
-      subsection:
-        title: "Название"
-        order: "Порядковый номер (сверху вниз)"
-        controller: "Контроллер"
-        action: "Действие"
-        published: "Опубликован"
-        section_id: "Раздел"
+        parent_id: "Родитель"
       user:
         first_name: "Имя"
         second_name: "Фамилия"
@@ -237,4 +229,4 @@ ru:
         published: "Опубликовано"
         published_at: "Дата публикации"
         created_at: "Дата создания"
-
+  

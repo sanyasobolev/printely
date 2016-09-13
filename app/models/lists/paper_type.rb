@@ -1,6 +1,5 @@
 # encoding: utf-8
 class Lists::PaperType < ActiveRecord::Base
-  attr_accessible :paper_type, :id, :paper_grade_id, :paper_density_id
   
   belongs_to :paper_grade
   belongs_to :paper_density
@@ -9,9 +8,9 @@ class Lists::PaperType < ActiveRecord::Base
   has_many :paper_sizes, :through => :paper_specifications
   has_many :documents, :through => :paper_specifications
 
-  scope :available_paper_types, lambda { 
+  scope :available_paper_types, -> {lambda { 
       |order_type, selected_paper_size| joins(:paper_specifications => [:order_type, :paper_size]).where("lists_paper_sizes.id" => selected_paper_size).where("lists_order_types.title = ? OR lists_order_types.title = ?", order_type, 'all').where('lists_paper_specifications.in_stock' => true).order('lists_paper_types.paper_type ASC')
-  }
+  }}
   
   def self.default_paper_type(order_type)
     available_paper_types(order_type.title, 

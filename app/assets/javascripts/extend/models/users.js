@@ -38,14 +38,14 @@ $(document).ready(function(){
     				minlength: 3,
     				regex_name: true	
     			},
-    			'user[email]': {
-    				required: true,
-    				email: true,
-    				remote: {
-    					url: "/users/check_email",
-    					type: "get"
-    				}
-    			},
+    		//	'user[email]': {
+    		//		required: true,
+    		//		email: true,
+    		//		remote: {
+    		//			url: "/users/check_email",
+    		//			type: "get"
+    		//		}
+    		//	},
     			'user[phone]': {
     				required: true,
     				regex_phone: true,

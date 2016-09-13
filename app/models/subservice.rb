@@ -1,13 +1,6 @@
 # encoding: utf-8
 class Subservice < ActiveRecord::Base
 
-  attr_accessible :title, 
-                  :synopsis,
-                  :header_icon, 
-                  :subservice_id, 
-                  :order_type_id, 
-                  :service_id
-
   belongs_to :service
   has_one :page
   has_one :order_type, :class_name => "Lists::OrderType"
@@ -49,10 +42,12 @@ class Subservice < ActiveRecord::Base
   validates :title,
             :permalink,
             :uniqueness => true
+            
+   scope :for_service, ->(service) {where("service_id=?", service.id.to_i).order(title: :desc)}
 
   #транслитерация названия статьи в ссылку
   def create_permalink
-    @attributes['permalink'] = title.parameterize
+    self[:permalink] = title.parameterize
   end
 
   def update_permalink

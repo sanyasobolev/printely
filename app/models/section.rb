@@ -1,31 +1,28 @@
 # encoding: utf-8
 class Section < ActiveRecord::Base
 
-  attr_accessible :id, :title, :order, :controller, :action, :permalink, :published
+  has_ancestry
 
   before_create :create_permalink
   before_save :update_permalink
 
-  has_one :page, :dependent => :destroy
-  has_many :subsections, :dependent => :destroy
-
-  SECTION_ORDER = [1,2,3,4,5,6]
-
+  has_one :page, :dependent => :nullify
+  
   #максмимальные и минимальные значения для полей
-  TITLE_MAX_LENGTH = 10
+  TITLE_MAX_LENGTH = 20
 
   #размер боксов полей в формах
   TITLE_SIZE = 20
 
   # поля должны быть не пустыми
   validates :title,
-            :order,
+            :position,
             :presence => true
 
-  validates :order, 
-            :permalink,
+  validates :permalink,
             :title,
             :uniqueness => true
+
 
 
   #проверка длины строк
@@ -34,9 +31,12 @@ class Section < ActiveRecord::Base
     :message => "Слишком длинное название"
     }
 
+  
+  scope :exclude_self_and_all_child, ->(section) { where.not(id: section.subtree_ids) }
+
   #транслитерация названия в ссылку
   def create_permalink
-    @attributes['permalink'] = title.parameterize
+    self[:permalink] = title.parameterize
   end
 
   def update_permalink
@@ -46,6 +46,5 @@ class Section < ActiveRecord::Base
   def to_param
     permalink
   end
-
 
 end

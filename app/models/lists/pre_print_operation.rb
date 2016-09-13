@@ -4,8 +4,6 @@ class Lists::PrePrintOperation < ActiveRecord::Base
   has_and_belongs_to_many :documents
   belongs_to :order_type
    
-  attr_accessible :id, :operation, :price, :order_type_id
-   
   def self.calc_price(object)
     full_price = 0
     object.pre_print_operations.each do |pre_print_operation|

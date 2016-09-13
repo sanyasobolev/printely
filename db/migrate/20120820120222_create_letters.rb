@@ -5,7 +5,7 @@ class CreateLetters < ActiveRecord::Migration
       t.column :phone, :string
       t.column :email, :string
       t.column :question, :text
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

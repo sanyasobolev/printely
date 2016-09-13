@@ -1,8 +1,6 @@
 # encoding: utf-8
 class Category < ActiveRecord::Base
 
-  attr_accessible :name
-
   has_many :articles, :dependent => :destroy
 
   before_create :create_permalink
@@ -27,10 +25,12 @@ class Category < ActiveRecord::Base
   validates :name,
             :permalink,
             :uniqueness => true
+ 
+  default_scope {order(name: :desc)}
 
   #транслитерация названия категории в ссылку
   def create_permalink
-    @attributes['permalink'] = name.parameterize
+    self[:permalink] = name.parameterize
   end
 
   def update_permalink

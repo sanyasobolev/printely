@@ -8,7 +8,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.string :paper_type
       t.integer :quantity
       t.string :margins
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

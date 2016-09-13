@@ -8,20 +8,16 @@
 </div>
 
 <% if zero_level.controller == 'services' %>
-  <% services = Service.find(:all,
-                             :order => 'title') %>
+  <% services = Service.all %>
   <%= render :partial => 'service', :collection => services %>
 <% end %>
   
 <% if zero_level.controller == 'articles' %>
-  <%  categories = Category.find(:all,
-                                 :order => 'name') %>
+  <%  categories = Category.all %>
   <%= render :partial => 'category', :collection => categories %>
 <% end %>
 
 <% if zero_level.controller == 'no'  %>
-  <% pages = Page.find(:all,
-             :order => 'published_at',
-             :conditions => "published=true AND section_id=#{zero_level.id.to_i}") %>
+  <% pages = Page.page_of_section(zero_level)
   <%= render :partial => 'page', :collection => pages %>
 <% end %>

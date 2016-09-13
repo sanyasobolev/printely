@@ -2,8 +2,7 @@
 class OrderStepsController < ApplicationController
   include Wicked::Wizard
 
-  skip_before_filter :authorized?,
-                     :only => [:index, :show, :update]
+  before_filter :login_required
 
   skip_before_filter :verify_authenticity_token,
                      :only => [:show, :update]
@@ -120,7 +119,7 @@ class OrderStepsController < ApplicationController
       @order.update_attribute(:order_status_id, get_status_id_from_key(20))
       #рассылаем письма
       UserMailer.email_all_admins_about_new_order(@order)
-      UserMailer.email_user_about_new_order(@order).deliver
+      UserMailer.email_user_about_new_order(@order).deliver_now
       flash[:notice] = 'Отлично! Ваш заказ создан. Ожидайте подтверждение по телефону или SMS.' 
       session[:order_id] = nil      
       my_orders_path

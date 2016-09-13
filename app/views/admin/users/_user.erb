@@ -1,5 +1,5 @@
 <tr class="grey_on_hover">
-  <td><%= link_to 'X', admin_user_path(user) , :confirm => 'Вы действительно хотите удалить пользователя?', :method => :delete %></td>
+  <td><%= link_to 'X', admin_user_path(user) , data: {confirm: 'Действительно хотите удалить?'}, :method => :delete %></td>
   <td><%=h (user.first_name) %></td>
   <td><%=h (user.second_name) %></td>
   <td><%=h (user.email) %></td>

@@ -47,7 +47,7 @@ class Admin::RolesController < ApplicationController
       @role_for_update.rights.clear
      if params[:role][:right_ids]
        params[:role][:right_ids].each do |right_id|
-         @role_for_update.rights << Right.find_by_id(right_id)
+         @role_for_update.rights << Right.find(right_id)
        end
      end
      if @role_for_update.save

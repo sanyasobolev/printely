@@ -1,5 +1,5 @@
 <tr class="grey_on_hover">
-  <td><%= link_to 'Х', admin_letter_path(letter), :method => :delete, :confirm => 'Действительно хотите удалить запись?' %></td>
+  <td><%= link_to 'Х', admin_letter_path(letter), :method => :delete, data: {confirm: 'Действительно хотите удалить?'} %></td>
   <td><%= letter.name %></td>
   <td><%= Russian::strftime(letter.created_at, "%d %B %Y") %></td>
   <td><%= link_to 'Смотреть', admin_letter_path(letter) %></td>

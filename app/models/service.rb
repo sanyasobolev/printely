@@ -1,13 +1,6 @@
 # encoding: utf-8
 class Service < ActiveRecord::Base
 
-  attr_accessible :title, 
-                  :synopsis, 
-                  :header_icon, 
-                  :service_id, 
-                  :pricelist, 
-                  :order_type_id
-
   has_many :subservices, :dependent => :destroy
   has_one :page
   has_many :order_types, :class_name => "Lists::OrderType"
@@ -50,9 +43,11 @@ class Service < ActiveRecord::Base
             :permalink,
             :uniqueness => true
 
+  default_scope {order(title: :desc)}
+
   #транслитерация названия услуги в ссылку
   def create_permalink
-    @attributes['permalink'] = title.parameterize
+    self[:permalink] = title.parameterize
   end
 
   def update_permalink

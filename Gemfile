@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '4.2.4'
 gem 'mysql2'
 gem "russian"
 gem "rdoc"
 gem "dynamic_form" #отображение ошибок
 gem "ckeditor" #WYSIWYG редактор
 gem 'gon', '3.0.5' #for pass variables to JS
-gem "ransack", '1.1.0'  #search engine
 gem 'delayed_job_active_record'#send mailings in background
 gem "daemons" #daemon for delayed job
 gem 'pdf-reader', "~> 1.3.3" #for get count pages in pdf
@@ -21,18 +20,28 @@ gem 'rmagick'
 gem 'mini_magick'
 gem 'flash_cookie_session'
 gem 'haml-rails'
+gem 'responders', '~> 2.0' #respond_with and respond_to
+gem 'ancestry' #tree tructure for activerecord
+gem 'devise'
+gem 'the_role', '~> 3.0.0'
 
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+gem "ransack"  #search engine
+gem "polyamorous"
+
+gem 'activerecord-session_store'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier', '>= 1.0.3'
+gem "therubyracer"
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
 end
 
-#gem 'jquery-rails'
-gem "therubyracer"
+group :test do
+  gem 'capybara'
+end
 
 group :production do
   gem 'execjs'
@@ -41,17 +50,4 @@ group :production do
   gem 'roadie-rails', '~> 1.0.3' #hook foe roadie
 end
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'

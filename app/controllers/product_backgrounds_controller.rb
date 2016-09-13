@@ -1,8 +1,6 @@
 # encoding: utf-8
 class ProductBackgroundsController < ApplicationController
-
-  skip_before_filter :authorized?,
-                     :only => [:load_image]
+  before_filter :login_required
   
   def load_image
     @order = Order.find(params[:order_id])

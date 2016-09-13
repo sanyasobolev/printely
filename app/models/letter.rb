@@ -1,8 +1,6 @@
 # encoding: utf-8
 class Letter < ActiveRecord::Base
 
-  attr_accessible :name, :email, :question
-
   #длины полей
   NAME_MIN_LENGTH = 3
   NAME_MAX_LENGTH = 255
@@ -28,5 +26,7 @@ class Letter < ActiveRecord::Base
       :within => 3..1000,
       :message => "Длина сообщения от 3 до 1000 знаков."
     }
+
+  default_scope { order(created_at: :desc)}
 
 end

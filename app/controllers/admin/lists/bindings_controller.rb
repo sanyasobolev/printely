@@ -12,7 +12,7 @@ class Admin::Lists::BindingsController < ApplicationController
 
   def update
     @binding = ::Lists::Binding.find(params[:id])
-    if @binding.update_attributes(params[:binding])
+    if @binding.update_attributes(binding_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -26,7 +26,7 @@ class Admin::Lists::BindingsController < ApplicationController
   end
 
   def create
-    @binding = ::Lists::Binding.new(params[:binding])
+    @binding = ::Lists::Binding.new(binding_params)
     if @binding.save
       flash[:notice] = 'Параметр создан удачно.'
       redirect_to :action => 'index'
@@ -38,6 +38,12 @@ class Admin::Lists::BindingsController < ApplicationController
   def destroy
     ::Lists::Binding.find(params[:id]).destroy
     redirect_to :action => 'index'
+  end
+  
+  private
+  
+  def binding_params
+    params.require(:binding).permit(:binding, :price)
   end
   
 end

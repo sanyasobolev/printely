@@ -14,7 +14,7 @@ class Admin::Lists::OrderStatusesController < ApplicationController
 
   def update
     @status = ::Lists::OrderStatus.find(params[:id])
-    if @status.update_attributes(params[:status])
+    if @status.update_attributes(order_status_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -28,7 +28,7 @@ class Admin::Lists::OrderStatusesController < ApplicationController
   end
 
   def create
-    @status = ::Lists::OrderStatus.new(params[:status])
+    @status = ::Lists::OrderStatus.new(order_status_params)
     if @status.save
       flash[:notice] = 'Cтатус создан удачно.'
       redirect_to :action => 'index'
@@ -41,6 +41,11 @@ class Admin::Lists::OrderStatusesController < ApplicationController
     ::Lists::OrderStatus.find(params[:id]).destroy
     redirect_to :action => 'index'
   end
+
+  private
   
+  def order_status_params
+    params.require(:status).permit(:title, :key)
+  end  
 
 end

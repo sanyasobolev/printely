@@ -13,7 +13,7 @@ class Admin::Lists::PrePrintOperationsController < ApplicationController
 
   def update
     @operation = ::Lists::PrePrintOperation.find(params[:id])
-    if @operation.update_attributes(params[:operation])
+    if @operation.update_attributes(pre_print_operation_params)
       flash[:notice] = 'Обновление прошло успешно.'
       redirect_to :action => 'index'
     else
@@ -27,7 +27,7 @@ class Admin::Lists::PrePrintOperationsController < ApplicationController
   end
 
   def create
-    @operation = ::Lists::PrePrintOperation.new(params[:operation])
+    @operation = ::Lists::PrePrintOperation.new(pre_print_operation_params)
     if @operation.save
       flash[:notice] = 'Операция создана удачно.'
       redirect_to :action => 'index'
@@ -39,6 +39,12 @@ class Admin::Lists::PrePrintOperationsController < ApplicationController
   def destroy
     ::Lists::PrePrintOperation.find(params[:id]).destroy
     redirect_to :action => 'index'
+  end
+  
+  private
+  
+  def pre_print_operation_params
+    params.require(:operation).permit(:operation, :price, :order_type_id)
   end
 
 end
