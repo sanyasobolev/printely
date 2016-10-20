@@ -1,0 +1,45 @@
+    <% if @section.errors.any? %>
+    <div id="error_explanation">
+    	<h2><%= t "errors.template.body" %></h2>
+    	<ul>
+    	<% @section.errors.full_messages.each do |msg| %>
+      		<li><%= msg %></li>
+    	<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<%= f.hidden_field :parent_id %>
+	<div class="form_align">
+		<%= f.label :title %>
+		<%= f.text_field :title, :maxlength => Section::TITLE_MAX_LENGTH ,:class => 'req_input' %>
+	</div>
+
+	<div class="form_align">
+		<%= f.label :position %>
+		<%= f.number_field :position, min: 1, :class => 'req_input' %>
+	</div>
+
+	<div class="form_align">
+		<%= f.label :controller %>
+		<%= f.text_field :controller %>
+	</div>
+	
+	<div class="form_align">
+		<%= f.label :action %>
+		<%= f.text_field :action %>
+	</div>
+	
+	
+	<div class="form_align">
+		<%= f.fields_for :page do |page| %>
+			<%= page.label :id, Page.human_attribute_name("id") %>
+			<%= page.collection_select :id, 
+								      Page.published_pages,
+								      :id,
+								      :title,
+								      @section.page.nil? ? {:include_blank => 'Нет страницы'} : {:selected => @section.page.id, :include_blank => 'Нет страницы'} 
+			%>	
+		<% end %>
+	
+   	</div>
+	

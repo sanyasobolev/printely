@@ -1,0 +1,16 @@
+= image_tag "errors/error.jpg", :border => '0', :class => "error_image" 
+%div.error_page
+  %h1 Ой!
+  %h2 По этому адресу у нас пока нет страниц.
+  %p
+    Извините, что так получилось.
+  Попробуйте: 
+  %ul
+    %li 
+      перейти на 
+      = link_to 'главную страницу', root_path
+    %li 
+      воспользоваться
+      = link_to 'картой сайта.', :sitemap
+  %div.error_details
+    %p.grey_color Ошибка 404

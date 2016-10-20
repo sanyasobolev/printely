@@ -1,0 +1,6 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'X', admin_lists_order_status_path(status), data: {confirm: 'Действительно хотите удалить?'}, :method => :delete %></td>
+  <td><%=h (status.title) %></td>
+  <td><%=h (status.key) %></td>
+  <td><%= link_to 'Редактировать', edit_admin_lists_order_status_path(status) %></td>
+</tr>

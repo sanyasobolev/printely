@@ -1,0 +1,21 @@
+    <td class="paper">
+	    <div class="paper_size">  
+	      	<%= select_tag "order[documents_attributes][#{document.id}][paper_size]", options_from_collection_for_select(Lists::PaperSize.available_paper_sizes(order.order_type.title), 'id', 'paper_size_with_iso', document.get_paper_size.id), {:class => 'paper_size_selector'} %>
+	    	<%= i.label :paper_size, :class => 'float_left'  %>
+	    </div>
+	    <div class="fl_clear"></div>
+	    <div class="paper_type">
+	    	<%= select_tag "order[documents_attributes][#{document.id}][paper_type]", options_from_collection_for_select(Lists::PaperType.available_paper_types(order.order_type.title, document.get_paper_size.id), 'id', 'paper_type', document.get_paper_type.id), {:class => 'paper_type_selector'} %>
+			<%= i.label :paper_type, :class => 'float_left'  %>
+	    </div>
+	    <div class="fl_clear"></div>
+	    <div class="quantity">	      
+	    	<div class="quantity_selector float_right">
+		        <%= button_tag(' ', :type => 'button', :class => 'decrease_quantity') %>
+		        <%= i.text_field(:quantity) %>
+		        <%= button_tag(' ', :type => 'button', :class => 'increase_quantity') %>
+	 		</div>
+	 		<%= i.label :quantity, :class => 'float_left' %>
+	    </div>
+	    <div class="fl_clear"></div>
+    </td>

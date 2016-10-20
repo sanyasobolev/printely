@@ -1,0 +1,125 @@
+/*fabric canvas----------------------------*/
+
+.editor {
+	position: relative;
+	width: 900px;
+	min-height: 550px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border: 0px;
+}
+
+.editor_container {
+	position:absolute;
+	width:620px;
+	float: left;	
+}
+
+.canvas_panel {
+	display: block;
+	position: relative;
+	width:618px; /*определяет размер canvas_bg*/
+	height:540px; /*определяет размер canvas_bg*/
+	border: 1px solid white
+}
+
+#canvas_bg {
+	position: absolute;
+	bottom: 30px;
+}
+
+.canvas-container {
+	/*margin-top: 165px; определяет положение canvas*/
+	/*margin-left: 30px; определяет положение canvas*/
+	border: 1px dotted red;
+}
+
+.canvas-container-show {
+	/*margin-top: 165px; определяет положение canvas - переменная*/ 
+	/*margin-left: 30px; определяет положение canvas - переменная*/
+	border: 1px dotted red;
+	position: relative;
+	/*width: 545px;	определяет размер canvas - переменная*/
+	/*height: 385px; определяет размер canvas - переменная*/
+}
+
+.sidebar_container {
+	width: 270px;
+	min-height: 540px;
+	margin-left: 630px;
+	border: 0px;
+	float: left;
+}
+
+
+#text_inputs_wrapper td.text_container {
+	padding: 10px 10px 10px 10px;
+}
+
+#text_inputs_wrapper input.text_field {
+	width: 190px;
+	height: 20px;
+	position: static;
+}
+
+.top_toolbar {
+	position: absolute;
+	z-index:+1;
+	display:none;
+	height: 50px;
+	width: 618px;
+	background: #F9F9F9;
+	border: 1px solid #E4E4E4;
+}
+
+.color_tool {
+	float: left;
+	display: none;
+	height: 45px;
+	width: 100px;
+	margin-left:20px;
+}
+
+.color_tool span.label {
+	display:block;
+	margin-top: 13px;
+	margin-right: 10px;
+	float: left;
+}
+
+.minicolors input[type=hidden] + .minicolors-swatch {
+	margin-top:7px;
+}
+
+.minicolors-swatch-color {
+	width: 35px;
+	height: 35px;
+	margin-top:7px;
+}
+
+.minicolors-theme-default .minicolors-swatch {
+	height: 33px;
+}
+
+.font_family_tool {
+	float: left;
+	display: none;
+	height: 45px;
+	width: 280px;
+	margin-left:20px;
+}
+
+.font_family_tool span.label {
+	display:block;
+	margin-top: 13px;
+	margin-right: 10px;
+	float: left;
+}
+
+.font_style_tool {
+	float: left;
+	display: none;
+	height: 45px;
+	width: 120px;
+	margin-left:20px;
+}

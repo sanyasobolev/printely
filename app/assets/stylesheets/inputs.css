@@ -1,0 +1,37 @@
+input {
+	
+}
+
+input.wide {
+	width:100%;
+    border: 1px solid #D6D3D1;
+    height: 30px;
+    padding:0px 7px 4px 7px;
+    font-size: 1.3em;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+
+input.delivery_street_edit, input.delivery_address_edit {
+	width: 350px;
+}
+
+td.delivery_date_edit input#datepicker {
+	position: absolute;
+	width: 165px;
+	text-align: center;
+	top: 0px;
+	margin-top: 20px;
+    margin-left: 75px;
+}
+
+input#timepicker_start {
+	width: 50px;
+	text-align: center;
+    margin-left: 75px;
+}
+
+input#timepicker_end {
+	width: 50px;
+	text-align: center;
+    margin-left: 15px;
+}

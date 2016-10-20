@@ -1,0 +1,14 @@
+<%= error_messages_for :subservice %>
+<h2>Редактирование подуслуги</h2>
+<div class="form_shape">
+  <%= form_for :subservice, :url => admin_subservice_path(@subservice), :html => { :method => :put, :id => 'edit_subservice' } do |f| -%>
+
+    <%= render :partial => 'form', :locals => {:f => f} %>
+
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_subservices_path}  %>
+
+</div>

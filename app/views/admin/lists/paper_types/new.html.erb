@@ -1,0 +1,13 @@
+<h1>Создание</h1>
+<%= error_messages_for :paper_type %>
+<%= form_for :paper_type, :url => admin_lists_paper_types_path do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_lists_paper_types_path}  %>
+
+
+ 

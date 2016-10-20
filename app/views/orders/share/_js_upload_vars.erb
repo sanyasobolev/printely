@@ -1,0 +1,20 @@
+<% key = Rails.application.config.session_options[:key] %>
+<%= content_for :scripts do %>
+  <script type="text/javascript">
+    //uploader for embedded images for envelope(document)
+    var upload_params = {
+      '<%= key %>' : '<%= cookies[key] %>',
+      '<%= request_forgery_protection_token %>' : '<%= form_authenticity_token %>',
+      '_http_accept': 'application/javascript'
+    },
+    
+    //uploader buttons
+    uploader = '<%= asset_path('uploadify/uploadify.swf') %>',
+    buttonImg = '<%= asset_path(upload_button) %>',
+    cancelImg = '<%= asset_path('uploadify/cancel.png') %>',
+	
+	//urls
+	url_for_create_document = '<%= order_documents_path(order) %>';
+	
+  </script>
+<% end %>

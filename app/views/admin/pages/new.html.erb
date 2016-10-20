@@ -1,0 +1,15 @@
+<% content_for :head do %>
+	<%= javascript_include_tag "ckeditor/init" %>
+<% end %>
+<%= error_messages_for :page %>
+<h2>Создание новой страницы</h2>
+<%= form_for :page, :url => admin_pages_path, :html => { :method => :post } do |f| -%>
+
+  <%= render :partial => 'form_for_user_pages', :locals => {:f => f} %>
+
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_pages_path}  %>
+

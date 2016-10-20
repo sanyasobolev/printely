@@ -1,0 +1,6 @@
+<h1><%= @title %></h1>
+  <p><%= link_to image_tag("icons/plus_double_large.png",  id: '25'), new_admin_section_path %></p>
+  
+  <%= nested_sections @sections.arrange(:order => :position) %>
+    
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>

@@ -1,0 +1,17 @@
+<h2><%= @title %></h2>
+<div class="form_shape">
+  <%= form_for(:section, :url => admin_section_path(@section), :html => {:method => :put}) do |f| -%>
+    
+    <%= render :partial => 'form', :locals => {:f => f} %>
+
+	<div class="form_align">
+		<%= f.label :parent_id %>
+		<%= f.select :parent_id, parent_sections, {:include_blank => 'Без родителя'} %>
+	</div>
+
+	<div class="submit_area">
+		<%= submit_tag 'Сохранить', :class => 'submit' %>
+	</div>  
+  <% end %>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_sections_path}  %>	
+</div>

@@ -1,0 +1,7 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'X', admin_lists_pre_print_operation_path(operation), data: {confirm: 'Действительно хотите удалить?'}, :method => :delete %></td>
+  <td><%=h (operation.operation) %></td>
+  <td><%=h (operation.price) %></td>
+  <td><%=h (operation.order_type.title) %></td>
+  <td><%= link_to 'Редактировать', edit_admin_lists_pre_print_operation_path(operation) %></td>
+</tr>

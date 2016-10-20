@@ -1,0 +1,11 @@
+<% if @page_about_services %>
+  <%= render :partial => 'pages/show_page', :locals => {:page => @page_about_services} %>
+<% else %>
+  <%= render :plain => 'Страница описания раздела удалена или не опубликована' %>
+<% end %>
+
+<%= render :partial => 'service', :collection => @services %>
+
+<div class="fl_clear"></div>
+
+

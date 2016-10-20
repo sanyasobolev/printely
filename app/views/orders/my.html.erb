@@ -1,0 +1,40 @@
+<% content_for :head do %>
+	<%= javascript_include_tag "orders/my_orders" %>
+<% end %>
+<table>
+  <tr>
+    <td>
+      <%= link_to 'В личный кабинет', myoffice_path, :class =>"button_style_long" %>
+    </td>
+  </tr>
+</table>
+<h2 class="orange">Мои заказы</h2>
+	<% if @my_orders.count > 0 %>
+	  <table class ="default_table">
+	    <tr class="header">
+	      <th><%= Order.human_attribute_name(:id) %></th>
+	      <th><%= Order.human_attribute_name(:created_at) %></th>
+	      <th><%= Order.human_attribute_name(:order_status_id) %></th>
+	      <th><%= Order.human_attribute_name(:cost) %></th>
+	      <th><%= Order.human_attribute_name(:manager_comment) %></th>
+	      <th><%= Order.human_attribute_name(:order_type) %></th>
+	      <th><%= Order.human_attribute_name(:details) %></th>
+	    </tr>
+	    <%= render :partial => 'orders/my/order', :collection => @my_orders  %>
+	  </table>
+		<div class="paginator">
+			<%= paginate @my_orders, :param_name => :my_orders_page %>
+		</div>
+	<% else %>
+	  <%= render :partial => 'my/no_orders' %>
+	<% end %>
+
+  <div class="fl_clear"></div>
+
+<table>
+  <tr>
+    <td>
+      <%= link_to 'В личный кабинет', myoffice_path, :class =>"button_style_long" %>
+    </td>
+  </tr>
+</table>

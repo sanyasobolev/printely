@@ -1,0 +1,50 @@
+<tr class="document grey_on_hover" id="<%= show_foto.id %>" name="document" >
+    <td class="upload">
+		<%= image_tag show_foto.docfile.thumb.url, :class => 'document_uploaded_thumb' %>
+    </td>
+
+    <td class="image_process">
+    	<% show_foto.pre_print_operations.all.each do |t| %>
+    		<div class="pre_print_operation">
+  				<%= t.operation %>
+  			</div>
+		<% end %>
+    </td>
+
+    <td class="paper">
+	    <div class="paper_size">  
+			<%= Document.human_attribute_name(:paper_size) %> -
+			<%= show_foto.get_paper_size_with_iso %>	    	
+	    </div>
+	    <div class="fl_clear"></div>
+	    <div class="paper_type">
+			<%= Document.human_attribute_name(:paper_type) %> - 
+			<%= show_foto.get_paper_type_with_grade %>			
+	    </div>
+	    <div class="fl_clear"></div>
+	    <div class="quantity">	      
+			<%= Document.human_attribute_name(:quantity) %> - 
+			<%= show_foto.quantity %>	      
+	    </div>
+	    <div class="fl_clear"></div>
+    </td>
+    <td class="print_settings">
+    	<div class="margins">
+    		<%= Document.human_attribute_name(:margins) %> - 
+			<%= show_foto.print_margin.margin %>  
+    	</div> 
+    	<div class="fl_clear"></div> 
+	    <div class="user_comment">
+	    	<span><%= "#{Document.human_attribute_name(:user_comment)}:" unless show_foto.user_comment.blank? %>
+			<%= show_foto.user_comment %></span>	    
+		</div>
+	    <div class="fl_clear"></div> 
+	    <div class="print_setting_1">
+
+	    </div>   	
+    </td>
+
+    <td class="document_cost ">
+      <%= h (number_to_currency(show_foto.cost, :unit => "коп.", :separator => " руб. ")) %>
+    </td>
+</tr>

@@ -1,0 +1,18 @@
+  	<p>
+  		<%= f.label(:subject) %> <br/>
+  		<%= f.text_field :subject,
+                   :size => Page::TITLE_SIZE,
+                   :maxlength =>Page::TITLE_MAX_LENGTH%>
+	</p>
+	<p>
+  		<%= f.label(:body) %> <br/>
+  		<%= f.cktext_area :body,
+                  :rows => Page::BODY_ROWS_SIZE,
+                  :cols => Page::BODY_COLS_SIZE,
+                  :height => '400px'%>
+	</p>
+	<p>
+  		<%= f.label(:published) %>
+  		<%= f.check_box :published %>
+	</p>
+

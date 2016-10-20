@@ -1,0 +1,123 @@
+/*сообщение об ошибке*/
+#error {
+    margin-top: 2em;
+    padding: 20px;
+    background-color: red;
+    color: white;
+}
+
+div.error_page {
+	display:block;
+	width: 300px;
+	position:relative;
+	top: 100px;
+	left:550px;
+	height: 600px;
+}
+
+img.error_image {
+	position:absolute;
+	z-index:-1;	
+	width: 900px;
+}
+
+div.error_details {
+	position:absolute;
+	bottom: 0px;
+	width: 100%;
+}
+
+/*сообщение о неправильно выбранном порядковом номере раздела*/
+#number_busy {
+    font-style: italic;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+/*обработка ошибок модели и выделение поля при введении неверных данных-------*/
+.field_with_errors input {
+    background-color: #FFB8B8;
+}
+
+#error_explanation {
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    background-color: red;
+}
+
+#error_explanation h2 {
+
+}
+
+#error_explanation p {
+
+}
+
+#error_explanation ul li {
+
+}
+
+
+
+
+/*jquery validate*/
+
+label.error {
+	font-size: 1em;
+	position: absolute;
+	display: table-cell;
+	text-align:left;
+  	color: red;
+	width: 210px; 
+	height: 30px; 
+	right: -220px;
+	top: -3px;	
+}
+
+label.error[for=order_delivery_town_id] {
+    font-size: 1.5em;
+    height: 20px;
+    right: 230px;
+    text-align: center;
+    top: 0;
+    width: 10px;
+}
+
+label.error[for=order_delivery_address] {
+	right: 340px;
+	top: 0px;
+	font-size: 1.5em;
+	width: 10px;
+	height: 20px;
+	text-align: center;
+}
+
+label.error[for=quantity_documents_for_validate] {
+    font-size: 1.5em;
+    height: 40px;
+    left: 100px;
+    top: 15px;
+    width: 200px;
+}
+
+label.error[for=datepicker] {
+    font-size: 1.5em;
+    height: 20px;
+    left: 260px;
+    top: 20px;
+    width: 50px;
+}
+
+form#new_user div.agreement label.error {
+	font-size: 1em;
+	position: absolute;
+	display: table-cell;
+	text-align:left;
+  	color: red;
+	width: 210px; 
+	height: 30px; 
+	right: -230px;
+	top: 50px;	
+}
+

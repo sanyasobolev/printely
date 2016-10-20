@@ -1,0 +1,14 @@
+<% @str_1 = "<div class=\"news\" onclick= \"window.location = '/news/#{news_for_welcome.permalink}';\">" %>
+<% @str_2 = "</div>" %>
+
+<%= @str_1.html_safe %>
+  <div class="news_created_at">
+    <%= Russian::strftime(news_for_welcome.created_at, "%d %B %Y") %>
+  </div>
+  <div class="news_title">
+    <%= raw(news_for_welcome.title) %>
+  </div>
+  <div class="news_synopsis">
+    <%= raw(news_for_welcome.synopsis) %>
+  </div>
+<%= @str_2.html_safe %>

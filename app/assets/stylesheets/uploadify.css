@@ -1,0 +1,40 @@
+/*
+Uploadify
+Copyright (c) 2012 Reactive Apps, Ronnie Garcia
+Released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
+*/
+
+div.uploadifyQueue {
+	display: none;
+	position: relative;
+	background-color: #FFFC9E;
+	margin: 10px 0 10px 0;
+}
+
+div.uploadifyQueueHeader {
+	display: block;
+	margin-left: 10px;
+}
+
+div.uploadifyQueueItem {
+	display: none;
+}
+
+div.uploadifyQueueItem.uploadifyError {
+	display: block;
+	background-color: #DC3C00;
+	margin: 10px 10px 0 10px;
+	color: white;
+	padding: 10px;
+	border-bottom: 10px solid #FFFC9E;
+}
+
+div.uploadifyQueueItem.uploadifyError div.cancel {
+	display: none;
+}
+
+div.uploadifyQueueItem.uploadifyError span.percentage {
+	display: none;
+}
+
+

@@ -1,0 +1,50 @@
+<table id="fileList" class="default_table">
+			<tr>
+				<td>
+					<div class="editor">
+						<div class="editor_container">
+							
+							<div id="canvas-wrapper"  class="canvas_panel">
+								
+								<div id="canvas_bg">
+									<%= read_product_background_image(order.documents.first) %>
+								</div>
+								
+								<div class="canvas-container-show" >
+									<%= image_tag order.documents.first.docfile.url %>
+								</div>
+							
+							</div>
+
+						</div>
+						<div class="sidebar_container">
+						    <div class="paper_size">  
+								<%= Document.human_attribute_name(:paper_size) %> -
+								<%= order.documents.first.get_paper_size_with_iso %>	    	
+						    </div>
+						    <div class="fl_clear"></div>
+						    <div class="paper_type">
+								<%= Document.human_attribute_name(:paper_type) %> - 
+								<%= order.documents.first.get_paper_type.paper_type %>			
+						    </div>
+						    <div class="fl_clear"></div>
+						    <div class="quantity">	      
+								<%= Document.human_attribute_name(:quantity) %> - 
+								<%= order.documents.first.quantity %>	      
+						    </div>
+						    <div class="fl_clear"></div>
+						</div>
+		
+						<div class="fl_clear"></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				    <div class="user_comment">
+				    	<span><%= "#{Document.human_attribute_name(:user_comment)}:" unless order.documents.first.user_comment.blank? %>
+						<%= order.documents.first.user_comment %></span>	    
+					</div>
+				</td>
+			</tr>
+</table>

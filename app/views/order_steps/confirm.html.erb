@@ -1,0 +1,24 @@
+<%= render :partial => 'orders/share/title', :locals => {:title => @title } %>
+
+<%= tutorial_progress_bar %>
+<div class="fl_clear"></div>
+
+<%= form_for @order, url: wizard_path, :html => { :method => :put, :id => @order.id} do |order| -%>
+	
+	<div class='order_description_confirm_wrapper'>
+		<h2><%= @order_description %></h2>
+		<%= render :partial=> 'orders/share/documents_specification', :locals => {:lines => @documents_specification_lines} %>
+	</div>   	
+	   	<%= render :partial => 'orders/share/documents_price', :locals => {:order => @order} %>	
+	
+	<div class='order_delivery_confirm_wrapper'>   	
+	   	<h2>Доставка - <%= @delivery_type %></h2>
+	  	<%= render :partial => 'orders/delivery/show', :locals => {:order => @order, :show_header => false} %>	
+  	</div>
+  	<%= render :partial => 'orders/delivery/price', :locals => {:order => @order} %>	
+  	<%= render :partial => 'orders/share/order_cost', :locals => {:order => @order} %>	
+	<%= render :partial => 'orders/share/submit', :locals => {:order => order, :title => 'Оформить заказ'}  %>	
+<% end -%>
+  <%= render :partial => 'previous_step', :locals => {:order => @order, :title => 'Назад к доставке'}  %>
+
+<div class="fl_clear"></div>

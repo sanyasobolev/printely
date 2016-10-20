@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <style type="text/css">
+      .orange {
+          padding: 10px;
+          background-color: orange;
+          color: black;
+      }
+      p {
+          font-size: 1em;
+          line-height: 130%;
+      }
+      .float_right {
+          float: right
+      }
+      .bold {
+          font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="orange">Здравствуйте, <%= @user.first_name %>!</h1>
+    <p class="bold">
+      Ваш заказ №<%= @order.id %> создан и находится <%= @status %>.
+    </p>
+    <p>
+		Спасибо! В ближайшее время мы свяжемся с Вами!
+    </p>  
+    <p>
+      Для просмотра информации о заказе, пройдите по <%= link_to 'ссылке', @url_to_order %>.
+    </p>
+    <p>
+      Для входа в личный кабинет, пройдите по <%= link_to 'ссылке', @myoffice %>.
+    </p>
+    <a href="http://printely.ru"><img src="http://printely.ru/assets/logo_sbold_black.png" border="0" class="float_right" alt="&copy; Printely. Все права защищены" /></a>
+  </body>
+</html>

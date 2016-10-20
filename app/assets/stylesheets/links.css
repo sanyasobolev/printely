@@ -1,0 +1,439 @@
+/*Общие*/
+a:link {text-decoration: none; color: #0066ff}
+a:visited {text-decoration: none; color: #0066ff}
+a:hover {text-decoration: underline;}
+
+a.logo {text-decoration: none; color: white}
+
+a.article_nav {text-decoration: none; color: #999999}
+
+a.grey:link, a.grey:visited {
+    color: gray;
+    text-decoration:none;
+}
+
+a.grey:hover {
+    color: orange;
+    text-decoration:none;
+}
+
+
+a.for_admin:link,a.for_admin:visited {
+    display:block;
+    color:#000000;
+    font-weight: bold;
+    text-align: right;
+    background-color:white;
+    width:120px;
+    padding: 4px;
+    text-decoration:none;
+    float: left;
+}
+
+a.for_admin:hover,a.for_admin:active{
+    background-color:#c2c1c1;
+}
+
+a.sort_link:link, a.sort_link:visited {
+	color: white;
+	text-decoration: underline;
+}
+
+/*top sections*/
+
+a.top_section:link, a.top_section:visited {
+    color: white;
+    text-align:center;
+    text-decoration:none;
+    padding: 0px;
+    font-size: inherit;
+}
+
+a.top_section:hover {
+    color: #378cff;
+    text-align:center;
+    text-decoration:none;
+    padding: 0px;
+}
+
+/*links as buttons (get)*/
+a.button_style:link, a.button_style:visited, input.button_style {
+    background-color: #1BA1E2;
+    border: 0 none;
+    color: white;
+    padding: 9px 20px 10px 20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-right: 0px;
+    display:block;
+
+    text-align:center;
+    text-decoration:none;
+    max-width: 100px;
+/*    height: 27px;*/
+}
+
+a.button_style:hover, input.button_style:hover {
+    cursor: pointer;
+    background-color: #3b6fb5;
+}
+
+a.button_style_long:link, a.button_style_long:visited {
+    display:block;
+    font-weight:bold;
+    text-align:center;
+    text-decoration:none;
+    background-color: #1BA1E2;
+    border: 0 none;
+    color: white;
+    padding: 9px 20px 10px 20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-right: 0px;
+}
+
+a.button_style_long:hover {
+    cursor: pointer;
+    background-color: #3b6fb5;
+}
+
+a.button_style_long_orange:link, a.button_style_long_orange:visited {
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background-color: #1BA1E2;
+    border: 0 none;
+    color: white;
+    padding: 9px 20px 10px 20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-right: 0px;
+}
+
+a.button_style_long_orange:hover {
+    cursor: pointer;
+    background-color: orange;
+}
+
+/*buttons pressed and unpressed*/
+.container_for_link_box {
+    display:table;
+    background-color: #1BA1E2;
+    width:150px;
+    text-align:center;
+    margin-bottom: 10px;
+    color: black;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.link_box {
+    display:table-cell;
+    width:150px;
+    text-align:center;
+    text-decoration:none;
+    color: black;
+    height: 50px;
+    vertical-align: middle; 
+}
+
+a.box:link, a.box:visited {
+    display: table-cell;
+    background-color: #cccccc;
+    text-align:center;
+    text-decoration:none;
+    color: black;
+    height: 50px;
+    width:150px;
+    vertical-align: inherit;
+}
+
+a.box:hover,a.box:active{
+    background:#1BA1E2;
+}
+
+/*user buttons for top panel*/
+a.box_user_opt:link, a.box_user_opt:visited {
+    float: right;
+    display:block;
+    color:white;
+    background-color:#378cff;
+    text-align:center;
+    text-decoration:none;
+    max-width: 100px;
+    margin-left: 3px;
+}
+
+a.box_user_opt:hover, a.box_user_opt:active {
+    background-color: #3b6fb5;
+}
+
+div.box_user_opt {
+    float: right;
+    display:block;
+    color:white;
+    background-color:#378cff;
+    text-align:center;
+    text-decoration:none;
+    max-width: 100px;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+div.box_user_opt:hover {
+    background-color: #3b6fb5;
+}
+
+/*link for delete*/
+.link_delete.docfile_delete {
+    position: absolute;
+    right: 0px;
+}
+
+
+.link_delete#clear_queue {
+    position: absolute;
+	right: -18px;
+	top: -14px;
+    border: 0 none;
+    background: none;
+    cursor:pointer;
+}
+/*for order wizard*/
+.previous_step {
+    background-color: white;
+    border: 0 none;
+    color: #0072c5;
+    display: block;
+    float: left;
+    font-size: 1em;
+    margin: 20px 20px 0 0;
+}
+
+.previous_step:hover {
+    cursor: pointer;
+    color: black;
+    text-decoration:none;
+}
+
+/*bot section sections*/
+a.bot_section:link, a.bot_section:visited {
+    width: 20%;
+    color: #999999;
+    text-decoration:none;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+a.bot_section:hover {
+    color: #F7941D;
+    text-decoration:none;
+}
+
+
+/*сложные ссылки для стартовой страницы---------------------------------------------------*/
+.link_container {
+     width: 420px; /* Ширина слоя */
+     height: 230px; /* Высота слоя */
+     background: #517B93; /* Цвет фона */
+}
+.link_container a {
+     display: block; /* Ссылка как блочный элемент */
+     text-align: center; /* Выравнивание по центру */
+     height: 100%; /* Высота на весь слой */
+     color: white; /* Цвет ссылки */
+     text-decoration: none;
+}
+
+/*сложные ссылки для услуг и подуслуг---------------------------------------------------*/
+.link_container_for_service {
+    position: relative;
+    float: left;
+    width: 420px;
+    height: 230px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    background-color: #517B93;
+    }
+
+.link_container_for_service:hover {
+    background: orange;
+}
+
+.link_container_for_service img {
+    margin: 20px 20px 30px 20px;
+    float: left;
+    }
+
+.link_container_for_service .service_synopsis {
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: white;
+    }
+
+.link_container_for_service .service_title {
+    margin-top: 30px;
+    margin-right: 20px;
+    height: 100px;
+    float: left;
+    color: white;
+    font-size: 2em;
+    width: 280px;
+    }
+
+/*сложные ссылки---------------------------------------------------*/
+.link_container_for_flash_link {
+    position: relative;
+    float: left;
+    width: 420px;
+    height: 230px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    background-color: #517B93;
+    }
+
+.link_container_for_flash_link:hover {
+    background: orange;
+}
+
+.link_container_for_flash_link a {
+    position: absolute;
+    display:block;
+    width: 420px;
+    height: 230px;
+    top:0px;
+    left:0px;
+	opacity:0;
+	filter:Alpha(opacity=0);
+}
+
+.link_container_for_flash_link img {
+    margin: 20px 20px 30px 20px;
+    float: left;
+    }
+
+.link_container_for_flash_link .flash_link_synopsis {
+    float: left;
+    margin-left: 20px;
+    color: white;
+    width: 380px;
+    }
+
+.link_container_for_flash_link .flash_link_title {
+    margin-top: 30px;
+    height: 100px;
+    float: left;
+    color: white;
+    font-size: 2em;
+    width: 300px;
+    }
+
+/*сложные ссылки c боковой линией---------------------------------------------------*/
+.link_container_for_sidelinelink {
+    position: relative;
+    float: left;
+    width: 210px;
+    height: 210px;
+    margin-right: 43px;
+    margin-left: 43px;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    border: 1px solid #d6d6d6;
+    }
+
+.link_container_for_sidelinelink:hover {
+    background-color: #e8e8e8;
+}
+
+.link_container_for_sidelinelink .sideline_red {
+    float: left;
+    width: 5px;
+    height: 100%;
+    background-color: red;
+    margin-right: 20px;
+}
+
+.link_container_for_sidelinelink .sideline_blue {
+    float: left;
+    width: 5px;
+    height: 100%;
+    background-color: #0000ff;
+    margin-right: 20px;
+}
+
+.link_container_for_sidelinelink .sideline_green {
+    float: left;
+    width: 5px;
+    height: 100%;
+    background-color: lime;
+    margin-right: 20px;
+}
+
+.link_container_for_sidelinelink .sideline_cyan {
+    float: left;
+    width: 5px;
+    height: 100%;
+    background-color:#04ACEC;
+    margin-right: 20px;
+}
+
+
+.link_container_for_sidelinelink .sidelinelink_synopsis {
+    float: left;
+    }
+
+.link_container_for_sidelinelink .sidelinelink_title {
+    margin-top: 15px;
+    width: 80%;
+    float: left;
+    font-size: 1.5em;
+    }
+
+/*boardlinks*/
+a.boardlink:link, a.boardlink:visited {
+    color: black;
+    text-decoration:none;
+}
+
+a.boardlink:hover, a.boardlink:active {
+    color: #F7941D;
+    text-decoration:none;
+}
+
+a#sign_up {
+    background-color: white;
+    border: 0 none;
+    color: #0072c5;
+    font-size: 1em;
+    margin: 20px 20px 0 0;
+}
+
+a#forgot_your_password {
+    background-color: white;
+    border: 0 none;
+    color: #0072c5;
+    font-size: 1em;
+    margin: 0 0 20px 20px ;
+}
+
+a.cancel{
+    background-color: white;
+    border: 0 none;
+    color: #0072c5;
+    display: block;
+    float: right;
+    font-size: 1em;
+    margin: 20px 20px 0 0;
+}
+
+a.cancel:hover, a#forgot_your_password:hover , a#sign_up:hover{
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}

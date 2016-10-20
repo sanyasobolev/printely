@@ -1,0 +1,9 @@
+ru:
+  admin:
+    sections:
+      index:
+        title: 'Разделы сайта'
+      new: 
+        title: 'Создание раздела'
+      edit:
+        title: 'Редактирование раздела'

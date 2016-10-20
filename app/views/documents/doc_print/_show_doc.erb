@@ -1,0 +1,48 @@
+<tr class="document grey_on_hover" id="<%= show_doc.id %>" name="document" >
+    <td class="upload">
+		<%= thumb_for_doc(show_doc) %>
+    </td>
+
+    <td class="page_count">
+		<%= show_doc.page_count %>
+    </td>
+
+    <td class="paper">
+	    <div class="paper_size">  
+			<%= Document.human_attribute_name(:paper_size) %> -
+			<%= show_doc.get_paper_size_with_iso %>	    	
+	    </div>
+	    <div class="fl_clear"></div>
+	    <div class="paper_type">
+			<%= Document.human_attribute_name(:paper_type) %> - 
+			<%= show_doc.get_paper_type_with_grade %>			
+	    </div>
+	    <div class="fl_clear"></div>
+	    <div class="quantity">	      
+			<%= Document.human_attribute_name(:quantity) %> - 
+			<%= show_doc.quantity %>	      
+	    </div>
+	    <div class="fl_clear"></div>
+    </td>
+    <td class="print_settings">
+    	<div class="print_color">
+    		<span>
+	    		<%= Document.human_attribute_name(:print_color) %> - 
+				<%= show_doc.print_color.color %> 
+			</span> 
+    	</div> 
+    	<div class="fl_clear"></div> 
+	    <div class="user_comment">
+	    	<span><%= "#{Document.human_attribute_name(:user_comment)}:" unless show_doc.user_comment.blank? %>
+			<%= show_doc.user_comment %></span>	    
+		</div>
+	    <div class="fl_clear"></div> 
+	    <div class="print_setting_1">
+
+	    </div>   	
+    </td>
+
+    <td class="document_cost ">
+      <%= h (number_to_currency(show_doc.cost, :unit => "коп.", :separator => " руб. ")) %>
+    </td>
+</tr>

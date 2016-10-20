@@ -1,0 +1,4 @@
+  <span class="grey_text"><%= section.position %></span>
+  <span class="bold"><%= section.title %></span>
+  <span class="grey_text"> (cтраница: <%= section.page.nil? ? "Нет" : section.page.title %>)</span>
+  <%= render :partial => 'share/cud_panel', :locals => {:section => section} %>

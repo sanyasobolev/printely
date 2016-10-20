@@ -1,0 +1,61 @@
+<h2 class="orange">Личный кабинет</h2>
+<p><%= current_user.first_name %>, здесь Вы можете создавать новые заказы на печать и просматривать информацию о ранее созданных заказах. </p>
+
+<% @str_1 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new?order_type=foto_print';\">" %>
+<% @str_2 = "</div>" %>
+
+<%= @str_1.html_safe %>
+  <%= image_tag("orders/add_foto_print.png", :border => '0') %>
+  <div class="flash_link_title">
+    Распечатать фото
+  </div>
+  <div class="flash_link_synopsis">
+    Печать фотографий распространенных размеров на различных типах фотобумаг.<br>
+    <span class="bold">Принимаем файлы: .jpg, .png.</span>
+  </div> 
+<%= @str_2.html_safe %>
+
+<% @str_3 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new?order_type=doc_print';\">" %>
+<% @str_4 = "</div>" %>
+<%= @str_3.html_safe %>
+  <%= image_tag("orders/add_doc_print.png", :border => '0') %>
+  <div class="flash_link_title">
+    Распечатать документы
+  </div>
+  <div class="flash_link_synopsis">
+    Печать на офисной бумаге формата А4 и А3 плотностью 80г.<br> 
+	<span class="bold">Принимаем файлы: .doc, .docx, .pdf, .ppt, .pptx.</span>
+  </div>
+<%= @str_4.html_safe %>
+
+<% @str_5 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/new?order_type=envelope_print';\">" %>
+<% @str_6 = "</div>" %>
+<%= @str_5.html_safe %>
+  <%= image_tag("orders/add_letter_print.png", :border => '0') %>
+  <div class="flash_link_title">
+    Распечатать конверты
+  </div>
+  <div class="flash_link_synopsis">
+    Печать на конвертах различных размеров.<br> 
+	<span class="bold">Разработайте макет Вашего конверта.</span>
+  </div>
+<%= @str_6.html_safe %>
+
+<div class="fl_clear"></div>
+<hr>
+<br />
+
+<% @str_7 = "<div class=\"link_container_for_flash_link\" onclick= \"window.location = '/orders/my';\">" %>
+<% @str_8 = "</div>" %>
+
+<%= @str_7.html_safe %>
+  <%= image_tag("orders/my_orders.png", :border => '0') %>
+  <div class="flash_link_title">
+    Мои заказы
+  </div>
+  <div class="flash_link_synopsis">
+    Посмотрите текущий статус Ваших заказов
+  </div>
+<%= @str_8.html_safe %>
+
+<div class="fl_clear"></div>

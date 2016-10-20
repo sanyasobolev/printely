@@ -1,0 +1,27 @@
+<div class="form_shape">
+	<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+	  <div class="form_align">
+	    <%= f.label :email %>
+	    <%= f.email_field :email, autofocus: true %>
+	  </div>
+
+	  <% if devise_mapping.rememberable? -%>
+	    <div id="remember_me">
+	      <%= f.check_box :remember_me %>
+	      <%= f.label :remember_me %>
+	    </div>
+	  <% end -%>
+	
+	  <div class="form_align">
+	    <%= f.label :password %>
+	    <%= f.password_field :password, autocomplete: "off" %>
+	  </div>
+	
+	  <div class="submit_area">
+	    <%= f.submit "Войти", :class => 'submit' %>
+	  </div>
+	  <div class="fl_clear"></div>
+	<% end %>
+</div>
+
+<%= render "devise/shared/links" %>

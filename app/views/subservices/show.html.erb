@@ -1,0 +1,5 @@
+<% if @page_about_subservice != nil %>
+  <%= render :partial => 'pages/show_page', :locals => {:page => @page_about_subservice} %>
+<% else %>
+  <p>Описание услуги отсутствует</p>
+<% end %>

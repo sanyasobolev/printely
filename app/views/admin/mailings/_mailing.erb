@@ -1,0 +1,9 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'Х', admin_mailing_path(mailing), :method => :delete, data: {confirm: 'Действительно хотите удалить?'} %></td>
+  <td><%= Russian::strftime(mailing.created_at, "%d %B %Y") %></td>
+  <td><%= h (mailing.subject) %></td>
+  <td><%= h (mailing.sent_mails) %></td>
+  <td><%= h (mailing.all_mails) %></td>
+  <td><%= h (boolean_to_ru(mailing.published)) %></td>
+  <td><%= link_to 'Ред.', edit_admin_mailing_path(mailing) %></td>
+</tr>

@@ -1,0 +1,23 @@
+<div class="zero_level">
+  <%= image_tag ("icons/section_sitemap.png") %>
+  <% if zero_level.controller == 'no' %>
+    <%= link_to zero_level.title, section_page_path(zero_level), :class => "site_map_link" %>
+  <% else %>
+    <%= link_to zero_level.title, {:controller => zero_level.controller, :action => zero_level.action, :category_id => nil} , {:class => "site_map_link"} %>
+  <% end %>
+</div>
+
+<% if zero_level.controller == 'services' %>
+  <% services = Service.all %>
+  <%= render :partial => 'service', :collection => services %>
+<% end %>
+  
+<% if zero_level.controller == 'articles' %>
+  <%  categories = Category.all %>
+  <%= render :partial => 'category', :collection => categories %>
+<% end %>
+
+<% if zero_level.controller == 'no'  %>
+  <% pages = Page.page_of_section(zero_level)
+  <%= render :partial => 'page', :collection => pages %>
+<% end %>

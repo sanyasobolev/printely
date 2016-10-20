@@ -1,0 +1,4 @@
+<tr class="grey_on_hover">
+  <td><%= pricelist_line.paper_size.paper_size_with_iso %></td>
+  <td><%= (number_to_currency((pricelist_line.price), :unit => "руб.", delimiter: ".", precision: 2)) %></td>
+</tr>

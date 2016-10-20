@@ -1,0 +1,14 @@
+<%= error_messages_for :pricelist_scan %>
+<h2><%= @title %></h2>
+<div class="form_shape">
+  <%= form_for :line, :url => admin_lists_scan_specification_path(@line), :html => { :method => :put } do |f| -%>
+
+    <%= render :partial => 'form', :locals => {:f => f} %>
+
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_lists_scan_specifications_path}  %>
+
+</div>

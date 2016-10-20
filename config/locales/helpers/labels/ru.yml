@@ -1,0 +1,6 @@
+ru:
+  helpers:
+    label:
+      user:
+        email: "Email"
+        password: "Пароль"

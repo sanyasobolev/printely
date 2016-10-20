@@ -1,0 +1,14 @@
+<h1>Создание статуса</h1>
+<div class="form_shape">
+	<%= form_for :status, :url => admin_lists_order_statuses_path, :html => {:id => 'new_order_status'} do |f| %>
+	  <%= f.error_messages %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+	  
+		<div class="submit_area">
+			<%= submit_tag 'Сохранить', :class => 'submit' %>
+		</div> 
+	<% end -%>
+	<%= render :partial => 'share/cancel', :locals => {:path => admin_lists_order_statuses_path}  %>
+
+</div>
+ 

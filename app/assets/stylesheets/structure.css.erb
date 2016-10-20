@@ -1,0 +1,778 @@
+body {
+    margin:0;
+    padding:0;
+    background-color: white;
+    font-size: 100%;
+    font-family: "Segoe UI",helvetica,arial,sans-serif;
+}
+/*панели---------------------------------------------------------------------*/
+#header {
+    height: 60px;
+    width: 100%;
+    background-color: #262626;
+}
+
+#middle_panel  {
+    width: 100%
+}
+
+#flash_panel {
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+}
+
+#slide_panel {
+    position: relative;
+    background-color: white;
+    height: 300px;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+#boardlinks {
+    border-bottom: solid 1px #CCCCCC;
+    border-top: solid 1px #CCCCCC;
+    height: 33px;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
+#content_panel {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+    min-height: 700px;
+}
+
+#contact_bottom_panel {
+    height: 45px;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
+#first_bottom_panel {
+    height: 150px;
+    width: 100%;
+    background-color: #565656;
+    color: #c3c0b9
+}
+
+#second_bottom_panel {
+    height: 28px;
+    width: 100%;
+    background-color: #363738;
+}
+/*-----------------------------------------------------------------------------------------*/
+/*контейнеры верхней панели---------------------------------------------------------------------*/
+#top_nav {
+    position: relative;
+    height:100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+}
+#logo_container {
+    padding-top: 5px;
+    width: 150px;
+    text-align: left;
+    font-size: 1.5em;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#user_options {
+    height: 60px;
+    max-width: 200px;
+    float:right;
+    margin-left: 20px;
+}
+
+#current_user {
+    margin-top: 5px;
+    float: right;
+    height: 25px;
+    color: white
+}
+
+/*CSS меню верхнее-------------------------------------------------*/
+/*section*/
+/*общие-------------------------------------*/
+#top_menu {
+    margin: 0 200px 0 100px;
+}
+
+#top_menu a {
+  display: block;
+  text-decoration: none;
+}
+
+#top_menu .has-sub {
+  z-index: 1;
+}
+
+/*первый уровень-------------------------------------*/
+#top_menu ul {
+    margin: 24px 0 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+#top_menu > ul > li {
+    padding: 0 20px 10px 20px;
+    position: relative;
+    display: inline-block;
+    top: 0px;
+}
+
+#top_menu > ul > li > a {
+  font-size: 1.2em;
+  color: #b5b5b5;
+}
+
+#top_menu > ul > li:hover > a {
+  color: #fafafa;
+}
+
+
+#top_menu:after,
+#top_menu ul:after {
+  content: '';
+  display: block;
+  clear: both;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+/*треугольник под меню первого уровня-----------------------*/
+
+#top_menu > ul > li.has-sub > ul > li:first-child:after {
+    border-bottom: 8px solid #444;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    content: "";
+    height: 0;
+    left: 30px;
+    position: absolute;
+    top: -8px;
+    width: 0;
+}
+
+#top_menu > ul > li.has-sub > ul > li:first-child:hover:after {
+    border-bottom-color: #378cff;
+}
+
+
+/*треугольник в меню первого уровня-----------------------*/
+#top_menu > ul > li > span.arrow-down {
+	position:absolute;
+	right:5px;
+	top: 12px;
+	float:right;
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid #B5B5B5
+}
+
+#top_menu > ul > li:hover > span.arrow-down {
+    border-top: 5px solid white;
+}
+
+
+
+/*второй уровень-------------------------------------*/
+#top_menu .has-sub:hover > ul {
+  display: block;
+}
+
+#top_menu .has-sub ul {
+	list-style: none;
+    margin: 0;
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background-color: #444; 
+}
+
+#top_menu .has-sub ul li {
+    position: relative;
+    display: block;
+    padding: 0 1px 1px 1px;
+}
+
+#top_menu .has-sub ul li a {
+    display: block;
+    font-size: 1em;
+    height: 30px;
+    padding: 5px 30px 0px 20px;
+    text-transform: none;
+    white-space: nowrap;
+    color: #b5b5b5;
+}
+
+#top_menu .has-sub ul li:hover a {
+  background-color: #378cff;
+}
+
+#top_menu ul ul li:hover > a {
+  color: #ffffff;
+}
+
+/*треугольник в меню второго уровня-----------------------*/
+#top_menu > ul > li > ul > li > span.arrow-right {
+	position:absolute;
+    right: 8px;
+    top: 12px;
+	width: 0; 
+	height: 0;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid #B5B5B5;
+	border-top: 5px solid transparent;
+	z-index: 2;
+}
+
+#top_menu > ul > li > ul > li:hover > span.arrow-right {
+    border-left: 5px solid white;
+}
+
+/*третий уровень------------------------------------*/
+
+#top_menu .has-sub .has-sub:hover > ul {
+  display: block;
+}
+
+#top_menu .has-sub .has-sub ul {
+  background-color: #696969;
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0px;
+}
+
+#top_menu .has-sub .has-sub ul li a {
+    font-size: 1em;
+    margin-left: 0px;
+    height: 30px;
+    padding-top: 5px;
+    color: #ffffff;
+    background-color: #696969;
+}
+
+#top_menu .has-sub .has-sub ul li a:hover {
+  background-color: #378cff;
+}
+
+#top_menu.align-right > ul {
+  float: right;
+}
+/*----------------------------------------------------------*/
+
+/*структрура разделов для админки---------------------------*/
+.sections {
+	display: block;
+	height: 60px;
+	font-size: 35px;
+}
+.nested_sections {
+  margin-left: 50px;
+}
+
+.tool_panel {
+    display: inline;
+    background-color: #DADADA;
+    padding: 0 10px 0 10px;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+/*контейнеры slide - панели-----------------------------------------------------------------------------*/
+
+#slide_image {
+    height: 300px;
+    width: 100%;
+}
+
+#slide_image > div {
+    width: 1200px;
+    height: 300px;
+    float: left;
+    overflow: hidden;
+}
+
+
+#slide_image img {
+    display: block;
+    margin: 0 25px 0 0;
+    float: left;
+}
+
+.slide_pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.slide_pagination a {
+    background: #cccccc;
+    width: 15px;
+    height: 15px;
+    margin: 0 5px 0 0;
+    display: inline-block;
+}
+
+.slide_pagination a.selected {
+    background:#1BA1E2;
+    cursor: default;
+}
+.slide_pagination a span {
+    display: none;
+}
+
+.image_title_letters {
+    height: 200px;
+    width: 100%;
+    background: #378cff;
+}
+
+.image_title_sitemap {
+    height: 200px;
+    width: 100%;
+    background-color: #006699;
+}
+
+.image_title_login {
+    height: 200px;
+    width: 100%;
+    background-color: #009999;
+}
+
+.image_title_reset_password {
+    height: 200px;
+    width: 100%;
+    background-color: #009999;
+}
+
+
+.image_title_signin {
+    height: 200px;
+    width: 100%;
+    background-color: #009999;
+}
+
+.image_title_text {
+    color: white;
+    position: relative;
+    right: -300px;
+    top: -185px;
+    width: 400px;
+    font-size: 3em;
+}
+
+/*контенеры центральной панели-----------------------------------------------------------------------------*/
+
+#sidebar {
+    margin-top: 65px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 150px;
+    min-height: 300px;
+    float: left;
+}
+
+#content_article {
+    position: relative;
+    margin-left: 150px;
+    min-height: 400px;
+    padding-top: 0px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+#bottombar {
+	position:relative;
+	width: 100%;
+	min-height: 200px;
+}
+
+/*контейнеры нижних панелей-----------------------------------------------------------------------------------------*/
+#bot_nav {
+    height:25px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+    padding-top: 3px;
+}
+
+#contact_mail {
+    display: block;
+    height: 100%;
+    margin-left: 20px;
+    width: 200px;
+    float: left;
+}
+
+#contact_mail img#mail {
+    margin-top: 5px;
+    float: left;
+}
+
+#contact_phone {
+    display: block;
+    height: 100%;
+    width: 200px;
+    float: left;
+}
+
+#contact_phone img#phone {
+    margin-top: 5px;
+    float: left;
+}
+
+#contact_skype {
+    display: block;
+    height: 100%;
+    width: 200px;
+    float: left;
+}
+
+#contact_skype img#skype {
+    margin-top: 5px;
+    float: left;
+}
+
+.contact_text {
+    margin-top: 7px;
+    margin-left: 5px;
+    margin-bottom: 3px;
+    float: left;
+}
+
+#all_rights {
+    font-size: 0.9em;
+    float: left;
+    width: 30%;
+    color: #999999;
+}
+
+#bot_section_nav {
+    display:block;
+    text-align: center;
+    float:right;
+    font-size: 0.9em;
+    width: 25%;
+    color: #999999;
+}
+
+
+#bottom_about_us {
+    margin-top: 20px;
+}
+
+/*меню у администратора*/
+
+#admin_menu {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: #ffffff;
+    width: 128px;
+    border: 1px solid #a1d8ff;
+}
+
+/*стиль пагинации страниц-----------------------------------------------*/
+div.paginator {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+nav.pagination {
+	padding: 3px;
+	margin: 3px;
+	text-align:center;
+}
+
+nav.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #EEE;
+	text-decoration: none; /* no underline */
+	color: #036CB4;
+}
+
+nav.pagination a:hover,
+nav.pagination a:active {
+	border: 1px solid #999;
+	color: #666;
+}
+nav.pagination .page current {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #036CB4;
+	font-weight: bold;
+	background-color: #036CB4;
+	color: #FFF;
+}
+nav.pagination .disabled {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #EEE;
+	color: #DDD;
+}
+
+
+/*оформление статей и новостей-----------------------------------------------*/
+.article {
+    position: relative;
+    margin: 20px 10px;
+    height: 150px;
+    width: 690px;
+}
+
+.article_fill {
+	display:block;
+	height:110px;
+	width:500px;
+	position: absolute;
+	margin-left: 10px;
+	margin-top: 10px;
+	background-color:black;
+	opacity:0.75;
+	filter:Alpha(opacity=75);
+
+}
+
+.article_title {
+    position: relative;
+    top: 15px;
+    left: 25px;
+    color: white;
+    font-size: 1.5em;
+    width: 450px;
+}
+
+.article_synopsis {
+    position: relative;
+    left: 25px;
+    width: 450px;
+    color: white;
+}
+
+.article_img {
+    position: absolute;
+}
+
+.article_link {
+    position: absolute;
+    display:block;
+    height: 150px;
+    width: 690px;
+    top:0px;
+    left:0px;
+	opacity:0;
+	filter:Alpha(opacity=0);
+}
+
+.category {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.property_article {
+    position: relative;
+    width: 200px;
+    height: 60px;
+    left: 700px;
+    top: 70px;
+}
+
+.property_article img {
+    position: absolute;
+}
+
+.property_article p {
+    position: absolute;
+    left: 60px;
+}
+
+.news {
+    margin-left: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100px;
+    width: 600px;
+    background:#F4F4F4
+}
+
+.news:hover {
+    background:#DFDFDF;
+    cursor:pointer;
+}
+
+.news_created_at {
+	width: 25%;
+	height: 100%;
+	float:left;
+	text-align:right;
+	margin-right: 2%;
+	font-style:italic;
+
+	color:#4b4b4b;
+}
+
+.news_title {
+	float:left;
+	width:70%;
+	height: 30%;
+	font-style:italic;
+	font-weight:bold;
+	color:#4b4b4b;
+}
+
+.news_synopsis {
+	float:left;
+	width: 70%;
+	height:70%;
+	vertical-align: top;
+}
+
+.news_synopsis p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-style:italic;
+	color:#4b4b4b;
+}
+
+
+/*карта сайта-------------------------------------*/
+.left_site_map {
+    float: left;
+    width: 450px;
+}
+
+.right_site_map {
+    float: left;
+    width: 450px;
+}
+
+a.site_map_link:link, a.site_map_link:visited {
+    text-decoration:none;
+    color: black;
+}
+
+a.site_map_link:hover {
+    cursor: pointer;
+    color: #F7941D
+}
+
+.zero_level {
+    font-size: 2em;
+    margin-top: 30px;
+}
+
+.first_level {
+    font-size: 1.5em;
+    position: relative;
+    right: -70px;
+}
+
+.second_level {
+    font-size: 0.75em;
+    position: relative;
+    right: -70px;
+}
+
+.zero_level a {
+    position: relative;
+    top: -5px;
+}
+
+.zero_level p {
+    margin-bottom: 0px;
+}
+
+.first_level p {
+	margin: 0px;
+}
+
+/*contact_map------------------------------------------------------------------*/
+
+div#contact_map {
+	position:relative;
+	height: 300px;
+	border: solid 1px gray;
+}
+
+div#contact_map p {
+	position:absolute
+}
+
+div#delivery_map {
+	position:relative;
+	height: 800px;
+	width: 600px;
+	border: solid 1px gray;
+	float: left;
+	margin-right: 20px;
+}
+
+div#delivery_map p {
+	position:absolute
+}
+
+
+/*phone popup--------------------------------------------------------*/
+
+.phone_popup {
+	display: none;
+	border-bottom: 4px solid #378cff;
+	cursor: default;
+	right: 0px;
+	top: 28px;
+	height: 62px;
+	width: 205px;
+	z-index: 1000104;
+	background-color: #4c4c4c;
+	padding: 10px;
+	position: absolute;
+	color: #b5b5b5;
+	/*opacity: 1!important;*/
+  }
+
+.phone_popup .arrow {
+	background-image: url('<%= asset_path('icons/popup_phone_arrow_icon.png') %>');
+	height: 9px;
+	background-repeat: no-repeat;
+	position: absolute;
+	width: 10px;
+	right: 0;
+	top: -10px;
+	height: 10px;
+}
+
+.phone_popup .heading {
+	float: left;
+	text-align: left;
+	width: 100px;	
+}
+
+.phone_popup .exit {
+	cursor: pointer;
+	float: right;
+	background-image: url('<%= asset_path('icons/popup_phone_exit_icon.png') %>');
+	background-repeat: no-repeat;
+	width: 12px;
+	height: 12px;
+}
+
+.phone_popup .number {
+	font-size: 1.5em;
+	font-weight: lighter;
+	text-align: center;
+	clear: both;
+}
+

@@ -1,0 +1,5 @@
+ru:
+  flash:
+    notice:
+      item_saved: 'Элемент сохранен.'
+      item_deleted: 'Элемент удален.'

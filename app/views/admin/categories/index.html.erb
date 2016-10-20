@@ -1,0 +1,14 @@
+<h2>Редактирование категорий статей</h2>
+  <p><%= link_to 'Создать категорию', new_admin_category_path, :class => 'button_style_long' %></p>
+  <table class ="default_table">
+    <tr class="header">
+      <th></th>
+      <th><%= Category.human_attribute_name("name") %></th>
+      <th></th>
+    </tr>
+
+    <%= render :partial => 'category', :collection => @categories %>
+
+  </table>
+  
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>

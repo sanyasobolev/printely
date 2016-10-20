@@ -1,0 +1,18 @@
+<h2><%= @title %></h2>
+<p><%= link_to 'Создать', new_admin_lists_delivery_zone_path, :class => 'button_style_long' %></p>
+<table class="default_table">
+  <tr class="header">
+    <th></th>
+    <th><%= Lists::DeliveryZone.human_attribute_name("title") %></th>
+    <th><%= Lists::DeliveryZone.human_attribute_name("streets") %></th>
+    <th><%= Lists::DeliveryZone.human_attribute_name("price") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'delivery_zone' , :collection => @delivery_zones %>
+
+</table>
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>
+    
+    
+    

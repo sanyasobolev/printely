@@ -1,0 +1,5 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'X', admin_lists_paper_grade_path(grade), data: {confirm: 'Действительно хотите удалить?'}, :method => :delete %></td>
+  <td><%=h (grade.grade) %></td>
+  <td><%= link_to 'Редактировать', edit_admin_lists_paper_grade_path(grade) %></td>
+</tr>

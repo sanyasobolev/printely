@@ -1,0 +1,207 @@
+table {
+    border-collapse: collapse;
+}
+
+/*типовая таблица на сайте------------------------------------------------------------------*/
+table.default_table {
+	border-collapse:separate;
+	width: 100%;
+}
+
+tr.header {
+    background-color: #517B93;
+    color: white;
+}
+
+tr.header.delivery {
+    background-color: #007234;
+    color: white;
+}
+
+tr.header.documents {
+    background-color: #0072C5;
+    color: white;
+}
+
+
+table.default_table tr.grey_on_hover:hover {
+	background-color: #e8e8e8;
+}
+
+table.default_table tr.border_cell td {
+	border-bottom: 10px solid white;
+}
+
+table.default_table th {
+    font-weight: normal;
+    text-align: center; 
+    height: 30px; 
+}
+
+.floatTheadfileListOrder {
+	border-collapse:separate;
+}
+
+.floatTheadfileListOrder th {
+	background-color: #0072C5;
+	font-weight: normal;
+	height: 30px;  
+	color: white;
+}
+
+/*----------------------------------------------------------------*/
+/*таблица страницы доставки*/
+table#delivery_map_menu {
+	  position:absolute;
+	  width: 290px;
+  	  right: -300px;
+ 	  top: 0px;
+}
+
+/*прайс лист для пользователя*/
+
+table.pricelist_for_user {
+	font-size: 1.5em;
+	margin-bottom: 20px;
+}
+
+table.pricelist_for_user td {
+	text-align: left;
+	width: 400px;
+	padding: 10px;
+}
+
+table.pricelist_for_user th {
+	text-align: left;
+	width: 400px;
+	padding: 10px;
+}
+
+/*таблицы в заказах*/
+/*перечень загруженных документов*/
+
+#fileList td.upload {
+    width: 160px;
+    height: 152px;
+    border-bottom: 20px solid white;
+    word-break: break-all;
+}
+
+#fileList td.page_count {
+	border-bottom: 20px solid white;
+	text-align: center;
+}
+
+#fileList td.image_process {
+	border-bottom: 20px solid white;
+    padding: 0px;
+}
+
+
+#fileList td.paper {
+	width: 230px;
+	border-bottom: 20px solid white;
+	padding: 0px;
+}
+
+#fileList td.print_settings {
+	width: 200px;
+	border-bottom: 20px solid white;
+    padding: 0px;
+}
+
+
+#fileList td.document_cost {
+	width: 108px;
+	border-bottom: 20px solid white;
+	padding: 0px 10px 0px 10px;
+}
+
+
+/*таблица заказа конвертов*/
+table.envelope tr.paper_size, tr.paper_type {
+	height: 60px;
+}
+
+/*таблица данных доставки*/
+td.delivery_location_edit {
+	height: 170px;
+	width: 560px;
+}
+
+td.delivery_date_edit {
+	height: 180px;
+	position: relative;
+}
+
+td.delivery_location_show {
+	text-align: left;
+	padding: 5px;
+	padding-left: 100px;
+	height: 80px;
+	width: 460px;
+	vertical-align: middle;
+}
+
+td.delivery_date_show {
+	height: 80px;
+	vertical-align: middle;
+    padding: 5px;
+    text-align: center
+}
+
+td.delivery_price {
+    width: 120px;
+   	font-size: 1.3em;
+    text-align: center
+}
+
+/*delete file*/
+.container_for_link_delete_docfile {
+    position: relative
+}
+
+/*таблица встроенных изображений в документ в canvas (embedded images)*/
+#embedded_fileList {
+	table-layout:fixed;
+}
+
+#embedded_fileList tr {
+	height: 70px;
+}
+
+#embedded_fileList td.embedded_thumb {
+	width: 60px;
+	padding: 0px 0px 0px 10px;
+}
+
+#embedded_fileList td.embedded_filename {
+    width: 170px;
+    padding: 0px;
+    word-break: break-all;
+}
+
+
+/*таблица с вариантами действий пользователя*/
+
+table.options {
+  width: 900px;
+  align: center;
+  border: 0px;
+}
+
+table.options td {
+  text-align:center;
+  width:205px;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: top;
+}
+
+table.options td h3 {
+	font-weight: normal;
+}
+
+
+
+

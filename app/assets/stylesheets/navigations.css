@@ -1,0 +1,285 @@
+/*панель навигации-------------------------*/
+#boardlinks_nav {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 33px;
+    line-height: 33px;
+}
+.boardseparator {
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.boardlink {
+    float: left;
+}
+
+.boardtext {
+    float: left;
+}
+
+
+/*order steps wizard*/
+
+div.wizard_navigator {
+    color: #E2E2E2;
+    display: block;
+    font-size: 1.5em;
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+div.wizard_step {
+    display: block;
+    float: left;
+    height: 70px;
+    width: 33%;
+    text-align: center;
+}
+
+div.wizard_step span.number {
+    font-size: 2em;
+    margin-right: 10px;
+}
+
+div.wizard_step.current.documents {
+	color: #01bcf3
+}
+
+div.wizard_step.current.delivery {
+	color: #7fba00
+}
+
+div.wizard_step.current.confirm {
+	color: #dc5900
+}
+
+
+div.wizard_step.finished {
+	color: gray
+}
+
+/*дерево вариантов выбора действий на посадочной странице,
+ организовано таким образом, т.к.ckeditor сбрасывает классы у дочерних
+ элементов*/
+.wrapper_image_and_question{
+  position: relative;
+}
+
+.wrapper_image_and_question ul {
+  position: absolute;
+  color: white;
+  list-style-type: square;
+  line-height: 25px;
+  padding: 5px 10px 5px 70px;
+  margin-top: 40px;
+}
+
+.wrapper_image_and_question.blue_list ul {
+	background-color: #0072C5;
+}
+
+.wrapper_image_and_question.blue_light_list ul {
+	background-color: #01BCF3;
+}
+
+.wrapper_image_and_question.red_list ul {
+	background-color: #DC3C00;
+}
+
+.wrapper_image_and_question.green_dark_list ul {
+	background-color: #008272
+}
+
+.wrapper_question {
+  display: block;
+  margin-left: 294px;
+  margin-right: 294px;
+  position: absolute;
+  top: 255px;
+
+}
+
+.trim_left {
+  float: left;
+  display: block;
+   width: 0;
+   height: 0;
+   border-bottom: 45px solid white;
+   border-left: 45px solid transparent;
+}
+
+.trim_right {
+    float: left;
+   display: block;
+   width: 0;
+   height: 0;
+   border-bottom: 45px solid white;
+   border-right: 45px solid transparent;
+}
+
+.wrapper_question h2 {
+  float: left;
+  background-color: white;
+  height: 45px;
+  display: block;
+  text-align: center;
+  width: 220px;
+}
+
+.chart_options {
+  display: block;
+  height: 70px;
+  width: 900px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.end_node {
+  background: #b5babf;
+  display: block;
+  width:  5px;
+  height: 5px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vertical_line {
+  width: 1px;
+  height: 30px;
+  background: #b5babf;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nodes_container {
+  display: block;
+  width: 900px;
+  height: 35px;
+}
+
+.nodes_container .empty_node {
+  display: block;
+  width: 110px;
+  height: 35px;
+  float: left;
+  position: relative;
+}
+
+.nodes_container .empty_node2 {
+  display: block;
+  width: 225px;
+  height: 35px;
+  float: left;
+  position: relative;
+}
+
+.nodes_container .left_node {
+  display: block;
+  width: 115px;
+  height: 35px;
+  float: left;
+  position: relative;
+}
+
+.nodes_container .left_node .end_node {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.nodes_container .left_node .vertical_line {
+  position: absolute;
+  bottom: 4px;
+  left: 2px;
+}
+
+.nodes_container .left_node .gorizontal_line {
+  position: absolute;
+  left: 2px;
+  top: 0px;
+  width: 100%;
+  height: 1px;
+  background: #B5BABF none repeat scroll 0% 0%;
+}
+
+.nodes_container .right_node {
+  display: block;
+  width: 112px;
+  height: 35px;
+  float: left;
+  position: relative;
+}
+
+.nodes_container .right_node .end_node {
+  position: absolute;
+  bottom: 4px;
+  right: 0px;
+}
+
+.nodes_container .right_node .vertical_line {
+  position: absolute;
+  bottom: 4px;
+  right: 2px;
+}
+
+.nodes_container .right_node .gorizontal_line {
+  position: absolute;
+  right: 2px;
+  top: 0px;
+  width: 100%;
+  height: 1px;
+  background: #B5BABF none repeat scroll 0% 0%;
+}
+
+.nodes_container .middle_node {
+  display: block;
+  width: 225px;
+  height: 35px;
+  float: left;
+  position: relative;
+}
+
+.nodes_container .middle_node .end_node {
+  position: absolute;
+  bottom: 0px;
+  right: 112px;
+}
+
+.nodes_container .middle_node .vertical_line {
+  position: absolute;
+  bottom: 4px;
+  right: 114px;
+}
+
+.nodes_container .middle_node .gorizontal_line {
+  position: absolute;
+  right: 2px;
+  top: 0px;
+  width: 100%;
+  height: 1px;
+  background: #B5BABF none repeat scroll 0% 0%;
+}
+
+
+/**/
+.inner_header {
+	display:block;
+	width:100%;
+	margin-top:10px;
+	margin-bottom:5px;
+	margin-right:0px;
+	padding-bottom:5px;
+	border-bottom: 1px dashed #2E2F91;
+	font-weight: bold;
+}
+
+
+
+

@@ -1,0 +1,18 @@
+<div class="form_align">
+	<%= f.label :margin %>
+	<%= f.text_field :margin, :class => 'req_input' %>
+</div>
+
+<div class="form_align">
+	<%= f.label :price %>
+	<%= f.text_field :price  %>
+</div>
+
+<div class="form_align">
+	<%= f.label :order_type_id %>
+	<%= f.collection_select(:order_type_id,
+                      Lists::OrderType.all,
+                      :id,
+                      :title) %>
+</div>
+

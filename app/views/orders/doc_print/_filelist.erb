@@ -1,0 +1,20 @@
+	  <%#*перечень всех файлов с параметрами печати%>
+	  <table id="fileList" class="default_table">
+	  	<thead>
+		    <tr id="fileList_header" class="header documents"
+		      <% if order.documents.count > 0 %>
+		        >
+		      <% else %>
+		        style="display: none;">
+		      <% end %>
+		    <%= render :partial=>'orders/doc_print/header_table' %>
+		    </tr>
+	    </thead>
+	    <%= render :partial => 'documents/doc_print/document', :collection => order.documents %>
+	  </table>
+
+    <%= render :partial => 'share/progress_bar/progress_panel' %>
+
+	<%#*кнопка выбора файлов%>
+	<%= file_field_tag 'document[docfile]',:id => 'document_docfile', :rel => order_documents_path(order) %>
+	<%= hidden_field_tag 'quantity_documents_for_validate' %>

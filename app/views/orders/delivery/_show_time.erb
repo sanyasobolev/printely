@@ -1,0 +1,4 @@
+<%= Order.human_attribute_name(:delivery_start_time) %>
+<%= h (Russian::strftime(order.delivery_start_time, "%R")) if order.delivery_start_time %>
+<%= Order.human_attribute_name(:delivery_end_time) %>
+<%= h (Russian::strftime(order.delivery_end_time, "%R")) if order.delivery_end_time %>

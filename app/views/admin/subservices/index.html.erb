@@ -1,0 +1,16 @@
+<h2>Редактирование подуслуг</h2>
+  <p><%= link_to 'Создать подуслугу', new_admin_subservice_path, :class => 'button_style_long' %></p>
+<table class ="default_table">
+  <tr class="header">
+    <th></th>
+    <th><%= Subservice.human_attribute_name("title") %></th>
+    <th><%= Subservice.human_attribute_name("synopsis") %></th>
+    <th><%= Subservice.human_attribute_name("permalink") %></th>
+    <th><%= Subservice.human_attribute_name("service_id") %></th>
+    <th><%= Subservice.human_attribute_name("order_type") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'subservice', :collection => @subservices %>
+</table>
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>

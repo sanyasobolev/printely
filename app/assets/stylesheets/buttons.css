@@ -1,0 +1,144 @@
+/*buttons for submit/cancel*/
+input.button_style {
+    background-color: #1BA1E2;
+    border: 0 none;
+    color: white;
+    padding: 9px 20px 10px 20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-right: 0px;
+    display:block;
+
+    text-align:center;
+    text-decoration:none;
+    max-width: 100px;
+    height: 39px;
+}
+
+input.button_style:hover {
+    cursor: pointer;
+    background-color: #3b6fb5;
+}
+
+.submit {
+    float: right;
+    background-color: #0072c5;
+    border: 0 none;
+    color: white;
+    cursor: pointer;
+    margin: 10px 0 10px 10px;
+    padding: 12px 20px;
+    display: block;
+    font-weight: bold;
+}
+
+.submit:hover {
+    color: yellow;
+    background-color: #00188F;
+}
+
+.submit:disabled {
+    background-color: #CCCCCC;
+}
+
+.submit:disabled:hover {
+    color: white;;
+    background-color: #CCCCCC;
+    cursor: default;
+}
+
+input.cancel {
+    background-color: white;
+    border: 0 none;
+    color: #0072c5;
+    display: block;
+    float: right;
+    font-size: 1em;
+    margin: 20px 20px 0 0;
+}
+
+input.cancel:hover {
+    cursor: pointer;
+    color: black;
+}
+
+
+button.button_style_long_orange, button.button_style_long_orange_pressed, button.button_style_long_orange_inactive {
+	float: left;
+	margin-right: 10px;
+}
+
+
+/*uploadify button for select files*/
+#document_docfileUploader {
+    cursor: pointer;
+    width: 200px;
+    height: 70px;
+}
+
+#embedded_image_imgfileUploader {
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+}
+
+
+/*canvas buttons*/
+button.add_canvas_element {
+    width: 48px;
+    height: 48px;
+    padding: 0px;
+    display: block;
+    border: 0 none;
+    cursor:pointer;
+    background-color: #efefef;
+}
+
+button.remove_element {
+    width: 25px;
+    height: 25px;
+    padding: 0px;
+    display: block;
+    border: 0 none;
+    cursor:pointer;
+    background-color: transparent;
+}
+
+button.font_style_button {
+    width: 35px;
+    height: 35px;
+    margin-top: 7px;
+    text-align: center;
+    text-decoration: none;
+    color: #777;
+    cursor:pointer;
+    font-size: 15px;
+	background: #F9F9F9;
+	border: 1px solid #E4E4E4;
+}
+
+button.font_style_button:hover {
+	color: black;
+	background: #FFFFDF;
+	border: 1px solid #CC8400;
+}
+
+button.font_style_button.pressed {
+	color: black;
+	background: lightgrey;
+	border: 1px solid black
+}
+
+button.font_style_button#font_weight {
+	font-weight: bold;
+}
+
+button.font_style_button#font_style {
+	font-style:italic;
+}
+
+button.font_style_button#text_decoration {
+	text-decoration:underline;
+}

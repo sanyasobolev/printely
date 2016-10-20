@@ -1,0 +1,17 @@
+<h2><%= @title %></h2>
+<p><%= link_to 'Создать', new_admin_lists_binding_path, :class => 'button_style_long' %></p>
+<table class="default_table">
+  <tr class="header">
+    <th></th>
+    <th><%= Lists::Binding.human_attribute_name("binding") %></th>
+    <th><%= Lists::Binding.human_attribute_name("price") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'binding' , :collection => @bindings %>
+
+</table>
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>
+    
+    
+    

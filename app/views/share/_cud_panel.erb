@@ -1,0 +1,5 @@
+  <div class="tool_panel">
+	<%= link_to image_tag("icons/del-3.png"), admin_section_path(section), :method => :delete, data: {confirm: 'Все страницы этого раздела также удалятся! Действительно хотите удалить раздел?'} %>
+	<%= link_to image_tag('icons/edit_black.png'), edit_admin_section_path(section) %>
+	<%= link_to image_tag('icons/plus.png'), new_admin_section_path(:parent_id => section.id) %>
+  </div>

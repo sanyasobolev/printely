@@ -1,0 +1,29 @@
+<div class="form_align">
+  <%= f.label(:title) %>
+  <%= f.text_field :title,
+                   :size => Subservice::TITLE_SIZE,
+                   :maxlength => Subservice::TITLE_MAX_LENGTH,
+                   :class => 'req_input'%>
+</div>
+
+<div class="form_align">
+  <%= f.label(:synopsis) %>
+  <%= f.text_area :synopsis,
+                   :rows => Subservice::SYNOPSIS_ROWS_SIZE,
+                   :cols => Subservice::SYNOPSIS_COLS_SIZE,
+                   :class => 'req_textarea'%>
+</div>
+
+<div class="form_align">
+  <%= f.label :header_icon %>
+  <%= f.file_field :header_icon,
+                   :class => 'req_input'%>
+</div>
+
+<div class="form_align">
+  <%= f.label :service_id %>
+  <%= f.collection_select(:service_id,
+                          Service.all,
+                          :id,
+                          :title) %>
+</div>

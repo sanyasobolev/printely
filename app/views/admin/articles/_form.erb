@@ -1,0 +1,46 @@
+<p>
+  <%= Article.human_attribute_name("title") %><br />
+  <%= f.text_field :title,
+                   :size => Article::TITLE_SIZE,
+                   :maxlength =>Article::TITLE_MAX_LENGTH %>
+</p>
+
+<p>
+  <%= Article.human_attribute_name("synopsis") %><br />
+  <%= f.cktext_area :synopsis,
+                    :rows => Article::SYNOPSIS_ROWS_SIZE,
+                    :cols => Article::SYNOPSIS_COLS_SIZE,
+                    :height => '150px'
+                    %>
+</p>
+
+<p>
+  <%= Article.human_attribute_name("body") %><br />
+  <%= f.cktext_area :body,
+                    :rows => Article::BODY_ROWS_SIZE,
+                    :cols => Article::BODY_COLS_SIZE,
+                    :height => '400px'
+                    %>
+</p>
+
+<p>
+  <%= f.label :article_header_image %>
+  <%= f.file_field :article_header_image %>
+</p>
+
+<p>
+  <%= Article.human_attribute_name("category_id") %><br />
+  <%= f.collection_select(:category_id,
+                          Category.all,
+                          :id,
+                          :name) %>
+</p>
+
+<p>
+  <%= Article.human_attribute_name("published") %>
+  <%= f.check_box :published %>
+</p>
+<p>
+  <%= Article.human_attribute_name("this_news") %>
+  <%= f.check_box :this_news %>
+</p>

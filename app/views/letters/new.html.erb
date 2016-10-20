@@ -1,0 +1,32 @@
+<%= error_messages_for :letter %>
+<p> Если Вы хотите пожаловаться на нас или похвалить, задать вопрос или просто что-нибудь написать нам, пожалуйста, заполните форму ниже. Мы ответим Вам очень быстро. </p>
+<div class="form_shape">
+  <%= form_for :letter, :url => letters_path, :html => { :method => :post, :id => 'new_letter' } do |f| -%>
+
+    <div class="form_align">
+      <%= f.label(:name) %>
+      <%= f.text_field :name,
+                       :maxlength =>Letter::NAME_MAX_LENGTH,
+                       :class => 'req_input' %>
+    </div>
+
+
+    <div class="form_align">
+      <%= f.label(:email) %>
+      <%= f.text_field :email,
+                       :class => 'req_input' %>
+    </div>
+
+    <div class="form_align">
+      <%= f.label(:question) %>
+      <%= f.text_area :question,
+                      :class => 'req_textarea' %>
+    </div>
+
+  <div class="submit_area">
+    <%= submit_tag 'Отправить', :class => 'submit' %>
+  </div>
+  
+
+  <% end -%>
+</div>

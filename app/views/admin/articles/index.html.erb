@@ -1,0 +1,21 @@
+<h2>Редактирование статей</h2>
+  <p><%= link_to 'Создать статью', new_admin_article_path, :class => 'button_style_long' %></p>
+
+<table class ="default_table">
+  <tr class="header">
+    <th></th>
+    <th><%= Article.human_attribute_name("title") %></th>
+    <th><%= Article.human_attribute_name("category_id") %></th>
+    <th><%= Article.human_attribute_name("created_at") %></th>
+    <th><%= Article.human_attribute_name("published") %></th>
+    <th><%= Article.human_attribute_name("user_id") %></th>
+    <th><%= Article.human_attribute_name("this_news") %></th>
+    <th></th>
+  </tr>
+
+  <%= render :partial => 'article', :collection => @articles %>
+
+</table>
+
+  
+<%= link_to 'Назад', admin_settings_path, :class => 'button_style' %>

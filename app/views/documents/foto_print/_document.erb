@@ -1,0 +1,50 @@
+<tr class="document grey_on_hover" id="<%= document.id %>" name="document" >
+  <%= fields_for "order[documents_attributes][]", document do |i| %>
+    <td class="upload">
+      <div class="container_for_link_delete_docfile">
+        <%= link_to image_tag("icons/del-3.png"), order_document_path(@order, document), :method => :delete, :remote => :true, :class => 'link_delete docfile_delete', :title => 'Удалить файл' %>
+      </div>
+    <%= image_tag document.docfile.thumb.url, :class => 'document_uploaded_thumb' %>
+    </td>
+
+    <td class="image_process">
+    	<% Lists::PrePrintOperation.all.each do |t| %>
+    		<div class="pre_print_operation">
+  				<%= check_box_tag("order[documents_attributes][#{document.id}][pre_print_operation_ids][#{t.id}]", t.id, document.pre_print_operations.include?(t)) %> 
+  				<%= t.operation %>
+  			</div>
+		<% end %>
+    </td>
+
+	<%= render :partial => 'documents/paper', :locals => {:order => @order, :document => document, :i => i} %>
+
+    <td class="print_settings">
+    	<div class="margins">
+      		<%= select_tag("order[documents_attributes][#{document.id}][margins]", options_from_collection_for_select(Lists::PrintMargin.available_print_margins(@order.order_type.title), 'id', 'margin', document.print_margin.id), {:class => 'margins_selector'}) %>
+    		<%= i.label :margins, :class => 'float_left' %>
+    	</div> 
+    	<div class="fl_clear"></div> 
+	      <%= i.text_area :user_comment, :placeholder => Document.human_attribute_name("user_comment"), :class => 'document_uploaded_user_comment'  %>
+	    <div class="fl_clear"></div> 
+	    <div class="print_setting_1">
+
+	    </div>   	
+    </td>
+
+    <td class="document_cost">
+		<div class='floatingBarsG'>
+			<div class='blockG' id='rotateG_01'></div>
+			<div class='blockG' id='rotateG_02'></div>
+			<div class='blockG' id='rotateG_03'></div>
+			<div class='blockG' id='rotateG_04'></div>
+			<div class='blockG' id='rotateG_05'></div>
+			<div class='blockG' id='rotateG_06'></div>
+			<div class='blockG' id='rotateG_07'></div>
+			<div class='blockG' id='rotateG_08'></div>
+		</div>
+		<div class='document_cost_value'>
+      		<%= h (number_to_currency(document.cost, :unit => "коп.", :separator => " руб. ")) %>
+    	</div>
+    </td>
+  <% end %>
+</tr>

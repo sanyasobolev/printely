@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <style type="text/css">
+      .orange {
+          padding: 10px;
+          background-color: orange;
+           color: black;
+      }
+      
+      p {
+          font-size: 1em;
+          line-height: 130%;
+      }
+      
+      .float_right {
+          float: right
+      }
+      
+      .bold {
+          font-weight: bold;
+      }
+      
+      .grey_color {
+		    padding: 10px;
+		    background-color: #EAEAEA;
+		    color: #666666;
+		}
+	
+		.dark_grey_color {
+		    padding: 10px;
+		    background-color: #C7C7C7;
+		    color: #666666;
+		}
+
+		table.pricelist_for_user {
+			font-size: 1.5em;
+			margin-bottom: 20px;
+		}
+		
+		table.pricelist_for_user td {
+			text-align: left;
+			width: 400px;
+			padding: 10px;
+		}
+		
+		table.pricelist_for_user th {
+			text-align: left;
+			width: 400px;
+			padding: 10px;
+		}
+ 
+		 .fl_clear {
+		    float: none;
+		    clear: both;
+		}
+ 
+    </style>
+  </head>
+  <body>
+    <h1 class="orange">Здравствуйте, <%= @user.first_name %>!</h1>
+	<%= raw(@mailing.body) %>
+    <a href="http://printely.ru"><img src="http://printely.ru/assets/logo_sbold_black.png" border="0" class="float_right" alt="&copy; Printely. Все права защищены" /></a>
+  </body>
+</html>

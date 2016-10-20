@@ -1,0 +1,8 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'Х', admin_subservice_path(subservice), :method => :delete, data: {confirm: 'Действительно хотите удалить?'} %></td>
+  <td><%= subservice.title %></td>
+  <td><%= subservice.synopsis %></td>
+  <td><%= subservice.permalink %></td>
+  <td><%= subservice.service.title %></td>
+  <td><%= link_to 'Редактировать', edit_admin_subservice_path(subservice) %></td>
+</tr>

@@ -1,0 +1,13 @@
+<table>
+  <tr>
+    <% if current_user.has_role?('Administrator') %>
+      <td>
+        <%= link_to 'К списку заказов', admin_orders_path, :class => "button_style_long" %>
+      </td>
+    <% else %>
+      <td>
+        <%= link_to 'К моим заказам', my_orders_path, :class => "button_style_long" %>
+      </td>
+    <% end %>
+  </tr>
+</table>

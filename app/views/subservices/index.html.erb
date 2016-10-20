@@ -1,0 +1,39 @@
+<% if @page_about_service != nil %>
+  <%= render :partial => 'pages/show_page', :locals => {:page => @page_about_service} %>
+<% else %>
+  <p>Описание услуги отсутствует.</p>
+<% end %>
+
+<% if @pricelist_for_service_model_name != nil %>
+	  <% @order_types.each do |order_type| %>	
+		 <h2><%= order_type.description if @order_types.count > 1 %></h2>
+			<div class="grey_color">
+				<% print_colors = Lists::PrintColor.where(:order_type_id => order_type) %>
+				<% if print_colors.count>0 %>
+					<% print_colors.each do |print_color| %>
+						<h2 class="dark_grey_color"><%= print_color.color %></h2>
+							<table class="pricelist_for_user">
+								<%= render :partial => "lists/#{@subdirectory}/pricelist_header" %>
+								<% @pricelist_for_service_model_name.constantize.pricelist(order_type).each do |line_of_pricelist| %>
+								  	<%= render :partial => "lists/#{@subdirectory}/pricelist_line", :locals =>{:pricelist_line => line_of_pricelist, :print_color => print_color}  %>
+								<% end %>
+							</table>
+					<% end %>				
+				<% else %>
+					<table class="pricelist_for_user">
+						<%= render :partial => "lists/#{@subdirectory}/pricelist_header" %>
+						<% @pricelist_for_service_model_name.constantize.pricelist(order_type).each do |line_of_pricelist| %>
+							<%= render :partial => "lists/#{@subdirectory}/pricelist_line", :locals =>{:pricelist_line => line_of_pricelist}  %>
+						<% end %>
+					</table>
+				<% end %>
+			</div>
+	  <% end %>		
+<% else %>
+  <p>Прайс-листа на эту услугу нет.</p>
+<% end %>
+<br />
+<%= render :partial => 'subservice', :collection => @subservices, :locals => { :service_id => @service.permalink} %>
+
+<div class="fl_clear">
+</div>

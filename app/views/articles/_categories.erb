@@ -1,0 +1,8 @@
+  <% categories = Category.all %>
+  <% categories.each do |category| %>
+    <div class="container_for_link_box">
+      <div class="link_box">
+         <%= link_to_unless_current category.name, category_articles_path(category), :class => 'box' %>
+      </div>
+    </div>
+  <% end %>

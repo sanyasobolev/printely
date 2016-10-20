@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title><%= @title %></title>
+  <%= include_gon %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <meta name='yandex-verification' content='5c52d432e5b1207f'>
+  <style type="text/css"><%= yield :stylesheets %></style>
+  <%= yield :head %>
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  
+</head>
+<body>
+
+<!-- Yandex.Metrika counter -->
+<!-- <%= render :partial => 'share/yandex_metrika_counter' %>
+<!-- /Yandex.Metrika counter -->
+
+<script type="text/javascript">
+	//set authencity token for all requests
+        jQuery.ajaxSetup({
+        	headers: {
+        		'X-CSRF-Token': jQuery('meta[name="csrf-token"]').attr('content')
+        	}
+        });
+</script>
+  <div id="header" >
+    <div id="top_nav">
+        <div id="user_options">
+       	  <div class="box_user_opt" id="call">
+	          <%= image_tag("icons/phone_white.png", :border => 0) %>
+          </div>
+          <% if user_signed_in? -%>
+            <%= render :partial => 'sessions/current' %>
+          <% else -%>
+            <%= link_to image_tag("icons/Login.png", :border =>'0'), :login, :class => 'box_user_opt' %>
+          <% end -%>
+        </div>
+        
+       <%= render :partial => 'share/top_menu' %>
+		
+        <div id="logo_container">
+          <%= link_to image_tag("logo_sbold.png", :border => '0'), :root, :class => 'logo' %>
+        </div>
+        <%= render :partial => 'share/phone_popup' %>
+    </div>
+  </div>
+
+  <div id="middle_panel">
+    <%= content_for?(:middle_panel) ? yield(:middle_panel) : '' %>
+  </div>
+
+  <div id="flash_panel">
+    <% if flash[:notice] -%>
+      <div id="notice" ><%= flash[:notice] %></div>
+    <% end -%>
+
+    <% if flash[:error] -%>
+      <div id="error" ><%= flash[:error] %></div>
+    <%  end -%>
+  </div>
+
+  <div id="content_panel">
+    <%= content_for?(:content_panel) ? yield(:content_panel) : yield %>
+  </div>
+
+
+  <div id="contact_bottom_panel">
+    <div id="bot_nav">
+      <%= render :partial => 'share/contacts' %>
+    </div>
+  </div>
+
+  <div id="first_bottom_panel">
+    <div id="bot_nav">
+      <%= render :partial => 'share/bottom_about_us' %>
+    </div>
+  </div>
+
+  <div id="second_bottom_panel">
+    <div id="bot_nav">
+      <%= render :partial => 'share/bottom_menu' %>
+    </div>
+  </div>
+
+  <%= admin_menu %>
+
+  <%= yield :scripts %>
+
+  </body>
+
+</html>

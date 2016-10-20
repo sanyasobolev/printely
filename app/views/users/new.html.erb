@@ -1,0 +1,13 @@
+<%= error_messages_for :user %>
+  <div class="form_shape">
+    <%=  form_for @user, :url => users_path do |form| %>
+
+      <%= render :partial => 'profile', :locals => {:form => form} %>
+      <%= render :partial => 'password', :locals => {:form => form} %>
+	  <%= render :partial => 'agreement', :locals => {:form => form} %>
+
+    <div class="submit_area">
+      <%= submit_tag "Регистрация", :class => 'submit' %>
+    </div>
+    <% end %>
+  </div>

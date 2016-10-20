@@ -1,0 +1,13 @@
+<tr class="grey_on_hover">
+  <td><%= link_to 'Х', admin_service_path(service), :method => :delete, data: {confirm: 'Действительно хотите удалить?'} %></td>
+  <td><%= service.title %></td>
+  <td><%= service.synopsis %></td>
+  <td><%= service.permalink %></td>
+  <td><%= service.pricelist %></td>
+  <td>
+  	<% service.order_types.each do |order_type| %>
+  		<%= order_type.title %><br />
+  	<% end %>
+  </td>
+  <td><%= link_to 'Редактировать', edit_admin_service_path(service) %></td>
+</tr>

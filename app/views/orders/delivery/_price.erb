@@ -1,0 +1,19 @@
+<div class="order_delivery_price_wrapper">
+	<div class="order_delivery_price">
+		<div class='floatingBarsG'>
+			<div class='blockG' id='rotateG_01'></div>
+			<div class='blockG' id='rotateG_02'></div>
+			<div class='blockG' id='rotateG_03'></div>
+			<div class='blockG' id='rotateG_04'></div>
+			<div class='blockG' id='rotateG_05'></div>
+			<div class='blockG' id='rotateG_06'></div>
+			<div class='blockG' id='rotateG_07'></div>
+			<div class='blockG' id='rotateG_08'></div>
+		</div>
+		<div id='order_delivery_price_value'>
+			<%= h (number_to_currency(order.delivery_price, :unit => "коп.", :separator => " руб. ")) %>
+		</div>
+	</div>
+	<%= label_tag 'order_delivery_price', 'Цена доставки:' %>
+</div>
+<div class="fl_clear"></div>

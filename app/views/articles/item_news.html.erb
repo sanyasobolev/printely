@@ -1,0 +1,7 @@
+<% content_for :head do %>
+  <%= auto_discovery_link_tag %>
+<% end %>
+  <h1><%= @title %></h1>
+  <%= render :partial => 'articles/article', :collection => @item_news %>
+
+

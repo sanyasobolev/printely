@@ -1,0 +1,17 @@
+<div class="article">
+  <div class="article_img">
+    <%= link_to image_tag(article.article_header_image_url, :border => "0"), article_path(article) %>
+  </div>
+  <div class="article_fill"></div>
+  <div class="article_title">
+    <%= raw(article.title) %>
+  </div>
+  <div class="article_synopsis">
+    <%= raw(article.synopsis) %>
+  </div>
+  <% if article.this_news %>
+  	<%= link_to '#', section_subsection_page_path(@current_subsection.section, @current_subsection, article), :class => "article_link" %>
+  <% else %>
+    <%= link_to '#', article_path(article), :class => "article_link" %>
+  <% end %>
+</div>

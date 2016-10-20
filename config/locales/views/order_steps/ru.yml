@@ -1,0 +1,6 @@
+ru:
+  order_steps:
+    wiked:
+      documents: 'редактирование'
+      delivery: 'доставка'
+      confirm: 'подтверждение'

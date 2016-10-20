@@ -1,0 +1,7 @@
+<%- if flash[:error].blank? -%>
+ 
+  $('table#embedded_fileList tr#<%= @embedded_image.id %>').fadeOut('fast', function() { 
+	  	$(this).remove(); 
+  	});
+
+<%- end -%>
